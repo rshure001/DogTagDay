@@ -1,0 +1,182 @@
+:root {
+  --black: #07090c;
+  --navy: #10264a;
+  --red: #ad1530;
+  --gold: #c8a24d;
+  --white: #f7f8fa;
+  --muted: #c5cad1;
+  --panel: #131922;
+  --line: rgba(255,255,255,.14);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--black);
+  color: var(--white);
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+}
+a { color: inherit; text-decoration: none; }
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 15px 6vw;
+  background: rgba(7,9,12,.94);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(12px);
+}
+.brand {
+  font-family: Georgia, serif;
+  font-weight: 800;
+  letter-spacing: .16em;
+}
+nav { display: flex; gap: 20px; font-weight: 700; font-size: .9rem; }
+nav a:hover { color: var(--gold); }
+.menu-button { display: none; }
+.hero {
+  min-height: 92vh;
+  position: relative;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  background:
+    linear-gradient(rgba(0,0,0,.28), rgba(0,0,0,.80)),
+    url("assets/official-dog-tags.png") center/cover no-repeat;
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, transparent 15%, rgba(0,0,0,.30) 60%, rgba(0,0,0,.76) 100%);
+}
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 1000px;
+  padding: 90px 24px;
+  text-shadow: 0 4px 22px rgba(0,0,0,.9);
+}
+.kicker, .eyebrow {
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: .22em;
+  font-size: .78rem;
+  font-weight: 800;
+}
+h1, h2, h3 { font-family: Georgia, serif; line-height: 1.08; }
+h1 { margin: 12px 0 0; font-size: clamp(4rem, 11vw, 9rem); letter-spacing: .04em; }
+.date { margin: 0; font-size: clamp(2rem, 5vw, 4.5rem); font-weight: 800; color: var(--gold); }
+.tagline { font-size: clamp(1.15rem, 2.6vw, 2rem); font-weight: 700; }
+.hero-actions { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; margin-top: 28px; }
+.button {
+  display: inline-block;
+  padding: 14px 22px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  font-size: .82rem;
+  font-weight: 800;
+}
+.primary { background: var(--red); }
+.secondary { border: 1px solid var(--white); }
+.statement {
+  padding: 70px 24px;
+  text-align: center;
+  background: var(--white);
+  color: #101318;
+  font-family: Georgia, serif;
+  font-size: clamp(1.5rem, 3.2vw, 2.8rem);
+  font-weight: 700;
+}
+.statement p { margin: 8px 0; }
+.section { padding: 95px 7vw; }
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; align-items: start; }
+h2 { margin: 0 0 22px; font-size: clamp(2.2rem, 4.5vw, 4.5rem); }
+.copy p, .lead { color: var(--muted); font-size: 1.06rem; }
+.date-banner {
+  display: grid;
+  grid-template-columns: .75fr 1.25fr;
+  gap: 55px;
+  align-items: center;
+  padding: 64px 7vw;
+  background: var(--navy);
+  border-top: 5px solid var(--red);
+  border-bottom: 5px solid var(--red);
+}
+.date-banner blockquote {
+  margin: 18px 0 0;
+  font-family: Georgia, serif;
+  font-size: clamp(2rem, 4vw, 4rem);
+  color: var(--gold);
+}
+.cards, .story-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--line);
+}
+.cards article, .story-grid article {
+  background: var(--panel);
+  padding: 42px 30px;
+}
+.cards span { color: var(--gold); font-weight: 800; }
+.cards p, .story-grid p { color: var(--muted); }
+.dark { background: #0d1117; }
+.notice {
+  margin-top: 30px;
+  padding: 18px 20px;
+  border-left: 4px solid var(--gold);
+  background: rgba(200,162,77,.1);
+  color: var(--muted);
+}
+.founder {
+  padding: 110px 7vw;
+  background:
+    linear-gradient(90deg, rgba(0,0,0,.92), rgba(0,0,0,.56)),
+    url("assets/official-dog-tags.png") center/cover no-repeat;
+}
+.founder-card { max-width: 900px; }
+.founder blockquote {
+  margin: 24px 0 34px;
+  font-family: Georgia, serif;
+  font-size: clamp(1.8rem, 3.7vw, 3.5rem);
+  line-height: 1.25;
+}
+.small-note { font-size: .86rem !important; }
+footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  padding: 36px 7vw;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: .9rem;
+}
+@media (max-width: 850px) {
+  .menu-button {
+    display: inline-block;
+    background: transparent;
+    color: var(--white);
+    border: 1px solid var(--line);
+    padding: 8px 12px;
+  }
+  nav {
+    display: none;
+    position: absolute;
+    top: 62px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    padding: 20px 6vw;
+    background: #080b10;
+  }
+  nav.open { display: flex; }
+  .split, .date-banner { grid-template-columns: 1fr; }
+  .cards, .story-grid { grid-template-columns: 1fr; }
+  footer { flex-direction: column; }
+}
