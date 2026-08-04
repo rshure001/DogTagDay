@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-labelledby="title desc">
+  <title id="title">Dog Tag Day logo</title>
+  <desc id="desc">Two military-style dog tags, one hanging from a long chain and one attached by a short chain.</desc>
+  <defs>
+    <linearGradient id="metal" x1="0" x2="1">
+      <stop offset="0" stop-color="#f7f8fa"/>
+      <stop offset=".45" stop-color="#aab2bd"/>
+      <stop offset="1" stop-color="#eef1f4"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" stroke="#aeb6c0" stroke-width="5" stroke-linecap="round" stroke-dasharray="1 10">
+    <path d="M100 8C43 8 28 67 55 105"/>
+    <path d="M100 8c55 0 67 54 43 96"/>
+  </g>
+  <path d="M106 36c10 26 12 42 9 61" fill="none" stroke="#aeb6c0" stroke-width="5" stroke-linecap="round" stroke-dasharray="1 10"/>
+  <g transform="rotate(-12 78 124)">
+    <path d="M43 82h55l15 15v70H43z" fill="url(#metal)" stroke="#75808d" stroke-width="4"/>
+    <circle cx="96" cy="99" r="7" fill="#0b1f3a" stroke="#75808d" stroke-width="3"/>
+    <path d="M56 119h42M56 131h42M56 143h34" stroke="#0b1f3a" stroke-width="5" stroke-linecap="round" opacity=".8"/>
+  </g>
+  <g transform="translate(32 34) rotate(10 104 112) scale(.78)">
+    <path d="M73 73h55l15 15v70H73z" fill="url(#metal)" stroke="#75808d" stroke-width="4"/>
+    <circle cx="126" cy="90" r="7" fill="#0b1f3a" stroke="#75808d" stroke-width="3"/>
+    <path d="M86 110h42M86 122h42M86 134h34" stroke="#0b1f3a" stroke-width="5" stroke-linecap="round" opacity=".8"/>
+  </g>
+</svg>
