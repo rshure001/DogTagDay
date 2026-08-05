@@ -1,20 +1,17 @@
-# Dog Tag Day Master Homepage
+# Dog Tag Day — Phase 4
 
-Official GitHub Pages-ready homepage for Dog Tag Day.
+Official GitHub Pages website package for Dog Tag Day, observed every April 18.
 
-## Upload to GitHub Pages
+## Publish
+Upload the contents of this folder directly to the root of the `DogTagDay` repository on the `main` branch. GitHub Pages should be configured to deploy from `main` and `/ (root)`.
 
-1. Open your `DogTagDay` repository.
-2. Choose **Add file** → **Upload files**.
-3. Upload the files inside this folder:
-   - `index.html`
-   - `styles.css`
-   - `script.js`
-   - `.nojekyll`
-   - `404.html`
-4. Commit the changes to the `main` branch.
-5. Open **Settings** → **Pages**.
-6. Under **Build and deployment**, select **Deploy from a branch**.
-7. Select `main` and `/ (root)`, then save.
+## Files
+- `index.html` — complete Phase 4 website
+- `styles.css` — responsive design
+- `script.js` — mobile menu and April 18 countdown
+- `404.html` — GitHub Pages error page
+- `.nojekyll` — GitHub Pages compatibility
+- `assets/approved-dog-tags.svg` — approved dog tag visual arrangement
 
-The website is mobile-friendly and requires no external libraries.
+Founder: Ronnie Shure  
+Official annual date: April 18

@@ -1,0 +1,10 @@
+DOG TAG DAY PHASE 4 — GITHUB PAGES UPLOAD
+
+1. Open the DogTagDay repository.
+2. Upload every item inside this ZIP to the repository root.
+3. Commit the files to the main branch.
+4. In Settings > Pages, select Deploy from a branch.
+5. Choose main and / (root), then Save.
+6. Refresh the published website after GitHub finishes deployment.
+
+IMPORTANT: Upload the files themselves, not the outer folder.
