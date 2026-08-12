@@ -663,11 +663,11 @@ footer{
 
 @media(prefers-reduced-motion:reduce){
   html{
-    scroll-behavior:auto;
+behavior:auto;
   }
 
   .button:hover,
   .cards article:hover{
     transform:none;
   }
-}
+}@media(min-width:621px){.cards{grid-
