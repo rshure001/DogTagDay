@@ -647,7 +647,7 @@ footer{
     grid-column:auto;
   }
 
-  .story-form-card{
+  .story-form-card{ht
     padding:28px 22px;
   }
 
@@ -671,4 +671,4 @@ behavior:auto;
     transform:none;
   }
 
-}.hero-content .kicker,.hero-content h1,.hero-content .date,.hero-content .tagline{display:none}.hero-actions{margin-top:0}.hero-actions{display:none!important}.hero-actions
+}.hero-content .kicker,.hero-content h1,.hero-content .date,.hero-content .tagline{display:none}.hero-actions{margin-top:0}.hero-actions{display:none!important}@media(max-width:620px){.hero{display:block;min-height:0;padding:0}.hero-photo{position:relative;width100%;height:auto;object-fit:contain},hero-content{display:none}}
