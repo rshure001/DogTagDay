@@ -670,4 +670,5 @@ behavior:auto;
   .cards article:hover{
     transform:none;
   }
-.hero-content .kicker,.hero-content h1,.hero-content .date,.hero-content .tagline{display:none}.hero-actions{margin-top:0}
+
+}.hero-content .kicker,.hero-content h1,.hero-content .date,.hero-content .tagline{display:none}.hero-actions{margin-top:0}
