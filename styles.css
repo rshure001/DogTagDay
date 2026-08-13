@@ -661,7 +661,7 @@ footer{
   }
 }
 
-@media(prefers-reduced-motion:reduce){
+@media(prefers-reduced-motion:reduce){.hero-actions{diplay::none!important}
   html{
 behavior:auto;
   }
@@ -671,4 +671,4 @@ behavior:auto;
     transform:none;
   }
 
-}.hero-content .kicker,.hero-content h1,.hero-content .date,.hero-content .tagline{display:none}.hero-actions{margin-top:0}
+}.hero-content .kicker,.hero-content h1,.hero-content .date,.hero-content .tagline{display:none}.hero-actions{margin-top:0}.hero-actions{display:none!important}.hero-actions
