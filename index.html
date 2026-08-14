@@ -14,7 +14,7 @@
     <button class="menu-button" aria-expanded="false" aria-controls="main-nav">Menu</button>
     <nav id="main-nav">
       <a href="#mission">Mission</a>
-      <a href="#april8">April 18</a>
+      <a href="#april18">April 18</a>
       <a href="#story">Share a Story</a>
       <a href="#founder">Founder</a>
       <a href="#contact">Contact</a>
@@ -84,7 +84,6 @@
       </article>
     </section>
 
-
 <section class="section">
   <p class="eyebrow">A Shared Connection</p>
   <h2>When you see the tags, you know.</h2>
@@ -113,7 +112,7 @@
   </div>
   <p class="lead">Whether worn openly or kept close, dog tags represent more than an identifier — they are symbols that invite connection, conversation, and remembrance.</p>
 </section>
-    
+
 <section class="section dark" id="story">
       <p class="eyebrow">Stories Behind the Tags</p>
       <h2>Every set of dog tags tells a story.</h2>
@@ -132,16 +131,48 @@
           <p>Respectful remembrance of those who served and are no longer with us.</p>
         </article>
       </div>
-      <p class="notice">No story will be published without the contributor’s approval.
-</p>
-   
- 
+      <p class="notice">No story will be published without the contributor’s approval.</p>
+</section>
+
+<section class="story-form-wrap">
+  <div class="story-form-card">
+    <p class="eyebrow">Share Your Story</p>
+    <h3>Tell us what the tags mean to you.</h3>
+    <form id="dogtag-story-form" action="https://formspree.io/f/mnpadrzj" method="POST">
+      <div class="form-grid">
+        <div class="field">
+          <label for="name">Your Name</label>
+          <input id="name" name="name" required>
+        </div>
+        <div class="field">
+          <label for="email">Your Email</label>
+          <input id="email" type="email" name="email" required>
+        </div>
+        <div class="field full">
+          <label for="connection">Your Connection to Military Service</label>
+          <input id="connection" name="military_connection" placeholder="Veteran, active duty, family member, friend, etc." required>
+        </div>
+        <div class="field full">
+          <label for="story-text">Tell Us Your Story</label>
+          <textarea id="story-text" name="story" rows="8" required aria-describedby="story-policy story-warning"></textarea>
+          <p id="story-policy" class="fineprint"><strong>Family-friendly policy:</strong> Please keep your story respectful and PG-rated. Profanity, obscene language, threats, hate speech, and explicit sexual content are not permitted.</p>
+          <p id="story-warning" class="fineprint" role="alert" aria-live="polite"></p>
+        </div>
+      </div>
+      <label class="permission">
+        <input id="permission-to-publish" type="checkbox" name="permission_to_publish" value="Yes" required>
+        <span>I give Dog Tag Day permission to contact me about publishing this story.</span>
+      </label>
+      <button id="story-submit" type="submit" class="button primary">Submit Story</button>
+      <p class="fineprint">Submitting a story does not publish it. Every submission remains private until reviewed. Dog Tag Day will not publish a contributor’s story without permission.</p>
+    </form>
+  </div>
 </section>
 
     <section class="founder" id="founder">
       <div class="founder-card">
         <p class="eyebrow">A Message from the Founder</p>
-        <blockquote>“I founded Dog Tag Day because every set of military dog tags represents a life of service, sacrifice, courage, and commitment. Those stories deserve to be seen, heard, and remembered. 
+        <blockquote>“I founded Dog Tag Day because every set of military dog tags represents a life of service, sacrifice, courage, and commitment. Those stories deserve to be seen, heard, and remembered.</blockquote>
         <p><strong>Ronnie Shure</strong><br>Founder<br>Dog Tag Day</p>
       </div>
     </section>
@@ -155,7 +186,6 @@
         <p>Invite veterans, families, schools, civic organizations, businesses, and community leaders to observe April 18.</p>
         <p>Volunteer opportunities will include outreach, story collection, local events, ceremonies, displays, and public awareness.</p>
         <a class="button primary" href="mailto:rshure001@yahoo.com">Contact Dog Tag Day</a>
-        
       </div>
     </section>
   </main>
