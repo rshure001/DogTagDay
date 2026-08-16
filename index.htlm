@@ -138,7 +138,7 @@
       <div class="full"><label>Your Connection to Military Service</label><input name="connection" type="text" placeholder="Veteran, active duty, family member, supporter, etc."></div>
       <div class="full"><label>Your Story or Message</label><textarea name="message" rows="8" placeholder="Tell us what the tags mean to you..."></textarea></div>
     </div>
-    <label class="checkline"><input type="checkbox" name="permission" value="yes"><span>I give Dog Tag Day permission to contact me about this submission and, if selected, to ask for approval before publishing my story.</span></label>
+    <label class="checkline"><input type="checkbox" name="permission" value="yes"><span>I give Dog Tag Day permission to contact me about this submission and if selected, to ask for approval before publishing my story.</span></label>
     <p class="fineprint">Submitting this form sends your message privately for review. It does not post your story publicly. Family-friendly content only.</p>
     <button class="button primary" type="submit">Submit Story</button>
   </form>
