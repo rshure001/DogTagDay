@@ -187,6 +187,9 @@ footer{
  color:#d7b464;font-size:.72rem;font-weight:900;letter-spacing:.17em;text-transform:uppercase
 }
 
+/* Keep the opening screen clean: use the main hero CTA only. */
+#story-quick-invite{display:none!important}
+
 @media(max-width:900px){
  nav{display:none}
  .hero-command,.date-grid,.split,.connection-box,.cards,.why-grid,.story-grid,.form-grid,.footer-grid{grid-template-columns:1fr}
