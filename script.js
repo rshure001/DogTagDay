@@ -33,7 +33,6 @@ let storyWall=null,loadMore=null,searchBox=null,storiesPage=1;
 const storiesPerPage=30;
 const seenStories=new Set();
 if(storySection){
-  // Remove any legacy/generated community-story grids so each approved story is shown once.
   storySection.querySelectorAll('#published-stories').forEach(el=>el.remove());
   const legacyGrids=[...storySection.querySelectorAll('.story-grid')];
   legacyGrids.forEach(grid=>{if(grid.querySelector('article')&&/Willie Beard|Name:\s|Connection:\s/i.test(grid.textContent||''))grid.remove();});
@@ -47,7 +46,19 @@ if(storySection){
 }
 function cleanIssueBody(body){return(body||'').split(/\r?\n/).filter(line=>!/(^|\||\*\*)\s*(email|e-mail|permission|subject|tags)\s*(:|\||\*\*)/i.test(line)).filter(line=>!/formspree/i.test(line)).join('\n').replace(/^#+\s*/gm,'').replace(/\*\*/g,'').replace(/`/g,'').trim();}
 function storyKey(issue){return`${(issue.title||'').trim().toLowerCase()}|${cleanIssueBody(issue.body).replace(/\s+/g,' ').trim().toLowerCase()}`;}
-function renderStory(issue){if(!storyWall||!issue||issue.pull_request)return;const key=storyKey(issue);if(seenStories.has(key))return;seenStories.add(key);const article=document.createElement('article');article.dataset.search=((issue.title||'')+' '+cleanIssueBody(issue.body)).toLowerCase();const title=document.createElement('h3');title.textContent=(issue.title||'Dog Tag Day Story').replace(/^Dog Tag Day Story\s*[-—:]?\s*/i,'')||'Dog Tag Day Story';const text=document.createElement('p');text.style.whiteSpace='pre-line';text.textContent=cleanIssueBody(issue.body)||'A Dog Tag Day community story.';article.append(title,text);storyWall.appendChild(article);}
+function renderStory(issue){
+  if(!storyWall||!issue||issue.pull_request)return;
+  const key=storyKey(issue);if(seenStories.has(key))return;seenStories.add(key);
+  const article=document.createElement('article');article.dataset.search=((issue.title||'')+' '+cleanIssueBody(issue.body)).toLowerCase();
+  const title=document.createElement('h3');title.textContent=(issue.title||'Dog Tag Day Story').replace(/^Dog Tag Day Story\s*[-—:]?\s*/i,'')||'Dog Tag Day Story';
+  const text=document.createElement('p');text.style.whiteSpace='pre-line';text.textContent=cleanIssueBody(issue.body)||'A Dog Tag Day community story.';
+  const honor=document.createElement('button');honor.type='button';honor.className='button secondary';honor.style.marginTop='14px';honor.style.padding='10px 14px';
+  const storageKey=`dogtagday-honor-${issue.number||key}`;
+  const setHonorState=()=>{const honored=localStorage.getItem(storageKey)==='1';honor.textContent=honored?'❤️ Honored':'♡ Honor This Story';honor.setAttribute('aria-pressed',String(honored));};
+  honor.addEventListener('click',()=>{const honored=localStorage.getItem(storageKey)==='1';if(honored)localStorage.removeItem(storageKey);else localStorage.setItem(storageKey,'1');setHonorState();});
+  setHonorState();
+  article.append(title,text,honor);storyWall.appendChild(article);
+}
 function filterStories(){if(!storyWall)return;const q=(searchBox?.value||'').trim().toLowerCase();storyWall.querySelectorAll('article').forEach(article=>{article.hidden=!!q&&!article.dataset.search.includes(q);});}
 searchBox?.addEventListener('input',filterStories);
 async function loadStories(reset=false){if(!storyWall)return;if(reset){storiesPage=1;storyWall.innerHTML='';seenStories.clear();}if(loadMore){loadMore.disabled=true;loadMore.textContent='Loading…';}try{const url=`https://api.github.com/repos/rshure001/DogTagDay/issues?state=open&labels=formspree&sort=created&direction=desc&per_page=${storiesPerPage}&page=${storiesPage}`;const response=await fetch(url,{headers:{Accept:'application/vnd.github+json'}});if(!response.ok)throw new Error(`GitHub ${response.status}`);const issues=await response.json();issues.filter(issue=>!issue.pull_request).forEach(renderStory);if(reset&&seenStories.size===0){const empty=document.createElement('p');empty.textContent='The first community stories will appear here as they are submitted.';storyWall.appendChild(empty);}if(loadMore){loadMore.hidden=issues.length<storiesPerPage;loadMore.disabled=false;loadMore.textContent='Load More Stories';}if(issues.length===storiesPerPage)storiesPage+=1;filterStories();}catch(error){if(reset){const note=document.createElement('p');note.textContent='Community stories are temporarily unavailable. Please check back shortly.';storyWall.appendChild(note);}if(loadMore){loadMore.hidden=true;loadMore.disabled=false;loadMore.textContent='Load More Stories';}console.error('Story wall load failed',error);}}
