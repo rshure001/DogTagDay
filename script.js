@@ -82,3 +82,15 @@ if(!document.querySelector('#story-quick-invite')){
   const close=document.createElement('button');close.type='button';close.textContent='×';close.setAttribute('aria-label','Close story invitation');close.style.border='0';close.style.background='transparent';close.style.color='#fff';close.style.fontSize='24px';close.style.cursor='pointer';close.style.padding='0 4px';close.addEventListener('click',()=>invite.remove());
   invite.append(copy,link,close);document.body.appendChild(invite);
 }
+
+// GA4 story funnel tracking.
+function trackStoryEvent(name,params={}){if(typeof window.gtag==='function')window.gtag('event',name,{...params,event_category:'Dog Tag Day Stories'});}
+let storySectionTracked=false;
+if(storySection&&'IntersectionObserver'in window){
+  const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting&&!storySectionTracked){storySectionTracked=true;trackStoryEvent('story_section_view',{section:'stories'});observer.disconnect();}});},{threshold:.35});
+  observer.observe(storySection);
+}
+document.querySelectorAll('a[href="#story"]').forEach(link=>link.addEventListener('click',()=>trackStoryEvent('share_story_click',{link_text:(link.textContent||'').trim()})));
+let storyFormStarted=false;
+storyForm?.addEventListener('focusin',()=>{if(!storyFormStarted){storyFormStarted=true;trackStoryEvent('story_form_start');}});
+storyForm?.addEventListener('submit',()=>{const result=pgCheck(storyText?.value);if(result.ok)trackStoryEvent('story_submit',{method:'formspree'});});
