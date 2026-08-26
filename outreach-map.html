@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dog Tag Day | National Outreach Map</title>
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIINfQ3ynBVep8LA02TBQp5nMZolL56xxjHc=" crossorigin="">
+<style>
+body{background:#07131f;color:#fff}.map-page{max-width:1500px;margin:0 auto;padding:18px}.map-top{display:grid;grid-template-columns:220px 1fr;gap:18px;align-items:stretch}.tag-panel{border:1px solid #b89a55;background:#020b14;border-radius:10px;overflow:hidden;min-height:180px;position:relative}.tag-crop{position:absolute;inset:0;background-image:url('assets/approved-dog-tags.PNG');background-size:auto 100%;background-position:left center;background-repeat:no-repeat}.map-heading{border:1px solid #2e4458;background:#0b1d2d;border-radius:10px;padding:18px}.map-heading h1{margin:0 0 8px;font-size:clamp(2rem,5vw,4.4rem);line-height:.95}.map-heading .gold{color:#d7b25b}.stats{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.stat{background:#06101a;border:1px solid #40566c;border-radius:8px;padding:10px 14px}.stat b{display:block;font-size:1.55rem;color:#d7b25b}.map-wrap{margin-top:16px;display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:14px}.map-card{border:2px solid #c59a35;border-radius:10px;overflow:hidden;background:#02070c}.map-note{padding:9px 12px;background:#0b1722;font-size:.9rem;color:#d7e2ea;border-bottom:1px solid #263746}#map{height:68vh;min-height:520px}.legend{background:#07111b;border:1px solid #45566a;border-radius:10px;padding:14px}.legend h2{margin-top:0;color:#d7b25b}.legend-row{display:flex;align-items:center;gap:9px;margin:9px 0;font-size:.9rem}.dot{width:13px;height:13px;border-radius:50%;display:inline-block;flex:0 0 auto}.green{background:#2bd35c}.gray{background:#d6d6d6}.blue{background:#2387ff}.red{background:#ff3434}.orange{background:#ff8a1f}.purple{background:#9a37e8}.teal{background:#20c5d8}.yellow{background:#ffd329}.pink{background:#ff3c91}.olive{background:#b5c83c}.brown{background:#a36e42}.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:#07111b;color:#fff}.leaflet-control-zoom a{background:#07111b!important;color:#fff!important}.back{display:inline-block;margin:16px 0;color:#fff;text-decoration:none;border:1px solid #b89a55;padding:10px 14px;border-radius:6px}@media(max-width:860px){.map-top{grid-template-columns:110px 1fr}.map-wrap{grid-template-columns:1fr}.legend{order:2}#map{height:62vh;min-height:430px}.tag-panel{min-height:150px}}
+</style>
+</head>
+<body>
+<div class="top-edge"></div>
+<main class="map-page">
+<a class="back" href="index.html">← Dog Tag Day Home</a>
+<section class="map-top">
+  <div class="tag-panel" aria-label="Dog Tag Day military dog tags"><div class="tag-crop"></div></div>
+  <div class="map-heading">
+    <p class="eyebrow">APRIL 18 • NATIONAL OUTREACH</p>
+    <h1>DOG TAG DAY <span class="gold">INTERACTIVE MAP</span></h1>
+    <p>Pinch, scroll, or use + / − to zoom. Drag the map to explore. Tap a marker for details.</p>
+    <div class="stats"><div class="stat"><b>1,522</b>Emails verified in Gmail Sent</div><div class="stat"><b>9</b>Bounce/failure notices excluded</div><div class="stat"><b>50 + D.C.</b>Nationwide outreach coverage</div></div>
+  </div>
+</section>
+<section class="map-wrap">
+  <div class="map-card"><div class="map-note">Interactive geography is real map data. Markers below represent verified city/state outreach hubs from the current contact log; they are not invented individual recipient addresses.</div><div id="map" aria-label="Interactive United States Dog Tag Day outreach map"></div></div>
+  <aside class="legend"><h2>DOT LEGEND</h2><div class="legend-row"><span class="dot green"></span>Grants / Foundations</div><div class="legend-row"><span class="dot gray"></span>Attorneys / Legal</div><div class="legend-row"><span class="dot blue"></span>Veterans Orgs / Outreach</div><div class="legend-row"><span class="dot red"></span>Media / Newsrooms</div><div class="legend-row"><span class="dot orange"></span>First Responders</div><div class="legend-row"><span class="dot purple"></span>Restaurants / Food</div><div class="legend-row"><span class="dot teal"></span>Government / Civic</div><div class="legend-row"><span class="dot yellow"></span>Businesses / Retail</div><div class="legend-row"><span class="dot pink"></span>Faith / Churches</div><div class="legend-row"><span class="dot olive"></span>Sports / Athletics</div><div class="legend-row"><span class="dot brown"></span>Other / Misc.</div></aside>
+</section>
+</main>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script>
+const map=L.map('map',{minZoom:3,maxZoom:18,zoomControl:true}).setView([39.5,-98.35],4);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap contributors'}).addTo(map);
+const hubs=[
+['Las Vegas, NV',36.1699,-115.1398,18],['Los Angeles, CA',34.0522,-118.2437,28],['Washington, D.C.',38.9072,-77.0369,16],['Phoenix, AZ',33.4484,-112.0740,9],['Austin, TX',30.2672,-97.7431,7],['Denver, CO',39.7392,-104.9903,5],['Columbus, OH',39.9612,-82.9988,5],['St. Paul, MN',44.9537,-93.0900,4],['Oklahoma City, OK',35.4676,-97.5164,5],['Richmond, VA',37.5407,-77.4360,5],['Seattle, WA',47.6062,-122.3321,4],['Honolulu, HI',21.3069,-157.8583,3],['Anchorage, AK',61.2181,-149.9003,3],['Portland, ME',43.6591,-70.2568,2],['Manchester, NH',42.9956,-71.4548,3],['Baltimore, MD',39.2904,-76.6122,5],['Nashville, TN',36.1627,-86.7816,4],['Madison, WI',43.0731,-89.4012,3],['Lansing, MI',42.7325,-84.5555,3],['Raleigh, NC',35.7796,-78.6382,3]
+];
+const c='#2387ff';
+hubs.forEach(([name,lat,lng,count])=>{L.circleMarker([lat,lng],{radius:Math.min(14,5+count/4),color:'#d8efff',weight:1.2,fillColor:c,fillOpacity:.9}).addTo(map).bindPopup(`<strong>${name}</strong><br>Verified outreach hub<br>${count} logged contacts represented at city/state level`);});
+</script>
+</body>
+</html>
