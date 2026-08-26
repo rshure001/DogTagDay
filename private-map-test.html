@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="robots" content="noindex,nofollow">
+<title>Dog Tag Day — Private Map Test</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+*{box-sizing:border-box}html,body{margin:0;padding:0;background:#06111b;color:#fff;font-family:Arial,Helvetica,sans-serif}.shell{max-width:1600px;margin:0 auto;padding:10px}.top{display:grid;grid-template-columns:120px minmax(0,1fr);gap:10px;margin-bottom:10px}.tags{border:1px solid #c5a04a;border-radius:12px;overflow:hidden;background:#02080d;min-height:120px}.tags img{width:100%;height:100%;object-fit:cover;object-position:left center;display:block}.hero{border:1px solid #354b60;border-radius:12px;background:linear-gradient(135deg,#0d2235,#07121d);padding:12px}.eyebrow{font-size:12px;font-weight:800;letter-spacing:.15em;color:#d7b25b}.hero h1{font-size:clamp(28px,6vw,52px);line-height:.95;margin:4px 0 8px}.search{display:flex;gap:8px}.search input{flex:1;min-width:0;padding:13px 14px;font-size:16px;border:0;border-radius:10px;color:#111}.search button{border:0;border-radius:10px;background:#d7b25b;color:#111;padding:0 18px;font-weight:900}.mapbox{border:2px solid #d7b25b;border-radius:12px;overflow:hidden;background:#000}#map{height:78vh;min-height:560px}.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:#07111b;color:#fff}.leaflet-control-zoom a{background:#07111b!important;color:#fff!important}.leaflet-control-attribution{font-size:9px!important}.legend-chip{display:inline-flex;align-items:center;gap:5px;font-size:11px;background:rgba(3,10,16,.86);border:1px solid #33495c;padding:5px 7px;border-radius:999px;margin:2px}.legend-wrap{position:absolute;z-index:500;left:10px;bottom:10px;max-width:calc(100% - 20px)}.sw{width:9px;height:9px;border-radius:50%;display:inline-block}.private{position:absolute;z-index:500;right:10px;top:10px;background:rgba(0,0,0,.76);border:1px solid #d7b25b;color:#d7b25b;padding:6px 8px;border-radius:7px;font-weight:800;font-size:11px}@media(max-width:700px){.top{grid-template-columns:78px minmax(0,1fr)}.tags{min-height:112px}.hero{padding:9px}.hero h1{font-size:27px}.eyebrow{font-size:10px}.search{grid-column:1/-1}.search button{padding:0 13px}#map{height:74vh;min-height:520px}.legend-chip{font-size:10px}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <section class="top">
+    <div class="tags"><img src="assets/approved-dog-tags.PNG" alt="Dog Tag Day dog tags"></div>
+    <div class="hero">
+      <div class="eyebrow">DOG TAG DAY • APRIL 18</div>
+      <h1>Across America</h1>
+      <div class="search"><input id="searchBox" autocomplete="off" placeholder="Search any city, street or ZIP code"><button id="searchBtn">SEARCH</button></div>
+    </div>
+  </section>
+  <div class="mapbox" style="position:relative">
+    <div id="map"></div>
+    <div class="private">PRIVATE TEST</div>
+    <div class="legend-wrap">
+      <span class="legend-chip"><span class="sw" style="background:#2684ff"></span>VFW</span>
+      <span class="legend-chip"><span class="sw" style="background:#ff3f83"></span>American Legion</span>
+      <span class="legend-chip"><span class="sw" style="background:#9b59ff"></span>DAV</span>
+      <span class="legend-chip"><span class="sw" style="background:#1bc7c9"></span>VA</span>
+      <span class="legend-chip"><span class="sw" style="background:#ff9b24"></span>Veteran org</span>
+    </div>
+  </div>
+</div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const map=L.map('map',{minZoom:3,maxZoom:19,zoomControl:true}).setView([39.5,-98.35],4);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap contributors'}).addTo(map);
+const layer=L.layerGroup().addTo(map);
+const colors={vfw:'#2684ff',legion:'#ff3f83',dav:'#9b59ff',va:'#1bc7c9',other:'#ff9b24'};
+function classify(name=''){
+ const s=name.toLowerCase();
+ if(s.includes('vfw')||s.includes('veterans of foreign wars')) return 'vfw';
+ if(s.includes('american legion')) return 'legion';
+ if(s.includes('disabled american veterans')||/^dav\b/.test(s)) return 'dav';
+ if(s.includes('va medical')||s.includes('veterans affairs')||s.includes('veterans health')) return 'va';
+ return 'other';
+}
+function addDot(lat,lng,name,type){
+ L.circleMarker([lat,lng],{radius:7,color:'#fff',weight:1.2,fillColor:colors[type]||colors.other,fillOpacity:.96}).addTo(layer).bindPopup('<strong>'+escapeHtml(name)+'</strong>');
+}
+function escapeHtml(s){return String(s).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));}
+const seed=[
+ ['VFW Post 12198',36.1266,-115.2004],['American Legion Post 8',36.1817,-115.1392],['DAV / VA Medical Center',36.2848,-115.1078],['VFW Basic Post 3848',36.0395,-114.9875],['American Legion Hollywood Post 43',34.1017,-118.3319],['VA Greater Los Angeles',34.0563,-118.4528],['VFW National Headquarters',39.0997,-94.5786],['American Legion National Headquarters',39.7684,-86.1581]
+];
+seed.forEach(([n,a,b])=>addDot(a,b,n,classify(n)));
+let fetchTimer=null,lastKey='';
+async function loadVisible(){
+ if(map.getZoom()<10) return;
+ const b=map.getBounds();
+ const key=[b.getSouth().toFixed(2),b.getWest().toFixed(2),b.getNorth().toFixed(2),b.getEast().toFixed(2)].join(',');
+ if(key===lastKey) return; lastKey=key;
+ const bbox=`${b.getSouth()},${b.getWest()},${b.getNorth()},${b.getEast()}`;
+ const q=`[out:json][timeout:15];(nwr[\"name\"~\"VFW|Veterans of Foreign Wars|American Legion|Disabled American Veterans|DAV|Veterans Affairs|VA Medical|Veterans Health\",i](${bbox}););out center tags;`;
+ try{
+   const r=await fetch('https://overpass-api.de/api/interpreter',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'},body:'data='+encodeURIComponent(q)});
+   if(!r.ok) return;
+   const data=await r.json();
+   const seen=new Set();
+   data.elements.forEach(e=>{
+     const name=e.tags&&e.tags.name; if(!name) return;
+     const lat=e.lat??(e.center&&e.center.lat), lng=e.lon??(e.center&&e.center.lon); if(lat==null||lng==null) return;
+     const k=name+'|'+Number(lat).toFixed(4)+'|'+Number(lng).toFixed(4); if(seen.has(k)) return; seen.add(k);
+     addDot(lat,lng,name,classify(name));
+   });
+ }catch(e){}
+}
+map.on('moveend',()=>{clearTimeout(fetchTimer);fetchTimer=setTimeout(loadVisible,350)});
+async function search(){
+ const q=document.getElementById('searchBox').value.trim(); if(!q) return;
+ try{
+   const r=await fetch('https://nominatim.openstreetmap.org/search?format=json&limit=1&countrycodes=us&q='+encodeURIComponent(q),{headers:{'Accept':'application/json'}});
+   const a=await r.json(); if(!a.length) return;
+   map.flyTo([Number(a[0].lat),Number(a[0].lon)],15,{duration:1.1});
+ }catch(e){}
+}
+document.getElementById('searchBtn').addEventListener('click',search);
+document.getElementById('searchBox').addEventListener('keydown',e=>{if(e.key==='Enter')search()});
+</script>
+</body>
+</html>
