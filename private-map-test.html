@@ -7,7 +7,7 @@
 <title>Dog Tag Day — Private Map Test</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <style>
-*{box-sizing:border-box}html,body{margin:0;padding:0;background:#06111b;color:#fff;font-family:Arial,Helvetica,sans-serif}.shell{max-width:1600px;margin:0 auto;padding:10px}.top{display:grid;grid-template-columns:120px minmax(0,1fr);gap:10px;margin-bottom:10px}.tags{border:1px solid #c5a04a;border-radius:12px;overflow:hidden;background:#02080d;min-height:120px}.tags img{width:100%;height:100%;object-fit:cover;object-position:left center;display:block}.hero{border:1px solid #354b60;border-radius:12px;background:linear-gradient(135deg,#0d2235,#07121d);padding:12px}.eyebrow{font-size:12px;font-weight:800;letter-spacing:.15em;color:#d7b25b}.hero h1{font-size:clamp(28px,6vw,52px);line-height:.95;margin:4px 0 8px}.search{display:flex;gap:8px}.search input{flex:1;min-width:0;padding:13px 14px;font-size:16px;border:0;border-radius:10px;color:#111}.search button{border:0;border-radius:10px;background:#d7b25b;color:#111;padding:0 18px;font-weight:900}.mapbox{border:2px solid #d7b25b;border-radius:12px;overflow:hidden;background:#000}#map{height:78vh;min-height:560px}.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:#07111b;color:#fff}.leaflet-control-zoom a{background:#07111b!important;color:#fff!important}.leaflet-control-attribution{font-size:9px!important}.legend-chip{display:inline-flex;align-items:center;gap:5px;font-size:11px;background:rgba(3,10,16,.86);border:1px solid #33495c;padding:5px 7px;border-radius:999px;margin:2px}.legend-wrap{position:absolute;z-index:500;left:10px;bottom:10px;max-width:calc(100% - 20px)}.sw{width:9px;height:9px;border-radius:50%;display:inline-block}.private{position:absolute;z-index:500;right:10px;top:10px;background:rgba(0,0,0,.76);border:1px solid #d7b25b;color:#d7b25b;padding:6px 8px;border-radius:7px;font-weight:800;font-size:11px}.count{position:absolute;z-index:500;left:10px;top:10px;background:rgba(0,0,0,.76);border:1px solid #d7b25b;color:#fff;padding:6px 8px;border-radius:7px;font-weight:800;font-size:11px}@media(max-width:700px){.top{grid-template-columns:78px minmax(0,1fr)}.tags{min-height:112px}.hero{padding:9px}.hero h1{font-size:27px}.eyebrow{font-size:10px}.search{grid-column:1/-1}.search button{padding:0 13px}#map{height:74vh;min-height:520px}.legend-chip{font-size:10px}}
+*{box-sizing:border-box}html,body{margin:0;padding:0;background:#06111b;color:#fff;font-family:Arial,Helvetica,sans-serif}.shell{max-width:1600px;margin:0 auto;padding:10px}.top{display:grid;grid-template-columns:120px minmax(0,1fr);gap:10px;margin-bottom:10px}.tags{border:1px solid #c5a04a;border-radius:12px;overflow:hidden;background:#02080d;min-height:120px}.tags img{width:100%;height:100%;object-fit:cover;object-position:left center;display:block}.hero{border:1px solid #354b60;border-radius:12px;background:linear-gradient(135deg,#0d2235,#07121d);padding:12px}.eyebrow{font-size:12px;font-weight:800;letter-spacing:.15em;color:#d7b25b}.hero h1{font-size:clamp(28px,6vw,52px);line-height:.95;margin:4px 0 8px}.search{display:flex;gap:8px}.search input{flex:1;min-width:0;padding:13px 14px;font-size:16px;border:0;border-radius:10px;color:#111}.search button{border:0;border-radius:10px;background:#d7b25b;color:#111;padding:0 18px;font-weight:900}.mapbox{border:2px solid #d7b25b;border-radius:12px;overflow:hidden;background:#000}#map{height:78vh;min-height:560px}.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:#07111b;color:#fff}.leaflet-control-zoom a{background:#07111b!important;color:#fff!important}.leaflet-control-attribution{font-size:9px!important}.legend-chip{display:inline-flex;align-items:center;gap:5px;font-size:11px;background:rgba(3,10,16,.86);border:1px solid #33495c;padding:5px 7px;border-radius:999px;margin:2px}.legend-wrap{position:absolute;z-index:500;left:10px;bottom:10px;max-width:calc(100% - 20px)}.sw{width:9px;height:9px;border-radius:50%;display:inline-block}.private{position:absolute;z-index:500;right:10px;top:10px;background:rgba(0,0,0,.76);border:1px solid #d7b25b;color:#d7b25b;padding:6px 8px;border-radius:7px;font-weight:800;font-size:11px}.count{position:absolute;z-index:500;left:10px;top:10px;background:rgba(0,0,0,.82);border:1px solid #d7b25b;color:#fff;padding:7px 9px;border-radius:7px;font-weight:800;font-size:11px;max-width:70%}@media(max-width:700px){.top{grid-template-columns:78px minmax(0,1fr)}.tags{min-height:112px}.hero{padding:9px}.hero h1{font-size:27px}.eyebrow{font-size:10px}.search{grid-column:1/-1}.search button{padding:0 13px}#map{height:74vh;min-height:520px}.legend-chip{font-size:10px}}
 </style>
 </head>
 <body>
@@ -22,14 +22,11 @@
   </section>
   <div class="mapbox" style="position:relative">
     <div id="map"></div>
-    <div class="count" id="dotCount">Loading all bubbles…</div>
+    <div class="count" id="dotCount">Verified Gmail outreach hubs • bubble size = logged contacts</div>
     <div class="private">PRIVATE TEST</div>
     <div class="legend-wrap">
-      <span class="legend-chip"><span class="sw" style="background:#2684ff"></span>VFW</span>
-      <span class="legend-chip"><span class="sw" style="background:#ff3f83"></span>American Legion</span>
-      <span class="legend-chip"><span class="sw" style="background:#9b59ff"></span>DAV</span>
-      <span class="legend-chip"><span class="sw" style="background:#1bc7c9"></span>VA</span>
-      <span class="legend-chip"><span class="sw" style="background:#ff9b24"></span>Veteran org</span>
+      <span class="legend-chip"><span class="sw" style="background:#2387ff"></span>Verified outreach hub</span>
+      <span class="legend-chip">Tap a bubble for count</span>
     </div>
   </div>
 </div>
@@ -37,83 +34,25 @@
 <script>
 const map=L.map('map',{minZoom:3,maxZoom:19,zoomControl:true,preferCanvas:true}).setView([39.5,-98.35],4);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap contributors'}).addTo(map);
-const layer=L.layerGroup().addTo(map);
-const colors={vfw:'#2684ff',legion:'#ff3f83',dav:'#9b59ff',va:'#1bc7c9',other:'#ff9b24'};
-const added=new Set();
-let totalDots=0;
-function classify(name=''){
- const s=name.toLowerCase();
- if(s.includes('vfw')||s.includes('veterans of foreign wars')) return 'vfw';
- if(s.includes('american legion')) return 'legion';
- if(s.includes('disabled american veterans')||/^dav\b/.test(s)) return 'dav';
- if(s.includes('va medical')||s.includes('veterans affairs')||s.includes('veterans health')) return 'va';
- return 'other';
-}
-function addDot(lat,lng,name,type){
- const key=name+'|'+Number(lat).toFixed(4)+'|'+Number(lng).toFixed(4);
- if(added.has(key)) return;
- added.add(key);
- L.circleMarker([lat,lng],{radius:5,color:'#fff',weight:.8,fillColor:colors[type]||colors.other,fillOpacity:.9}).addTo(layer).bindPopup('<strong>'+escapeHtml(name)+'</strong>');
- totalDots++;
- document.getElementById('dotCount').textContent=totalDots+' bubbles loaded';
-}
-function escapeHtml(s){return String(s).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));}
-function parseElements(data){
- (data.elements||[]).forEach(e=>{
-  const name=e.tags&&e.tags.name;if(!name)return;
-  const lat=e.lat??(e.center&&e.center.lat),lng=e.lon??(e.center&&e.center.lon);if(lat==null||lng==null)return;
-  addDot(lat,lng,name,classify(name));
- });
-}
-async function queryBox(s,w,n,e){
- const bbox=`${s},${w},${n},${e}`;
- const q=`[out:json][timeout:35];(nwr[\"name\"~\"VFW|Veterans of Foreign Wars|American Legion|Disabled American Veterans|DAV|Veterans Affairs|VA Medical|Veterans Health|Veterans Center|Veteran Center\",i](${bbox}););out center tags;`;
- const endpoints=['https://overpass-api.de/api/interpreter','https://overpass.kumi.systems/api/interpreter'];
- for(const url of endpoints){
-  try{
-   const r=await fetch(url,{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'},body:'data='+encodeURIComponent(q)});
-   if(!r.ok) continue;
-   parseElements(await r.json());
-   return true;
-  }catch(err){}
- }
- return false;
-}
-async function loadNationwide(){
- document.getElementById('dotCount').textContent='Loading all bubbles…';
- const boxes=[
-  [24.4,-125,37.5,-100],
-  [37.5,-125,50,-100],
-  [24.4,-100,37.5,-66.5],
-  [37.5,-100,50,-66.5],
-  [51,-170,72,-129],
-  [18.8,-161,22.6,-154]
- ];
- let ok=0;
- for(const b of boxes){if(await queryBox(...b)) ok++;}
- document.getElementById('dotCount').textContent=totalDots+' bubbles loaded';
- if(ok===0) document.getElementById('dotCount').textContent='Map service busy — tap refresh';
-}
-let fetchTimer=null,lastKey='';
-async function loadVisible(){
- if(map.getZoom()<10) return;
- const b=map.getBounds();
- const key=[b.getSouth().toFixed(2),b.getWest().toFixed(2),b.getNorth().toFixed(2),b.getEast().toFixed(2)].join(',');
- if(key===lastKey) return;lastKey=key;
- await queryBox(b.getSouth(),b.getWest(),b.getNorth(),b.getEast());
-}
-map.on('moveend',()=>{clearTimeout(fetchTimer);fetchTimer=setTimeout(loadVisible,350)});
+const hubs=[
+['Las Vegas, NV',36.1699,-115.1398,18],['Los Angeles, CA',34.0522,-118.2437,28],['Washington, D.C.',38.9072,-77.0369,16],['Phoenix, AZ',33.4484,-112.0740,9],['Austin, TX',30.2672,-97.7431,7],['Denver, CO',39.7392,-104.9903,5],['Columbus, OH',39.9612,-82.9988,5],['St. Paul, MN',44.9537,-93.0900,4],['Oklahoma City, OK',35.4676,-97.5164,5],['Richmond, VA',37.5407,-77.4360,5],['Seattle, WA',47.6062,-122.3321,4],['Honolulu, HI',21.3069,-157.8583,3],['Anchorage, AK',61.2181,-149.9003,3],['Portland, ME',43.6591,-70.2568,2],['Manchester, NH',42.9956,-71.4548,3],['Baltimore, MD',39.2904,-76.6122,5],['Nashville, TN',36.1627,-86.7816,4],['Madison, WI',43.0731,-89.4012,3],['Lansing, MI',42.7325,-84.5555,3],['Raleigh, NC',35.7796,-78.6382,3]
+];
+const group=[];
+hubs.forEach(([name,lat,lng,count])=>{
+ const m=L.circleMarker([lat,lng],{radius:Math.min(18,6+count/2.2),color:'#fff',weight:1.3,fillColor:'#2387ff',fillOpacity:.92}).addTo(map).bindPopup(`<strong>${name}</strong><br>${count} logged outreach contacts represented at city/state level`);
+ group.push(m);
+});
+const fg=L.featureGroup(group);map.fitBounds(fg.getBounds().pad(.22));
 async function search(){
  const q=document.getElementById('searchBox').value.trim();if(!q)return;
  try{
   const r=await fetch('https://nominatim.openstreetmap.org/search?format=json&limit=1&countrycodes=us&q='+encodeURIComponent(q),{headers:{'Accept':'application/json'}});
   const a=await r.json();if(!a.length)return;
-  map.flyTo([Number(a[0].lat),Number(a[0].lon)],15,{duration:1.1});
+  map.flyTo([Number(a[0].lat),Number(a[0].lon)],12,{duration:1.1});
  }catch(e){}
 }
 document.getElementById('searchBtn').addEventListener('click',search);
 document.getElementById('searchBox').addEventListener('keydown',e=>{if(e.key==='Enter')search()});
-loadNationwide();
 </script>
 </body>
 </html>
