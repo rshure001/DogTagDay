@@ -56,6 +56,17 @@ hubs.filter((_,i)=>i%2===0).slice(0,28).forEach(([lat,lng],i)=>{const d=.03+(i%5
 map.fitBounds([[24.2,-125],[49.7,-66.5]],{padding:[8,8]});
 function mini(id,center,zoom,count,spread){const mm=L.map(id,{zoomControl:false,attributionControl:false,dragging:false,scrollWheelZoom:false,doubleClickZoom:false,touchZoom:false,boxZoom:false,keyboard:false,preferCanvas:true}).setView(center,zoom);L.tileLayer(tile,{maxZoom:19}).addTo(mm);for(let i=0;i<count;i++){const a=rnd()*6.28318,d=Math.sqrt(rnd())*spread,c=i%9===0?accent[i%accent.length]:warm[i%warm.length];L.circleMarker([center[0]+Math.sin(a)*d,center[1]+Math.cos(a)*d/Math.max(.58,Math.cos(center[0]*.0174533))],{radius:1.2+(i%13===0?.8:0),weight:.3,color:'#fff7d6',fillColor:c,fillOpacity:.98,interactive:false}).addTo(mm)}return mm}
 mini('ak',[61.4,-149.4],4,45,2.4);mini('hi',[20.8,-157.8],5,45,1.1);mini('pr',[18.25,-66.4],7,30,.35);
+try{
+  if(window.parent&&window.parent!==window){
+    const section=window.parent.document.querySelector('#home-outreach-map');
+    if(section){
+      const p=section.querySelector('p[style*="max-width:760px"]');
+      if(p)p.textContent='Explore 1,800 approximate national outreach lights. Pinch, zoom, and drag to explore communities across America. Exact recipient addresses are not displayed.';
+      const a=section.querySelector('a[href*="map-target-1800.html"]');
+      if(a)a.href='map-target-1800.html?v=20260827-final';
+    }
+  }
+}catch(e){}
 </script>
 </body>
 </html>
