@@ -37,3 +37,27 @@ function trackStoryEvent(name,params={}){if(typeof window.gtag==='function')wind
 let storySectionTracked=false;if(storySection&&'IntersectionObserver'in window){const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting&&!storySectionTracked){storySectionTracked=true;trackStoryEvent('story_section_view',{section:'stories'});observer.disconnect();}});},{threshold:.35});observer.observe(storySection);}
 document.querySelectorAll('a[href="#story"]').forEach(link=>link.addEventListener('click',()=>trackStoryEvent('share_story_click',{link_text:(link.textContent||'').trim()})));
 let storyFormStarted=false;storyForm?.addEventListener('focusin',()=>{if(!storyFormStarted){storyFormStarted=true;trackStoryEvent('story_form_start');}});storyForm?.addEventListener('submit',()=>{const result=pgCheck(storyText?.value);if(result.ok)trackStoryEvent('story_submit',{method:'formspree'});});
+
+// Restore the interactive outreach map directly on the homepage.
+if(!document.querySelector('#home-outreach-map')){
+  const anchor=document.querySelector('.identity-ribbon')||document.querySelector('.statement');
+  if(anchor){
+    const section=document.createElement('section');
+    section.id='home-outreach-map';
+    section.setAttribute('aria-label','Interactive Dog Tag Day outreach map');
+    section.style.maxWidth='1200px';
+    section.style.margin='26px auto 42px';
+    section.style.padding='0 18px';
+    section.innerHTML=`
+      <div style="text-align:center;margin-bottom:14px">
+        <p class="eyebrow">NATIONAL OUTREACH</p>
+        <h2 style="margin:0 0 8px">Explore the Dog Tag Day Map</h2>
+        <p style="margin:0 auto 14px;max-width:760px">Pinch, zoom, drag, and explore where Dog Tag Day outreach is reaching across America.</p>
+      </div>
+      <div style="border:2px solid #b89a55;border-radius:12px;overflow:hidden;background:#07131f;box-shadow:0 8px 28px rgba(0,0,0,.18)">
+        <iframe src="map.html" title="Dog Tag Day interactive national outreach map" loading="lazy" style="display:block;width:100%;height:min(72vh,680px);min-height:480px;border:0" allow="geolocation 'none'"></iframe>
+      </div>
+      <div style="text-align:center;margin-top:14px"><a class="button secondary" href="map.html">Open Full-Screen Map</a></div>`;
+    anchor.before(section);
+  }
+}
