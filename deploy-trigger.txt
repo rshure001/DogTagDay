@@ -1,1 +1,1 @@
-Force site rebuild for DogTagDay.org — 2026-08-27 12:28 PT — final 1,800-light map published from synchronized branch.
+Force site rebuild for DogTagDay.org — 2026-08-27 15:46 PT — publish latest dense 1,800-light map and cache-buster 6358.
