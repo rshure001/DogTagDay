@@ -7,7 +7,6 @@
   <title>Dog Tag Day | April 18</title>
   <meta name="description" content="Dog Tag Day honors veterans, active-duty service members, military families, and the stories behind the tags.">
   <link rel="stylesheet" href="styles.css">
-  <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-G1C0S7L1XN"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -17,7 +16,6 @@
   </script>
 </head>
 <body>
-
 <div class="top-edge"></div>
 <header>
   <div class="brand-block">
@@ -28,7 +26,7 @@
     <a href="#mission">Mission</a>
     <a href="#april18">April 18</a>
     <a href="#why">Why We Wear</a>
-    <a href="map.html">Outreach Map</a>
+    <a href="#home-outreach-map">Map</a>
     <a href="#story">Share a Story</a>
     <a href="#founder">Founder</a>
     <a href="contact.html">Contact</a>
@@ -48,7 +46,7 @@
     </div>
     <div class="cta-row">
       <a class="button primary" href="#story">Share a Story</a>
-      <a class="button secondary" href="map.html">Explore Outreach Map</a>
+      <a class="button secondary" href="#home-outreach-map">Explore the Map</a>
     </div>
   </div>
 </section>
@@ -61,10 +59,20 @@
     <source src="https://www.gutenberg.org/files/10169/10169-m/10169-m-001.mp3" type="audio/mpeg">
     Your browser does not support the audio player.
   </audio>
-  <script>
-    document.getElementById('service-march').volume = 0.22;
-  </script>
+  <script>document.getElementById('service-march').volume = 0.22;</script>
   <p style="font-size:.9rem;opacity:.75;margin-top:10px;">Recorded June 1909 • Public domain in the United States</p>
+</section>
+
+<section id="home-outreach-map" aria-label="Interactive Dog Tag Day map" style="max-width:1200px;margin:26px auto 42px;padding:0 18px;">
+  <div style="text-align:center;margin-bottom:14px">
+    <p class="eyebrow">DOG TAG DAY ACROSS AMERICA</p>
+    <h2 style="margin:0 0 8px">Explore the Map</h2>
+    <p style="margin:0 auto 14px;max-width:760px">Zoom in, zoom out, drag, and explore the dots across America.</p>
+  </div>
+  <div style="border:2px solid #b89a55;border-radius:12px;overflow:hidden;background:#07131f;box-shadow:0 8px 28px rgba(0,0,0,.18)">
+    <iframe src="public-map.html" title="Dog Tag Day interactive map" loading="lazy" style="display:block;width:100%;height:min(72vh,680px);min-height:480px;border:0"></iframe>
+  </div>
+  <div style="text-align:center;margin-top:14px"><a class="button secondary" href="public-map.html">Open Full-Screen Map</a></div>
 </section>
 
 <section class="identity-ribbon">
@@ -113,6 +121,5 @@
 
 <footer><div class="footer-grid"><div><div class="footer-brand">DOG TAG DAY FOUNDATION</div><div class="footer-motto">Wear Your Tags. Tell Your Story. Honor Ours.</div><div class="footer-seal">Identity • Brotherhood • Honor</div></div><div>Official Date: April 18<br>© 2026 Dog Tag Day Foundation</div></div><div class="bottom-edge"></div></footer>
 <script src="script.js"></script>
-<!-- deploy refresh 2026-08-26 -->
 </body>
 </html>
