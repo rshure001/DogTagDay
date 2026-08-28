@@ -83,3 +83,15 @@
 
   fetch(`${endpoint}?limit=500`).then(r => r.json()).then(data => (data.stories || []).slice().reverse().forEach(s => renderStory(s, true))).catch(console.error);
 })();
+
+(() => {
+  if (document.querySelector('#live-outreach-picture')) return;
+  const audioSection = document.querySelector('section[aria-label="Marine Corps March"]');
+  const hero = document.querySelector('.hero-shell');
+  const section = document.createElement('section');
+  section.id = 'live-outreach-picture';
+  section.style.cssText = 'max-width:1100px;margin:28px auto 42px;padding:0 18px;text-align:center';
+  section.innerHTML = '<p class="eyebrow">REACHING ACROSS AMERICA</p><h2 style="margin:0 0 8px">1,800 outreach connections—and growing.</h2><p style="max-width:820px;margin:0 auto 18px">Every light represents a connection made in the mission to ensure our veterans are seen, heard, and remembered.</p><img src="assets/outreach-map-photo.jpg?v=20260828slip1" alt="Dog Tag Day nationwide outreach map" style="display:block;width:100%;max-width:900px;height:auto;margin:0 auto;border-radius:14px;box-shadow:0 14px 40px rgba(0,0,0,.3)"><p style="font-weight:800;letter-spacing:.1em;margin:14px 0 0">DOG TAG DAY • APRIL 18</p>';
+  if (audioSection) audioSection.insertAdjacentElement('afterend', section);
+  else if (hero) hero.insertAdjacentElement('afterend', section);
+})();
