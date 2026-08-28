@@ -1,4 +1,9 @@
 (() => {
+  document.querySelectorAll('#reach-across-america, #live-outreach-picture').forEach(el => el.remove());
+  document.querySelectorAll('a[href="#reach-across-america"], a[href="#live-outreach-picture"]').forEach(el => el.remove());
+})();
+
+(() => {
   const endpoint = 'https://ynleeweezwkdbisaiovq.supabase.co/functions/v1/story-wall';
   const oldForm = document.querySelector('form.form-shell[action*="formspree.io"], #dogtag-story-form, #dogtag-story-form-live');
   if (!oldForm) return;
@@ -82,20 +87,4 @@
   });
 
   fetch(`${endpoint}?limit=500`).then(r => r.json()).then(data => (data.stories || []).slice().reverse().forEach(s => renderStory(s, true))).catch(console.error);
-})();
-
-(() => {
-  const reach = document.querySelector('#reach-across-america');
-  if (!reach) return;
-
-  reach.style.scrollMarginTop = '110px';
-
-  const map = reach.querySelector('img[alt="Dog Tag Day nationwide outreach map"]');
-  if (map) {
-    map.src = 'https://raw.githubusercontent.com/rshure001/DogTagDay/main/assets/outreach-map-photo.jpg?v=20260828fix3';
-    map.loading = 'eager';
-    map.decoding = 'async';
-  }
-
-  document.querySelectorAll('#live-outreach-picture').forEach(el => el.remove());
 })();
