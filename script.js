@@ -22,9 +22,14 @@ if(storyForm){
   if(storyText)storyText.id='story-text';
   if(storySubmit){storySubmit.id='story-submit';storySubmit.textContent='Submit My Story';}
   const emailInput=storyForm.querySelector('input[name="email"]');
-  if(emailInput){emailInput.required=true;emailInput.placeholder='Your email — kept private';}
+  if(emailInput){emailInput.required=true;emailInput.placeholder='Your email — kept private';emailInput.autocomplete='email';}
+  const nameInput=storyForm.querySelector('input[name="name"]');if(nameInput)nameInput.autocomplete='name';
   let subject=storyForm.querySelector('input[name="subject"]');
   if(!subject){subject=document.createElement('input');subject.type='hidden';subject.name='subject';subject.value='Dog Tag Day Story';storyForm.appendChild(subject);}
+  let gotcha=storyForm.querySelector('input[name="_gotcha"]');
+  if(!gotcha){gotcha=document.createElement('input');gotcha.type='text';gotcha.name='_gotcha';gotcha.tabIndex=-1;gotcha.autocomplete='off';gotcha.setAttribute('aria-hidden','true');gotcha.style.position='absolute';gotcha.style.left='-10000px';gotcha.style.width='1px';gotcha.style.height='1px';storyForm.appendChild(gotcha);}
+  let source=storyForm.querySelector('input[name="source"]');
+  if(!source){source=document.createElement('input');source.type='hidden';source.name='source';source.value='DogTagDay.org — Share Your Story';storyForm.appendChild(source);}
   const permission=storyForm.querySelector('input[name="permission"]');
   if(permission){permission.required=true;const span=permission.parentElement?.querySelector('span');if(span)span.textContent='I give Dog Tag Day permission to publish this story publicly on DogTagDay.org. My email address will remain private.';}
   const fineprint=storyForm.querySelector('.fineprint');
@@ -43,6 +48,9 @@ storyForm?.addEventListener('submit',async event=>{
   const fd=new FormData(storyForm);
   const rid=receiptId();
   fd.set('receipt',rid);
+  fd.set('submitted_at',new Date().toISOString());
+  fd.set('source','DogTagDay.org — Share Your Story');
+  fd.set('subject',`Dog Tag Day Story — ${fd.get('name')||'Website visitor'}`);
   const backup={receipt:rid,created:new Date().toISOString(),name:fd.get('name')||'',email:fd.get('email')||'',connection:fd.get('connection')||'',message:fd.get('message')||'',permission:fd.get('permission')||''};
   try{localStorage.setItem(`dogtagday-story-${rid}`,JSON.stringify(backup));}catch(e){}
   if(storySubmit){storySubmit.disabled=true;storySubmit.textContent='Sending…';}
