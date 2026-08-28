@@ -3,11 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <title>Community Stories | Dog Tag Day</title>
   <meta name="description" content="Dog Tag Day community stories shared with permission.">
   <link rel="stylesheet" href="styles.css">
   <style>
-    .approved-stories{max-width:980px;margin:0 auto;padding:48px 22px 72px}.approved-stories h1{margin-bottom:8px}.approved-stories .intro{margin-bottom:28px}.story-card{border:1px solid rgba(0,0,0,.18);border-radius:14px;padding:24px;margin:20px 0;background:#fff}.story-card p{white-space:pre-line;line-height:1.65}.story-card .byline{font-weight:700;margin-top:18px}.back-link{display:inline-block;margin-top:24px}.story-controls{margin:28px 0 18px}.story-controls input{width:100%;max-width:620px;padding:14px 16px;border-radius:8px;border:1px solid currentColor}
+    .approved-stories{max-width:980px;margin:0 auto;padding:48px 22px 72px}.approved-stories h1{margin-bottom:8px}.approved-stories .intro{margin-bottom:28px}.story-card{border:1px solid rgba(0,0,0,.18);border-radius:14px;padding:24px;margin:20px 0;background:#fff}.story-card p{white-space:pre-line;line-height:1.65}.story-card .byline{font-weight:700;margin-bottom:14px}.back-link{display:inline-block;margin-top:24px}.story-count{font-weight:700;margin:18px 0 28px}
   </style>
 </head>
 <body>
@@ -23,9 +26,42 @@
   <p class="eyebrow">Community Stories</p>
   <h1>Stories shared with permission</h1>
   <p class="intro">These stories were submitted to Dog Tag Day and approved for public publication.</p>
-  <div class="story-controls"><input id="story-search" type="search" placeholder="Search stories by name or keyword" aria-label="Search community stories"></div>
-  <div id="story-wall" aria-live="polite"></div>
-  <button id="load-more" class="button secondary" type="button" hidden>Load More Stories</button>
+  <p class="story-count">3 published stories</p>
+
+  <article class="story-card">
+    <h2>In Memory of James Calhoun Houston</h2>
+    <p class="byline">Lena Pendleton — Daughter of a Veteran</p>
+    <p>I would like to honor and remember my Dad. A man who meant so much to so many and whose life left a lasting mark on everyone fortunate enough to know him.
+
+My Dad proudly served in the United States Air Force. His service was a reflection of the kind of man he was: dedicated, courageous, dependable and willing to put others before himself. He carried that same sense of duty and strength into every part of his life.
+
+He was the person whose presence helped shape who I am, whose lessons I will carry with me for the rest of my life. I will remember the things he taught me—not only through his words, but through the way he lived his life.
+
+Dad, you served your country with honor. You loved your family with all your heart and you will never be forgotten.
+
+Continue to rest peaceful, Dad.
+Until we meet again.
+Always, your little girl,
+Lena Joyce</p>
+  </article>
+
+  <article class="story-card">
+    <h2>A salute to everyone who served</h2>
+    <p class="byline">Willie Beard III — Family</p>
+    <p>I want to 🇺🇸 Salute everyone that has ever served in the Military 🇺🇸 🙏... The sacrifice everyone of you made is priceless... I have family (My nephew) currently in the Navy that's active... I have a brother from another mother that went to Iraq and Afghanistan as well... They made it home, a lot if people didn't... May Jesus bless everyone that is currently serving our Country USA,
+
+Love Willie Beard III</p>
+  </article>
+
+  <article class="story-card">
+    <h2>With gratitude for those who served</h2>
+    <p class="byline">Willie Beard III — Family</p>
+    <p>To all the men and women who have served in the United States military, thank you for your immeasurable sacrifices. I am deeply proud of my nephew currently serving in the Navy, and a close friend who bravely served in Iraq and Afghanistan. While I am thankful for their safe return, I honor and remember those who made the ultimate sacrifice. May God bless all who are actively serving our nation today.
+
+Respectfully,
+Willie Beard III</p>
+  </article>
+
   <a class="button primary back-link" href="index.html#story">Share Your Story</a>
 </main>
 <footer>
@@ -35,21 +71,5 @@
   </div>
   <div class="bottom-edge"></div>
 </footer>
-<script>
-const wall=document.getElementById('story-wall');
-const search=document.getElementById('story-search');
-const loadMore=document.getElementById('load-more');
-const perPage=30;
-let page=1;
-const seen=new Set();
-function clean(body){return(body||'').split(/\r?\n/).filter(line=>!/(^|\||\*\*)\s*(email|e-mail|permission|subject|tags)\s*(:|\||\*\*)/i.test(line)).filter(line=>!/formspree/i.test(line)).join('\n').replace(/^#+\s*/gm,'').replace(/\*\*/g,'').replace(/`/g,'').trim();}
-function key(issue){return`${(issue.title||'').trim().toLowerCase()}|${clean(issue.body).replace(/\s+/g,' ').trim().toLowerCase()}`;}
-function render(issue){if(!issue||issue.pull_request)return;const k=key(issue);if(seen.has(k))return;seen.add(k);const article=document.createElement('article');article.className='story-card';article.dataset.search=((issue.title||'')+' '+clean(issue.body)).toLowerCase();const title=document.createElement('h2');title.textContent=(issue.title||'Dog Tag Day Story').replace(/^Dog Tag Day Story\s*[-—:]?\s*/i,'')||'Dog Tag Day Story';const text=document.createElement('p');text.textContent=clean(issue.body)||'A Dog Tag Day community story.';article.append(title,text);wall.appendChild(article);}
-function filter(){const q=(search.value||'').trim().toLowerCase();wall.querySelectorAll('.story-card').forEach(card=>card.hidden=!!q&&!card.dataset.search.includes(q));}
-async function load(reset=false){if(reset){page=1;wall.innerHTML='';seen.clear();}loadMore.disabled=true;loadMore.textContent='Loading…';try{const url=`https://api.github.com/repos/rshure001/DogTagDay/issues?state=open&labels=formspree&sort=created&direction=desc&per_page=${perPage}&page=${page}`;const response=await fetch(url,{headers:{Accept:'application/vnd.github+json'}});if(!response.ok)throw new Error(`GitHub ${response.status}`);const issues=await response.json();issues.filter(i=>!i.pull_request).forEach(render);if(reset&&seen.size===0)wall.innerHTML='<p>The first community stories will appear here as they are approved.</p>';loadMore.hidden=issues.length<perPage;if(issues.length===perPage)page+=1;filter();}catch(e){if(reset)wall.innerHTML='<p>Community stories are temporarily unavailable. Please check back shortly.</p>';loadMore.hidden=true;console.error(e);}finally{loadMore.disabled=false;loadMore.textContent='Load More Stories';}}
-search.addEventListener('input',filter);
-loadMore.addEventListener('click',()=>load(false));
-load(true);
-</script>
 </body>
 </html>
