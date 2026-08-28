@@ -1,4 +1,3 @@
-if((location.pathname==='/'||location.pathname.endsWith('/index.html'))&&!location.search.includes('noredirect')){location.replace('/live.html?v=202608282015');}
 const menuButton=document.querySelector('.menu-button');
 const nav=document.querySelector('#main-nav');
 menuButton?.addEventListener('click',()=>{const open=nav.classList.toggle('open');menuButton.setAttribute('aria-expanded',String(open));});
