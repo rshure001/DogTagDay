@@ -50,8 +50,7 @@
     form.appendChild(trap);
   }
 
-  const section = document.querySelector('section.stories#story');
-  const wall = section?.querySelector('#published-stories');
+  const wall = document.querySelector('#published-stories');
   const storyKey = s => `${String(s.name||'').trim().toLowerCase()}|${String(s.message||'').replace(/\s+/g,' ').trim().toLowerCase()}`;
 
   function renderStory(s, prepend = true) {
@@ -67,6 +66,14 @@
     article.append(p); prepend ? wall.prepend(article) : wall.appendChild(article);
   }
 
+  const fallbackStories = [
+    {name:'Lena Pendleton',connection:'Daughter of a Veteran',message:'I would like to honor and remember my Dad. A man who meant so much to so many and whose life left a lasting mark on everyone fortunate enough to know him.\n\nMy Dad proudly served in the United States Air Force. His service was a reflection of the kind of man he was: dedicated, courageous, dependable and willing to put others before himself. He carried that same sense of duty and strength into every part of his life.\n\nHe was the person whose presence helped shape who I am, whose lessons I will carry with me for the rest of my life. I will remember the things he taught me—not only through his words, but through the way he lived his life.\n\nDad, you served your country with honor. You loved your family with all your heart and you will never be forgotten.\n\nContinue to rest peaceful, Dad.\nUntil we meet again.\nAlways, your little girl,\nLena Joyce'},
+    {name:'Willie Beard III',connection:'Family',message:'I want to 🇺🇸 Salute everyone that has ever served in the Military 🇺🇸 🙏... The sacrifice everyone of you made is priceless... I have family (My nephew) currently in the Navy that\'s active... I have a brother from another mother that went to Iraq and Afghanistan as well... They made it home, a lot if people didn\'t... May Jesus bless everyone that is currently serving our Country USA,\n\nLove Willie Beard III'},
+    {name:'Willie Beard III',connection:'Family',message:'To all the men and women who have served in the United States military, thank you for your immeasurable sacrifices. I am deeply proud of my nephew currently serving in the Navy, and a close friend who bravely served in Iraq and Afghanistan. While I am thankful for their safe return, I honor and remember those who made the ultimate sacrifice. May God bless all who are actively serving our nation today.\n\nRespectfully,\nWillie Beard III'}
+  ];
+
+  fallbackStories.slice().reverse().forEach(s => renderStory(s, true));
+
   form.addEventListener('submit', async e => {
     e.preventDefault();
     if (!form.reportValidity()) return;
@@ -75,7 +82,7 @@
     if (submit) { submit.disabled = true; submit.textContent = 'Posting Story…'; }
     status.textContent = 'Posting your story…';
     try {
-      const r = await fetch(endpoint, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({name:String(name?.value||'Anonymous').trim()||'Anonymous',connection:String(connection?.value||'').trim(),message:text,website:String(trap?.value||'')}) });
+      const r = await fetch(endpoint, { method:'POST', cache:'no-store', headers:{'Content-Type':'application/json'}, body: JSON.stringify({name:String(name?.value||'Anonymous').trim()||'Anonymous',connection:String(connection?.value||'').trim(),message:text,website:String(trap?.value||'')}) });
       const data = await r.json();
       if (!r.ok || !data.ok) throw new Error(data.error || `Story wall ${r.status}`);
       renderStory(data.story, true); form.reset(); status.textContent = 'Your story is now posted on the public Dog Tag Day Story Wall.';
@@ -86,5 +93,13 @@
     }
   });
 
-  fetch(`${endpoint}?limit=500`).then(r => r.json()).then(data => (data.stories || []).slice().reverse().forEach(s => renderStory(s, true))).catch(console.error);
+  fetch(`${endpoint}?limit=500&t=${Date.now()}`, {cache:'no-store'})
+    .then(r => { if (!r.ok) throw new Error(`Story wall ${r.status}`); return r.json(); })
+    .then(data => {
+      const stories = data.stories || [];
+      if (!wall || !stories.length) return;
+      wall.innerHTML = '';
+      stories.slice().reverse().forEach(s => renderStory(s, true));
+    })
+    .catch(err => console.error('Story Wall live load failed; showing saved fallback stories.', err));
 })();
