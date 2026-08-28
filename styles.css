@@ -190,6 +190,10 @@ footer{
 /* Keep the opening screen clean: use the main hero CTA only. */
 #story-quick-invite{display:none!important}
 
+/* Make the outreach map the visual centerpiece and override old inline sizing. */
+body #home-outreach-map{max-width:1500px!important;padding-left:8px!important;padding-right:8px!important}
+body #home-map-frame{height:780px!important;min-height:700px!important}
+
 @media(max-width:900px){
  nav{display:none}
  .hero-command,.date-grid,.split,.connection-box,.cards,.why-grid,.story-grid,.form-grid,.footer-grid{grid-template-columns:1fr}
@@ -202,4 +206,5 @@ footer{
  .three-actions{padding:0 22px 74px}
  .full{grid-column:auto}
  .form-shell,.founder-card{padding:32px 22px}
+ body #home-map-frame{height:650px!important;min-height:650px!important}
 }
