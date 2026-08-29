@@ -39,3 +39,5 @@ jobs:
           git add index.html
           git commit -m "Render interactive outreach map directly in homepage [skip ci]"
           git push
+
+# trigger-20260828-2
