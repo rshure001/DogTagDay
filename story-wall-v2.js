@@ -22,24 +22,24 @@
   }
 
   if(form){
+    const button=form.querySelector('button[type="submit"]');
+    if(button) button.textContent='Submit Story for Review';
     form.addEventListener('submit',async e=>{
       e.preventDefault();
       if(!form.reportValidity()) return;
-      const button=form.querySelector('button[type="submit"]');
       let status=form.querySelector('[data-story-status]');
       if(!status){status=document.createElement('p');status.dataset.storyStatus='1';button.before(status);}
       const fd=new FormData(form);
       const payload={name:String(fd.get('name')||'Anonymous').trim()||'Anonymous',connection:String(fd.get('connection')||'').trim(),message:String(fd.get('message')||'').trim(),website:''};
       if(!payload.message) return;
-      button.disabled=true; button.textContent='Posting Story…'; status.textContent='Posting your story…';
+      button.disabled=true; button.textContent='Submitting…'; status.textContent='Sending your story for private review…';
       try{
         const r=await fetch(endpoint,{method:'POST',cache:'no-store',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
         const d=await r.json();
-        if(!r.ok||!d.ok||!d.story) throw new Error(d.error||`HTTP ${r.status}`);
-        wall.insertAdjacentHTML('afterbegin',card(d.story));
-        form.reset(); status.textContent='Your story is now posted on the public Dog Tag Day Story Wall.';
-      }catch(err){console.error(err);status.textContent='Your story did not post. Please try again.';}
-      finally{button.disabled=false;button.textContent='Post My Story';}
+        if(!r.ok||!d.ok) throw new Error(d.error||`HTTP ${r.status}`);
+        form.reset(); status.textContent='Thank you. Your story was received for private review. It will not be published automatically.';
+      }catch(err){console.error(err);status.textContent='Your story was not submitted. Please try again.';}
+      finally{button.disabled=false;button.textContent='Submit Story for Review';}
     });
   }
   load();
