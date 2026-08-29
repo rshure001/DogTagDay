@@ -1,0 +1,33 @@
+name: Diagnose DogTagDay Domain
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/diagnose-domain.yml'
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check DNS and live site
+        run: |
+          set -x
+          echo '=== A ==='
+          dig +short dogtagday.org A
+          echo '=== AAAA ==='
+          dig +short dogtagday.org AAAA
+          echo '=== NS ==='
+          dig +short dogtagday.org NS
+          echo '=== WWW CNAME ==='
+          dig +short www.dogtagday.org CNAME
+          echo '=== CLOUDFLARE DNS ==='
+          dig @1.1.1.1 +short dogtagday.org A
+          dig @1.1.1.1 +short www.dogtagday.org CNAME
+          echo '=== GOOGLE DNS ==='
+          dig @8.8.8.8 +short dogtagday.org A
+          dig @8.8.8.8 +short www.dogtagday.org CNAME
+          echo '=== HTTP HEADERS ==='
+          curl -sSIL --max-time 20 https://dogtagday.org/ || true
+          echo '=== LIVE MARKERS ==='
+          curl -sSL --max-time 20 https://dogtagday.org/ | grep -E -i 'Lena Pendleton|Willie Beard III|Semper Fidelis|story-wall-v2' || true
+          echo '=== WWW MARKERS ==='
+          curl -sSL --max-time 20 https://www.dogtagday.org/ | grep -E -i 'Lena Pendleton|Willie Beard III|Semper Fidelis|story-wall-v2' || true
