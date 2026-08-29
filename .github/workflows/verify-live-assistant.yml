@@ -6,40 +6,42 @@ on:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
       - run: npm install playwright
-      - run: npx playwright install --with-deps chromium
-      - name: Verify dogtagday.org assistant
+      - run: npx playwright install --with-deps webkit
+      - name: Verify dogtagday.org Ask page on mobile WebKit
         run: |
           node <<'NODE'
-          const { chromium } = require('playwright');
+          const { webkit, devices } = require('playwright');
           (async()=>{
-            const browser=await chromium.launch({headless:true});
-            const page=await browser.newPage({viewport:{width:390,height:844}});
-            let ok=false,last='';
-            for(let n=0;n<10&&!ok;n++){
-              try{
-                await page.goto('https://dogtagday.org/?verify='+Date.now(),{waitUntil:'networkidle',timeout:30000});
-                const hard=await page.locator('#hardAsk').count();
-                if(!hard) throw new Error('hardAsk missing');
-                await page.locator('#hardAsk').click();
-                await page.locator('#hardInput').fill('When did Dog Tag Day start?');
-                await page.locator('#hardSend').click();
-                last=await page.locator('#hardAnswer').innerText();
-                ok=last.includes('You asked: When did Dog Tag Day start?') && last.includes('Dog Tag Day Foundation was created');
-              }catch(e){last=e.message}
-              if(!ok) await new Promise(r=>setTimeout(r,15000));
+            const browser=await webkit.launch({headless:true});
+            const context=await browser.newContext({...devices['iPhone 13']});
+            const page=await context.newPage();
+            await page.goto('https://dogtagday.org/ask.html?verify='+Date.now(),{waitUntil:'domcontentloaded',timeout:30000});
+            const tests=[
+              ['What is the mission of Dog Tag Day?','Dog Tag Day is a national movement built around one simple idea'],
+              ['Tell me about the founder','Ronnie Shure is the Founder & President'],
+              ['Why do dog tags matter?','Dog tags are more than pieces of metal'],
+              ['How is this different from Veterans Day?','Veterans Day and Memorial Day are sacred American observances'],
+              ['Can families participate?','Families and loved ones are part of Dog Tag Day too'],
+              ['How can I participate?','On April 18, if you served, wear your dog tags']
+            ];
+            for(const [question,expected] of tests){
+              await page.locator('#q').fill(question);
+              await page.getByRole('button',{name:'Ask'}).click();
+              const answer=await page.locator('#a').innerText();
+              if(!answer.includes(expected)) throw new Error(question+' FAILED: '+answer);
+              console.log('PASS: '+question);
             }
-            console.log(last);
             await page.screenshot({path:'live-assistant.png',fullPage:true});
             await browser.close();
-            if(!ok) process.exit(1);
-          })();
+            console.log('MOBILE_WEBKIT_ASK_PASS=true');
+          })().catch(e=>{console.error(e);process.exit(1)});
           NODE
       - uses: actions/upload-artifact@v4
         if: always()
