@@ -11,6 +11,7 @@ jobs:
       - name: Check DNS and live site
         run: |
           set -x
+          echo '=== RUN 2026-08-29T02:03Z ==='
           echo '=== A ==='
           dig +short dogtagday.org A
           echo '=== AAAA ==='
@@ -28,6 +29,6 @@ jobs:
           echo '=== HTTP HEADERS ==='
           curl -sSIL --max-time 20 https://dogtagday.org/ || true
           echo '=== LIVE MARKERS ==='
-          curl -sSL --max-time 20 https://dogtagday.org/ | grep -E -i 'Lena Pendleton|Willie Beard III|Semper Fidelis|story-wall-v2' || true
+          curl -sSL --max-time 20 https://dogtagday.org/ | grep -E -i '1,800 outreach lights across America|Lena Pendleton|Willie Beard III|Semper Fidelis|story-wall-v2' || true
           echo '=== WWW MARKERS ==='
-          curl -sSL --max-time 20 https://www.dogtagday.org/ | grep -E -i 'Lena Pendleton|Willie Beard III|Semper Fidelis|story-wall-v2' || true
+          curl -sSL --max-time 20 https://www.dogtagday.org/ | grep -E -i '1,800 outreach lights across America|Lena Pendleton|Willie Beard III|Semper Fidelis|story-wall-v2' || true
