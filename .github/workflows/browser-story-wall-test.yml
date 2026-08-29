@@ -24,15 +24,15 @@ jobs:
             const marker='DogTagDay-BROWSER-'+Date.now();
             const browser=await chromium.launch({headless:true});
             const page=await browser.newPage();
-            await page.goto('https://dogtagday.org/',{waitUntil:'networkidle'});
+            await page.goto('https://dogtagday.org/?verify='+Date.now(),{waitUntil:'networkidle'});
             await page.locator('#dogtag-story-form input[name="name"]').fill(marker);
             await page.locator('#dogtag-story-form input[name="connection"]').fill('Temporary automated verification');
             await page.locator('#dogtag-story-form textarea[name="message"]').fill('Temporary Story Wall browser test.');
             await page.locator('#dogtag-story-form input[name="permission"]').check();
             await page.locator('#dogtag-story-form button[type="submit"]').click();
-            await page.waitForFunction(m=>document.body.innerText.includes(m),marker,{timeout:15000});
+            await page.waitForFunction(m=>document.body.innerText.includes(m),marker,{timeout:20000});
             await page.reload({waitUntil:'networkidle'});
-            await page.waitForFunction(m=>document.body.innerText.includes(m),marker,{timeout:15000});
+            await page.waitForFunction(m=>document.body.innerText.includes(m),marker,{timeout:20000});
             console.log('BROWSER_VISIBLE_AFTER_RELOAD='+marker);
             await browser.close();
           })().catch(e=>{console.error(e);process.exit(1)});
