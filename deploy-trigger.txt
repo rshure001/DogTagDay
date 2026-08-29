@@ -1,1 +1,1 @@
-Force fresh DogTagDay.org edge deployment — 2026-08-28 11:58 PT — repaired story form, repaired 1,800-light map, cache reset attempt.
+Force fresh DogTagDay.org edge deployment — 2026-08-29 13:28 PT — direct Marine Band Semper Fidelis player, fresh Pages artifact, cache-bust redeploy.
