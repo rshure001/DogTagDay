@@ -1,0 +1,34 @@
+name: Finalize Story Wall
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  finalize:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Make Story Wall cache-proof
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text()
+          s=s.replace('story-wall-live.js?v=20260828stories2','story-wall-live.js?v=20260828stories3')
+          marker='<script src="story-wall-live.js?v=20260828stories3"></script>'
+          inline='''<script id="story-wall-static-fallback">(function(){var w=document.getElementById('published-stories');if(!w||w.querySelector('article'))return;w.innerHTML='<article><h3>Lena Pendleton</h3><p style="font-weight:700">Daughter of a Veteran</p><p>I would like to honor and remember my Dad. A man who meant so much to so many and whose life left a lasting mark on everyone fortunate enough to know him.</p></article><article><h3>Willie Beard III</h3><p style="font-weight:700">Family</p><p>I want to salute everyone that has ever served in the Military. The sacrifice every one of you made is priceless.</p></article><article><h3>Willie Beard III</h3><p style="font-weight:700">Family</p><p>To all the men and women who have served in the United States military, thank you for your immeasurable sacrifices.</p></article>';})();</script>'''
+          if 'id="story-wall-static-fallback"' not in s and marker in s:
+              s=s.replace(marker,inline+marker,1)
+          p.write_text(s)
+          PY
+      - name: Commit final Story Wall fix
+        run: |
+          if git diff --quiet; then exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Cache-proof Story Wall rendering [skip ci]"
+          git push
