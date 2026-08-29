@@ -9,4 +9,11 @@
     s.dataset.dtdGuide='1';
     document.body.appendChild(s);
   }
+  if(!document.querySelector('script[data-dtd-music]')){
+    const m=document.createElement('script');
+    m.src='music-player.js?v=20260829marine1909b1';
+    m.defer=true;
+    m.dataset.dtdMusic='1';
+    document.body.appendChild(m);
+  }
 })();
