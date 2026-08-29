@@ -1,38 +1,10 @@
-name: Server Render Story Wall
+name: Archived - Server Render Story Wall
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 permissions:
-  contents: write
+  contents: read
 jobs:
-  fix:
-    if: github.actor != 'github-actions[bot]'
+  archived:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Insert saved stories into homepage HTML
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-          p=Path('index.html')
-          s=p.read_text()
-          old='<div id="published-stories" class="story-grid"></div>'
-          new='''<div id="published-stories" class="story-grid">
-          <article><h3>Lena Pendleton</h3><p style="font-weight:700">Daughter of a Veteran</p><p>I would like to honor and remember my Dad. A man who meant so much to so many and whose life left a lasting mark on everyone fortunate enough to know him.<br><br>My Dad proudly served in the United States Air Force. His service was a reflection of the kind of man he was: dedicated, courageous, dependable and willing to put others before himself. He carried that same sense of duty and strength into every part of his life.<br><br>He was the person whose presence helped shape who I am, whose lessons I will carry with me for the rest of my life. I will remember the things he taught me—not only through his words, but through the way he lived his life.<br><br>Dad, you served your country with honor. You loved your family with all your heart and you will never be forgotten.<br><br>Continue to rest peaceful, Dad.<br>Until we meet again.<br>Always, your little girl,<br>Lena Joyce</p></article>
-          <article><h3>Willie Beard III</h3><p style="font-weight:700">Family</p><p>I want to 🇺🇸 Salute everyone that has ever served in the Military 🇺🇸 🙏... The sacrifice everyone of you made is priceless... I have family (My nephew) currently in the Navy that's active... I have a brother from another mother that went to Iraq and Afghanistan as well... They made it home, a lot if people didn't... May Jesus bless everyone that is currently serving our Country USA,<br><br>Love Willie Beard III</p></article>
-          <article><h3>Willie Beard III</h3><p style="font-weight:700">Family</p><p>To all the men and women who have served in the United States military, thank you for your immeasurable sacrifices. I am deeply proud of my nephew currently serving in the Navy, and a close friend who bravely served in Iraq and Afghanistan. While I am thankful for their safe return, I honor and remember those who made the ultimate sacrifice. May God bless all who are actively serving our nation today.<br><br>Respectfully,<br>Willie Beard III</p></article>
-          </div>'''
-          if old not in s:
-              print('Story wall already server-rendered; no change needed.')
-              raise SystemExit(0)
-          p.write_text(s.replace(old,new,1))
-          PY
-      - name: Commit homepage fix
-        run: |
-          if git diff --quiet; then exit 0; fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add index.html
-          git commit -m "Server-render saved Story Wall entries [skip ci]"
-          git push
+      - run: echo "Archived. Stories belong on stories.html and this workflow no longer modifies the homepage."
