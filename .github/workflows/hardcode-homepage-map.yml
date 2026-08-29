@@ -1,0 +1,41 @@
+name: Hardcode Homepage Map
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  map:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Put map directly in homepage HTML
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text()
+          hero_end='</div></div></section><section class="identity-ribbon">'
+          nav_old='<a href="#why">Why We Wear</a><a href="#story">Share a Story</a>'
+          nav_new='<a href="#why">Why We Wear</a><a href="#reach-across-america">Map</a><a href="#story">Share a Story</a>'
+          section='''</div></div></section><section id="reach-across-america" style="padding:48px 18px;background:#04101c;color:white;text-align:center;border-top:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12)"><div style="max-width:1100px;margin:auto"><p class="eyebrow" style="color:#d9b45a">REACHING ACROSS AMERICA</p><h2 style="margin:.2em 0 .35em">1,800 outreach lights across America.</h2><p style="max-width:760px;margin:0 auto 22px;font-size:1rem;line-height:1.55">Each light represents an outreach point in the Dog Tag Day campaign. Zoom in, zoom out, drag, and explore the map.</p><div style="max-width:1000px;margin:0 auto;background:#02070c;padding:8px;border-radius:18px;box-shadow:0 18px 55px rgba(0,0,0,.35);overflow:hidden"><iframe id="dogtag-outreach-map" title="Dog Tag Day 1,800-light interactive outreach map" src="map-1800.html?v=20260828interactive2" loading="eager" style="display:block;width:100%;height:min(68vh,680px);min-height:430px;border:0;border-radius:12px;background:#02060b"></iframe></div><div style="margin-top:18px"><a href="map-1800.html?v=20260828interactive2" style="display:inline-block;padding:12px 18px;border:1px solid #d9b45a;border-radius:10px;color:#fff;text-decoration:none;font-weight:800;letter-spacing:.04em">OPEN FULL-SCREEN MAP</a></div><p style="font-weight:800;letter-spacing:.12em;margin:18px 0 0">DOG TAG DAY • APRIL 18</p></div></section><section class="identity-ribbon">'''
+          if 'id="reach-across-america"' not in s:
+              if hero_end not in s:
+                  raise SystemExit('Hero insertion point not found')
+              s=s.replace(hero_end,section,1)
+          if 'href="#reach-across-america"' not in s:
+              if nav_old not in s:
+                  raise SystemExit('Navigation insertion point not found')
+              s=s.replace(nav_old,nav_new,1)
+          p.write_text(s)
+          PY
+      - name: Commit homepage map
+        run: |
+          if git diff --quiet; then exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Render interactive outreach map directly in homepage [skip ci]"
+          git push
