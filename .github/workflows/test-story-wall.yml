@@ -1,0 +1,20 @@
+name: Test Story Wall End to End
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/test-story-wall.yml'
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Submit and verify temporary story
+        run: |
+          set -euo pipefail
+          ENDPOINT='https://ynleeweezwkdbisaiovq.supabase.co/functions/v1/story-wall'
+          MARKER="DogTagDay-E2E-${GITHUB_RUN_ID}"
+          RESPONSE=$(curl --fail-with-body -sS -X POST "$ENDPOINT" -H 'Content-Type: application/json' --data "{\"name\":\"$MARKER\",\"connection\":\"Automated temporary verification\",\"message\":\"Temporary Story Wall verification entry.\"}")
+          echo "$RESPONSE"
+          echo "$RESPONSE" | grep -F '"ok":true'
+          curl --fail-with-body -sS "$ENDPOINT?limit=500&v=${GITHUB_RUN_ID}" | grep -F "$MARKER"
+          echo "STORY_WALL_POST_AND_RELOAD_VERIFIED"
