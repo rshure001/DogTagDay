@@ -10,12 +10,15 @@ jobs:
     steps:
       - name: Install Playwright
         run: |
+          mkdir -p /tmp/storywall-browser
+          cd /tmp/storywall-browser
           npm init -y >/dev/null 2>&1
           npm install playwright >/dev/null 2>&1
           npx playwright install --with-deps chromium >/dev/null 2>&1
       - name: Test public form in real Chromium
         run: |
-          cat > /tmp/test.js <<'EOF'
+          cd /tmp/storywall-browser
+          cat > test.js <<'EOF'
           const { chromium } = require('playwright');
           (async()=>{
             const marker='DogTagDay-BROWSER-'+Date.now();
@@ -34,4 +37,4 @@ jobs:
             await browser.close();
           })().catch(e=>{console.error(e);process.exit(1)});
           EOF
-          node /tmp/test.js
+          node test.js
