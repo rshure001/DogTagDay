@@ -25,24 +25,29 @@ jobs:
             await page.goto('https://dogtagday.org/ask.html?verify='+Date.now(),{waitUntil:'domcontentloaded',timeout:30000});
             const tests=[
               ['Is Dog Tag Day a nonprofit corporation?','Dog Tag Day Foundation is the organization behind Dog Tag Day'],
-              ['Why did Ronnie create this instead of just supporting Veterans Day?','Ronnie Shure is the Founder & President'],
-              ['What is the deeper mission and what are you trying to accomplish nationally?','The mission of Dog Tag Day is to keep veterans and service members from fading into the background'],
-              ['Why should a family care about a set of old dog tags after a veteran dies?','Military families and loved ones belong in Dog Tag Day'],
-              ['What can a company, school, or community actually do to support this movement?','Participation can be simple and personal'],
-              ['Suppose I have never served and know nothing about the military. Why should April 18 matter to me?','Dog Tag Day is observed on April 18 each year']
+              ['Why did Ronnie create this instead of just supporting Veterans Day?','Veterans Day and Memorial Day are sacred American observances'],
+              ['What is the deeper mission and what are you trying to accomplish nationally?','Dog Tag Day exists so veterans and service members do not fade into the background'],
+              ['Why should a family care about a set of old dog tags after a veteran dies?','Military families are part of Dog Tag Day'],
+              ['What can a company, school, or community actually do to support this movement?','Schools and universities can use Dog Tag Day'],
+              ['Suppose I have never served and know nothing about the military. Why should April 18 matter to me?','Dog Tag Day is April 18 every year']
             ];
+            let failed=false;
             for(const [question,expected] of tests){
               await page.locator('#q').fill(question);
               await page.getByRole('button',{name:'Ask'}).click();
               const answer=await page.locator('#a').innerText();
-              if(!answer.includes('You asked: '+question)) throw new Error('QUESTION NOT SHOWN: '+answer);
-              if(!answer.includes(expected)) throw new Error(question+' FAILED: '+answer);
-              console.log('PASS: '+question+' => '+answer.replace(/\n/g,' '));
+              if(!answer.includes('You asked: '+question)){console.error('QUESTION NOT SHOWN: '+answer);failed=true;}
+              if(!answer.includes(expected)){console.error(question+' FAILED: '+answer);failed=true;}
+              else console.log('PASS: '+question+' => '+answer.replace(/\n/g,' '));
             }
-            await page.locator('#q').fill('Why should a family care about a set of old dog tags after a veteran dies?');
+            const proof='Why did Ronnie create this instead of just supporting Veterans Day?';
+            await page.locator('#q').fill(proof);
             await page.getByRole('button',{name:'Ask'}).click();
+            const proofAnswer=await page.locator('#a').innerText();
+            if(!proofAnswer.includes('You asked: '+proof)||!proofAnswer.includes('Ronnie Shure is the Founder & President')||!proofAnswer.includes('Veterans Day and Memorial Day are sacred American observances')) failed=true;
             await page.screenshot({path:'live-assistant-depth-proof.png',fullPage:true});
             await browser.close();
+            if(failed) process.exit(1);
             console.log('MOBILE_WEBKIT_DEPTH_PASS=true');
           })().catch(e=>{console.error(e);process.exit(1)});
           NODE
