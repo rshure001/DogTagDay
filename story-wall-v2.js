@@ -12,7 +12,7 @@
     try{
       const r=await fetch(`${endpoint}?limit=500&v=${Date.now()}`,{cache:'no-store'});
       const d=await r.json();
-      if(!r.ok||!d.ok||!Array.isArray(d.stories)) throw new Error(d.error||`HTTP ${r.status}`);
+      if(!r.ok||!Array.isArray(d.stories)) throw new Error(d.error||`HTTP ${r.status}`);
       if(d.stories.length) wall.innerHTML=d.stories.map(card).join('');
       else if(!wall.querySelector('article')) wall.innerHTML=staticHTML;
     }catch(e){
@@ -35,7 +35,7 @@
       try{
         const r=await fetch(endpoint,{method:'POST',cache:'no-store',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
         const d=await r.json();
-        if(!r.ok||!d.ok) throw new Error(d.error||`HTTP ${r.status}`);
+        if(!r.ok||!d.ok||!d.story) throw new Error(d.error||`HTTP ${r.status}`);
         wall.insertAdjacentHTML('afterbegin',card(d.story));
         form.reset(); status.textContent='Your story is now posted on the public Dog Tag Day Story Wall.';
       }catch(err){console.error(err);status.textContent='Your story did not post. Please try again.';}
