@@ -16,6 +16,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -e
+          echo "Forcing GitHub Pages domain refresh 2026-08-29T00:40Z"
           curl --fail-with-body -L \
             -X PUT \
             -H "Accept: application/vnd.github+json" \
