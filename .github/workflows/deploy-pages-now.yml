@@ -28,7 +28,7 @@ jobs:
         with:
           path: .
           name: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
-      - name: Deploy restored homepage last
+      - name: Deploy approved homepage last
         id: deployment
         uses: actions/deploy-pages@v4
         with:
@@ -40,17 +40,18 @@ jobs:
           ok=0
           for i in $(seq 1 18); do
             html=$(curl -fsSL --retry 2 -H 'Cache-Control: no-cache' -H 'Pragma: no-cache' "https://dogtagday.org/?deploy=${GITHUB_SHA}-${GITHUB_RUN_ID}-$i" || true)
-            if printf '%s' "$html" | grep -q 'data-dtd-build="2026-08-30-restored-full-map"' \
+            if printf '%s' "$html" | grep -q 'data-dtd-build="2026-08-31-full-approved"' \
               && printf '%s' "$html" | grep -q '1,800 Outreach Lights' \
               && printf '%s' "$html" | grep -q 'map-christmas-1800-v4.html' \
-              && printf '%s' "$html" | grep -q 'Why It Matters' \
-              && printf '%s' "$html" | grep -q 'Share Your Story' \
-              && printf '%s' "$html" | grep -q 'America Can Join In'; then
-              echo 'LIVE_RESTORED_FULL_MAP_VERIFIED'
+              && printf '%s' "$html" | grep -q 'I See Your Dog Tags' \
+              && printf '%s' "$html" | grep -q 'Stories Behind the Tags' \
+              && printf '%s' "$html" | grep -q 'America Can Join In' \
+              && printf '%s' "$html" | grep -q 'Help Build Dog Tag Day'; then
+              echo 'LIVE_FULL_APPROVED_HOMEPAGE_VERIFIED'
               ok=1
               break
             fi
-            echo "Waiting for restored full homepage... attempt $i"
+            echo "Waiting for full approved homepage... attempt $i"
             sleep 10
           done
           test "$ok" -eq 1
