@@ -51,3 +51,4 @@ jobs:
             sleep 10
           done
           test "$ok" -eq 1
+# redeploy-trigger: 2026-08-30-force-restored-full
