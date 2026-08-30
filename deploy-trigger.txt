@@ -1,1 +1,1 @@
-Force clean DogTagDay.org Pages deployment — 2026-08-29 18:25 PT — new workflow run only; do not rerun failed artifact-bearing run. Homepage support section, approved dog-tag hero, and subtle holiday accent included.
+Force clean DogTagDay.org Pages deployment — 2026-08-29 19:57 PT — fresh workflow run only. Homepage support section, approved dog-tag hero, and subtle automatic holiday accent included.
