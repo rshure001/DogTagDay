@@ -1,1 +1,1 @@
-Force fresh DogTagDay.org edge deployment — 2026-08-29 17:25 PT — automatic holiday accent enabled on homepage. Labor Day is next; only one holiday accent displays at a time.
+Force fresh DogTagDay.org edge deployment — 2026-08-29 17:38 PT — republish subtle holiday accent. Remove the large Labor Day label; keep only a small corner icon.
