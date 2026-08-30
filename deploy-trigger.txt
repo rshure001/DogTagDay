@@ -1,1 +1,1 @@
-Force fresh DogTagDay.org edge deployment — 2026-08-29 17:47 PT — homepage support section now in index.html, approved dog-tag hero preserved, subtle automatic holiday accent retained.
+Force clean DogTagDay.org Pages deployment — 2026-08-29 18:25 PT — new workflow run only; do not rerun failed artifact-bearing run. Homepage support section, approved dog-tag hero, and subtle holiday accent included.
