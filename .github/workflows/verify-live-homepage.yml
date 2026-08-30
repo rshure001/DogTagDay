@@ -14,7 +14,7 @@ jobs:
           node-version: '20'
       - run: npm install playwright
       - run: npx playwright install --with-deps webkit
-      - name: Verify live iPhone homepage timeline and map
+      - name: Verify compact map-first live iPhone homepage
         run: |
           node <<'NODE'
           const { webkit, devices } = require('playwright');
@@ -23,22 +23,23 @@ jobs:
             const context=await browser.newContext({...devices['iPhone 13']});
             const page=await context.newPage();
             let ok=false;
-            for(let i=0;i<12;i++){
+            for(let i=0;i<18;i++){
               await page.goto('https://dogtagday.org/?verify='+Date.now(),{waitUntil:'networkidle',timeout:30000});
+              const build=await page.locator('html').getAttribute('data-dtd-build');
               const body=await page.locator('body').innerText();
-              const timeline=await page.locator('.action-line').count();
-              const steps=await page.locator('.action-step').count();
-              const map=await page.locator('.map-card svg').count();
+              const map=await page.locator('iframe[title*="national outreach map"]').count();
+              const ask=await page.locator('a[href="ask.html"]').count();
+              const stories=await page.locator('a[href="stories.html"]').count();
               const broken=await page.locator('img').evaluateAll(imgs=>imgs.filter(i=>!i.complete||i.naturalWidth===0).length);
-              const text=body.includes('Wear Your Tags')&&body.includes('Acknowledge One')&&body.includes('Tell the Story')&&body.includes('Help It Reach America');
-              console.log(`attempt=${i+1} timeline=${timeline} steps=${steps} map=${map} brokenImages=${broken} text=${text}`);
-              if(timeline===1&&steps===4&&map===1&&broken===0&&text){ok=true;break;}
+              const text=body.includes('1,800 Outreach Lights')&&body.includes('Don’t let our veterans fade into the background.');
+              console.log(`attempt=${i+1} build=${build} map=${map} ask=${ask} stories=${stories} brokenImages=${broken} text=${text}`);
+              if(build==='2026-08-30-compact-map-first'&&map===1&&ask===1&&stories===1&&broken===0&&text){ok=true;break;}
               await page.waitForTimeout(10000);
             }
             await page.screenshot({path:'live-homepage-proof.png',fullPage:true});
             await browser.close();
             if(!ok) process.exit(1);
-            console.log('LIVE_VERTICAL_MAP_PASS=true');
+            console.log('LIVE_COMPACT_MAP_FIRST_IPHONE_PASS=true');
           })().catch(e=>{console.error(e);process.exit(1)});
           NODE
       - uses: actions/upload-artifact@v4
