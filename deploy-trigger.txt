@@ -1,1 +1,1 @@
-Force clean DogTagDay.org Pages deployment — 2026-08-29 20:04 PT — unique artifact deployment fix active. Deploy current main with Help Build Dog Tag Day section, approved dog-tag hero, and subtle automatic holiday accent.
+Force clean DogTagDay.org Pages deployment — 2026-08-30 — rebuild and cache refresh. Deploy current main with mobile-first homepage, approved dog-tag hero, 1,800+ outreach map, sponsor/partner section, and founder section.
