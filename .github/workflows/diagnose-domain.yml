@@ -11,7 +11,7 @@ jobs:
       - name: Check DNS and live site
         run: |
           set -x
-          echo '=== RUN 2026-08-29T02:03Z ==='
+          echo '=== RUN 2026-08-30T17:20Z ==='
           echo '=== A ==='
           dig +short dogtagday.org A
           echo '=== AAAA ==='
