@@ -14,7 +14,7 @@ jobs:
           node-version: '20'
       - run: npm install playwright
       - run: npx playwright install --with-deps webkit
-      - name: Verify compact map-first live iPhone homepage
+      - name: Verify restored full live iPhone homepage
         run: |
           node <<'NODE'
           const { webkit, devices } = require('playwright');
@@ -30,16 +30,18 @@ jobs:
               const map=await page.locator('iframe[title*="national outreach map"]').count();
               const ask=await page.locator('a[href="ask.html"]').count();
               const stories=await page.locator('a[href="stories.html"]').count();
+              const share=await page.locator('a[href="stories.html#share-story"]').count();
+              const nav=await page.locator('nav a').count();
               const broken=await page.locator('img').evaluateAll(imgs=>imgs.filter(i=>!i.complete||i.naturalWidth===0).length);
-              const text=body.includes('1,800 Outreach Lights')&&body.includes('Don’t let our veterans fade into the background.');
-              console.log(`attempt=${i+1} build=${build} map=${map} ask=${ask} stories=${stories} brokenImages=${broken} text=${text}`);
-              if(build==='2026-08-30-compact-map-first'&&map===1&&ask===1&&stories===1&&broken===0&&text){ok=true;break;}
+              const text=body.includes('1,800 Outreach Lights')&&body.includes('Don’t let our veterans fade into the background.')&&body.includes('Why It Matters')&&body.includes('America Can Join In');
+              console.log(`attempt=${i+1} build=${build} nav=${nav} map=${map} ask=${ask} stories=${stories} share=${share} brokenImages=${broken} text=${text}`);
+              if(build==='2026-08-30-restored-full-map'&&nav>=7&&map===1&&ask===1&&stories>=1&&share===1&&broken===0&&text){ok=true;break;}
               await page.waitForTimeout(10000);
             }
             await page.screenshot({path:'live-homepage-proof.png',fullPage:true});
             await browser.close();
             if(!ok) process.exit(1);
-            console.log('LIVE_COMPACT_MAP_FIRST_IPHONE_PASS=true');
+            console.log('LIVE_RESTORED_FULL_MAP_IPHONE_PASS=true');
           })().catch(e=>{console.error(e);process.exit(1)});
           NODE
       - uses: actions/upload-artifact@v4
