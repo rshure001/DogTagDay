@@ -1,0 +1,48 @@
+name: Verify Live Homepage
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm install playwright
+      - run: npx playwright install --with-deps webkit
+      - name: Verify live homepage support and holiday accent
+        run: |
+          node <<'NODE'
+          const { webkit, devices } = require('playwright');
+          (async()=>{
+            const browser=await webkit.launch({headless:true});
+            const context=await browser.newContext({...devices['iPhone 13']});
+            const page=await context.newPage();
+            let ok=false;
+            for(let i=0;i<12;i++){
+              await page.goto('https://dogtagday.org/?verify='+Date.now(),{waitUntil:'networkidle',timeout:30000});
+              const body=await page.locator('body').innerText();
+              const support=body.includes('Help build a national tradition.') || body.includes('Help Build Dog Tag Day');
+              const sponsor=body.includes('Become a Sponsor');
+              const fund=body.includes('Fund the Mission');
+              const partner=body.includes('Partner With Us');
+              const holiday=await page.locator('[aria-label="Labor Day"]').count();
+              console.log(`attempt=${i+1} support=${support} sponsor=${sponsor} fund=${fund} partner=${partner} holiday=${holiday}`);
+              if(support&&sponsor&&fund&&partner&&holiday>0){ok=true;break;}
+              await page.waitForTimeout(15000);
+            }
+            await page.screenshot({path:'live-homepage-proof.png',fullPage:true});
+            await browser.close();
+            if(!ok) process.exit(1);
+            console.log('LIVE_HOMEPAGE_PASS=true');
+          })().catch(e=>{console.error(e);process.exit(1)});
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: live-homepage-proof
+          path: live-homepage-proof.png
