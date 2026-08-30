@@ -34,27 +34,24 @@
     {name:'Halloween', date:new Date(y,9,31), icon:'🎃', seasonal:true}
   ];
 
-  let current = holidays
+  const current = holidays
     .map(h => ({...h, delta:daysUntil(h.date)}))
-    .filter(h => h.delta >= 0 && h.delta <= (h.seasonal ? 10 : 10))
+    .filter(h => h.delta >= 0 && h.delta <= 10)
     .sort((a,b) => a.delta - b.delta)[0];
 
   if (!current) return;
 
   hero.style.position = hero.style.position || 'relative';
-  const badge = document.createElement('div');
-  badge.setAttribute('aria-label', current.name);
-  badge.style.cssText = [
-    'position:absolute','right:14px','top:14px','z-index:8','display:flex','align-items:center','gap:9px',
-    'padding:9px 13px','border-radius:999px','background:rgba(5,12,20,.78)','border:1px solid rgba(217,180,90,.72)',
-    'box-shadow:0 5px 20px rgba(0,0,0,.3)','backdrop-filter:blur(4px)','font:800 13px/1.1 Arial,sans-serif',
-    'letter-spacing:.04em','color:#fff','text-transform:uppercase'
+  const accent = document.createElement('div');
+  accent.setAttribute('aria-label', current.name);
+  accent.title = current.name;
+  accent.textContent = current.icon;
+  accent.style.cssText = [
+    'position:absolute','right:10px','top:10px','z-index:8',
+    'width:34px','height:34px','display:flex','align-items:center','justify-content:center',
+    'border-radius:50%','background:rgba(5,12,20,.48)','border:1px solid rgba(217,180,90,.55)',
+    'box-shadow:0 3px 12px rgba(0,0,0,.22)','backdrop-filter:blur(3px)',
+    'font-size:20px','line-height:1','pointer-events:none'
   ].join(';');
-  const icon = document.createElement('span');
-  icon.textContent = current.icon;
-  icon.style.cssText = 'font-size:25px;line-height:1';
-  const label = document.createElement('span');
-  label.textContent = current.name;
-  badge.append(icon,label);
-  hero.appendChild(badge);
+  hero.appendChild(accent);
 })();
