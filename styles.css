@@ -33,3 +33,34 @@ nav a[href="#home-outreach-map"],
 a[href="#home-outreach-map"],
 a[href*="map-christmas-1800-v4"],
 a[href*="national-outreach-map"]{display:none!important}
+
+/* PRESIDENT PREVIEW: GOLDEN MAP + ONE COMPACT HORIZONTAL SUPPORT BAR */
+#outreach{padding-bottom:8px!important}
+#outreach .map-intro{padding:20px 16px 10px!important}
+#outreach .map-wrap{max-width:1500px!important;width:96%!important;margin:0 auto 10px!important}
+#outreach .map-wrap iframe{height:min(70vw,790px)!important;min-height:390px!important}
+#support{padding:10px 4vw 34px!important;background:#06111d!important}
+#support .support-build{max-width:980px!important}
+#support .support-build>.eyebrow,#support .support-build>h2,#support .support-build>.support-lead{display:none!important}
+#support .support-banner{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:0!important;max-width:980px!important;margin:0 auto!important;border:1px solid rgba(217,180,90,.75)!important;border-radius:12px!important;overflow:hidden!important;background:linear-gradient(180deg,rgba(217,180,90,.08),rgba(255,255,255,.02))!important;box-shadow:none!important}
+#support .support-item{display:flex!important;align-items:center!important;gap:9px!important;text-align:left!important;padding:10px 12px!important;min-height:76px!important}
+#support .support-item+.support-item{border-left:1px solid rgba(217,180,90,.35)!important;border-top:0!important}
+#support .support-icon{flex:0 0 36px!important;width:36px!important;height:36px!important}
+#support .support-icon svg{width:20px!important;height:20px!important}
+#support .support-item h3{margin:0 0 2px!important;font-size:.95rem!important;line-height:1.05!important}
+#support .support-item p{display:none!important}
+#support .support-item a{font-size:.72rem!important;line-height:1.15!important;color:#d9b45a!important;font-weight:900!important}
+#support .email-invite{max-width:980px!important;margin:6px auto 0!important;padding:7px 8px 0!important;border:0!important;text-align:center!important;font-size:.78rem!important;line-height:1.25!important}
+@media(max-width:700px){
+ #support{padding:8px 6px 24px!important}
+ #support .support-banner{grid-template-columns:repeat(3,minmax(0,1fr))!important;border-radius:9px!important}
+ #support .support-item{min-width:0!important;min-height:70px!important;padding:8px 4px!important;gap:4px!important;flex-direction:column!important;text-align:center!important;justify-content:center!important}
+ #support .support-item+.support-item{border-left:1px solid rgba(217,180,90,.35)!important;border-top:0!important}
+ #support .support-icon{flex-basis:28px!important;width:28px!important;height:28px!important}
+ #support .support-icon svg{width:16px!important;height:16px!important}
+ #support .support-item h3{font-size:.72rem!important}
+ #support .support-item a{font-size:.56rem!important;white-space:normal!important}
+ #support .email-invite{font-size:.66rem!important;padding-left:4px!important;padding-right:4px!important}
+ #outreach .map-wrap{width:98%!important}
+ #outreach .map-wrap iframe{height:72vw!important;min-height:320px!important}
+}
