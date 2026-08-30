@@ -1,1 +1,1 @@
-Force clean DogTagDay.org Pages deployment — 2026-08-29 20:00 PT — deploy current main with Help Build Dog Tag Day section, approved dog-tag hero, and subtle automatic holiday accent. Ignore failed domain-refresh workflow; use successful Pages deploy workflow only.
+Force clean DogTagDay.org Pages deployment — 2026-08-29 20:04 PT — unique artifact deployment fix active. Deploy current main with Help Build Dog Tag Day section, approved dog-tag hero, and subtle automatic holiday accent.
