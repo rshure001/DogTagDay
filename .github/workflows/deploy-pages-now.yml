@@ -8,7 +8,7 @@ permissions:
   pages: write
   id-token: write
 concurrency:
-  group: pages-${{ github.ref }}
+  group: pages-restored-homepage
   cancel-in-progress: true
 jobs:
   deploy:
@@ -19,6 +19,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Let automatic Pages build finish first
+        run: sleep 60
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload site
@@ -26,7 +28,7 @@ jobs:
         with:
           path: .
           name: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
-      - name: Deploy
+      - name: Deploy restored homepage last
         id: deployment
         uses: actions/deploy-pages@v4
         with:
@@ -42,7 +44,8 @@ jobs:
               && printf '%s' "$html" | grep -q '1,800 Outreach Lights' \
               && printf '%s' "$html" | grep -q 'map-christmas-1800-v4.html' \
               && printf '%s' "$html" | grep -q 'Why It Matters' \
-              && printf '%s' "$html" | grep -q 'Share Your Story'; then
+              && printf '%s' "$html" | grep -q 'Share Your Story' \
+              && printf '%s' "$html" | grep -q 'America Can Join In'; then
               echo 'LIVE_RESTORED_FULL_MAP_VERIFIED'
               ok=1
               break
@@ -51,4 +54,3 @@ jobs:
             sleep 10
           done
           test "$ok" -eq 1
-# redeploy-trigger: 2026-08-30-force-restored-full
