@@ -38,14 +38,16 @@ jobs:
           ok=0
           for i in $(seq 1 18); do
             html=$(curl -fsSL --retry 2 -H 'Cache-Control: no-cache' -H 'Pragma: no-cache' "https://dogtagday.org/?deploy=${GITHUB_SHA}-${GITHUB_RUN_ID}-$i" || true)
-            if printf '%s' "$html" | grep -q 'data-dtd-build="2026-08-30-compact-map-first"' \
+            if printf '%s' "$html" | grep -q 'data-dtd-build="2026-08-30-restored-full-map"' \
               && printf '%s' "$html" | grep -q '1,800 Outreach Lights' \
-              && printf '%s' "$html" | grep -q 'map-christmas-1800-v4.html'; then
-              echo 'LIVE_COMPACT_MAP_FIRST_VERIFIED'
+              && printf '%s' "$html" | grep -q 'map-christmas-1800-v4.html' \
+              && printf '%s' "$html" | grep -q 'Why It Matters' \
+              && printf '%s' "$html" | grep -q 'Share Your Story'; then
+              echo 'LIVE_RESTORED_FULL_MAP_VERIFIED'
               ok=1
               break
             fi
-            echo "Waiting for exact compact map-first homepage... attempt $i"
+            echo "Waiting for restored full homepage... attempt $i"
             sleep 10
           done
           test "$ok" -eq 1
