@@ -31,3 +31,19 @@ jobs:
         uses: actions/deploy-pages@v4
         with:
           artifact_name: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
+      - name: Verify custom-domain homepage is fresh
+        shell: bash
+        run: |
+          set -euo pipefail
+          ok=0
+          for i in $(seq 1 18); do
+            html=$(curl -fsSL --retry 2 -H 'Cache-Control: no-cache' -H 'Pragma: no-cache' "https://dogtagday.org/?deploy=${GITHUB_SHA}-${GITHUB_RUN_ID}-$i" || true)
+            if printf '%s' "$html" | grep -q 'Help Build Dog Tag Day' && printf '%s' "$html" | grep -q 'approved-dog-tags.PNG'; then
+              echo 'LIVE_HOMEPAGE_VERIFIED'
+              ok=1
+              break
+            fi
+            echo "Waiting for fresh custom-domain page... attempt $i"
+            sleep 10
+          done
+          test "$ok" -eq 1
