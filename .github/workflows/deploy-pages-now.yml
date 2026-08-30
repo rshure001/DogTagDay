@@ -26,7 +26,7 @@ jobs:
         with:
           path: .
           name: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
-      - name: Deploy approved homepage last
+      - name: Deploy president preview
         id: deployment
         uses: actions/deploy-pages@v4
         with:
@@ -36,21 +36,23 @@ jobs:
         run: |
           set -euo pipefail
           ok=0
-          for i in $(seq 1 18); do
+          for i in $(seq 1 24); do
             html=$(curl -fsSL --retry 2 -H 'Cache-Control: no-cache' -H 'Pragma: no-cache' "https://dogtagday.org/?deploy=${GITHUB_SHA}-${GITHUB_RUN_ID}-$i" || true)
-            if printf '%s' "$html" | grep -q 'data-dtd-build="2026-08-31-full-approved"' \
-              && printf '%s' "$html" | grep -q 'Help Build Dog Tag Day' \
+            css=$(curl -fsSL --retry 2 -H 'Cache-Control: no-cache' -H 'Pragma: no-cache' "https://dogtagday.org/styles.css?deploy=${GITHUB_SHA}-${GITHUB_RUN_ID}-$i" || true)
+            map=$(curl -fsSL --retry 2 -H 'Cache-Control: no-cache' -H 'Pragma: no-cache' "https://dogtagday.org/map-golden-1850.html?deploy=${GITHUB_SHA}-${GITHUB_RUN_ID}-$i" || true)
+            if printf '%s' "$html" | grep -q 'data-dtd-build="2026-08-30-president-preview"' \
+              && printf '%s' "$html" | grep -q '1,850+ Outreach Lights' \
+              && printf '%s' "$html" | grep -q 'map-golden-1850.html?v=20260830PRESIDENT2' \
               && printf '%s' "$html" | grep -q '>Sponsors<' \
               && printf '%s' "$html" | grep -q '>Donations<' \
               && printf '%s' "$html" | grep -q '>Partnerships<' \
-              && printf '%s' "$html" | grep -q 'support-banner' \
-              && printf '%s' "$html" | grep -q '1,800 Outreach Lights' \
-              && printf '%s' "$html" | grep -q 'I See Your Dog Tags'; then
-              echo 'LIVE_TRANSPLANTED_SUPPORT_BANNER_VERIFIED'
+              && printf '%s' "$css" | grep -q 'grid-template-columns:repeat(3,minmax(0,1fr))' \
+              && printf '%s' "$map" | grep -q '1,850+'; then
+              echo 'LIVE_GOLDEN_1850_HORIZONTAL_SUPPORT_VERIFIED'
               ok=1
               break
             fi
-            echo "Waiting for transplanted support banner... attempt $i"
+            echo "Waiting for golden 1,850+ president preview... attempt $i"
             sleep 10
           done
           test "$ok" -eq 1
