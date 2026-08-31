@@ -1,0 +1,1 @@
+Trigger Pages refresh after hero correction and branch alignment.
