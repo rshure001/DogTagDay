@@ -11,24 +11,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Force partnership section visible and republish
+      - name: Clean mobile hero and preserve partnership section
         run: |
           python - <<'PY'
           from pathlib import Path
+          import re
           p=Path('index.html')
           s=p.read_text()
-          css='''.partnerBand{display:block!important;visibility:visible!important;opacity:1!important;max-width:1180px;margin:0 auto 58px;padding:28px 20px;text-align:center}.partnerPanel{display:block!important;border:1px solid #8f753c;background:#0a1a28;padding:28px 20px}.partnerPanel h3{margin:0 0 8px;font-family:Georgia,serif;font-size:clamp(1.6rem,4vw,2.5rem);color:#fff}.partnerPanel p{margin:0 auto 18px;max-width:850px}.partnerTypes{display:flex!important;justify-content:center;gap:9px;flex-wrap:wrap;margin:0 0 20px}.partnerTypes span{display:inline-block;border:1px solid #8f753c;border-radius:999px;padding:8px 12px;color:#dfba62;font-size:.78rem;font-weight:900}.partnerPanel .btn{display:inline-block}@media(max-width:760px){.partnerBand{padding:22px 12px 30px}.partnerPanel{padding:22px 14px}.partnerTypes{gap:7px}.partnerTypes span{font-size:.68rem;padding:7px 9px}}'''
+          css='''.partnerBand{display:block!important;visibility:visible!important;opacity:1!important;max-width:1180px;margin:0 auto 58px;padding:28px 20px;text-align:center}.partnerPanel{display:block!important;border:1px solid #8f753c;background:#0a1a28;padding:28px 20px}.partnerPanel h3{margin:0 0 8px;font-family:Georgia,serif;font-size:clamp(1.6rem,4vw,2.5rem);color:#fff}.partnerPanel p{margin:0 auto 18px;max-width:850px}.partnerTypes{display:flex!important;justify-content:center;gap:9px;flex-wrap:wrap;margin:0 0 20px}.partnerTypes span{display:inline-block;border:1px solid #8f753c;border-radius:999px;padding:8px 12px;color:#dfba62;font-size:.78rem;font-weight:900}.partnerPanel .btn{display:inline-block}.heroWrap{position:relative!important;overflow:hidden!important;aspect-ratio:16/9!important;padding:0!important;background:#000}.heroWrap>img{width:100%!important;height:100%!important;object-fit:cover!important;object-position:center 60%!important;border:0!important}.heroCopy{left:4%!important;right:4%!important;bottom:5%!important;top:auto!important;z-index:8!important;padding:10px 12px!important;background:linear-gradient(180deg,transparent,rgba(0,0,0,.68))!important}.heroCopy .kicker{font-size:clamp(.62rem,1.4vw,.9rem)!important}.heroCopy h1{font-size:clamp(2rem,6vw,4.5rem)!important}.heroCopy .tagline{font-size:clamp(.72rem,1.6vw,1.05rem)!important}.heroCopy .values{font-size:clamp(.62rem,1.3vw,.9rem)!important}@media(max-width:760px){.partnerBand{padding:22px 12px 30px}.partnerPanel{padding:22px 14px}.partnerTypes{gap:7px}.partnerTypes span{font-size:.68rem;padding:7px 9px}.heroWrap{aspect-ratio:16/9!important}.heroWrap>img{object-position:center 61%!important}.heroCopy{bottom:3%!important;padding:8px 8px 7px!important}.heroCopy .kicker{font-size:.58rem!important;letter-spacing:.13em!important}.heroCopy h1{font-size:2.25rem!important;margin:.18rem 0!important}.heroCopy .tagline{font-size:.68rem!important;line-height:1.2!important}.heroCopy .values{font-size:.58rem!important;letter-spacing:.09em!important;margin-top:.32rem!important}}'''
           if css not in s:
               s=s.replace('</style></head>',css+'</style></head>',1)
-          partner='''<section class="partnerBand" aria-label="Partner with Dog Tag Day"><div class="partnerPanel"><div class="eyebrow">Stand With Those Who Served</div><h3>Partner With Dog Tag Day</h3><p>We welcome organizations and communities that want to help make military service visible on April 18.</p><div class="partnerTypes"><span>SPONSORS</span><span>CHARITIES</span><span>VETERANS ORGANIZATIONS</span><span>COMMUNITY PARTNERS</span><span>VOLUNTEERS</span><span>MEDIA</span></div><a class="btn primary" href="#contact">Become a Partner</a></div></section>'''
+          partner='''<section class="partnerBand" aria-label="Partner with Dog Tag Day"><div class="partnerPanel"><div class="eyebrow">Stand With Those Who Served</div><h3>Partner With Dog Tag Day</h3><p>We welcome organizations and communities that want to help make military service visible on April 18.</p><div class="partnerTypes"><span>SPONSORS</span><span>CHARITIES</span><span>VETERANS ORGANIZATIONS</span><span>COMMUNITY PARTNERS</span><span>VOLUNTEERS</span><span>MEDIA</span></div><a class="btn primary" href="contact.html">Become a Partner</a></div></section>'''
           if 'aria-label="Partner with Dog Tag Day"' not in s:
-              needle='<section class="section dark" id="stories">'
-              s=s.replace(needle,partner+needle,1)
-          s=s.replace('href="contact.html">Become a Partner','href="#contact">Become a Partner')
-          import re
-          s=re.sub(r'data-dtd-build="[^"]+"','data-dtd-build="2026-08-31-live-partners-v2"',s,count=1)
-          if '<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">' not in s:
-              s=s.replace('<title>Dog Tag Day | April 18</title>','<title>Dog Tag Day | April 18</title><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0">',1)
+              s=s.replace('<section class="section dark" id="stories">',partner+'<section class="section dark" id="stories">',1)
+          s=s.replace('href="#contact">Become a Partner','href="contact.html">Become a Partner')
+          s=re.sub(r'data-dtd-build="[^"]+"','data-dtd-build="2026-08-31-clean-mobile-hero"',s,count=1)
           p.write_text(s)
           PY
       - name: Commit homepage
@@ -37,5 +34,5 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add index.html
           if git diff --cached --quiet; then exit 0; fi
-          git commit -m "Republish visible partnership section"
+          git commit -m "Clean mobile hero crop and keep partner section visible"
           git push
