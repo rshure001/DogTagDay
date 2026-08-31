@@ -52,6 +52,7 @@ a[href*="national-outreach-map"]{display:none!important}
 #support .support-item a{font-size:.72rem!important;line-height:1.15!important;color:#d9b45a!important;font-weight:900!important}
 #support .email-invite{max-width:980px!important;margin:6px auto 0!important;padding:7px 8px 0!important;border:0!important;text-align:center!important;font-size:.78rem!important;line-height:1.25!important}
 @media(max-width:700px){
+ header{position:relative!important;top:auto!important}
  #support{padding:8px 6px 24px!important}
  #support .support-banner{grid-template-columns:repeat(3,minmax(0,1fr))!important;border-radius:9px!important}
  #support .support-item{min-width:0!important;min-height:70px!important;padding:8px 4px!important;gap:4px!important;flex-direction:column!important;text-align:center!important;justify-content:center!important}
