@@ -28,22 +28,19 @@ jobs:
               const build=await page.locator('html').getAttribute('data-dtd-build');
               const broken=await page.locator('img').evaluateAll(imgs=>imgs.filter(i=>!i.complete||i.naturalWidth===0).map(i=>i.getAttribute('src')));
               const mapCount=await page.locator('#outreach iframe').count();
-              const heroCount=await page.locator('.heroInner').count();
-              const titleCount=await page.locator('.heroTitle').count();
-              const title=titleCount===1?await page.locator('.heroTitle').innerText():'';
-              const heroText=heroCount===1?await page.locator('.heroInner').innerText():'';
+              const heroCount=await page.locator('.heroBanner img').count();
+              const heroSrc=heroCount===1?await page.locator('.heroBanner img').getAttribute('src'):'';
               const body=await page.locator('body').innerText();
-              const current=heroText.includes('A National Day of Honor and Remembrance')&&heroText.includes('DOG TAG DAY')&&heroText.includes('APRIL 18')&&heroText.includes('Wear yours. Share your story. Honor them. Inspire others.');
-              const oldHero=!heroText.includes('Make military service visible.')&&!heroText.includes('IDENTITY • BROTHERHOOD • HONOR');
               const text=body.includes('Don’t let our veterans fade into the background.')&&body.includes('Nationwide Outreach')&&body.includes('Partner With Dog Tag Day');
-              console.log(JSON.stringify({attempt:i+1,build,broken,mapCount,heroCount,titleCount,title,current,oldHero,text}));
-              if(build==='2026-08-31-hero-rebuild'&&broken.length===0&&mapCount===1&&heroCount===1&&titleCount===1&&title.trim()==='DOG TAG DAY'&&current&&oldHero&&text){ok=true;break;}
+              const current=build==='2026-08-31-approved-hero'&&heroCount===1&&heroSrc.includes('approved-dog-tags.PNG');
+              console.log(JSON.stringify({attempt:i+1,build,broken,mapCount,heroCount,heroSrc,current,text}));
+              if(current&&broken.length===0&&mapCount===1&&text){ok=true;break;}
               await page.waitForTimeout(5000);
             }
             await page.screenshot({path:'live-homepage-proof.png',fullPage:true});
             await browser.close();
             if(!ok) process.exit(1);
-            console.log('LIVE_REBUILT_HOMEPAGE_PASS=true');
+            console.log('LIVE_HOMEPAGE_PASS=true');
           })().catch(e=>{console.error(e);process.exit(1)});
           NODE
       - uses: actions/upload-artifact@v4
