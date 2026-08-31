@@ -25,9 +25,11 @@ jobs:
           set -euo pipefail
           test -s index.html
           test -s map-golden-1850.html
-          grep -q 'data-dtd-build="2026-08-31-no-hats-embedded"' index.html
+          grep -q 'data-dtd-build="2026-08-31-live-partners-v2"' index.html
           grep -q 'data:image/webp;base64,' index.html
           grep -q 'Nationwide Outreach' index.html
+          grep -q 'Partner With Dog Tag Day' index.html
+          grep -q 'PARTNER WITH DOG TAG DAY' map-golden-1850.html
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload site
@@ -44,12 +46,15 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          for i in $(seq 1 24); do
-            html=$(curl -fsSL --retry 2 -H 'Cache-Control: no-cache' "https://dogtagday.org/?nohat=${GITHUB_SHA}-${GITHUB_RUN_ID}-$i" || true)
-            if printf '%s' "$html" | grep -q 'data-dtd-build="2026-08-31-no-hats-embedded"' \
-              && printf '%s' "$html" | grep -q 'data:image/webp;base64,' \
-              && printf '%s' "$html" | grep -q 'Nationwide Outreach'; then
-              echo LIVE_NO_HATS_HOMEPAGE_VERIFIED
+          for i in $(seq 1 30); do
+            html=$(curl -fsSL --retry 2 -H 'Cache-Control: no-cache' "https://dogtagday.org/?partners=${GITHUB_SHA}-${GITHUB_RUN_ID}-$i" || true)
+            maphtml=$(curl -fsSL --retry 2 -H 'Cache-Control: no-cache' "https://dogtagday.org/map-golden-1850.html?partners=${GITHUB_SHA}-${GITHUB_RUN_ID}-$i" || true)
+            if printf '%s' "$html" | grep -q 'data-dtd-build="2026-08-31-live-partners-v2"' \
+              && printf '%s' "$html" | grep -q 'Partner With Dog Tag Day' \
+              && printf '%s' "$html" | grep -q 'Nationwide Outreach' \
+              && printf '%s' "$maphtml" | grep -q 'PARTNER WITH DOG TAG DAY' \
+              && printf '%s' "$maphtml" | grep -q 'Sponsors'; then
+              echo LIVE_PARTNERS_HOMEPAGE_VERIFIED
               exit 0
             fi
             sleep 5
