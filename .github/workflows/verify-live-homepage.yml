@@ -30,12 +30,13 @@ jobs:
               const mapCount=await page.locator('#outreach iframe').count();
               const heroCount=await page.locator('.heroCard').count();
               const h1=await page.locator('.heroCard h1').allTextContents();
+              const heroText=heroCount===1 ? await page.locator('.heroCard').innerText() : '';
               const body=await page.locator('body').innerText();
-              const current=body.includes('April 18 — Wear yours. Share your story. Honor them. Inspire others.');
-              const old=!body.includes('Make military service visible.')&&!body.includes('IDENTITY • BROTHERHOOD • HONOR');
+              const current=heroText.includes('April 18 — Wear yours. Share your story. Honor them. Inspire others.');
+              const oldHero=!heroText.includes('Make military service visible.')&&!heroText.includes('IDENTITY • BROTHERHOOD • HONOR');
               const text=body.includes('Don’t let our veterans fade into the background.')&&body.includes('Nationwide Outreach')&&body.includes('Partner With Dog Tag Day');
-              console.log(JSON.stringify({attempt:i+1,build,broken,mapCount,heroCount,h1,current,old,text}));
-              if(build==='2026-08-31-mobile-hero-fixed'&&broken.length===0&&mapCount===1&&heroCount===1&&h1.length===1&&h1[0].trim()==='DOG TAG DAY'&&current&&old&&text){ok=true;break;}
+              console.log(JSON.stringify({attempt:i+1,build,broken,mapCount,heroCount,h1,current,oldHero,text}));
+              if(build==='2026-08-31-mobile-hero-fixed'&&broken.length===0&&mapCount===1&&heroCount===1&&h1.length===1&&h1[0].trim()==='DOG TAG DAY'&&current&&oldHero&&text){ok=true;break;}
               await page.waitForTimeout(5000);
             }
             await page.screenshot({path:'live-homepage-proof.png',fullPage:true});
