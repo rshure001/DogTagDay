@@ -25,10 +25,12 @@ jobs:
           set -euo pipefail
           test -s index.html
           test -s map-golden-1850.html
-          grep -q 'data-dtd-build="2026-08-31-hero-rebuild"' index.html
-          grep -q 'DOG TAG DAY' index.html
+          test -s map-vector.html
+          grep -q 'data-dtd-build="2026-08-31-visual-hero-restored"' index.html
+          grep -q 'dog-tag-day-hero.PNG' index.html
           grep -q 'Nationwide Outreach' index.html
           grep -q 'Partner With Dog Tag Day' index.html
+          grep -q 'map-vector.html' map-golden-1850.html
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload site
@@ -47,8 +49,8 @@ jobs:
           set -euo pipefail
           for i in $(seq 1 36); do
             html=$(curl -fsSL --retry 2 -H 'Cache-Control: no-cache' "https://dogtagday.org/?verify=${GITHUB_SHA}-${GITHUB_RUN_ID}-$i" || true)
-            if printf '%s' "$html" | grep -q 'data-dtd-build="2026-08-31-hero-rebuild"' \
-              && printf '%s' "$html" | grep -q 'Wear yours. Share your story. Honor them. Inspire others.' \
+            if printf '%s' "$html" | grep -q 'data-dtd-build="2026-08-31-visual-hero-restored"' \
+              && printf '%s' "$html" | grep -q 'dog-tag-day-hero.PNG' \
               && printf '%s' "$html" | grep -q 'Nationwide Outreach' \
               && printf '%s' "$html" | grep -q 'Partner With Dog Tag Day'; then
               echo LIVE_HOMEPAGE_VERIFIED
