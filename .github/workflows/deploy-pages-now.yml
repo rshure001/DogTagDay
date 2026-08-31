@@ -19,23 +19,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Emergency hero repair and mobile hardening
+      - name: Verify source assets
         shell: bash
         run: |
-          python - <<'PY'
-          from pathlib import Path
-          import re, os
-          p=Path('index.html')
-          s=p.read_text()
-          s=s.replace('assets/approved-dog-tags.PNG?v=APPROVED0831','assets/dog-tag-day-hero.PNG?v=HERO-RESTORED')
-          s=s.replace('</head>', '<style id="mobile-hard-fix">@media(max-width:700px){header{position:relative!important;top:auto!important}header nav{display:none!important}.hero-shell{padding-top:12px!important}#outreach{position:relative!important;z-index:1!important}.map-intro{padding-top:18px!important}}</style></head>')
-          sha=os.environ.get('GITHUB_SHA','fresh')[:12]
-          s=s.replace('HERO-RESTORED', f'HERO-{sha}')
-          s=re.sub(r'music-player\.js\?v=[^"\']+', f'music-player.js?v=MOBILEHARD-{sha}', s)
-          s=re.sub(r'styles\.css\?v=[^"\']+', f'styles.css?v=MOBILEHARD-{sha}', s)
-          p.write_text(s)
-          PY
-          test -s assets/dog-tag-day-hero.PNG
+          set -euo pipefail
+          test -s assets/hero-final-20260831.png
+          test -s map-golden-1850.html
+          grep -q 'data-dtd-build="2026-08-31-mobile-hero-across-america"' index.html
+          grep -q 'href="#outreach">Across America</a>' index.html
+          grep -q 'Nationwide Outreach' index.html
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload site
@@ -48,17 +40,18 @@ jobs:
         uses: actions/deploy-pages@v4
         with:
           artifact_name: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
-      - name: Verify live hero
+      - name: Verify live homepage
         shell: bash
         run: |
           set -euo pipefail
           ok=0
           for i in $(seq 1 24); do
             html=$(curl -fsSL --retry 2 -H 'Cache-Control: no-cache' "https://dogtagday.org/?verify=${GITHUB_SHA}-${GITHUB_RUN_ID}-$i" || true)
-            code=$(curl -sS -o /tmp/hero -w '%{http_code}' -H 'Cache-Control: no-cache' "https://dogtagday.org/assets/dog-tag-day-hero.PNG?verify=${GITHUB_SHA}-${GITHUB_RUN_ID}-$i" || true)
-            bytes=$(wc -c </tmp/hero 2>/dev/null || echo 0)
-            if printf '%s' "$html" | grep -q 'assets/dog-tag-day-hero.PNG?v=HERO-' && [ "$code" = "200" ] && [ "$bytes" -gt 100000 ]; then
-              echo "LIVE_HERO_VERIFIED $bytes bytes"
+            if printf '%s' "$html" | grep -q 'data-dtd-build="2026-08-31-mobile-hero-across-america"' \
+              && printf '%s' "$html" | grep -q 'href="#outreach">Across America</a>' \
+              && printf '%s' "$html" | grep -q 'Nationwide Outreach' \
+              && printf '%s' "$html" | grep -q 'hero-final-20260831.png'; then
+              echo "LIVE_HOMEPAGE_VERIFIED"
               ok=1
               break
             fi
