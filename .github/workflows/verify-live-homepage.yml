@@ -14,7 +14,7 @@ jobs:
           node-version: '20'
       - run: npm install playwright
       - run: npx playwright install --with-deps webkit
-      - name: Verify live iPhone president preview
+      - name: Verify live iPhone homepage
         run: |
           node <<'NODE'
           const { webkit, devices } = require('playwright');
@@ -26,29 +26,22 @@ jobs:
             for(let i=0;i<24;i++){
               await page.goto('https://dogtagday.org/?verify='+Date.now(),{waitUntil:'networkidle',timeout:30000});
               const build=await page.locator('html').getAttribute('data-dtd-build');
+              const hero=page.locator('.hero-frame img');
+              const src=await hero.getAttribute('src');
+              const natural=await hero.evaluate(img=>({w:img.naturalWidth,h:img.naturalHeight,complete:img.complete}));
               const body=await page.locator('body').innerText();
-              const map=page.locator('#outreach iframe');
-              const mapCount=await map.count();
-              const support=page.locator('#support .support-banner');
-              const items=page.locator('#support .support-item');
-              const labels=await items.locator('h3').allTextContents();
-              let cols='', mapTop=0, supportTop=0, widths=[];
-              if(await support.count()) cols=await support.evaluate(el=>getComputedStyle(el).gridTemplateColumns);
-              if(mapCount){const b=await map.boundingBox(); if(b) mapTop=b.y;}
-              if(await support.count()){const b=await support.boundingBox(); if(b) supportTop=b.y;}
-              widths=await items.evaluateAll(els=>els.map(e=>Math.round(e.getBoundingClientRect().width)));
+              const mapCount=await page.locator('#outreach iframe').count();
               const broken=await page.locator('img').evaluateAll(imgs=>imgs.filter(i=>!i.complete||i.naturalWidth===0).length);
-              const text=body.includes('1,850+ Outreach Lights')&&labels.join('|')==='Sponsors|Donations|Partnerships';
-              const horizontal=widths.length===3&&Math.max(...widths)-Math.min(...widths)<8&&widths.every(w=>w>70);
-              const order=mapTop>0&&supportTop>mapTop;
-              console.log(`attempt=${i+1} build=${build} map=${mapCount} labels=${labels.join('|')} cols=${cols} widths=${widths.join(',')} mapTop=${mapTop} supportTop=${supportTop} broken=${broken} text=${text} horizontal=${horizontal} order=${order}`);
-              if(build==='2026-08-30-president-preview'&&mapCount===1&&text&&horizontal&&order&&broken===0){ok=true;break;}
+              const noOld=!body.includes('1,850+ Outreach Lights');
+              const text=body.includes('Wear the tags. Keep the stories alive.')&&body.includes('Nationwide Outreach');
+              console.log(`attempt=${i+1} build=${build} hero=${src} natural=${natural.w}x${natural.h} complete=${natural.complete} map=${mapCount} broken=${broken} noOld=${noOld} text=${text}`);
+              if(build==='2026-08-31-five-veterans-no-hats'&&src&&src.includes('dog-tag-day-five-no-hats.webp')&&natural.complete&&natural.w>0&&mapCount===1&&broken===0&&noOld&&text){ok=true;break;}
               await page.waitForTimeout(10000);
             }
             await page.screenshot({path:'live-homepage-proof.png',fullPage:true});
             await browser.close();
             if(!ok) process.exit(1);
-            console.log('LIVE_GOLDEN_1850_HORIZONTAL_SUPPORT_IPHONE_PASS=true');
+            console.log('LIVE_FIVE_VETERAN_HOMEPAGE_IPHONE_PASS=true');
           })().catch(e=>{console.error(e);process.exit(1)});
           NODE
       - uses: actions/upload-artifact@v4
