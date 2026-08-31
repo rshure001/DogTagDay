@@ -24,23 +24,24 @@ jobs:
             const page=await context.newPage();
             let ok=false;
             for(let i=0;i<18;i++){
-              await page.goto('https://dogtagday.org/?rush='+Date.now(),{waitUntil:'networkidle',timeout:30000});
+              await page.goto('https://dogtagday.org/?verify='+Date.now(),{waitUntil:'networkidle',timeout:30000});
               const build=await page.locator('html').getAttribute('data-dtd-build');
-              const hero=page.locator('.hero-frame img');
-              const src=await hero.getAttribute('src');
-              const natural=await hero.evaluate(img=>({w:img.naturalWidth,h:img.naturalHeight,complete:img.complete}));
+              const hero=page.locator('.tagPanel img');
+              const count=await hero.count();
+              let src=null,natural={w:0,h:0,complete:false};
+              if(count){src=await hero.getAttribute('src');natural=await hero.evaluate(img=>({w:img.naturalWidth,h:img.naturalHeight,complete:img.complete}));}
               const body=await page.locator('body').innerText();
               const mapCount=await page.locator('#outreach iframe').count();
               const broken=await page.locator('img').evaluateAll(imgs=>imgs.filter(i=>!i.complete||i.naturalWidth===0).length);
-              const text=body.includes('Wear the tags. Keep the stories alive.')&&body.includes('Nationwide Outreach');
+              const text=body.includes('On April 18, wear the tags.')&&body.includes('Nationwide Outreach');
               console.log(`attempt=${i+1} build=${build} hero=${src} natural=${natural.w}x${natural.h} map=${mapCount} broken=${broken} text=${text}`);
-              if(build==='2026-08-31-rush-fixed'&&src&&src.includes('hero-final-20260831.png')&&natural.complete&&natural.w>0&&mapCount===1&&broken===0&&text){ok=true;break;}
+              if(build==='2026-08-31-clean-rebuild'&&src&&src.includes('approved-dog-tags.PNG')&&natural.complete&&natural.w>0&&natural.h>0&&mapCount===1&&broken===0&&text){ok=true;break;}
               await page.waitForTimeout(5000);
             }
             await page.screenshot({path:'live-homepage-proof.png',fullPage:true});
             await browser.close();
             if(!ok) process.exit(1);
-            console.log('LIVE_RUSH_FIXED_IPHONE_PASS=true');
+            console.log('LIVE_CLEAN_REBUILD_IPHONE_PASS=true');
           })().catch(e=>{console.error(e);process.exit(1)});
           NODE
       - uses: actions/upload-artifact@v4
