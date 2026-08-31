@@ -19,6 +19,17 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Force fresh holiday mascot loader
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('index.html')
+          s=p.read_text()
+          s=re.sub(r'music-player\.js\?v=[^"\']+', 'music-player.js?v=20260830HOLIDAYSTATIC3', s)
+          p.write_text(s)
+          PY
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload site
@@ -37,9 +48,13 @@ jobs:
           set -euo pipefail
           ok=0
           for i in $(seq 1 24); do
+            html=$(curl -fsSL --retry 2 -H 'Cache-Control: no-cache' "https://dogtagday.org/?verify=${GITHUB_SHA}-${GITHUB_RUN_ID}-$i" || true)
             js=$(curl -fsSL --retry 2 -H 'Cache-Control: no-cache' "https://dogtagday.org/music-player.js?verify=${GITHUB_SHA}-${GITHUB_RUN_ID}-$i" || true)
-            if printf '%s' "$js" | grep -q 'DTD_HOLIDAY_STATIC_V2' && printf '%s' "$js" | grep -q 'top:92px'; then
-              echo 'LIVE_HOLIDAY_STATIC_V2_VERIFIED'
+            if printf '%s' "$html" | grep -q 'music-player.js?v=20260830HOLIDAYSTATIC3' \
+              && printf '%s' "$js" | grep -q 'DTD_HOLIDAY_STATIC_V3' \
+              && printf '%s' "$js" | grep -q 'bottom:18px' \
+              && printf '%s' "$js" | grep -q 'bottom:14px'; then
+              echo 'LIVE_HOLIDAY_STATIC_V3_BOTTOM_RIGHT_VERIFIED'
               ok=1
               break
             fi
