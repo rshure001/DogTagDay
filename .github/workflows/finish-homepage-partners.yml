@@ -1,0 +1,41 @@
+name: Finish Homepage Partners
+on:
+  push:
+    paths:
+      - '.github/workflows/finish-homepage-partners.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  finish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch homepage
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text()
+          css='''.heroWrap{position:relative}.heroCopy{position:absolute;left:5%;right:5%;bottom:6%;text-align:center;text-shadow:0 2px 8px #000,0 0 18px #000}.heroCopy .kicker{color:#dfba62;font-weight:900;letter-spacing:.18em;font-size:clamp(.72rem,1.5vw,1rem)}.heroCopy h1{margin:.25rem 0;color:#fff;font-family:Georgia,serif;font-size:clamp(2rem,6vw,5rem);line-height:.95;letter-spacing:.04em}.heroCopy .tagline{margin:.45rem auto 0;color:#fff;font-size:clamp(.85rem,1.8vw,1.3rem);font-weight:800}.heroCopy .values{margin-top:.5rem;color:#dfba62;font-size:clamp(.7rem,1.5vw,1rem);font-weight:900;letter-spacing:.12em}.partnerBand{max-width:1180px;margin:-18px auto 58px;padding:0 20px 26px;text-align:center}.partnerPanel{border:1px solid #8f753c;background:#0a1a28;padding:28px 20px}.partnerPanel h3{margin:0 0 8px;font-family:Georgia,serif;font-size:clamp(1.6rem,4vw,2.5rem);color:#fff}.partnerPanel p{margin:0 auto 18px;max-width:850px}.partnerTypes{display:flex;justify-content:center;gap:9px;flex-wrap:wrap;margin:0 0 20px}.partnerTypes span{border:1px solid #8f753c;border-radius:999px;padding:8px 12px;color:#dfba62;font-size:.78rem;font-weight:900;letter-spacing:.04em}.partnerPanel .btn{display:inline-block}@media(max-width:760px){.heroCopy{bottom:4%;left:3%;right:3%}.heroCopy .tagline{font-size:.8rem}.partnerBand{margin:-20px auto 42px;padding:0 12px 20px}.partnerPanel{padding:22px 14px}.partnerTypes{gap:7px}.partnerTypes span{font-size:.68rem;padding:7px 9px}}'''
+          if '.partnerBand{' not in s:
+              s=s.replace('</style></head>',css+'</style></head>')
+          old='<section class="hero"><img alt="Dog Tag Day five veterans, no hats"'
+          if old in s and 'class="heroCopy"' not in s:
+              s=s.replace(old,'<section class="hero heroWrap"><img alt="Dog Tag Day five veterans, no hats"',1)
+              s=s.replace('</section><section class="section dark" id="mission">','<div class="heroCopy"><div class="kicker">APRIL 18 · A NATIONAL DAY OF HONOR</div><h1>DOG TAG DAY</h1><div class="tagline">Wear the tags. Share the story. Make military service visible.</div><div class="values">IDENTITY · BROTHERHOOD · HONOR</div></div></section><section class="section dark" id="mission">',1)
+          marker='</div></section><section class="section dark" id="stories">'
+          partner='''</div></section><section class="partnerBand" aria-label="Partner with Dog Tag Day"><div class="partnerPanel"><div class="eyebrow">Stand With Those Who Served</div><h3>Partner With Dog Tag Day</h3><p>We welcome organizations and communities that want to help make military service visible on April 18.</p><div class="partnerTypes"><span>SPONSORS</span><span>CHARITIES</span><span>VETERANS ORGANIZATIONS</span><span>COMMUNITY PARTNERS</span><span>VOLUNTEERS</span><span>MEDIA</span></div><a class="btn primary" href="contact.html">Become a Partner</a></div></section><section class="section dark" id="stories">'''
+          if marker in s and 'class="partnerBand" aria-label=' not in s:
+              s=s.replace(marker,partner,1)
+          s=s.replace('data-dtd-build="2026-08-31-no-hats-embedded"','data-dtd-build="2026-08-31-partners-crisp-hero"')
+          p.write_text(s)
+          PY
+      - name: Commit homepage
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Finish crisp hero text and partnership section"
+          git push
