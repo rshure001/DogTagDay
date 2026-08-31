@@ -23,11 +23,12 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test -s assets/hero-final-20260831.png
+          test -s assets/dog-tag-day-five-no-hats.webp
           test -s map-golden-1850.html
-          grep -q 'data-dtd-build="2026-08-31-mobile-hero-across-america"' index.html
+          grep -q 'data-dtd-build="2026-08-31-five-veterans-no-hats"' index.html
           grep -q 'href="#outreach">Across America</a>' index.html
           grep -q 'Nationwide Outreach' index.html
+          grep -q 'dog-tag-day-five-no-hats.webp' index.html
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload site
@@ -47,10 +48,10 @@ jobs:
           ok=0
           for i in $(seq 1 24); do
             html=$(curl -fsSL --retry 2 -H 'Cache-Control: no-cache' "https://dogtagday.org/?verify=${GITHUB_SHA}-${GITHUB_RUN_ID}-$i" || true)
-            if printf '%s' "$html" | grep -q 'data-dtd-build="2026-08-31-mobile-hero-across-america"' \
+            if printf '%s' "$html" | grep -q 'data-dtd-build="2026-08-31-five-veterans-no-hats"' \
               && printf '%s' "$html" | grep -q 'href="#outreach">Across America</a>' \
               && printf '%s' "$html" | grep -q 'Nationwide Outreach' \
-              && printf '%s' "$html" | grep -q 'hero-final-20260831.png'; then
+              && printf '%s' "$html" | grep -q 'dog-tag-day-five-no-hats.webp'; then
               echo "LIVE_HOMEPAGE_VERIFIED"
               ok=1
               break
