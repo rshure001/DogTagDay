@@ -19,15 +19,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Force fresh holiday mascot loader
+      - name: Harden mobile layout and force fresh assets
         shell: bash
         run: |
           python - <<'PY'
           from pathlib import Path
-          import re
+          import re, os
           p=Path('index.html')
           s=p.read_text()
-          s=re.sub(r'music-player\.js\?v=[^"\']+', 'music-player.js?v=20260830HOLIDAYSTATIC3', s)
+          s=s.replace('</head>', '<style id="mobile-hard-fix">@media(max-width:700px){header{position:relative!important;top:auto!important}header nav{display:none!important}.hero-shell{padding-top:12px!important}#outreach{position:relative!important;z-index:1!important}.map-intro{padding-top:18px!important}}</style></head>')
+          sha=os.environ.get('GITHUB_SHA','fresh')[:12]
+          s=re.sub(r'music-player\.js\?v=[^"\']+', f'music-player.js?v=MOBILEHARD-{sha}', s)
+          s=re.sub(r'styles\.css\?v=[^"\']+', f'styles.css?v=MOBILEHARD-{sha}', s)
           p.write_text(s)
           PY
       - name: Configure Pages
@@ -42,7 +45,7 @@ jobs:
         uses: actions/deploy-pages@v4
         with:
           artifact_name: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
-      - name: Verify live holiday loader
+      - name: Verify live mobile hard fix
         shell: bash
         run: |
           set -euo pipefail
@@ -50,11 +53,12 @@ jobs:
           for i in $(seq 1 24); do
             html=$(curl -fsSL --retry 2 -H 'Cache-Control: no-cache' "https://dogtagday.org/?verify=${GITHUB_SHA}-${GITHUB_RUN_ID}-$i" || true)
             js=$(curl -fsSL --retry 2 -H 'Cache-Control: no-cache' "https://dogtagday.org/music-player.js?verify=${GITHUB_SHA}-${GITHUB_RUN_ID}-$i" || true)
-            if printf '%s' "$html" | grep -q 'music-player.js?v=20260830HOLIDAYSTATIC3' \
-              && printf '%s' "$js" | grep -q 'DTD_HOLIDAY_STATIC_V3' \
-              && printf '%s' "$js" | grep -q 'bottom:18px' \
-              && printf '%s' "$js" | grep -q 'bottom:14px'; then
-              echo 'LIVE_HOLIDAY_STATIC_V3_BOTTOM_RIGHT_VERIFIED'
+            if printf '%s' "$html" | grep -q 'mobile-hard-fix' \
+              && printf '%s' "$html" | grep -q 'header nav{display:none!important}' \
+              && printf '%s' "$html" | grep -q 'music-player.js?v=MOBILEHARD-' \
+              && printf '%s' "$js" | grep -q 'DTD_HOLIDAY_STATIC_V4' \
+              && printf '%s' "$js" | grep -q 'header nav{display:none!important}'; then
+              echo 'LIVE_MOBILE_HARD_FIX_VERIFIED'
               ok=1
               break
             fi
