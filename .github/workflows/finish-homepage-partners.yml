@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Force partnership section visible
+      - name: Force partnership section visible and republish
         run: |
           python - <<'PY'
           from pathlib import Path
@@ -25,6 +25,10 @@ jobs:
               needle='<section class="section dark" id="stories">'
               s=s.replace(needle,partner+needle,1)
           s=s.replace('href="contact.html">Become a Partner','href="#contact">Become a Partner')
+          import re
+          s=re.sub(r'data-dtd-build="[^"]+"','data-dtd-build="2026-08-31-live-partners-v2"',s,count=1)
+          if '<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">' not in s:
+              s=s.replace('<title>Dog Tag Day | April 18</title>','<title>Dog Tag Day | April 18</title><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0">',1)
           p.write_text(s)
           PY
       - name: Commit homepage
@@ -33,5 +37,5 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add index.html
           if git diff --cached --quiet; then exit 0; fi
-          git commit -m "Force partnership section visible on homepage"
+          git commit -m "Republish visible partnership section"
           git push
