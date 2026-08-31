@@ -1,1 +1,1 @@
-Force clean DogTagDay.org Pages deployment — 2026-08-30 — rebuild and cache refresh. Deploy current main with mobile-first homepage, approved dog-tag hero, 1,800+ outreach map, sponsor/partner section, and founder section.
+Force clean DogTagDay.org Pages deployment — 2026-08-30 18:28 PT — rebuild and cache refresh after restoring working hero image asset. Keep current map and horizontal Sponsors | Donations | Partnerships strip unchanged.
