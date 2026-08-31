@@ -20,4 +20,3 @@ s.onload=()=>{window.Date=RealDate;window.setInterval=realSetInterval;const a=do
 s.onerror=()=>{window.Date=RealDate;window.setInterval=realSetInterval};
 document.head.appendChild(s);
 })();
-(()=>{const hero=document.querySelector('.hero-frame img');if(hero){hero.src='assets/dtd-new-hero.jpg?v=20260831REAL5';hero.alt='Dog Tag Day April 18 realistic five-service-member hero banner';}})();
