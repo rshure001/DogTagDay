@@ -26,22 +26,22 @@ jobs:
             for(let i=0;i<24;i++){
               await page.goto('https://dogtagday.org/?verify='+Date.now(),{waitUntil:'networkidle',timeout:30000});
               const build=await page.locator('html').getAttribute('data-dtd-build');
-              const hero=page.locator('.hero img');
-              const feature=page.locator('.featureBanner img');
-              const heroInfo=await hero.evaluate(img=>({src:img.getAttribute('src'),w:img.naturalWidth,h:img.naturalHeight,complete:img.complete}));
-              const featureInfo=await feature.evaluate(img=>({src:img.getAttribute('src'),w:img.naturalWidth,h:img.naturalHeight,complete:img.complete}));
               const broken=await page.locator('img').evaluateAll(imgs=>imgs.filter(i=>!i.complete||i.naturalWidth===0).map(i=>i.getAttribute('src')));
               const mapCount=await page.locator('#outreach iframe').count();
+              const heroCount=await page.locator('.heroCard').count();
+              const h1=await page.locator('.heroCard h1').allTextContents();
               const body=await page.locator('body').innerText();
+              const current=body.includes('April 18 — Wear yours. Share your story. Honor them. Inspire others.');
+              const old=!body.includes('Make military service visible.')&&!body.includes('IDENTITY • BROTHERHOOD • HONOR');
               const text=body.includes('Don’t let our veterans fade into the background.')&&body.includes('Nationwide Outreach')&&body.includes('Partner With Dog Tag Day');
-              console.log(JSON.stringify({attempt:i+1,build,heroInfo,featureInfo,broken,mapCount,text}));
-              if(build==='2026-08-31-broken-image-fixed'&&heroInfo.complete&&heroInfo.w>0&&heroInfo.h>0&&featureInfo.complete&&featureInfo.w>0&&featureInfo.h>0&&broken.length===0&&mapCount===1&&text){ok=true;break;}
+              console.log(JSON.stringify({attempt:i+1,build,broken,mapCount,heroCount,h1,current,old,text}));
+              if(build==='2026-08-31-mobile-hero-fixed'&&broken.length===0&&mapCount===1&&heroCount===1&&h1.length===1&&h1[0].trim()==='DOG TAG DAY'&&current&&old&&text){ok=true;break;}
               await page.waitForTimeout(5000);
             }
             await page.screenshot({path:'live-homepage-proof.png',fullPage:true});
             await browser.close();
             if(!ok) process.exit(1);
-            console.log('LIVE_HOMEPAGE_ALL_IMAGES_PASS=true');
+            console.log('LIVE_MOBILE_HOMEPAGE_PASS=true');
           })().catch(e=>{console.error(e);process.exit(1)});
           NODE
       - uses: actions/upload-artifact@v4
