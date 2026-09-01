@@ -18,7 +18,7 @@ html,body,#map{height:100%;margin:0;background:#07111b;font-family:Arial,sans-se
 </head>
 <body>
 <div id="map" aria-label="Interactive United States Dog Tag Day outreach map"></div>
-<div class="map-status"><b>1,800 lights</b> • pinch or + to see cities</div>
+<div class="map-status"><b>1,800 bright lights</b> • pinch or + for a crisp city view</div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
 const canvas=L.canvas({padding:.3});
@@ -35,9 +35,9 @@ while(pts.length<1300){let x=-125+rnd()*58,y=24+rnd()*26;if(inside(x,y,poly)){le
 hubs.forEach(([lat,lng])=>{for(let k=0;k<10;k++){const a=rnd()*Math.PI*2,r=.08+Math.sqrt(rnd())*.75;pts.push([lat+Math.sin(a)*r,lng+Math.cos(a)*r/Math.max(.55,Math.cos(lat*Math.PI/180))])}});
 for(let i=0;i<50;i++)pts.push([58.5+rnd()*5,-151.5+rnd()*8]);
 for(let i=0;i<50;i++)pts.push([19.2+rnd()*3.2,-160.2+rnd()*5.6]);
-const markers=[];
-pts.forEach(([lat,lng],i)=>{const [category,color]=categories[i%categories.length];const marker=L.circleMarker([lat,lng],{renderer:canvas,radius:1.35,color:'#ffffff',weight:.3,opacity:.85,fillColor:color,fillOpacity:.88}).addTo(map).bindPopup('<strong>'+category+'</strong><br>Dog Tag Day outreach visualization near this area.<br><small>Illustrative—not an exact recipient address.</small>');markers.push(marker)});
-function sharpen(){const z=map.getZoom();const radius=z<=4?1.35:z<=7?2.25:z<=10?3.25:4.25;const weight=z<=5?.3:.65;markers.forEach(m=>m.setStyle({radius,weight,fillOpacity:z<=4?.82:.94}))}
+const lights=[];
+pts.forEach(([lat,lng],i)=>{const [category,color]=categories[i%categories.length];const halo=L.circleMarker([lat,lng],{renderer:canvas,radius:3.6,stroke:false,fillColor:color,fillOpacity:.22,interactive:false}).addTo(map);const core=L.circleMarker([lat,lng],{renderer:canvas,radius:1.25,color:'#ffffff',weight:.45,opacity:1,fillColor:color,fillOpacity:1}).addTo(map).bindPopup('<strong>'+category+'</strong><br>Dog Tag Day outreach visualization near this area.<br><small>Illustrative—not an exact recipient address.</small>');lights.push({halo,core})});
+function sharpen(){const z=map.getZoom();const national=z<=5;const coreRadius=national?1.25:z<=7?2.1:z<=10?3:4;lights.forEach(({halo,core})=>{halo.setStyle({radius:national?3.6:1,fillOpacity:national?.22:0});core.setStyle({radius:coreRadius,weight:national?.45:.75,fillOpacity:1,opacity:1})})}
 map.on('zoomend',sharpen);
 map.fitBounds([[18.5,-161.5],[63.8,-68]],{padding:[10,10]});
 sharpen();
