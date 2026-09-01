@@ -1,0 +1,127 @@
+name: Send Approved Outreach
+
+on:
+  push:
+    paths:
+      - "outreach/queue/*.json"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: dog-tag-day-outreach
+  cancel-in-progress: false
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      YAHOO_EMAIL: ${{ secrets.YAHOO_EMAIL }}
+      YAHOO_APP_PASSWORD: ${{ secrets.YAHOO_APP_PASSWORD }}
+    steps:
+      - name: Check out outreach queue
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Verify Yahoo sender is configured
+        shell: bash
+        run: |
+          test -n "$YAHOO_EMAIL" || { echo "YAHOO_EMAIL secret is missing"; exit 1; }
+          test -n "$YAHOO_APP_PASSWORD" || { echo "YAHOO_APP_PASSWORD secret is missing"; exit 1; }
+
+      - name: Send approved individualized emails
+        shell: python
+        run: |
+          import datetime
+          import email.utils
+          import glob
+          import json
+          import os
+          import re
+          import smtplib
+          import ssl
+          import subprocess
+          import time
+          from email.message import EmailMessage
+
+          sender = os.environ["YAHOO_EMAIL"].strip()
+          password = os.environ["YAHOO_APP_PASSWORD"].strip()
+          email_re = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
+          queue_files = sorted(glob.glob("outreach/queue/*.json"))
+          if not queue_files:
+              raise SystemExit("No campaign files found.")
+
+          context = ssl.create_default_context()
+          server = smtplib.SMTP_SSL("smtp.mail.yahoo.com", 465, context=context, timeout=45)
+          server.login(sender, password)
+
+          sent_count = 0
+          try:
+              for path in queue_files:
+                  with open(path, "r", encoding="utf-8") as handle:
+                      campaign = json.load(handle)
+
+                  if campaign.get("status") != "approved":
+                      continue
+
+                  recipients = campaign.get("recipients", [])
+                  if not 1 <= len(recipients) <= 20:
+                      raise ValueError(f"{path}: each batch must contain 1 to 20 recipients")
+
+                  subject = str(campaign.get("subject", "")).strip()
+                  body_template = str(campaign.get("body_template", "")).strip()
+                  if not subject or not body_template:
+                      raise ValueError(f"{path}: subject and body_template are required")
+
+                  for recipient in recipients:
+                      if recipient.get("sent_at"):
+                          continue
+
+                      address = str(recipient.get("email", "")).strip()
+                      if not email_re.match(address):
+                          raise ValueError(f"{path}: invalid recipient email")
+
+                      organization = str(recipient.get("organization", "")).strip()
+                      contact_name = str(recipient.get("contact_name", "")).strip()
+                      greeting = f"Dear {contact_name}," if contact_name else f"Dear {organization} Team,"
+                      body = body_template.replace("{{greeting}}", greeting).replace("{{organization}}", organization)
+
+                      msg = EmailMessage()
+                      msg["From"] = f"Ronnie Shure, Dog Tag Day Foundation <{sender}>"
+                      msg["To"] = address
+                      msg["Subject"] = subject
+                      msg["Date"] = email.utils.formatdate(localtime=True)
+                      msg["Message-ID"] = email.utils.make_msgid(domain=sender.split("@", 1)[1])
+                      msg["Reply-To"] = sender
+                      msg.set_content(body)
+
+                      server.send_message(msg)
+                      recipient["sent_at"] = datetime.datetime.now(datetime.timezone.utc).isoformat()
+                      sent_count += 1
+
+                      with open(path, "w", encoding="utf-8") as handle:
+                          json.dump(campaign, handle, indent=2, ensure_ascii=False)
+                          handle.write("\n")
+
+                      subprocess.run(["git", "config", "user.name", "Dog Tag Day Outreach"], check=True)
+                      subprocess.run(["git", "config", "user.email", "actions@users.noreply.github.com"], check=True)
+                      subprocess.run(["git", "add", path], check=True)
+                      subprocess.run(["git", "commit", "-m", "Record verified outreach send [skip ci]"], check=True)
+                      subprocess.run(["git", "push"], check=True)
+                      time.sleep(12)
+
+                  if recipients and all(item.get("sent_at") for item in recipients):
+                      campaign["status"] = "sent"
+                      campaign["completed_at"] = datetime.datetime.now(datetime.timezone.utc).isoformat()
+                      with open(path, "w", encoding="utf-8") as handle:
+                          json.dump(campaign, handle, indent=2, ensure_ascii=False)
+                          handle.write("\n")
+                      subprocess.run(["git", "add", path], check=True)
+                      subprocess.run(["git", "commit", "-m", "Complete outreach batch [skip ci]"], check=True)
+                      subprocess.run(["git", "push"], check=True)
+          finally:
+              server.quit()
+
+          print(f"Successfully sent and recorded {sent_count} outreach emails.")
