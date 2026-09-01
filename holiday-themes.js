@@ -30,21 +30,53 @@ const definitions=[
 ["christmas-hanukkah","Christmas & Hanukkah",y=>new Date(y,11,25)]
 ];
 const now=new Date(),today=new Date(now.getFullYear(),now.getMonth(),now.getDate());
-let choices=[];
-for(let year=today.getFullYear();year<=today.getFullYear()+1;year++){for(const [key,name,getDate] of definitions){choices.push({key,name,date:getDate(year)});}}
-choices.sort((a,b)=>a.date-b.date);
-const active=choices.find(item=>item.date>=today)||choices[0];
+const upcoming=definitions.map(([key,name,getDate])=>{let date=getDate(today.getFullYear());if(date<today)date=getDate(today.getFullYear()+1);return{key,name,date};}).sort((a,b)=>a.date-b.date);
 const section=document.createElement("section");
 section.className="holidayAccent";
-section.setAttribute("aria-label",active.name+" holiday theme");
-const image=document.createElement("img");
-image.src=assets[active.key];
-image.alt=active.name+" holiday decoration";
-image.loading="lazy";
-const label=document.createElement("div");
-label.className="holidayName";
-label.textContent=active.name;
-section.append(image,label);
+section.setAttribute("aria-label","Holiday themes");
+const viewport=document.createElement("div");
+viewport.className="holidayViewport";
+const track=document.createElement("div");
+track.className="holidayTrack";
+for(const item of upcoming){
+  const slide=document.createElement("article");
+  slide.className="holidaySlide";
+  slide.setAttribute("aria-label",item.name);
+  const image=document.createElement("img");
+  image.src=assets[item.key];
+  image.alt=item.name+" holiday decoration";
+  image.loading=item===upcoming[0]?"eager":"lazy";
+  const label=document.createElement("div");
+  label.className="holidayName";
+  label.textContent=item.name;
+  slide.append(image,label);
+  track.append(slide);
+}
+viewport.append(track);
+const controls=document.createElement("div");
+controls.className="holidayControls";
+const previous=document.createElement("button");
+previous.className="holidayArrow";
+previous.type="button";
+previous.setAttribute("aria-label","Previous holiday");
+previous.textContent="‹";
+const counter=document.createElement("span");
+counter.className="holidayCounter";
+const next=document.createElement("button");
+next.className="holidayArrow";
+next.type="button";
+next.setAttribute("aria-label","Next holiday");
+next.textContent="›";
+controls.append(previous,counter,next);
+section.append(viewport,controls);
+let current=0;
+const show=(index)=>{current=(index+upcoming.length)%upcoming.length;track.style.transform="translateX(-"+current*100+"%)";counter.textContent=(current+1)+" / "+upcoming.length;};
+previous.addEventListener("click",()=>show(current-1));
+next.addEventListener("click",()=>show(current+1));
+let touchStart=0;
+track.addEventListener("touchstart",event=>{touchStart=event.changedTouches[0].clientX;},{passive:true});
+track.addEventListener("touchend",event=>{const distance=event.changedTouches[0].clientX-touchStart;if(Math.abs(distance)>40)show(current+(distance<0?1:-1));},{passive:true});
+show(0);
 const marker=document.querySelector(".patriotBottom");
 if(marker&&marker.parentNode){marker.parentNode.insertBefore(section,marker);}
 })();
