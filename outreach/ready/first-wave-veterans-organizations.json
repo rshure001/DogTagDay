@@ -1,0 +1,36 @@
+{
+  "campaign_id": "2026-09-01-first-wave-veterans-organizations",
+  "status": "approved",
+  "approved_by": "Ronnie Shure",
+  "approved_at": "2026-09-01",
+  "sender_name": "Ronnie Shure",
+  "sender_title": "Founder & President",
+  "subject": "Dog Tag Day — April 18 — National Veterans Outreach",
+  "body_template": "{{greeting}}\n\nI am Ronnie Shure, Founder & President of Dog Tag Day Foundation.\n\nDog Tag Day is a nonpartisan movement inviting veterans, active-duty service members, and military families to wear or display dog tags every April 18 and share the stories behind them. We ask Americans who see the tags to pause, acknowledge the person who served, and say through a simple gesture: I see you.\n\nOur purpose is simple: make military service visible and ensure veterans are seen, heard, and remembered.\n\nWe would value {{organization}}'s guidance and participation. How can Dog Tag Day Foundation help your organization, and how can we work together to bring April 18 to veterans and families nationwide?\n\nRespectfully,\n\nRonnie Shure\nFounder & President\nDog Tag Day Foundation\nhttps://dogtagday.org/\n\nIf this message reached the wrong department, please forward it to the appropriate veterans outreach or communications contact. If you do not wish to receive further messages, reply with “remove.”",
+  "recipients": [
+    {
+      "organization": "U.S. Department of Veterans Affairs",
+      "contact_name": "Office of Public and Intergovernmental Affairs",
+      "email": "vapublicaffairs@va.gov",
+      "source_url": "https://department.va.gov/"
+    },
+    {
+      "organization": "Nevada Department of Veterans Services",
+      "contact_name": "Public Information Office",
+      "email": "pio.ndvs@veterans.nv.gov",
+      "source_url": "https://veterans.nv.gov/"
+    },
+    {
+      "organization": "The American Legion",
+      "contact_name": "Media Relations",
+      "email": "magazine@legion.org",
+      "source_url": "https://www.legion.org/about/media-toolkits/media-contacts"
+    },
+    {
+      "organization": "Veterans of Foreign Wars",
+      "contact_name": "Randi K. Law",
+      "email": "rlaw@vfw.org",
+      "source_url": "https://www.vfw.org/media-and-events/latest-releases/media-contacts"
+    }
+  ]
+}
