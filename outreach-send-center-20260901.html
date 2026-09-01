@@ -6,15 +6,33 @@
 <meta name="robots" content="noindex,nofollow">
 <title>Dog Tag Day Outreach Send Center</title>
 <style>
-*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#061421,#0a1d31);color:#fff;font-family:Arial,sans-serif;min-height:100vh;padding:18px}.wrap{max-width:760px;margin:auto}.top{border:2px solid #dfba62;background:#07131f;padding:22px;border-radius:18px;text-align:center;box-shadow:inset 6px 0 #b62035,inset -6px 0 #143b68}.top h1{font-family:Georgia,serif;font-size:clamp(2rem,8vw,3.6rem);margin:8px 0}.top p{color:#dce5ef;line-height:1.5}.count{color:#dfba62;font-weight:900;letter-spacing:.12em}.card{margin-top:15px;border:2px solid #dfba62;border-radius:16px;background:#0a1a28;padding:20px}.org{font-family:Georgia,serif;font-size:1.35rem;font-weight:900}.email{color:#dfba62;margin:8px 0 14px;overflow-wrap:anywhere}.btn{display:block;text-align:center;text-decoration:none;background:#dfba62;color:#07131f;border:2px solid #fff;border-radius:999px;padding:14px;font-weight:900;font-size:1.05rem}.formbtn{background:#143b68;color:#fff;border-color:#dfba62}.source{display:block;margin-top:10px;color:#9fb0bf;font-size:.78rem;line-height:1.45}.note{margin:18px 0 28px;color:#b9c6d1;text-align:center;line-height:1.5;font-size:.9rem}.badge{display:inline-block;border:1px solid #dfba62;border-radius:999px;padding:7px 11px;color:#dfba62;font-size:.75rem;font-weight:900;letter-spacing:.08em}.done{margin-top:12px;display:flex;gap:8px;align-items:center;color:#dce5ef}.done input{width:22px;height:22px}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#061421,#0a1d31);color:#fff;font-family:Arial,sans-serif;min-height:100vh;padding:18px}.wrap{max-width:760px;margin:auto}.top{border:2px solid #dfba62;background:#07131f;padding:22px;border-radius:18px;text-align:center;box-shadow:inset 6px 0 #b62035,inset -6px 0 #143b68}.top h1{font-family:Georgia,serif;font-size:clamp(2rem,8vw,3.6rem);margin:8px 0}.top p{color:#dce5ef;line-height:1.5}.count{color:#dfba62;font-weight:900;letter-spacing:.12em}.batchBox{margin-top:16px;padding:18px;border:3px solid #fff;border-radius:18px;background:linear-gradient(135deg,#b62035,#8b1728);box-shadow:0 0 0 3px #dfba62;text-align:center}.batchBtn{display:block;text-align:center;text-decoration:none;background:#dfba62;color:#07131f;border:3px solid #fff;border-radius:999px;padding:18px 14px;font-weight:900;font-size:1.15rem}.batchBox small{display:block;margin-top:10px;color:#fff;line-height:1.4}.card{margin-top:15px;border:2px solid #dfba62;border-radius:16px;background:#0a1a28;padding:20px}.org{font-family:Georgia,serif;font-size:1.35rem;font-weight:900}.email{color:#dfba62;margin:8px 0 14px;overflow-wrap:anywhere}.btn{display:block;text-align:center;text-decoration:none;background:#dfba62;color:#07131f;border:2px solid #fff;border-radius:999px;padding:14px;font-weight:900;font-size:1.05rem}.formbtn{background:#143b68;color:#fff;border-color:#dfba62}.source{display:block;margin-top:10px;color:#9fb0bf;font-size:.78rem;line-height:1.45}.note{margin:18px 0 28px;color:#b9c6d1;text-align:center;line-height:1.5;font-size:.9rem}.badge{display:inline-block;border:1px solid #dfba62;border-radius:999px;padding:7px 11px;color:#dfba62;font-size:.75rem;font-weight:900;letter-spacing:.08em}.done{margin-top:12px;display:flex;gap:8px;align-items:center;color:#dce5ef}.done input{width:22px;height:22px}
 </style>
 </head>
 <body><main class="wrap">
 <section class="top"><span class="badge">INDEPENDENT EMAIL ROUTE</span><h1>Dog Tag Day Send Center</h1><div class="count">FIRST VERIFIED WAVE • 5 TARGETS</div><p>Tap a gold button. Your phone’s working Mail app opens with the verified address, subject, and individualized message already filled in. Review it and tap Send.</p></section>
-<div id="cards"></div>
+<section class="batchBox"><a class="batchBtn" id="firstWaveBatch" href="#">OPEN FIRST WAVE — ONE EMAIL</a><small>One message to VA, Nevada Veterans Services, American Legion, and VFW. Recipient addresses are placed in BCC.</small></section><div id="cards"></div>
 <p class="note">Addresses were checked against official organization websites on September 1, 2026. This page does not connect to Gmail, Apollo, or Outlook.</p>
 </main>
 <script>
+const batchSubject="Dog Tag Day — April 18 — National Veterans Outreach";
+const batchBody=`Dear Veterans Outreach Leadership,
+
+I am Ronnie Shure, Founder & President of Dog Tag Day Foundation.
+
+Dog Tag Day is a nonpartisan movement inviting veterans, active-duty service members, and military families to wear or display dog tags every April 18 and share the stories behind them. We ask Americans who see the tags to pause and acknowledge the person who served.
+
+Our purpose is simple: make military service visible and ensure veterans are seen, heard, and remembered.
+
+We would value your guidance and participation. How can Dog Tag Day Foundation help your organization, and how can we work together to bring April 18 to veterans and families nationwide?
+
+Respectfully,
+
+Ronnie Shure
+Founder & President
+Dog Tag Day Foundation
+https://dogtagday.org/`;
+document.getElementById("firstWaveBatch").href="mailto:vapublicaffairs@va.gov?bcc="+encodeURIComponent("pio.ndvs@veterans.nv.gov,magazine@legion.org,rlaw@vfw.org")+"&subject="+encodeURIComponent(batchSubject)+"&body="+encodeURIComponent(batchBody);
 const commonEnd=`Dog Tag Day is a nonpartisan movement inviting veterans, active-duty service members, and military families to wear or display dog tags on April 18 and share the stories behind them. We ask Americans who see the tags to pause and acknowledge the person who served.
 
 Our purpose is simple: make military service visible and ensure veterans are seen, heard, and remembered.
