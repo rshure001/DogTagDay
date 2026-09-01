@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Dog Tag Day Outreach Send Center</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#061421,#0a1d31);color:#fff;font-family:Arial,sans-serif;min-height:100vh;padding:18px}.wrap{max-width:760px;margin:auto}.top{border:2px solid #dfba62;background:#07131f;padding:22px;border-radius:18px;text-align:center;box-shadow:inset 6px 0 #b62035,inset -6px 0 #143b68}.top h1{font-family:Georgia,serif;font-size:clamp(2rem,8vw,3.6rem);margin:8px 0}.top p{color:#dce5ef;line-height:1.5}.count{color:#dfba62;font-weight:900;letter-spacing:.12em}.card{margin-top:15px;border:2px solid #dfba62;border-radius:16px;background:#0a1a28;padding:20px}.org{font-family:Georgia,serif;font-size:1.35rem;font-weight:900}.email{color:#dfba62;margin:8px 0 14px;overflow-wrap:anywhere}.btn{display:block;text-align:center;text-decoration:none;background:#dfba62;color:#07131f;border:2px solid #fff;border-radius:999px;padding:14px;font-weight:900;font-size:1.05rem}.formbtn{background:#143b68;color:#fff;border-color:#dfba62}.source{display:block;margin-top:10px;color:#9fb0bf;font-size:.78rem;line-height:1.45}.note{margin:18px 0 28px;color:#b9c6d1;text-align:center;line-height:1.5;font-size:.9rem}.badge{display:inline-block;border:1px solid #dfba62;border-radius:999px;padding:7px 11px;color:#dfba62;font-size:.75rem;font-weight:900;letter-spacing:.08em}.done{margin-top:12px;display:flex;gap:8px;align-items:center;color:#dce5ef}.done input{width:22px;height:22px}
+</style>
+</head>
+<body><main class="wrap">
+<section class="top"><span class="badge">INDEPENDENT EMAIL ROUTE</span><h1>Dog Tag Day Send Center</h1><div class="count">FIRST VERIFIED WAVE • 5 TARGETS</div><p>Tap a gold button. Your phone’s working Mail app opens with the verified address, subject, and individualized message already filled in. Review it and tap Send.</p></section>
+<div id="cards"></div>
+<p class="note">Addresses were checked against official organization websites on September 1, 2026. This page does not connect to Gmail, Apollo, or Outlook.</p>
+</main>
+<script>
+const commonEnd=`Dog Tag Day is a nonpartisan movement inviting veterans, active-duty service members, and military families to wear or display dog tags on April 18 and share the stories behind them. We ask Americans who see the tags to pause and acknowledge the person who served.
+
+Our purpose is simple: make military service visible and ensure veterans are seen, heard, and remembered.
+
+We would value your guidance and participation. How can Dog Tag Day Foundation help your organization, and how can we work together to bring April 18 to veterans and families nationwide?
+
+Respectfully,
+
+Ronnie Shure
+Founder & President
+Dog Tag Day Foundation
+https://dogtagday.org/`;
+const targets=[
+ {org:"U.S. Department of Veterans Affairs",to:"vapublicaffairs@va.gov",subject:"National Veterans Outreach — Dog Tag Day, April 18",opening:"Dear VA Office of Public and Intergovernmental Affairs,\n\nI am writing to introduce Dog Tag Day and ask for the VA’s guidance in bringing this national observance to veterans and their families.\n\n",source:"https://department.va.gov/"},
+ {org:"Nevada Department of Veterans Services",to:"pio.ndvs@veterans.nv.gov",subject:"Nevada Partnership — Dog Tag Day, April 18",opening:"Dear Nevada Department of Veterans Services Public Information Office,\n\nAs a Nevada nonprofit foundation, we are asking NDVS to help us make military service visible throughout Nevada on April 18.\n\n",source:"https://veterans.nv.gov/"},
+ {org:"The American Legion — Media Relations",to:"magazine@legion.org",subject:"National Collaboration — Dog Tag Day, April 18",opening:"Dear American Legion Media Relations Team,\n\nI am writing to invite The American Legion to help carry Dog Tag Day to veterans, posts, families, and communities across America.\n\n",source:"https://www.legion.org/about/media-toolkits/media-contacts"},
+ {org:"VFW — Communications & Public Affairs",to:"rlaw@vfw.org",subject:"National Collaboration — Dog Tag Day, April 18",opening:"Dear Ms. Law,\n\nI am writing to invite the VFW to help carry Dog Tag Day to veterans, posts, families, and communities across America.\n\n",source:"https://www.vfw.org/media-and-events/latest-releases/media-contacts"},
+ {org:"DAV — Communications",form:"https://www.dav.org/news-media/press-room/",subject:"Dog Tag Day, April 18",source:"https://www.dav.org/news-media/press-room/"}
+];
+const cards=document.getElementById("cards");
+targets.forEach((t,i)=>{
+ const article=document.createElement("article");article.className="card";
+ let action;
+ if(t.to){const body=t.opening+commonEnd;const href="mailto:"+encodeURIComponent(t.to)+"?subject="+encodeURIComponent(t.subject)+"&body="+encodeURIComponent(body);action=`<a class="btn" href="${href}">Open Ready Email</a>`;}
+ else{action=`<a class="btn formbtn" href="${t.form}" target="_blank" rel="noopener">Open Official DAV Contact</a>`;}
+ article.innerHTML=`<div class="org">${i+1}. ${t.org}</div><div class="email">${t.to||"Official contact page — no public communications email listed"}</div>${action}<label class="done"><input type="checkbox"> Mark completed on this phone</label><small class="source">Official source: ${t.source}</small>`;cards.appendChild(article);
+});
+</script></body></html>
