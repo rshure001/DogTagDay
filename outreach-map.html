@@ -20,7 +20,7 @@ body{background:#07131f;color:#fff}.map-page{max-width:1500px;margin:0 auto;padd
     <p class="eyebrow">APRIL 18 • NATIONAL OUTREACH</p>
     <h1>DOG TAG DAY <span class="gold">INTERACTIVE MAP</span></h1>
     <p>Pinch, scroll, or use + / − to zoom. Drag the map to explore. Tap a marker for details.</p>
-    <div class="stats"><div class="stat"><b>1,522</b>Emails verified in Gmail Sent</div><div class="stat"><b>9</b>Bounce/failure notices excluded</div><div class="stat"><b>50 + D.C.</b>Nationwide outreach coverage</div></div>
+    <div class="stats"><div class="stat"><b>1,522</b>Emails verified in Gmail Sent</div><div class="stat"><b>5</b>Verified funding leads added</div><div class="stat"><b>50 + D.C.</b>Nationwide outreach coverage</div></div>
   </div>
 </section>
 <section class="map-wrap">
@@ -37,6 +37,14 @@ const hubs=[
 ];
 const c='#2387ff';
 hubs.forEach(([name,lat,lng,count])=>{L.circleMarker([lat,lng],{radius:Math.min(14,5+count/4),color:'#d8efff',weight:1.2,fillColor:c,fillOpacity:.9}).addTo(map).bindPopup(`<strong>${name}</strong><br>Verified outreach hub<br>${count} logged contacts represented at city/state level`);});
+const fundingLeads=[
+['Veterans Collaborative — Fiscal Sponsorship','Charlottesville, VA',38.0293,-78.4767,'Applications accepted continually'],
+['Bob Woodruff Foundation — Grants','Long Island City, NY',40.7447,-73.9485,'Applications reviewed year-round'],
+['Infinite Hero Foundation — Grants up to $100,000','Lake Forest, CA',33.6469,-117.6892,'Next LOI window: January 1–June 15'],
+['Overwatch Alliance — Grants up to $15,000','Goodlettsville, TN',36.3231,-86.7133,'Small veteran-serving nonprofits'],
+['Nevada GrantLab — Grant Support','Las Vegas, NV',36.1699,-115.1398,'Local help identifying and submitting grants']
+];
+fundingLeads.forEach(([name,place,lat,lng,status])=>{L.circleMarker([lat,lng],{radius:8,color:'#eaffef',weight:2,fillColor:'#2bd35c',fillOpacity:1}).addTo(map).bindPopup(`<strong>${name}</strong><br>${place}<br>${status}<br><em>Verified September 2, 2026</em>`);});
 </script>
 </body>
 </html>
