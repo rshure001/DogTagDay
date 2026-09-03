@@ -221,21 +221,19 @@
 <source src="https://www.marineband.marines.mil/Portals/175/Docs/Audio/Complete%20Marches%20of%20JPS/Volume%202/34%20Semper%20Fidelis.mp3" type="audio/mpeg">
 </audio>
 <aside class="honorJarWidget" id="honorJarWidget">
-<form class="honorJarPanel" id="honorJarPanel" action="https://formspree.io/f/mnpadrzj" method="POST" hidden>
+<form class="honorJarPanel" id="honorJarPanel" hidden>
 <button class="honorJarClose" id="honorJarClose" type="button" aria-label="Close pledge choices">×</button>
-<strong>Make a Pledge</strong>
+<strong>Donate Through PayPal</strong>
 <p>Choose an amount to support Dog Tag Day.</p>
-<input type="hidden" name="request_type" value="Honor Jar pledge">
-<div class="pledgeAmounts" aria-label="Pledge amount">
-<label><input type="radio" name="pledge_amount" value="$1" required><span>$1</span></label>
-<label><input type="radio" name="pledge_amount" value="$5"><span>$5</span></label>
-<label><input type="radio" name="pledge_amount" value="$20"><span>$20</span></label>
-<label><input type="radio" name="pledge_amount" value="$100"><span>$100</span></label>
+<div class="pledgeAmounts" aria-label="Donation amount">
+<label><input type="radio" name="donation_amount" value="1" required><span>$1</span></label>
+<label><input type="radio" name="donation_amount" value="5"><span>$5</span></label>
+<label><input type="radio" name="donation_amount" value="20"><span>$20</span></label>
+<label><input type="radio" name="donation_amount" value="100"><span>$100</span></label>
 </div>
-<label class="pledgeOther">Other amount<input type="text" name="other_amount" inputmode="decimal" placeholder="$"></label>
-<label class="pledgeEmail">Your email<input type="email" name="email" autocomplete="email" required></label>
-<button class="pledgeSubmit" type="submit">Send My Pledge</button>
-<small>A pledge is a promise of support, not an immediate charge.</small>
+<label class="pledgeOther">Other amount<input type="number" name="other_amount" inputmode="decimal" min="1" step="0.01" placeholder="$"></label>
+<button class="pledgeSubmit" type="submit">Continue to PayPal</button>
+<small>Payment is completed securely on PayPal. Contributions are not represented here as tax-deductible.</small>
 </form>
 <button class="honorJarButton" id="honorJarButton" type="button" aria-expanded="false" aria-controls="honorJarPanel" aria-label="Click and pledge to Dog Tag Day">
 <img src="assets/honor-jar-click-pledge.png?v=20260903" alt="" aria-hidden="true">
@@ -245,6 +243,6 @@
 </script>
 <script>(function(){var a=document.getElementById('dtdMarch'),b=document.getElementById('musicControl'),l=document.getElementById('musicLabel'),start=68,end=108;a.volume=.16;function reset(){if(a.currentTime<start||a.currentTime>=end)a.currentTime=start}b.addEventListener('click',function(){if(a.paused){reset();a.play().then(function(){b.setAttribute('aria-pressed','true');l.textContent='Pause Quiet March'}).catch(function(){l.textContent='Tap Again to Play'})}else{a.pause();b.setAttribute('aria-pressed','false');l.textContent='Play Quiet March'}});a.addEventListener('timeupdate',function(){if(a.currentTime>=end)a.currentTime=start});a.addEventListener('ended',function(){a.currentTime=start});})();</script>
 <script>(function(){var b=document.getElementById('shareWorldBtn'),s=document.getElementById('shareStatus'),u='https://dogtagday.org/',t='Dog Tag Day — April 18',x='Put them on. Share the story. Help the world see who served.';b.addEventListener('click',async function(){try{if(navigator.share){await navigator.share({title:t,text:x,url:u});s.textContent='Thank you for carrying the mission forward.'}else{await navigator.clipboard.writeText(u);s.textContent='Website link copied—paste it into any social app.'}}catch(e){if(e&&e.name!=='AbortError')s.textContent='Visit and share: '+u}})})();</script>
-<script>(function(){var w=document.getElementById('honorJarWidget'),b=document.getElementById('honorJarButton'),p=document.getElementById('honorJarPanel'),c=document.getElementById('honorJarClose');function setOpen(open){p.hidden=!open;b.setAttribute('aria-expanded',String(open));w.classList.toggle('is-open',open)}b.addEventListener('click',function(){setOpen(p.hidden)});c.addEventListener('click',function(){setOpen(false);b.focus()});document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!p.hidden){setOpen(false);b.focus()}})})();</script>
+<script>(function(){var w=document.getElementById('honorJarWidget'),b=document.getElementById('honorJarButton'),p=document.getElementById('honorJarPanel'),c=document.getElementById('honorJarClose'),o=p.elements.other_amount;function setOpen(open){p.hidden=!open;b.setAttribute('aria-expanded',String(open));w.classList.toggle('is-open',open)}b.addEventListener('click',function(){setOpen(p.hidden)});c.addEventListener('click',function(){setOpen(false);b.focus()});p.addEventListener('submit',function(e){e.preventDefault();var chosen=p.querySelector('input[name="donation_amount"]:checked'),amount=o.value||chosen&&chosen.value;if(!amount||Number(amount)<1){o.focus();return}window.location.href='https://paypal.me/ronnieshure/'+encodeURIComponent(Number(amount).toFixed(2))+'USD'});o.addEventListener('input',function(){if(o.value){var chosen=p.querySelector('input[name="donation_amount"]:checked');if(chosen)chosen.checked=false}});document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!p.hidden){setOpen(false);b.focus()}})})();</script>
 </body>
 </html>
