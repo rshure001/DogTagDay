@@ -1,6 +1,3 @@
-Warning: truncated output (original token count: 311729)
-... 198339 bytes omitted ...
-
 (()=>{
 "use strict";
 const navStyle=document.createElement("link");
