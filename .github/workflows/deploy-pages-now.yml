@@ -26,7 +26,7 @@ jobs:
           test -s map-golden-1850.html
           test -s map-vector.html
           grep -q '17.2 MILLION' index.html
-          grep -q 'Nationwide Outreach' index.html
+          grep -q 'National Outreach' index.html
           grep -q 'Partner With Dog Tag Day' index.html
       - name: Configure Pages
         uses: actions/configure-pages@v5
@@ -45,7 +45,7 @@ jobs:
           set -e
           for i in $(seq 1 36); do
             html=$(curl -fsSL -H 'Cache-Control: no-cache' "https://dogtagday.org/?verify=${GITHUB_SHA}-${GITHUB_RUN_ID}-$i" || true)
-            if printf '%s' "$html" | grep -q '17.2 MILLION' && printf '%s' "$html" | grep -q 'Nationwide Outreach' && printf '%s' "$html" | grep -q 'Partner With Dog Tag Day'; then
+            if printf '%s' "$html" | grep -q '17.2 MILLION' && printf '%s' "$html" | grep -q 'National Outreach' && printf '%s' "$html" | grep -q 'Partner With Dog Tag Day'; then
               echo LIVE_HOMEPAGE_VERIFIED
               exit 0
             fi
