@@ -1,70 +1,35 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate">
-  <title>Dog Tag Day | 3,211 Lights Across America</title>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-  <style>
-    *{box-sizing:border-box}
-    html,body{min-height:100%;margin:0;background:#02060b;color:#fff;font-family:Arial,sans-serif}
-    body{overflow-x:hidden;background:radial-gradient(circle at 50% 42%,#13202a 0,#07111a 42%,#02060b 78%)}
-    .head{margin:12px;border:1px solid #d7b464;border-radius:14px;background:#02060bf2;padding:13px 15px;text-align:center;box-shadow:0 0 24px #d7a53b33}
-    .head strong{display:block;color:#f8d26b;font-size:clamp(17px,4.4vw,28px);letter-spacing:.11em}
-    .head .count{display:block;margin-top:5px;color:#fff7d1;font-size:clamp(15px,3.9vw,23px);font-weight:900}
-    .head small{display:block;margin-top:4px;color:#dbe5ed;line-height:1.25}
-    .map-shell{position:relative;width:100%;height:min(61vw,560px);min-height:310px;margin:8px auto 0;border-top:1px solid #8b7138;border-bottom:1px solid #8b7138;background:#02060b;box-shadow:inset 0 0 55px #000,0 0 36px #d7a53b22}
-    #map{width:100%;height:100%;background:#02060b}
-    .leaflet-container{background:#02060b;cursor:default!important}
-    .leaflet-tile-pane{filter:brightness(.13) saturate(.28) contrast(2.25)}
-    .leaflet-control-attribution{font-size:7px!important;opacity:.55;background:#000a!important;color:#b9c5ce!important}
-    .leaflet-control-attribution a{color:#d7b464!important}
-    .spark{width:8px;height:8px;border-radius:50%;background:#fffbd8;box-shadow:0 0 4px 2px #fff,0 0 11px 5px #ffe19a,0 0 22px 10px #d89a36,0 0 38px 16px #b866174d}
-    .vegas{width:12px;height:12px;border-radius:50%;background:#fff;box-shadow:0 0 6px 3px #fff,0 0 16px 8px #ffe36d,0 0 34px 15px #ff9b24,0 0 55px 25px #ff6b174d}
-    .caption{display:flex;gap:8px;justify-content:center;align-items:center;flex-wrap:wrap;padding:13px 10px 22px;color:#eaf1f6;font-weight:700;text-align:center}
-    .key{display:inline-flex;align-items:center;gap:5px}.bulb{width:9px;height:9px;border-radius:50%;box-shadow:0 0 6px currentColor,0 0 12px currentColor;background:currentColor}
-    .home{display:block;width:max-content;margin:0 auto 22px;padding:9px 14px;border:1px solid #d7b464;border-radius:9px;color:#fff;text-decoration:none;background:#07111b}
-    @media(max-width:600px){.head{margin:8px;padding:10px 8px}.head small{font-size:11px}.map-shell{height:66vw;min-height:295px}.caption{font-size:12px;padding-top:10px}.spark{width:7px;height:7px}}
-  </style>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate">
+<title>Dog Tag Day | 3,211 Lights Across America</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#020812;color:#fff;font-family:Arial,sans-serif}
+body{background:radial-gradient(circle at 50% 44%,#152333 0,#07111c 50%,#01050a 100%);padding:14px 0 28px}
+.head{text-align:center;padding:4px 12px 13px}.head h1{margin:0;color:#f2cb6a;font:900 clamp(18px,4.8vw,34px)/1.12 Georgia,serif;letter-spacing:.09em}.head strong{display:block;margin-top:7px;color:#fff5c7;font-size:clamp(18px,4.5vw,29px)}.head p{margin:5px auto 0;color:#d6e0e8;font-size:clamp(11px,2.8vw,16px)}
+.frame{position:relative;width:min(100%,1100px);margin:auto;border:2px solid #c59c4b;background:#010308;box-shadow:0 0 34px #f2b73938;overflow:hidden;aspect-ratio:700/467}
+.frame img,.frame canvas{position:absolute;inset:0;width:100%;height:100%;display:block}.frame img{object-fit:fill;filter:saturate(1.18) brightness(1.05) contrast(1.04)}.frame canvas{pointer-events:none}
+.loading{position:absolute;inset:0;display:grid;place-items:center;color:#f2cb6a;font-weight:800}.legend{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;padding:15px 10px 8px;color:#eef4f8;font-weight:700;font-size:13px}.key{display:flex;align-items:center;gap:5px}.lamp{width:9px;height:9px;border-radius:50%;background:currentColor;box-shadow:0 0 5px #fff,0 0 12px currentColor}
+.note{text-align:center;color:#bfcbd5;font-size:11px;padding:0 16px 14px}.home{display:block;width:max-content;margin:auto;border:1px solid #c59c4b;border-radius:8px;padding:9px 14px;color:white;text-decoration:none;background:#07111c}
+@media(max-width:600px){body{padding-top:9px}.head{padding-bottom:9px}.frame{border-left:0;border-right:0;width:100%}.legend{gap:8px;font-size:11px}}
+</style>
 </head>
 <body>
-  <header class="head">
-    <strong>AMERICA AGLOW FOR DOG TAG DAY</strong>
-    <span class="count">3,211 LIGHTS ACROSS AMERICA</span>
-    <small>Every light represents an outreach touchpoint. Repeat contacts remain as neighboring lights.</small>
-  </header>
-  <section class="map-shell" aria-label="United States lit with 3,211 outreach lights"><div id="map"></div></section>
-  <div class="caption">
-    <span class="key" style="color:#ff3b45"><i class="bulb"></i>Honor</span>
-    <span class="key" style="color:#2d8cff"><i class="bulb"></i>Service</span>
-    <span class="key" style="color:#38e875"><i class="bulb"></i>Community</span>
-    <span class="key" style="color:#fff"><i class="bulb"></i>Remembrance</span>
-    <span class="key" style="color:#ffbd45"><i class="bulb"></i>Amber waves</span>
-  </div>
-  <a class="home" href="index.html">Return to Dog Tag Day</a>
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script>
-    const m=L.map('map',{zoomControl:false,attributionControl:true,dragging:false,scrollWheelZoom:false,doubleClickZoom:false,boxZoom:false,keyboard:false,touchZoom:false,preferCanvas:true});
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{subdomains:'abc',maxZoom:7,attribution:'&copy; OpenStreetMap contributors'}).addTo(m);
-    let seed=4182026;const rnd=()=>((seed=(seed*1664525+1013904223)>>>0)/4294967296);
-    const outline=[[-124.8,48.8],[-124.2,42],[-117.1,32.5],[-111,31.3],[-106.5,31.8],[-103,29.7],[-99,26],[-96,26],[-94,29],[-90,29],[-85,30],[-82,25],[-80,26],[-80,32],[-77,35],[-76,39],[-74,40.5],[-70,42],[-69.8,44],[-72.5,45.2],[-79,43.5],[-83,46],[-89,47],[-95,49],[-110,49]];
-    function inside(x,y){let c=false;for(let i=0,j=outline.length-1;i<outline.length;j=i++){const a=outline[i],b=outline[j];if((a[1]>y)!=(b[1]>y)&&x<(b[0]-a[0])*(y-a[1])/(b[1]-a[1])+a[0])c=!c}return c}
-    const cities=[[47.61,-122.33],[45.52,-122.68],[37.77,-122.42],[38.58,-121.49],[36.17,-115.14],[34.05,-118.24],[32.72,-117.16],[33.45,-112.07],[40.76,-111.89],[39.74,-104.99],[32.78,-96.8],[29.76,-95.37],[30.27,-97.74],[29.42,-98.49],[35.47,-97.52],[39.1,-94.58],[38.63,-90.2],[44.98,-93.27],[41.88,-87.63],[42.33,-83.05],[39.96,-83],[39.77,-86.16],[36.16,-86.78],[35.15,-90.05],[33.75,-84.39],[30.33,-81.66],[28.54,-81.38],[27.95,-82.46],[25.76,-80.19],[35.23,-80.84],[35.78,-78.64],[37.54,-77.44],[38.91,-77.04],[39.29,-76.61],[39.95,-75.17],[40.71,-74.01],[42.36,-71.06],[41.82,-71.41],[42.89,-78.88],[40.44,-79.99],[38.25,-85.76],[33.52,-86.81],[34.75,-92.29],[41.26,-95.93],[43.54,-96.73],[43.62,-116.2],[32.22,-110.97],[31.76,-106.49],[38.83,-104.82],[36.15,-95.99],[37.69,-97.33]];
-    const points=[];
-    while(points.length<1810){const x=-125+rnd()*59,y=24+rnd()*26;if(inside(x,y))points.push([y,x,0])}
-    while(points.length<3111){const h=cities[Math.floor(rnd()*cities.length)],a=rnd()*Math.PI*2,d=.025+Math.sqrt(rnd())*.48;points.push([h[0]+Math.sin(a)*d,h[1]+Math.cos(a)*d/Math.max(.58,Math.cos(h[0]*Math.PI/180)),1])}
-    for(let i=0;i<55;i++)points.push([58.5+rnd()*5.4,-152+rnd()*9,0]);
-    for(let i=0;i<45;i++)points.push([19.2+rnd()*2.9,-160+rnd()*5,0]);
-    points.length=3211;
-    const colors=['#ff3347','#2f8cff','#37e876','#ffffff','#ffbd45','#fff4b0'];
-    const cv=L.canvas({padding:.7,tolerance:0});
-    points.forEach((p,i)=>{const c=colors[(i*7+i%5)%colors.length],radius=i%41===0?3.7:(p[2]?2.45:2.15);L.circleMarker([p[0],p[1]],{renderer:cv,radius,weight:i%41===0?1:.35,color:'#fff8d8',opacity:.95,fillColor:c,fillOpacity:1,interactive:false}).addTo(m)});
-    cities.filter((_,i)=>i%3===0).forEach(([y,x])=>L.marker([y,x],{icon:L.divIcon({className:'',html:'<div class="spark"></div>',iconSize:[8,8],iconAnchor:[4,4]}),interactive:false}).addTo(m));
-    L.marker([36.17,-115.14],{icon:L.divIcon({className:'',html:'<div class="vegas"></div>',iconSize:[12,12],iconAnchor:[6,6]}),interactive:false}).addTo(m);
-    m.fitBounds([[23.5,-126],[50.5,-66]],{padding:[2,2],animate:false});
-    window.addEventListener('resize',()=>{m.invalidateSize();m.fitBounds([[23.5,-126],[50.5,-66]],{padding:[2,2],animate:false})});
-    window.DOGTAG_LIGHT_COUNT=points.length;document.body.dataset.lightCount=String(points.length);
-  </script>
-</body>
-</html>
+<header class="head"><h1>DOG TAG DAY — OUTREACH ACROSS AMERICA</h1><strong>3,211 LIGHTS</strong><p>The original golden map, now shining brighter across the nation.</p></header>
+<main class="frame"><div class="loading">Lighting America…</div><img id="oldMap" alt="Golden Dog Tag Day outreach map across America"><canvas id="newLights" width="1400" height="934" aria-label="1,411 new lights added to the original 1,800 lights"></canvas></main>
+<div class="legend"><span class="key" style="color:#ff3347"><i class="lamp"></i>Honor</span><span class="key" style="color:#318cff"><i class="lamp"></i>Service</span><span class="key" style="color:#35e976"><i class="lamp"></i>Community</span><span class="key" style="color:#fff"><i class="lamp"></i>Remembrance</span><span class="key" style="color:#ffc24b"><i class="lamp"></i>Amber waves</span></div>
+<div class="note">1,800 original outreach lights + 1,411 new outreach lights = 3,211. Repeat contacts remain as neighboring lights. Placement is artistic and approximate.</div>
+<a class="home" href="index.html">Return to Dog Tag Day</a>
+<script>
+const img=document.getElementById('oldMap'),canvas=document.getElementById('newLights'),ctx=canvas.getContext('2d');
+let seed=32110418;const rnd=()=>((seed=(seed*1664525+1013904223)>>>0)/4294967296);
+const poly=[[96,157],[160,122],[225,133],[287,121],[352,138],[414,127],[476,142],[537,132],[600,145],[665,134],[728,150],[790,142],[858,159],[918,151],[974,182],[1011,222],[995,270],[1031,308],[987,348],[967,399],[915,424],[860,457],[800,439],[743,470],[685,451],[629,482],[570,454],[517,468],[463,437],[407,447],[356,418],[302,408],[264,371],[221,357],[195,314],[164,286],[177,244],[145,210]];
+function inside(x,y){let c=false;for(let i=0,j=poly.length-1;i<poly.length;j=i++){const a=poly[i],b=poly[j];if((a[1]>y)!=(b[1]>y)&&x<(b[0]-a[0])*(y-a[1])/(b[1]-a[1])+a[0])c=!c}return c}
+const colors=['#ff3347','#318cff','#35e976','#ffffff','#ffc24b','#fff3ae'];const pts=[];
+while(pts.length<1411){const x=85+rnd()*950,y=115+rnd()*375;if(inside(x,y))pts.push([x,y])}
+function draw(){ctx.clearRect(0,0,canvas.width,canvas.height);ctx.save();ctx.scale(1.31,1.72);pts.forEach((p,i)=>{const c=colors[(i*7+i%3)%colors.length],r=i%31===0?2.7:1.45;ctx.beginPath();ctx.shadowColor=c;ctx.shadowBlur=i%31===0?12:5;ctx.fillStyle=c;ctx.arc(p[0],p[1],r,0,Math.PI*2);ctx.fill()});ctx.restore()}
+fetch('assets/final-approved-amber-map.jpg?v=original').then(r=>r.text()).then(b64=>{img.src='data:image/jpeg;base64,'+b64.trim()}).catch(()=>{img.src='assets/outreach-map-photo.jpg'});img.onload=()=>document.querySelector('.loading').remove();draw();
+window.DOGTAG_ORIGINAL_LIGHTS=1800;window.DOGTAG_NEW_LIGHTS=1411;window.DOGTAG_LIGHT_COUNT=3211;document.body.dataset.lightCount='3211';
+</script>
+</body></html>
