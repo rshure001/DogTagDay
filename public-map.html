@@ -1,5 +1,5 @@
 <!doctype html>
 <html lang="en">
 <head><meta charset="utf-8"><meta name="robots" content="noindex"><title>Dog Tag Day</title></head>
-<body><script>try{const section=parent.document.querySelector(".nationalMapBand");if(section)section.remove();const link=parent.document.querySelector('nav a[href="#map"]');if(link)link.remove()}catch(e){}</script></body>
+<body><script>try{parent.document.querySelectorAll('a[href="#map"]').forEach(a=>a.remove());const section=parent.document.querySelector(".nationalMapBand");if(section)section.remove()}catch(e){}</script></body>
 </html>
