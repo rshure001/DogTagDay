@@ -41,6 +41,11 @@ footer:before{content:"";display:block;height:8px;margin:-22px auto 24px;max-wid
 .publicCounter:first-child{box-shadow:inset 4px 0 0 #28ef6f,inset -4px 0 0 #ff384c,0 0 14px rgba(255,196,61,.2)}
 .publicCounter:last-child{box-shadow:inset 4px 0 0 #2387ff,inset -4px 0 0 #fff,0 0 14px rgba(255,196,61,.2)}
 </style>
+<style>
+.mapFrame{height:auto!important;min-height:0!important;aspect-ratio:709/478}
+.mapFrame iframe{overflow:hidden;pointer-events:none}
+@media(max-width:760px){.mapFrame{height:auto!important;min-height:0!important;aspect-ratio:709/478}}
+</style>
 </head>
 <body>
 <div class="patriotTop">
@@ -94,10 +99,9 @@ footer:before{content:"";display:block;height:8px;margin:-22px auto 24px;max-wid
 <section class="nationalMapBand" id="map" aria-labelledby="map-title">
 <div class="eyebrow">America Aglow</div>
 <h2 id="map-title">From every city and town, let the lights reach every veteran.</h2>
-<p class="mapIntro">The original national map is back and growing. It brings 1,850 earlier Gmail outreach contacts together with 1,361 current Yahoo and verified-contact records in one beautiful field of red, white, blue, green, and amber light. When someone is contacted again, a second light shines beside the first.</p>
-<div class="mapFrame"><iframe src="public-map.html?v=20260905-clear-glow-footer" title="Dog Tag Day national outreach map" loading="lazy"></iframe></div>
-<a class="btn primary" href="map.html">Open the Full-Screen Map</a>
-<small class="mapNote">3,211 outreach touchpoints: 1,850 earlier contacts plus 1,361 current contacts. Repeat contacts remain as neighboring lights. Placement is artistic and approximate around real U.S. cities and towns; a light is not proof of participation.</small>
+<p class="mapIntro">A single national picture in red, white, blue, green, and amber light. The complete map and its color key stay visible together.</p>
+<div class="mapFrame"><iframe src="public-map.html?v=20260905-static-one-screen" title="Dog Tag Day national outreach map" loading="lazy" scrolling="no"></iframe></div>
+<small class="mapNote">Campaign artwork. Public outreach totals are counted only from confirmed send records.</small>
 </section>
 <section class="worldShare" aria-label="Share Dog Tag Day worldwide">
 <div class="worldSharePanel">
@@ -304,4 +308,3 @@ footer:before{content:"";display:block;height:8px;margin:-22px auto 24px;max-wid
 <script>(function(){var el=document.getElementById('websiteVisits'),key='dogtagday-org-visits-20260905',seen='dogtagday_visit_counted_20260905',base='https://countapi.mileshilliard.com/api/v1/';var action;try{action=localStorage.getItem(seen)?'get/':'hit/'}catch(e){action='hit/'}fetch(base+action+key,{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error('counter unavailable');return r.json()}).then(function(data){el.textContent=Number(data.value||0).toLocaleString();try{localStorage.setItem(seen,'1')}catch(e){}}).catch(function(){el.textContent='Counting now'})})();</script>
 </body>
 </html>
-
