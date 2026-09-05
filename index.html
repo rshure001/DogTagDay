@@ -34,6 +34,13 @@
 <style>
 .publicCounters{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin:0 auto 22px}.publicCounter{min-width:210px;padding:13px 18px;border:1px solid #dfba62;border-radius:9px;background:#0a1a28}.publicCounter strong{display:block;color:#dfba62;font-family:Georgia,serif;font-size:1.65rem}.publicCounter span{display:block;margin-top:4px;color:#fff;font-size:.75rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}.publicCounter small{display:block;margin-top:4px;color:#aebdca;font-size:.68rem}@media(max-width:520px){.publicCounters{display:grid;grid-template-columns:1fr 1fr;gap:8px}.publicCounter{min-width:0;padding:11px 8px}.publicCounter strong{font-size:1.35rem}.publicCounter span{font-size:.62rem;letter-spacing:.08em}}
 </style>
+<style>
+footer{position:relative;overflow:hidden;border:2px solid #dfba62;background:radial-gradient(circle at 50% 0,rgba(255,180,45,.2),transparent 42%),linear-gradient(180deg,#07131f,#02070d);box-shadow:inset 0 0 0 5px #143b68,0 0 28px rgba(255,180,45,.24)}
+footer:before{content:"";display:block;height:8px;margin:-22px auto 24px;max-width:920px;border-radius:999px;background:repeating-linear-gradient(90deg,#28ef6f 0 18px,transparent 18px 30px,#fff 30px 48px,transparent 48px 60px,#2387ff 60px 78px,transparent 78px 90px,#ff384c 90px 108px,transparent 108px 120px,#ffc43d 120px 138px,transparent 138px 150px);filter:drop-shadow(0 0 6px #fff);opacity:.95}
+.publicCounter{border-color:#ffc43d;background:linear-gradient(145deg,#081525,#030912);box-shadow:inset 0 0 18px rgba(35,135,255,.16),0 0 12px rgba(255,196,61,.18)}
+.publicCounter:first-child{box-shadow:inset 4px 0 0 #28ef6f,inset -4px 0 0 #ff384c,0 0 14px rgba(255,196,61,.2)}
+.publicCounter:last-child{box-shadow:inset 4px 0 0 #2387ff,inset -4px 0 0 #fff,0 0 14px rgba(255,196,61,.2)}
+</style>
 </head>
 <body>
 <div class="patriotTop">
@@ -88,7 +95,7 @@
 <div class="eyebrow">America Aglow</div>
 <h2 id="map-title">From every city and town, let the lights reach every veteran.</h2>
 <p class="mapIntro">The original national map is back and growing. It brings 1,850 earlier Gmail outreach contacts together with 1,361 current Yahoo and verified-contact records in one beautiful field of red, white, blue, green, and amber light. When someone is contacted again, a second light shines beside the first.</p>
-<div class="mapFrame"><iframe src="public-map.html?v=20260904-confirmed-sent-190" title="Dog Tag Day confirmed national outreach map" loading="lazy"></iframe></div>
+<div class="mapFrame"><iframe src="public-map.html?v=20260905-clear-glow-footer" title="Dog Tag Day national outreach map" loading="lazy"></iframe></div>
 <a class="btn primary" href="map.html">Open the Full-Screen Map</a>
 <small class="mapNote">3,211 outreach touchpoints: 1,850 earlier contacts plus 1,361 current contacts. Repeat contacts remain as neighboring lights. Placement is artistic and approximate around real U.S. cities and towns; a light is not proof of participation.</small>
 </section>
@@ -258,7 +265,7 @@
 </div>
 <footer>
 <div class="publicCounters" aria-label="Dog Tag Day public counters">
-<div class="publicCounter"><strong>1,850</strong><span>National Outreach</span><small>Earlier outreach contacts</small></div>
+<div class="publicCounter"><strong>Verified Only</strong><span>National Outreach</span><small>Counted only from confirmed send records</small></div>
 <div class="publicCounter"><strong id="websiteVisits" aria-live="polite">—</strong><span>Website Visits</span><small>Counting since September 5, 2026</small></div>
 </div>
 <b style="display:inline-block;white-space:nowrap">DOG TAG DAY FOUNDATION</b>
@@ -297,3 +304,4 @@
 <script>(function(){var el=document.getElementById('websiteVisits'),key='dogtagday-org-visits-20260905',seen='dogtagday_visit_counted_20260905',base='https://countapi.mileshilliard.com/api/v1/';var action;try{action=localStorage.getItem(seen)?'get/':'hit/'}catch(e){action='hit/'}fetch(base+action+key,{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error('counter unavailable');return r.json()}).then(function(data){el.textContent=Number(data.value||0).toLocaleString();try{localStorage.setItem(seen,'1')}catch(e){}}).catch(function(){el.textContent='Counting now'})})();</script>
 </body>
 </html>
+
