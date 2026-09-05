@@ -11,7 +11,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'
       - run: npm install playwright
       - run: npx playwright install --with-deps webkit
       - name: Verify live iPhone homepage
@@ -23,8 +23,9 @@ jobs:
             const context=await browser.newContext({...devices['iPhone 13']});
             const page=await context.newPage();
             let ok=false;
-            for(let i=0;i<24;i++){
-              await page.goto('https://dogtagday.org/?verify='+Date.now(),{waitUntil:'networkidle',timeout:30000});
+            for(let i=0;i<12;i++){
+              await page.goto('https://dogtagday.org/?verify='+Date.now(),{waitUntil:'domcontentloaded',timeout:30000});
+              await page.locator('.hero img').waitFor({state:'visible',timeout:10000});
               const build=await page.locator('html').getAttribute('data-dtd-build');
               const broken=await page.locator('img').evaluateAll(imgs=>imgs.filter(i=>!i.complete||i.naturalWidth===0).map(i=>i.getAttribute('src')));
               const hero=page.locator('.hero img');
@@ -33,13 +34,13 @@ jobs:
               const heroSize=heroCount===1?await hero.evaluate(i=>({w:i.naturalWidth,h:i.naturalHeight})):({w:0,h:0});
               const mapCount=await page.locator('#outreach iframe').count();
               const body=await page.locator('body').innerText();
-              const text=body.includes('17.2 MILLION')&&body.includes('Nationwide Outreach')&&body.includes('Partner With Dog Tag Day');
+              const text=body.includes('17.2 MILLION')&&body.includes('America Aglow')&&body.includes('Partner With Dog Tag Day')&&body.includes('National Outreach')&&body.includes('Website Visits');
               const noOverflow=await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+1);
               const navFits=await page.locator('nav a').last().evaluate(el=>el.getBoundingClientRect().right<=window.innerWidth+1);
-              const current=build==='2026-08-31-final-mobile'&&heroCount===1&&heroSrc.includes('assets/dog-tag-day-hero.PNG')&&heroSize.w>0&&heroSize.h>0;
+              const current=build==='2026-09-01-president-letter'&&heroCount===1&&heroSrc.includes('assets/dog-tag-day-hero.PNG')&&heroSize.w>0&&heroSize.h>0;
               console.log(JSON.stringify({attempt:i+1,build,broken,mapCount,heroCount,heroSrc,heroSize,current,text,noOverflow,navFits}));
               if(current&&broken.length===0&&mapCount===1&&text&&noOverflow&&navFits){ok=true;break;}
-              await page.waitForTimeout(3000);
+              await page.waitForTimeout(2000);
             }
             await page.screenshot({path:'live-homepage-proof.png',fullPage:true});
             await browser.close();
