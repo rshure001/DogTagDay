@@ -31,6 +31,9 @@
 <style>
 .nationalMapBand{padding:36px 20px 48px;background:radial-gradient(circle at 50% 20%,rgba(223,186,98,.12),transparent 44%),#040b12;text-align:center;border-block:2px solid #dfba62}.nationalMapBand .mapIntro{max-width:820px;margin:0 auto 18px;color:#e8eef4}.mapFrame{position:relative;width:min(1180px,100%);height:clamp(430px,64vw,720px);margin:18px auto;border:2px solid #dfba62;background:#010409;box-shadow:0 0 0 5px #143b68,0 18px 55px rgba(0,0,0,.55);overflow:hidden}.mapFrame iframe{display:block;width:100%;height:100%;border:0}.mapNote{display:block;max-width:880px;margin:12px auto 0;color:#aebdca;font-size:.8rem;line-height:1.45}@media(max-width:760px){.nationalMapBand{padding:30px 10px 38px}.mapFrame{height:68vh;min-height:430px}.nationalMapBand h2{font-size:2.35rem}}
 </style>
+<style>
+.publicCounters{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin:0 auto 22px}.publicCounter{min-width:210px;padding:13px 18px;border:1px solid #dfba62;border-radius:9px;background:#0a1a28}.publicCounter strong{display:block;color:#dfba62;font-family:Georgia,serif;font-size:1.65rem}.publicCounter span{display:block;margin-top:4px;color:#fff;font-size:.75rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}.publicCounter small{display:block;margin-top:4px;color:#aebdca;font-size:.68rem}@media(max-width:520px){.publicCounters{display:grid;grid-template-columns:1fr 1fr;gap:8px}.publicCounter{min-width:0;padding:11px 8px}.publicCounter strong{font-size:1.35rem}.publicCounter span{font-size:.62rem;letter-spacing:.08em}}
+</style>
 </head>
 <body>
 <div class="patriotTop">
@@ -254,6 +257,10 @@
 <div class="patriotBottom">
 </div>
 <footer>
+<div class="publicCounters" aria-label="Dog Tag Day public counters">
+<div class="publicCounter"><strong>1,850</strong><span>National Outreach</span><small>Earlier outreach contacts</small></div>
+<div class="publicCounter"><strong id="websiteVisits" aria-live="polite">—</strong><span>Website Visits</span><small>Counting since September 5, 2026</small></div>
+</div>
 <b style="display:inline-block;white-space:nowrap">DOG TAG DAY FOUNDATION</b>
 <br>Official Date: April 18<br>© 2026 <span style="display:inline-block;white-space:nowrap">Dog Tag Day Foundation</span></footer>
 <button class="musicControl" id="musicControl" type="button" aria-pressed="false" aria-label="Play soft Marine Band music">
@@ -287,5 +294,6 @@
 <script>(function(){var a=document.getElementById('dtdMarch'),b=document.getElementById('musicControl'),l=document.getElementById('musicLabel'),start=68,end=108;a.volume=.16;function reset(){if(a.currentTime<start||a.currentTime>=end)a.currentTime=start}b.addEventListener('click',function(){if(a.paused){reset();a.play().then(function(){b.setAttribute('aria-pressed','true');l.textContent='Pause Quiet March'}).catch(function(){l.textContent='Tap Again to Play'})}else{a.pause();b.setAttribute('aria-pressed','false');l.textContent='Play Quiet March'}});a.addEventListener('timeupdate',function(){if(a.currentTime>=end)a.currentTime=start});a.addEventListener('ended',function(){a.currentTime=start});})();</script>
 <script>(function(){var b=document.getElementById('shareWorldBtn'),s=document.getElementById('shareStatus'),u='https://dogtagday.org/',t='Dog Tag Day — April 18',x='Put them on. Share the story. Help the world see who served.';b.addEventListener('click',async function(){try{if(navigator.share){await navigator.share({title:t,text:x,url:u});s.textContent='Thank you for carrying the mission forward.'}else{await navigator.clipboard.writeText(u);s.textContent='Website link copied—paste it into any social app.'}}catch(e){if(e&&e.name!=='AbortError')s.textContent='Visit and share: '+u}})})();</script>
 <script>(function(){var w=document.getElementById('honorJarWidget'),b=document.getElementById('honorJarButton'),p=document.getElementById('honorJarPanel'),c=document.getElementById('honorJarClose'),o=p.elements.other_amount;function setOpen(open){p.hidden=!open;b.setAttribute('aria-expanded',String(open));w.classList.toggle('is-open',open)}b.addEventListener('click',function(){setOpen(p.hidden)});c.addEventListener('click',function(){setOpen(false);b.focus()});p.addEventListener('submit',function(e){e.preventDefault();var chosen=p.querySelector('input[name="donation_amount"]:checked'),amount=o.value||chosen&&chosen.value;if(!amount||Number(amount)<1){o.focus();return}window.location.href='https://paypal.me/ronnieshure/'+encodeURIComponent(Number(amount).toFixed(2))+'USD'});o.addEventListener('input',function(){if(o.value){var chosen=p.querySelector('input[name="donation_amount"]:checked');if(chosen)chosen.checked=false}});document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!p.hidden){setOpen(false);b.focus()}})})();</script>
+<script>(function(){var el=document.getElementById('websiteVisits'),key='dogtagday-org-visits-20260905',seen='dogtagday_visit_counted_20260905',base='https://countapi.mileshilliard.com/api/v1/';var action;try{action=localStorage.getItem(seen)?'get/':'hit/'}catch(e){action='hit/'}fetch(base+action+key,{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error('counter unavailable');return r.json()}).then(function(data){el.textContent=Number(data.value||0).toLocaleString();try{localStorage.setItem(seen,'1')}catch(e){}}).catch(function(){el.textContent='Counting now'})})();</script>
 </body>
 </html>
