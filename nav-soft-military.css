@@ -172,3 +172,38 @@ nav a:focus-visible {
   .nationalMapBand .mapIntro::after { font-size: .95rem; line-height: 1.5; }
   .nationalMapBand .mapNote::after { font-size: .75rem; }
 }
+
+/* Restore the earlier, cleaner homepage treatment for the Donald J. Trump open-letter panel. */
+.presidentBand {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  background: transparent !important;
+}
+
+.presidentPanel {
+  border: 2px solid #dfba62 !important;
+  background: radial-gradient(circle at 50% -30%, rgba(223,186,98,.18), transparent 45%), linear-gradient(135deg,#07131f,#102e50) !important;
+  box-shadow: inset 6px 0 0 #b62035, inset -6px 0 0 #143b68 !important;
+}
+
+.presidentPanel .eyebrow,
+.presidentPanel .presidentStars {
+  color: #dfba62 !important;
+}
+
+.presidentPanel h2 {
+  color: #fff !important;
+  text-shadow: none !important;
+}
+
+.presidentPanel .primary {
+  background: #dfba62 !important;
+  color: #07131f !important;
+  border: 2px solid #fff !important;
+}
+
+@media (max-width: 760px) {
+  .presidentPanel {
+    box-shadow: inset 5px 0 0 #b62035, inset -5px 0 0 #143b68 !important;
+  }
+}
