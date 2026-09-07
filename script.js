@@ -2,6 +2,12 @@
   document.querySelector('#nationwide-outreach')?.remove();
   document.querySelector('#reach-across-america')?.remove();
   document.querySelector('header nav a[href="#reach-across-america"]')?.remove();
+
+  const founderPortrait=document.querySelector('.founderPortrait img');
+  if(founderPortrait){
+    founderPortrait.src='assets/ronnie-founder-crowsfeet-20260906.jpg?v=20260906-crowsfeet';
+  }
+
   if(!document.querySelector('script[data-dtd-guide]')){
     const s=document.createElement('script');
     s.src='visitor-guide.js?v=20260829assistant1';
