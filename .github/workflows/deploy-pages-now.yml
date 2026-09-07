@@ -23,11 +23,15 @@ jobs:
         run: |
           set -e
           test -s index.html
+          test -s public-map.html
           test -s map-golden-1850.html
           test -s map-vector.html
           grep -q '17.2 MILLION' index.html
           grep -q 'National Outreach' index.html
           grep -q 'Partner With Dog Tag Day' index.html
+          grep -q 'data-dtd-map-build="2026-09-07-nav-accuracy"' public-map.html
+          grep -q 'Campaign visualization' public-map.html
+          ! grep -q '1,800 OUTREACH LIGHTS' public-map.html
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload site
@@ -45,8 +49,14 @@ jobs:
           set -e
           for i in $(seq 1 36); do
             html=$(curl -fsSL -H 'Cache-Control: no-cache' "https://dogtagday.org/?verify=${GITHUB_SHA}-${GITHUB_RUN_ID}-$i" || true)
-            if printf '%s' "$html" | grep -q '17.2 MILLION' && printf '%s' "$html" | grep -q 'National Outreach' && printf '%s' "$html" | grep -q 'Partner With Dog Tag Day'; then
-              echo LIVE_HOMEPAGE_VERIFIED
+            map_html=$(curl -fsSL -H 'Cache-Control: no-cache' "https://dogtagday.org/public-map.html?verify=${GITHUB_SHA}-${GITHUB_RUN_ID}-$i" || true)
+            if printf '%s' "$html" | grep -q '17.2 MILLION' \
+              && printf '%s' "$html" | grep -q 'National Outreach' \
+              && printf '%s' "$html" | grep -q 'Partner With Dog Tag Day' \
+              && printf '%s' "$map_html" | grep -q 'data-dtd-map-build="2026-09-07-nav-accuracy"' \
+              && printf '%s' "$map_html" | grep -q 'Campaign visualization' \
+              && ! printf '%s' "$map_html" | grep -q '1,800 OUTREACH LIGHTS'; then
+              echo LIVE_HOMEPAGE_AND_MAP_VERIFIED
               exit 0
             fi
             sleep 5
