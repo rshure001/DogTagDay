@@ -10,9 +10,10 @@
 html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#01050a;color:#fff;font-family:Arial,Helvetica,sans-serif}
 body{padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
 .shell{position:relative;width:100%;height:100%;overflow:hidden;background:#01050a}
-.stage{position:absolute;inset:0;overflow:auto;display:flex;align-items:center;justify-content:center;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.stage{position:absolute;inset:0;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .stage::-webkit-scrollbar{display:none}
-.stage img{display:block;width:100%;height:auto;min-width:100%;max-width:none;user-select:none;-webkit-user-drag:none;transition:width .16s ease}
+.mapCanvas{width:100%;min-width:100%;min-height:100%;display:grid;place-items:center;transition:width .16s ease}
+.mapCanvas img{display:block;width:100%;height:auto;max-width:none;user-select:none;-webkit-user-drag:none}
 .topbar{position:absolute;z-index:10;top:8px;left:8px;right:8px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px;pointer-events:none}
 .topbar a,.title{pointer-events:auto;border:1px solid rgba(223,186,98,.9);background:rgba(2,9,16,.88);box-shadow:0 2px 12px rgba(0,0,0,.45);backdrop-filter:blur(4px)}
 .topbar a{min-height:42px;display:flex;align-items:center;justify-content:center;padding:0 13px;border-radius:999px;color:#fff;text-decoration:none;font-weight:900;font-size:.78rem;letter-spacing:.03em}
@@ -29,7 +30,9 @@ body{padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-i
 <body>
 <main class="shell" aria-label="Dog Tag Day Across America campaign map">
   <div class="stage" id="stage">
-    <img id="mapImage" src="assets/dog-tag-day-population-centered-map-20260905.jpg?v=20260908-mobile-focus" alt="Dog Tag Day Across America campaign map artwork with multicolored lights and its color key">
+    <div class="mapCanvas" id="mapCanvas">
+      <img id="mapImage" src="assets/dog-tag-day-population-centered-map-20260905.jpg?v=20260908-mobile-focus" alt="Dog Tag Day Across America campaign map artwork with multicolored lights and its color key">
+    </div>
   </div>
   <div class="topbar" aria-label="Map navigation">
     <a href="index.html#map" target="_top" aria-label="Return to Dog Tag Day home page">← Home</a>
@@ -46,7 +49,7 @@ body{padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-i
 </main>
 <script>
 (function(){
-  var stage=document.getElementById('stage'),img=document.getElementById('mapImage');
+  var stage=document.getElementById('stage'),canvas=document.getElementById('mapCanvas'),img=document.getElementById('mapImage');
   var zin=document.getElementById('zoomIn'),zout=document.getElementById('zoomOut'),reset=document.getElementById('resetMap'),status=document.getElementById('zoomStatus');
   var zoom=1;
   function focusPoint(){
@@ -62,7 +65,7 @@ body{padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-i
   function apply(next,fitAll){
     var f=fitAll?{x:.5,y:.5}:focusPoint();
     zoom=Math.max(1,Math.min(3,next));
-    img.style.width=(zoom*100)+'%';
+    canvas.style.width=(zoom*100)+'%';
     setTimeout(function(){restoreFocus(f)},170);
     zout.disabled=zoom<=1;
     zin.disabled=zoom>=3;
