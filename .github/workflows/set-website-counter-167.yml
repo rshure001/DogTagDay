@@ -1,0 +1,42 @@
+name: Set Website Counter 167
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/set-website-counter-167.yml'
+permissions:
+  contents: write
+jobs:
+  set-counter:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          fetch-depth: 0
+      - name: Set displayed website views to 167
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text()
+          old='<strong id="websiteVisits" aria-live="polite">—</strong>'
+          new='<strong id="websiteVisits" aria-live="polite">167</strong>'
+          if old in s:
+              s=s.replace(old,new,1)
+          start=s.find("<script>(function(){var el=document.getElementById('websiteVisits')")
+          if start!=-1:
+              end=s.find('</script>',start)
+              if end!=-1:
+                  end+=len('</script>')
+                  s=s[:start]+"<script>(function(){var el=document.getElementById('websiteVisits');el.textContent='167';})();</script>"+s[end:]
+          p.write_text(s)
+          PY
+      - name: Push 167 to live site
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Set website views to 167"
+          git push origin HEAD:gh-pages
