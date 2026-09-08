@@ -1,0 +1,11 @@
+{
+  "name": "dogtagday-mailer",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "send": "node mailer.mjs"
+  },
+  "dependencies": {
+    "nodemailer": "^7.0.6"
+  }
+}
