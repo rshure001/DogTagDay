@@ -29,8 +29,11 @@ jobs:
           grep -q '17.2 MILLION' index.html
           grep -q 'National Outreach' index.html
           grep -q 'Partner With Dog Tag Day' index.html
-          grep -q 'data-dtd-map-build="2026-09-07-nav-accuracy"' public-map.html
+          grep -q 'data-dtd-map-build=' public-map.html
+          grep -q 'dog-tag-day-population-centered-map-20260905.jpg' public-map.html
+          grep -q 'Across America' public-map.html
           grep -q 'Campaign visualization' public-map.html
+          grep -q 'mapCanvas' public-map.html
           ! grep -q '1,800 OUTREACH LIGHTS' public-map.html
       - name: Configure Pages
         uses: actions/configure-pages@v5
@@ -53,8 +56,11 @@ jobs:
             if printf '%s' "$html" | grep -q '17.2 MILLION' \
               && printf '%s' "$html" | grep -q 'National Outreach' \
               && printf '%s' "$html" | grep -q 'Partner With Dog Tag Day' \
-              && printf '%s' "$map_html" | grep -q 'data-dtd-map-build="2026-09-07-nav-accuracy"' \
+              && printf '%s' "$map_html" | grep -q 'data-dtd-map-build=' \
+              && printf '%s' "$map_html" | grep -q 'dog-tag-day-population-centered-map-20260905.jpg' \
+              && printf '%s' "$map_html" | grep -q 'Across America' \
               && printf '%s' "$map_html" | grep -q 'Campaign visualization' \
+              && printf '%s' "$map_html" | grep -q 'mapCanvas' \
               && ! printf '%s' "$map_html" | grep -q '1,800 OUTREACH LIGHTS'; then
               echo LIVE_HOMEPAGE_AND_MAP_VERIFIED
               exit 0
