@@ -1,816 +1,3080 @@
 {
-  "sent": {
-    "e83949a3c47766a1bfdf4607730e0e710db8ca6894982dd43c981c708c46dd93": {
-      "skipped": false,
-      "status": "submitted",
-      "messageId": null,
-      "accepted": [
-        "vhacleoutreachcommittee@va.gov"
-      ],
-      "rejected": [],
-      "response": "Verified in Outlook Sent Items",
-      "at": "2026-09-09T13:59:05.758Z"
-    },
-    "976841394260745c986c26703f995bb6546e2718647fbf427795fca0126029ce": {
-      "skipped": false,
-      "status": "submitted",
-      "messageId": null,
-      "accepted": [
-        "damien.horvath@va.gov"
-      ],
-      "rejected": [],
-      "response": "Verified in Outlook Sent Items",
-      "at": "2026-09-09T13:59:05.758Z"
-    },
-    "0c5eb9fad388ab7a5c1f9a7aab7942154a07283df0ba5ea2213f4eedec435cac": {
-      "skipped": false,
-      "status": "submitted",
-      "messageId": null,
-      "accepted": [
-        "vanjhcscommsteam@va.gov"
-      ],
-      "rejected": [],
-      "response": "Verified in Outlook Sent Items",
-      "at": "2026-09-09T13:59:05.758Z"
-    },
-    "862fb1ffc7fb75fd8d8509a74f40510feec34749f23b5e636a450aac6f073b82": {
-      "skipped": false,
-      "status": "submitted",
-      "messageId": null,
-      "accepted": [
-        "scott.dadaian@va.gov"
-      ],
-      "rejected": [],
-      "response": "Verified in Outlook Sent Items",
-      "at": "2026-09-09T13:59:05.758Z"
-    },
-    "a35642ac5ad78ea890344e00b3bd8209bcddad17aa444c83e9528f4e2158531e": {
-      "skipped": false,
-      "status": "submitted",
-      "messageId": null,
-      "accepted": [
-        "jonathan.gonzalez1@va.gov"
-      ],
-      "rejected": [],
-      "response": "Verified in Outlook Sent Items",
-      "at": "2026-09-09T13:59:05.758Z"
-    },
-    "c09aec59b1dbd082f9af32cdbabccb2ec444f64035d419b92dc95bae907913d1": {
-      "skipped": false,
-      "status": "submitted",
-      "messageId": null,
-      "accepted": [
-        "chad.costello@va.gov"
-      ],
-      "rejected": [],
-      "response": "Verified in Outlook Sent Items",
-      "at": "2026-09-09T13:59:05.758Z"
-    },
-    "e3acdc5862cee3e013c3ff71ff2fe59f09d5cf2fd526b28e23fdf353dbe63127": {
-      "skipped": false,
-      "status": "submitted",
-      "messageId": null,
-      "accepted": [
-        "tanya.kero@va.gov"
-      ],
-      "rejected": [],
-      "response": "Verified in Outlook Sent Items",
-      "at": "2026-09-09T13:59:05.758Z"
-    },
-    "4ce81a87c5a060d433db86eeb2169f14292c6d765e58a7c6e43a89731c074306": {
-      "skipped": false,
-      "status": "submitted",
-      "messageId": null,
-      "accepted": [
-        "mark.correale1@va.gov"
-      ],
-      "rejected": [],
-      "response": "Verified in Outlook Sent Items",
-      "at": "2026-09-09T13:59:05.758Z"
-    },
-    "58724fd77efec0fc9eeceaa42f8b3e3507b1129ce612782fc9286694ca14d413": {
-      "skipped": false,
-      "status": "submitted",
-      "messageId": null,
-      "accepted": [
-        "ericka.jackson2@va.gov"
-      ],
-      "rejected": [],
-      "response": "Verified in Outlook Sent Items",
-      "at": "2026-09-09T13:59:05.758Z"
-    },
-    "d500a502b3de751208ca9af47d43d7ade7db5f9e0dcfb28e5976221fb2360377": {
-      "skipped": false,
-      "status": "submitted",
-      "messageId": null,
-      "accepted": [
-        "vhaeaswriiscnj@va.gov"
-      ],
-      "rejected": [],
-      "response": "Verified in Outlook Sent Items",
-      "at": "2026-09-09T13:59:05.758Z"
-    },
-    "9bcc9009d8d54a966571511de51b8d5bd3b9e7843ae20890aeebaa844b496f1c": {
-      "skipped": false,
-      "status": "submitted",
-      "messageId": null,
-      "accepted": [
-        "alba.lopez@va.gov"
-      ],
-      "rejected": [],
-      "response": "Verified in Outlook Sent Items",
-      "at": "2026-09-09T13:59:05.758Z"
-    },
-    "51a99b7299dca883c950b51c2f0858bb909d1b07516014c302b08dfd026440f5": {
-      "skipped": false,
-      "status": "submitted",
-      "messageId": null,
-      "accepted": [
-        "mickiela.montoya@va.gov"
-      ],
-      "rejected": [],
-      "response": "Verified in Outlook Sent Items",
-      "at": "2026-09-09T13:59:05.758Z"
-    },
-    "42cf79af73da8dfd9e9da0839e115709a09501c9034f85d691802e24100bbafe": {
-      "skipped": false,
-      "status": "submitted",
-      "messageId": null,
-      "accepted": [
-        "calvin.payne@va.gov"
-      ],
-      "rejected": [],
-      "response": "Verified in Outlook Sent Items",
-      "at": "2026-09-09T13:59:05.758Z"
-    },
-    "a0f4e0383c1f9faa008539349101145bfa4b7e7ac8ba13234dfc6fad3d2d4f04": {
-      "skipped": false,
-      "status": "submitted",
-      "messageId": null,
-      "accepted": [
-        "vhaglaoutreach@va.gov"
-      ],
-      "rejected": [],
-      "response": "Verified in Outlook Sent Items",
-      "at": "2026-09-09T13:59:05.758Z"
-    },
-    "688db71167d530e9cdb35571d6e0ca06b4028ee67fa290e83dc9a769aa6527e8": {
-      "skipped": false,
-      "status": "submitted",
-      "messageId": null,
-      "accepted": [
-        "marissa.burgoyne@va.gov"
-      ],
-      "rejected": [],
-      "response": "Verified in Outlook Sent Items",
-      "at": "2026-09-09T13:59:05.758Z"
-    },
-    "e656f02595f6aa5c3db21d531b97adf957d42057fe210960743b77cd4ea04cd4": {
-      "skipped": false,
-      "status": "submitted",
-      "messageId": null,
-      "accepted": [
-        "vapublicaffairs@va.gov"
-      ],
-      "rejected": [],
-      "response": "Verified in Outlook Sent Items",
-      "at": "2026-09-09T13:59:05.758Z"
-    },
-    "c89d0c48b78ca7f0a5390b0276a3e02108d2f92b342d75488151a5c5b0de7cac": {
-      "skipped": false,
-      "status": "submitted",
-      "messageId": null,
-      "accepted": [
-        "vhawimoutreachteam@va.gov"
-      ],
-      "rejected": [],
-      "response": "Verified in Outlook Sent Items",
-      "at": "2026-09-09T13:59:05.758Z"
-    },
-    "4ac5a946d569d4ce0f49425545974e9cab82d37850d4437f477cd23c2788bb8c": {
-      "skipped": false,
-      "status": "submitted",
-      "messageId": null,
-      "accepted": [
-        "pao.wilmington@va.gov"
-      ],
-      "rejected": [],
-      "response": "Verified in Outlook Sent Items",
-      "at": "2026-09-09T13:59:05.758Z"
-    },
-    "1a426f2730d1bfdb53177fe2393caf7bbf64a516c71daecd72cf32e89370c11d": {
-      "skipped": false,
-      "status": "submitted",
-      "messageId": null,
-      "accepted": [
-        "john.richter@va.gov"
-      ],
-      "rejected": [],
-      "response": "Verified in Outlook Sent Items",
-      "at": "2026-09-09T13:59:05.758Z"
-    },
-    "1db29ee8b2eb670b4e44276d43a195631a11921095cdf078ab702359df1d6bf8": {
-      "skipped": false,
-      "status": "submitted",
-      "messageId": null,
-      "accepted": [
-        "patrick.devlin2@va.gov"
-      ],
-      "rejected": [],
-      "response": "Verified in Outlook Sent Items",
-      "at": "2026-09-09T13:59:05.758Z"
-    },
-    "004c84b1e69c5803b7d795f8366bc87511ba8e84e4dd7cc2b71eede04141188a": {
-      "skipped": false,
-      "status": "submitted",
-      "messageId": null,
-      "accepted": [
-        "david.ward@va.gov"
-      ],
-      "rejected": [],
-      "response": "Verified in Outlook Sent Items",
-      "at": "2026-09-09T13:59:05.758Z"
-    },
-    "0e5b135093b3dc70fd88cbe38d1a527a212fbc74272dc219610a7ff1631095a1": {
-      "skipped": false,
-      "status": "submitted",
-      "messageId": null,
-      "accepted": [
-        "michael.billings@va.gov"
-      ],
-      "rejected": [],
-      "response": "Verified in Outlook Sent Items",
-      "at": "2026-09-09T13:59:05.758Z"
-    },
-    "72cf6a9f9a7239584aa4060f9bffb36ad48fffc9ed1ed5b320f21a2eab755ca8": {
-      "skipped": false,
-      "status": "submitted",
-      "messageId": null,
-      "accepted": [
-        "alexander.hightower@va.gov"
-      ],
-      "rejected": [],
-      "response": "Verified in Outlook Sent Items",
-      "at": "2026-09-09T13:59:05.758Z"
-    },
-    "dac6eb0e712942247e42d322891e258efaf00e8a9b47b83c58d69f5a41c6d2f4": {
-      "skipped": false,
-      "status": "submitted",
-      "messageId": null,
-      "accepted": [
-        "seana.creech@va.gov"
-      ],
-      "rejected": [],
-      "response": "Verified in Outlook Sent Items",
-      "at": "2026-09-09T13:59:05.758Z"
-    },
-    "e35224be31a04c1bc9514643a9383aa56dc8860693ae5fbd8d7fd67cb3950a1a": {
-      "skipped": false,
-      "status": "submitted",
-      "messageId": null,
-      "accepted": [
-        "bethany.hamilton-clary@va.gov"
-      ],
-      "rejected": [],
-      "response": "Verified in Outlook Sent Items",
-      "at": "2026-09-09T13:59:05.758Z"
-    },
-    "3c664f4dfb88bf90375189aef732147c78dfe42a1aaedf4eb314d8688cc8c88c": {
-      "skipped": false,
-      "status": "submitted",
-      "messageId": null,
-      "accepted": [
-        "jessica.howard5@va.gov"
-      ],
-      "rejected": [],
-      "response": "Verified in Outlook Sent Items",
-      "at": "2026-09-09T13:59:05.758Z"
-    },
-    "3538ae45029e64658da7eaf53cce6ee32460b131f52ebfc0a9fb82e6462eaf03": {
-      "skipped": false,
-      "status": "submitted",
-      "messageId": null,
-      "accepted": [
-        "ronald.michaelson@va.gov"
-      ],
-      "rejected": [],
-      "response": "Verified in Outlook Sent Items",
-      "at": "2026-09-09T13:59:05.758Z"
-    },
-    "a34d2c4185bf6ff0f5bb676f22f93c3b83585d510063b622506bf27df6ea3941": {
-      "skipped": false,
-      "status": "submitted",
-      "messageId": null,
-      "accepted": [
-        "anne.karp@va.gov"
-      ],
-      "rejected": [],
-      "response": "Verified in Outlook Sent Items",
-      "at": "2026-09-09T13:59:05.758Z"
-    },
-    "ac545236a80a1c0b3fd30927d53c0a12baff5dc038bc8624a8fb5795eb2dffea": {
-      "skipped": false,
-      "status": "submitted",
-      "messageId": null,
-      "accepted": [
-        "homelessvets@va.gov"
-      ],
-      "rejected": [],
-      "response": "Verified in Outlook Sent Items",
-      "at": "2026-09-09T13:59:05.758Z"
-    },
-    "5b02ddc744bae36dbeaa6ac645245977c501bfeca1651b232c7284c2366e2c05": {
-      "skipped": false,
-      "status": "submitted",
-      "messageId": null,
-      "accepted": [
-        "vhaphovjohcrv@va.gov"
-      ],
-      "rejected": [],
-      "response": "Verified in Outlook Sent Items",
-      "at": "2026-09-09T13:59:05.758Z"
-    },
-    "ed2fa331db203a5f657cd189ab7e397f174abefb0085055927948826fd4944fd": {
-      "skipped": false,
-      "status": "submitted",
-      "messageId": null,
-      "accepted": [
-        "chymhvjo@va.gov"
-      ],
-      "rejected": [],
-      "response": "Verified in Outlook Sent Items",
-      "at": "2026-09-09T13:59:05.758Z"
-    },
-    "f098df24f6bdc76d69d3f8b8db15f81225ee454e6acf5eb230b47975f163ee63": {
-      "skipped": false,
-      "status": "submitted",
-      "messageId": null,
-      "accepted": [
-        "vhaannmhsvjo@va.gov"
-      ],
-      "rejected": [],
-      "response": "Verified in Outlook Sent Items",
-      "at": "2026-09-09T13:59:05.758Z"
-    },
-    "80712397e015983480446026bd9c7bbbc20e151665f1cf5fa3d9dfddef773b04": {
-      "skipped": false,
-      "status": "submitted",
-      "messageId": null,
-      "accepted": [
-        "vhaminmplsvjo@va.gov"
-      ],
-      "rejected": [],
-      "response": "Verified in Outlook Sent Items",
-      "at": "2026-09-09T13:59:05.758Z"
-    },
-    "9041c74bb68ef11cd3dcb3e8fde0470d3a2ea11339987913710906bef6233711": {
-      "skipped": false,
-      "status": "submitted",
-      "messageId": null,
-      "accepted": [
-        "vhalinveteranjusticeoutreach@va.gov"
-      ],
-      "rejected": [],
-      "response": "Verified in Outlook Sent Items",
-      "at": "2026-09-09T13:59:05.758Z"
-    },
-    "7a5c2625b8d967ea68b95c7487d3284ea5ef681e395ee8ee04ee5a52e192553f": {
-      "skipped": false,
-      "status": "submitted",
-      "messageId": null,
-      "accepted": [
-        "ntxvjo@va.gov"
-      ],
-      "rejected": [],
-      "response": "Verified in Outlook Sent Items",
-      "at": "2026-09-09T13:59:05.758Z"
-    },
-    "0e3ba6487c558a774f1edaf2ce7456619681e8f500f577abb59e22e15f11a06b": {
-      "skipped": false,
-      "status": "submitted",
-      "messageId": null,
-      "accepted": [
-        "elpveteransjusticeoutreachteam@va.gov"
-      ],
-      "rejected": [],
-      "response": "Verified in Outlook Sent Items",
-      "at": "2026-09-09T13:59:05.758Z"
-    },
-    "6d07551c76f40cd6992a5c64e0a3fd4fd5934472ab409644fc794bbdd6af1a27": {
-      "skipped": false,
-      "status": "submitted",
-      "messageId": null,
-      "accepted": [
-        "vhahouvjo@va.gov"
-      ],
-      "rejected": [],
-      "response": "Verified in Outlook Sent Items",
-      "at": "2026-09-09T13:59:05.758Z"
-    },
-    "92146922f7f53f9890a2d884f8824e7cbd0c817f566a5d0c40771a3b6ecab114": {
-      "skipped": false,
-      "status": "submitted",
-      "messageId": null,
-      "accepted": [
-        "vhastxswsvjo@va.gov"
-      ],
-      "rejected": [],
-      "response": "Verified in Outlook Sent Items",
-      "at": "2026-09-09T13:59:05.758Z"
-    },
-    "68a64af3acbb883a11952164a8d9dac3e846332787c7dc7abad05a878835506f": {
-      "skipped": false,
-      "status": "submitted",
-      "messageId": null,
-      "accepted": [
-        "ctxswsvjo@va.gov"
-      ],
-      "rejected": [],
-      "response": "Verified in Outlook Sent Items",
-      "at": "2026-09-09T13:59:05.758Z"
-    },
-    "95dc0a1479f4d72484b050d79665d1240dd09b8d709b583b92be00bda4182c44": {
-      "skipped": false,
-      "status": "submitted",
-      "messageId": null,
-      "accepted": [
-        "vhamiwvjp@va.gov"
-      ],
-      "rejected": [],
-      "response": "Verified in Outlook Sent Items",
-      "at": "2026-09-09T13:59:05.758Z"
-    },
-    "857d7b8bca99fd475adae0de71d6f5cbf4564e03dab55cf4ec588d84d6aa64d0": {
-      "skipped": false,
-      "status": "submitted",
-      "messageId": null,
-      "accepted": [
-        "vhatomvjp@va.gov"
-      ],
-      "rejected": [],
-      "response": "Verified in Outlook Sent Items",
-      "at": "2026-09-09T13:59:05.758Z"
-    },
-    "c7b82863069101f21f34aca66547a69520074cb4aea3e2fd1c64606ebd651830": {
-      "skipped": false,
-      "status": "submitted",
-      "messageId": null,
-      "accepted": [
-        "officeofsurvivors@va.gov"
-      ],
-      "rejected": [],
-      "response": "Verified in Outlook Sent Items",
-      "at": "2026-09-09T13:59:05.758Z"
-    },
-    "258ec153c86f25118e8dd24bbdacca870e8f6aadb87bd6f95d99877f9f367871": {
-      "skipped": false,
-      "status": "submitted",
-      "messageId": null,
-      "accepted": [
-        "orh-wr@va.gov"
-      ],
-      "rejected": [],
-      "response": "Verified in Outlook Sent Items",
-      "at": "2026-09-09T13:59:05.758Z"
-    },
-    "7e2d49d5d94e44bd24fa18f30afa8782e0f3afca28efc291a6e821ba3863b77e": {
-      "skipped": false,
-      "status": "submitted",
-      "messageId": null,
-      "accepted": [
-        "amber.lane2@va.gov"
-      ],
-      "rejected": [],
-      "response": "Verified in Outlook Sent Items",
-      "at": "2026-09-09T13:59:05.758Z"
-    },
-    "b2e1f4e4277c9535a19ab3532cac70675f2bab260890b344d74ad8341722576f": {
-      "skipped": false,
-      "status": "submitted",
-      "messageId": null,
-      "accepted": [
-        "kelty.fehling@va.gov"
-      ],
-      "rejected": [],
-      "response": "Verified in Outlook Sent Items",
-      "at": "2026-09-09T13:59:05.758Z"
-    }
-  },
   "attempts": [
     {
+      "at": "2026-09-09T13:59:05.758Z",
       "email": "vhacleoutreachcommittee@va.gov",
-      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
       "status": "submitted",
-      "transport": "outlook-web",
-      "messageId": null
+      "transport": "outlook-web"
     },
     {
+      "at": "2026-09-09T13:59:05.758Z",
       "email": "damien.horvath@va.gov",
-      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
       "status": "submitted",
-      "transport": "outlook-web",
-      "messageId": null
+      "transport": "outlook-web"
     },
     {
+      "at": "2026-09-09T13:59:05.758Z",
       "email": "vanjhcscommsteam@va.gov",
-      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
       "status": "submitted",
-      "transport": "outlook-web",
-      "messageId": null
+      "transport": "outlook-web"
     },
     {
+      "at": "2026-09-09T13:59:05.758Z",
       "email": "scott.dadaian@va.gov",
-      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
       "status": "submitted",
-      "transport": "outlook-web",
-      "messageId": null
+      "transport": "outlook-web"
     },
     {
+      "at": "2026-09-09T13:59:05.758Z",
       "email": "jonathan.gonzalez1@va.gov",
-      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
       "status": "submitted",
-      "transport": "outlook-web",
-      "messageId": null
+      "transport": "outlook-web"
     },
     {
+      "at": "2026-09-09T13:59:05.758Z",
       "email": "chad.costello@va.gov",
-      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
       "status": "submitted",
-      "transport": "outlook-web",
-      "messageId": null
+      "transport": "outlook-web"
     },
     {
+      "at": "2026-09-09T13:59:05.758Z",
       "email": "tanya.kero@va.gov",
-      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
       "status": "submitted",
-      "transport": "outlook-web",
-      "messageId": null
+      "transport": "outlook-web"
     },
     {
+      "at": "2026-09-09T13:59:05.758Z",
       "email": "mark.correale1@va.gov",
-      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
       "status": "submitted",
-      "transport": "outlook-web",
-      "messageId": null
+      "transport": "outlook-web"
     },
     {
+      "at": "2026-09-09T13:59:05.758Z",
       "email": "ericka.jackson2@va.gov",
-      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
       "status": "submitted",
-      "transport": "outlook-web",
-      "messageId": null
+      "transport": "outlook-web"
     },
     {
+      "at": "2026-09-09T13:59:05.758Z",
       "email": "vhaeaswriiscnj@va.gov",
-      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
       "status": "submitted",
-      "transport": "outlook-web",
-      "messageId": null
+      "transport": "outlook-web"
     },
     {
+      "at": "2026-09-09T13:59:05.758Z",
       "email": "alba.lopez@va.gov",
-      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
       "status": "submitted",
-      "transport": "outlook-web",
-      "messageId": null
+      "transport": "outlook-web"
     },
     {
+      "at": "2026-09-09T13:59:05.758Z",
       "email": "mickiela.montoya@va.gov",
-      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
       "status": "submitted",
-      "transport": "outlook-web",
-      "messageId": null
+      "transport": "outlook-web"
     },
     {
+      "at": "2026-09-09T13:59:05.758Z",
       "email": "calvin.payne@va.gov",
-      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
       "status": "submitted",
-      "transport": "outlook-web",
-      "messageId": null
+      "transport": "outlook-web"
     },
     {
+      "at": "2026-09-09T13:59:05.758Z",
       "email": "vhaglaoutreach@va.gov",
-      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
       "status": "submitted",
-      "transport": "outlook-web",
-      "messageId": null
+      "transport": "outlook-web"
     },
     {
+      "at": "2026-09-09T13:59:05.758Z",
       "email": "marissa.burgoyne@va.gov",
-      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
       "status": "submitted",
-      "transport": "outlook-web",
-      "messageId": null
+      "transport": "outlook-web"
     },
     {
+      "at": "2026-09-09T13:59:05.758Z",
       "email": "vapublicaffairs@va.gov",
-      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
       "status": "submitted",
-      "transport": "outlook-web",
-      "messageId": null
+      "transport": "outlook-web"
     },
     {
+      "at": "2026-09-09T13:59:05.758Z",
       "email": "vhawimoutreachteam@va.gov",
-      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
       "status": "submitted",
-      "transport": "outlook-web",
-      "messageId": null
+      "transport": "outlook-web"
     },
     {
+      "at": "2026-09-09T13:59:05.758Z",
       "email": "pao.wilmington@va.gov",
-      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
       "status": "submitted",
-      "transport": "outlook-web",
-      "messageId": null
+      "transport": "outlook-web"
     },
     {
+      "at": "2026-09-09T13:59:05.758Z",
       "email": "john.richter@va.gov",
-      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
       "status": "submitted",
-      "transport": "outlook-web",
-      "messageId": null
+      "transport": "outlook-web"
     },
     {
+      "at": "2026-09-09T13:59:05.758Z",
       "email": "patrick.devlin2@va.gov",
-      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
       "status": "submitted",
-      "transport": "outlook-web",
-      "messageId": null
+      "transport": "outlook-web"
     },
     {
+      "at": "2026-09-09T13:59:05.758Z",
       "email": "david.ward@va.gov",
-      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
       "status": "submitted",
-      "transport": "outlook-web",
-      "messageId": null
+      "transport": "outlook-web"
     },
     {
+      "at": "2026-09-09T13:59:05.758Z",
       "email": "michael.billings@va.gov",
-      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
       "status": "submitted",
-      "transport": "outlook-web",
-      "messageId": null
+      "transport": "outlook-web"
     },
     {
+      "at": "2026-09-09T13:59:05.758Z",
       "email": "alexander.hightower@va.gov",
-      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
       "status": "submitted",
-      "transport": "outlook-web",
-      "messageId": null
+      "transport": "outlook-web"
     },
     {
+      "at": "2026-09-09T13:59:05.758Z",
       "email": "seana.creech@va.gov",
-      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
       "status": "submitted",
-      "transport": "outlook-web",
-      "messageId": null
+      "transport": "outlook-web"
     },
     {
+      "at": "2026-09-09T13:59:05.758Z",
       "email": "bethany.hamilton-clary@va.gov",
-      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
       "status": "submitted",
-      "transport": "outlook-web",
-      "messageId": null
+      "transport": "outlook-web"
     },
     {
+      "at": "2026-09-09T13:59:05.758Z",
       "email": "jessica.howard5@va.gov",
-      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
       "status": "submitted",
-      "transport": "outlook-web",
-      "messageId": null
+      "transport": "outlook-web"
     },
     {
+      "at": "2026-09-09T13:59:05.758Z",
       "email": "ronald.michaelson@va.gov",
-      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
       "status": "submitted",
-      "transport": "outlook-web",
-      "messageId": null
+      "transport": "outlook-web"
     },
     {
+      "at": "2026-09-09T13:59:05.758Z",
       "email": "anne.karp@va.gov",
-      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
       "status": "submitted",
-      "transport": "outlook-web",
-      "messageId": null
+      "transport": "outlook-web"
     },
     {
+      "at": "2026-09-09T13:59:05.758Z",
       "email": "homelessvets@va.gov",
-      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
       "status": "submitted",
-      "transport": "outlook-web",
-      "messageId": null
+      "transport": "outlook-web"
     },
     {
+      "at": "2026-09-09T13:59:05.758Z",
       "email": "vhaphovjohcrv@va.gov",
-      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
       "status": "submitted",
-      "transport": "outlook-web",
-      "messageId": null
+      "transport": "outlook-web"
     },
     {
+      "at": "2026-09-09T13:59:05.758Z",
       "email": "chymhvjo@va.gov",
-      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
       "status": "submitted",
-      "transport": "outlook-web",
-      "messageId": null
+      "transport": "outlook-web"
     },
     {
+      "at": "2026-09-09T13:59:05.758Z",
       "email": "vhaannmhsvjo@va.gov",
-      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
       "status": "submitted",
-      "transport": "outlook-web",
-      "messageId": null
+      "transport": "outlook-web"
     },
     {
+      "at": "2026-09-09T13:59:05.758Z",
       "email": "vhaminmplsvjo@va.gov",
-      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
       "status": "submitted",
-      "transport": "outlook-web",
-      "messageId": null
+      "transport": "outlook-web"
     },
     {
+      "at": "2026-09-09T13:59:05.758Z",
       "email": "vhalinveteranjusticeoutreach@va.gov",
-      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
       "status": "submitted",
-      "transport": "outlook-web",
-      "messageId": null
+      "transport": "outlook-web"
     },
     {
+      "at": "2026-09-09T13:59:05.758Z",
       "email": "ntxvjo@va.gov",
-      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
       "status": "submitted",
-      "transport": "outlook-web",
-      "messageId": null
+      "transport": "outlook-web"
     },
     {
+      "at": "2026-09-09T13:59:05.758Z",
       "email": "elpveteransjusticeoutreachteam@va.gov",
-      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
       "status": "submitted",
-      "transport": "outlook-web",
-      "messageId": null
+      "transport": "outlook-web"
     },
     {
+      "at": "2026-09-09T13:59:05.758Z",
       "email": "vhahouvjo@va.gov",
-      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
       "status": "submitted",
-      "transport": "outlook-web",
-      "messageId": null
+      "transport": "outlook-web"
     },
     {
+      "at": "2026-09-09T13:59:05.758Z",
       "email": "vhastxswsvjo@va.gov",
-      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
       "status": "submitted",
-      "transport": "outlook-web",
-      "messageId": null
+      "transport": "outlook-web"
     },
     {
+      "at": "2026-09-09T13:59:05.758Z",
       "email": "ctxswsvjo@va.gov",
-      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
       "status": "submitted",
-      "transport": "outlook-web",
-      "messageId": null
+      "transport": "outlook-web"
     },
     {
+      "at": "2026-09-09T13:59:05.758Z",
       "email": "vhamiwvjp@va.gov",
-      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
       "status": "submitted",
-      "transport": "outlook-web",
-      "messageId": null
+      "transport": "outlook-web"
     },
     {
+      "at": "2026-09-09T13:59:05.758Z",
       "email": "vhatomvjp@va.gov",
-      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
       "status": "submitted",
-      "transport": "outlook-web",
-      "messageId": null
+      "transport": "outlook-web"
     },
     {
+      "at": "2026-09-09T13:59:05.758Z",
       "email": "officeofsurvivors@va.gov",
-      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
       "status": "submitted",
-      "transport": "outlook-web",
+      "transport": "outlook-web"
+    },
+    {
+      "at": "2026-09-09T13:59:05.758Z",
+      "email": "orh-wr@va.gov",
+      "messageId": null,
+      "status": "submitted",
+      "transport": "outlook-web"
+    },
+    {
+      "at": "2026-09-09T13:59:05.758Z",
+      "email": "amber.lane2@va.gov",
+      "messageId": null,
+      "status": "submitted",
+      "transport": "outlook-web"
+    },
+    {
+      "at": "2026-09-09T13:59:05.758Z",
+      "email": "kelty.fehling@va.gov",
+      "messageId": null,
+      "status": "submitted",
+      "transport": "outlook-web"
+    },
+    {
+      "email": "heather.mcisaac@va.gov",
+      "at": "2026-09-09T18:06:23Z",
+      "status": "submitted",
+      "transport": "outlook-connector",
       "messageId": null
     },
     {
-      "email": "orh-wr@va.gov",
-      "at": "2026-09-09T13:59:05.758Z",
+      "email": "kelli.nance@va.gov",
+      "at": "2026-09-09T18:06:11Z",
       "status": "submitted",
-      "transport": "outlook-web",
+      "transport": "outlook-connector",
+      "messageId": null
+    },
+    {
+      "email": "daniel.gutkind@va.gov",
+      "at": "2026-09-09T18:05:59Z",
+      "status": "submitted",
+      "transport": "outlook-connector",
+      "messageId": null
+    },
+    {
+      "email": "rebecca.smith9@va.gov",
+      "at": "2026-09-09T18:05:48Z",
+      "status": "submitted",
+      "transport": "outlook-connector",
+      "messageId": null
+    },
+    {
+      "email": "frank.rainey@va.gov",
+      "at": "2026-09-09T18:05:37Z",
+      "status": "submitted",
+      "transport": "outlook-connector",
+      "messageId": null
+    },
+    {
+      "email": "sarah.whitley@va.gov",
+      "at": "2026-09-09T18:05:25Z",
+      "status": "submitted",
+      "transport": "outlook-connector",
+      "messageId": null
+    },
+    {
+      "email": "nikki.balboa@va.gov",
+      "at": "2026-09-09T18:05:14Z",
+      "status": "submitted",
+      "transport": "outlook-connector",
+      "messageId": null
+    },
+    {
+      "email": "vhalonsws-hchvveteranjusticeoutreach@va.gov",
+      "at": "2026-09-09T18:05:03Z",
+      "status": "submitted",
+      "transport": "outlook-connector",
+      "messageId": null
+    },
+    {
+      "email": "sherry.delisle@va.gov",
+      "at": "2026-09-09T18:04:51Z",
+      "status": "submitted",
+      "transport": "outlook-connector",
+      "messageId": null
+    },
+    {
+      "email": "vhawlaveteranjusticeprogram@va.gov",
+      "at": "2026-09-09T18:04:41Z",
+      "status": "submitted",
+      "transport": "outlook-connector",
+      "messageId": null
+    },
+    {
+      "email": "vhalomvjp@va.gov",
+      "at": "2026-09-09T18:04:31Z",
+      "status": "submitted",
+      "transport": "outlook-connector",
+      "messageId": null
+    },
+    {
+      "email": "nikki.garner@va.gov",
+      "at": "2026-09-09T18:04:20Z",
+      "status": "submitted",
+      "transport": "outlook-connector",
+      "messageId": null
+    },
+    {
+      "email": "debra.mattos@va.gov",
+      "at": "2026-09-09T18:04:10Z",
+      "status": "submitted",
+      "transport": "outlook-connector",
+      "messageId": null
+    },
+    {
+      "email": "gertrude.thompkins@va.gov",
+      "at": "2026-09-09T18:04:00Z",
+      "status": "submitted",
+      "transport": "outlook-connector",
+      "messageId": null
+    },
+    {
+      "email": "stella.botello@va.gov",
+      "at": "2026-09-09T18:03:44Z",
+      "status": "submitted",
+      "transport": "outlook-connector",
+      "messageId": null
+    },
+    {
+      "email": "charis.cook@va.gov",
+      "at": "2026-09-09T18:03:34Z",
+      "status": "submitted",
+      "transport": "outlook-connector",
+      "messageId": null
+    },
+    {
+      "email": "alexandra.blondell@va.gov",
+      "at": "2026-09-09T18:03:26Z",
+      "status": "submitted",
+      "transport": "outlook-connector",
+      "messageId": null
+    },
+    {
+      "email": "eric.hudson2@va.gov",
+      "at": "2026-09-09T18:03:15Z",
+      "status": "submitted",
+      "transport": "outlook-connector",
+      "messageId": null
+    },
+    {
+      "email": "julie.perkins@va.gov",
+      "at": "2026-09-09T18:03:06Z",
+      "status": "submitted",
+      "transport": "outlook-connector",
+      "messageId": null
+    },
+    {
+      "email": "lucia.loyd@va.gov",
+      "at": "2026-09-09T18:02:57Z",
+      "status": "submitted",
+      "transport": "outlook-connector",
+      "messageId": null
+    },
+    {
+      "email": "marcy.vandeberg@va.gov",
+      "at": "2026-09-09T18:02:48Z",
+      "status": "submitted",
+      "transport": "outlook-connector",
+      "messageId": null
+    },
+    {
+      "email": "wendy.clanton2@va.gov",
+      "at": "2026-09-09T18:02:40Z",
+      "status": "submitted",
+      "transport": "outlook-connector",
+      "messageId": null
+    },
+    {
+      "email": "kameil.nicholson@va.gov",
+      "at": "2026-09-09T18:02:31Z",
+      "status": "submitted",
+      "transport": "outlook-connector",
+      "messageId": null
+    },
+    {
+      "email": "amelia.hill@va.gov",
+      "at": "2026-09-09T18:02:22Z",
+      "status": "submitted",
+      "transport": "outlook-connector",
+      "messageId": null
+    },
+    {
+      "email": "david.glover@va.gov",
+      "at": "2026-09-09T18:02:14Z",
+      "status": "submitted",
+      "transport": "outlook-connector",
+      "messageId": null
+    },
+    {
+      "email": "elizabeth.santos1@va.gov",
+      "at": "2026-09-09T18:02:03Z",
+      "status": "submitted",
+      "transport": "outlook-connector",
+      "messageId": null
+    },
+    {
+      "email": "steven.wenzel@va.gov",
+      "at": "2026-09-09T18:01:52Z",
+      "status": "submitted",
+      "transport": "outlook-connector",
+      "messageId": null
+    },
+    {
+      "email": "gwendolyn.anderson1@va.gov",
+      "at": "2026-09-09T18:01:45Z",
+      "status": "submitted",
+      "transport": "outlook-connector",
+      "messageId": null
+    },
+    {
+      "email": "lynda.woods@va.gov",
+      "at": "2026-09-09T18:01:37Z",
+      "status": "submitted",
+      "transport": "outlook-connector",
+      "messageId": null
+    },
+    {
+      "email": "debra.stutz-middleton@va.gov",
+      "at": "2026-09-09T18:01:30Z",
+      "status": "submitted",
+      "transport": "outlook-connector",
+      "messageId": null
+    },
+    {
+      "email": "dogtagdayfoundation@outlook.com",
+      "at": "2026-09-09T15:23:59Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "anthony.love@va.gov",
+      "at": "2026-09-09T15:23:59Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "michael.messmer1@va.gov",
+      "at": "2026-09-09T14:10:26Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "sabrina.bordelon@va.gov",
+      "at": "2026-09-09T14:10:20Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "valence.hebert@va.gov",
+      "at": "2026-09-09T14:10:14Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "vhatogmainevetjustice@va.gov",
+      "at": "2026-09-09T14:10:07Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "sonny.hatfield@va.gov",
+      "at": "2026-09-09T14:10:00Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "jessica.mayeux@va.gov",
+      "at": "2026-09-09T14:09:50Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "janis.skilling@va.gov",
+      "at": "2026-09-09T14:09:43Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "leslie.stanley1@va.gov",
+      "at": "2026-09-09T14:09:35Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "nicole.lejeune@va.gov",
+      "at": "2026-09-09T14:09:29Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "scott.huisman@va.gov",
+      "at": "2026-09-09T14:09:22Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "dawne.james@va.gov",
+      "at": "2026-09-09T14:09:12Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "marcie.goldheim@va.gov",
+      "at": "2026-09-09T14:09:04Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "kathy.vasquez2@va.gov",
+      "at": "2026-09-09T14:08:56Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "jovanni.mooring@va.gov",
+      "at": "2026-09-09T14:08:49Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "james.haskell@va.gov",
+      "at": "2026-09-09T14:08:42Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "sara.glenn@va.gov",
+      "at": "2026-09-09T14:08:30Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "randall.smith4@va.gov",
+      "at": "2026-09-09T14:08:24Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "mckenzie.gauthier@va.gov",
+      "at": "2026-09-09T14:08:17Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "keather.likins@va.gov",
+      "at": "2026-09-09T14:08:07Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "danielle.alderson@va.gov",
+      "at": "2026-09-09T14:07:59Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "autumn.kuehl@va.gov",
+      "at": "2026-09-09T14:07:53Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "eric.dungan@va.gov",
+      "at": "2026-09-09T14:07:47Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "jeffrey.friedlander2@va.gov",
+      "at": "2026-09-09T14:07:39Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "ed.haycraft@va.gov",
+      "at": "2026-09-09T14:07:31Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "darlene.seilheimer@va.gov",
+      "at": "2026-09-09T14:07:25Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "jill.ertel@va.gov",
+      "at": "2026-09-09T14:07:18Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "indvjo@va.gov",
+      "at": "2026-09-09T14:07:12Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "stacy.downey@va.gov",
+      "at": "2026-09-09T14:07:06Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "christine.strohm99@va.gov",
+      "at": "2026-09-09T14:06:59Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "rita.wynn@va.gov",
+      "at": "2026-09-09T14:06:53Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "ginger.garner@va.gov",
+      "at": "2026-09-09T14:05:25Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "denise.oconnor@va.gov",
+      "at": "2026-09-09T14:05:20Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "fhcclovellvjo@va.gov",
+      "at": "2026-09-09T14:05:13Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "rocky.peppers@va.gov",
+      "at": "2026-09-09T14:05:07Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "hinesveteransjusticeprogram@va.gov",
+      "at": "2026-09-09T14:05:00Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "rebecca.sanders2@va.gov",
+      "at": "2026-09-09T14:04:54Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "jade.lopez@va.gov",
+      "at": "2026-09-09T14:04:49Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "edith.zamudio@va.gov",
+      "at": "2026-09-09T14:04:42Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "luqretia.stuckey@va.gov",
+      "at": "2026-09-09T14:04:36Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "jeffrey.gatch@va.gov",
+      "at": "2026-09-09T14:04:30Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "chsjbveteransjusticeprogram@va.gov",
+      "at": "2026-09-09T14:04:24Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "sergio.grajeda@va.gov",
+      "at": "2026-09-09T14:04:17Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "marguerita.high@va.gov",
+      "at": "2026-09-09T14:04:10Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "krista.davis@va.gov",
+      "at": "2026-09-09T14:04:05Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "lauran.olson@va.gov",
+      "at": "2026-09-09T14:03:59Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "quinton.pickett@va.gov",
+      "at": "2026-09-09T14:03:53Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "christian.heaton@va.gov",
+      "at": "2026-09-09T14:03:47Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "standrez.warren@va.gov",
+      "at": "2026-09-09T14:03:42Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "kelly.estle@va.gov",
+      "at": "2026-09-09T14:03:37Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "rachel.parker@va.gov",
+      "at": "2026-09-09T14:03:31Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
       "messageId": null
     },
     {
       "email": "amber.lane2@va.gov",
-      "at": "2026-09-09T13:59:05.758Z",
-      "status": "submitted",
-      "transport": "outlook-web",
+      "at": "2026-09-09T18:07:51.964Z",
+      "status": "bounced",
+      "transport": "outlook-ndr",
       "messageId": null
     },
     {
-      "email": "kelty.fehling@va.gov",
-      "at": "2026-09-09T13:59:05.758Z",
+      "email": "chymhvjo@va.gov",
+      "at": "2026-09-09T18:07:51.970Z",
+      "status": "bounced",
+      "transport": "outlook-ndr",
+      "messageId": null
+    },
+    {
+      "email": "pio.ndvs@veterans.nv.gov",
+      "at": "2026-09-09T01:20:27Z",
       "status": "submitted",
-      "transport": "outlook-web",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "v21sfcpublicaffairs@va.gov",
+      "at": "2026-09-09T01:20:05Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "veteransbusiness@sba.gov",
+      "at": "2026-09-09T01:19:37Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "stxmedia@va.gov",
+      "at": "2026-09-09T01:18:27Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "vhaglapublicaffairs@va.gov",
+      "at": "2026-09-09T01:18:18Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "vhaorlpublicaffairs@va.gov",
+      "at": "2026-09-09T01:18:08Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "dlwdalveterans-labor@maryland.gov",
+      "at": "2026-09-09T01:17:01Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "rshure001@yahoo.com",
+      "at": "2026-09-09T01:04:00Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "artsfellowsgrant@arts.ca.gov",
+      "at": "2026-09-08T23:04:51Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "amber@louisiana-arts.org",
+      "at": "2026-09-08T23:04:46Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "arts.culture@seattle.gov",
+      "at": "2026-09-08T23:04:40Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "grants@racc.org",
+      "at": "2026-09-08T23:04:35Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "grants@slcartscouncil.org",
+      "at": "2026-09-08T23:04:29Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "uamgrants@utah.gov",
+      "at": "2026-09-08T23:03:36Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "briana.henry@delaware.gov",
+      "at": "2026-09-08T23:03:31Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "iac.info@illinois.gov",
+      "at": "2026-09-08T23:03:24Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "cedrick.l.farmer@wv.gov",
+      "at": "2026-09-08T23:03:19Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "info@oshkoshareacf.org",
+      "at": "2026-09-08T23:03:13Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "grants@indyarts.org",
+      "at": "2026-09-08T23:03:07Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "info@ycfwv.org",
+      "at": "2026-09-08T23:03:02Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "katie@bigskyarts.org",
+      "at": "2026-09-08T23:02:57Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "ashley.marshall@arts.wa.gov",
+      "at": "2026-09-08T23:02:51Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "emccrum@mainecf.org",
+      "at": "2026-09-08T23:02:46Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "v21macpublicaffairs@va.gov",
+      "at": "2026-09-08T22:53:26Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "pitches@taskandpurpose.com",
+      "at": "2026-09-08T22:50:28Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "jessie.williams@ktnv.com",
+      "at": "2026-09-08T22:50:28Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "magazine@legion.org",
+      "at": "2026-09-08T22:50:28Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "desk@fox5vegas.com",
+      "at": "2026-09-08T22:50:27Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "tips@militarytimes.com",
+      "at": "2026-09-08T22:48:38Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "publicrelations@mgmresorts.com",
+      "at": "2026-09-08T22:48:32Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "pr@creditone.com",
+      "at": "2026-09-08T22:48:26Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "foundation@wynnresorts.com",
+      "at": "2026-09-08T22:48:21Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "desk@ktnv.com",
+      "at": "2026-09-08T22:48:15Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "sponsorships@vegasgoldenknights.com",
+      "at": "2026-09-08T22:48:09Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "foundation@vegasgoldenknights.com",
+      "at": "2026-09-08T22:48:09Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "partnerships@lasvegasaces.com",
+      "at": "2026-09-08T22:48:03Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "mediarelations@allegiantair.com",
+      "at": "2026-09-08T22:47:58Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "media@amvets.org",
+      "at": "2026-09-08T22:47:12Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "info@teamrwb.org",
+      "at": "2026-09-08T22:47:07Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "press@teamrwb.org",
+      "at": "2026-09-08T22:47:07Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "rlaw@vfw.org",
+      "at": "2026-09-08T22:46:59Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "media@bluestarfam.org",
+      "at": "2026-09-08T22:46:54Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
+      "messageId": null
+    },
+    {
+      "email": "sean.tuckey@va.gov",
+      "at": "2026-09-08T22:45:03Z",
+      "status": "submitted",
+      "transport": "outlook-sent-items-reconciliation",
       "messageId": null
     }
-  ]
+  ],
+  "sent": {
+    "004c84b1e69c5803b7d795f8366bc87511ba8e84e4dd7cc2b71eede04141188a": {
+      "accepted": [
+        "david.ward@va.gov"
+      ],
+      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "skipped": false,
+      "status": "submitted"
+    },
+    "0c5eb9fad388ab7a5c1f9a7aab7942154a07283df0ba5ea2213f4eedec435cac": {
+      "accepted": [
+        "vanjhcscommsteam@va.gov"
+      ],
+      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "skipped": false,
+      "status": "submitted"
+    },
+    "0e3ba6487c558a774f1edaf2ce7456619681e8f500f577abb59e22e15f11a06b": {
+      "accepted": [
+        "elpveteransjusticeoutreachteam@va.gov"
+      ],
+      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "skipped": false,
+      "status": "submitted"
+    },
+    "0e5b135093b3dc70fd88cbe38d1a527a212fbc74272dc219610a7ff1631095a1": {
+      "accepted": [
+        "michael.billings@va.gov"
+      ],
+      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "skipped": false,
+      "status": "submitted"
+    },
+    "1a426f2730d1bfdb53177fe2393caf7bbf64a516c71daecd72cf32e89370c11d": {
+      "accepted": [
+        "john.richter@va.gov"
+      ],
+      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "skipped": false,
+      "status": "submitted"
+    },
+    "1db29ee8b2eb670b4e44276d43a195631a11921095cdf078ab702359df1d6bf8": {
+      "accepted": [
+        "patrick.devlin2@va.gov"
+      ],
+      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "skipped": false,
+      "status": "submitted"
+    },
+    "258ec153c86f25118e8dd24bbdacca870e8f6aadb87bd6f95d99877f9f367871": {
+      "accepted": [
+        "orh-wr@va.gov"
+      ],
+      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "skipped": false,
+      "status": "submitted"
+    },
+    "3538ae45029e64658da7eaf53cce6ee32460b131f52ebfc0a9fb82e6462eaf03": {
+      "accepted": [
+        "ronald.michaelson@va.gov"
+      ],
+      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "skipped": false,
+      "status": "submitted"
+    },
+    "3c664f4dfb88bf90375189aef732147c78dfe42a1aaedf4eb314d8688cc8c88c": {
+      "accepted": [
+        "jessica.howard5@va.gov"
+      ],
+      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "skipped": false,
+      "status": "submitted"
+    },
+    "42cf79af73da8dfd9e9da0839e115709a09501c9034f85d691802e24100bbafe": {
+      "accepted": [
+        "calvin.payne@va.gov"
+      ],
+      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "skipped": false,
+      "status": "submitted"
+    },
+    "4ac5a946d569d4ce0f49425545974e9cab82d37850d4437f477cd23c2788bb8c": {
+      "accepted": [
+        "pao.wilmington@va.gov"
+      ],
+      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "skipped": false,
+      "status": "submitted"
+    },
+    "4ce81a87c5a060d433db86eeb2169f14292c6d765e58a7c6e43a89731c074306": {
+      "accepted": [
+        "mark.correale1@va.gov"
+      ],
+      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "skipped": false,
+      "status": "submitted"
+    },
+    "51a99b7299dca883c950b51c2f0858bb909d1b07516014c302b08dfd026440f5": {
+      "accepted": [
+        "mickiela.montoya@va.gov"
+      ],
+      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "skipped": false,
+      "status": "submitted"
+    },
+    "58724fd77efec0fc9eeceaa42f8b3e3507b1129ce612782fc9286694ca14d413": {
+      "accepted": [
+        "ericka.jackson2@va.gov"
+      ],
+      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "skipped": false,
+      "status": "submitted"
+    },
+    "5b02ddc744bae36dbeaa6ac645245977c501bfeca1651b232c7284c2366e2c05": {
+      "accepted": [
+        "vhaphovjohcrv@va.gov"
+      ],
+      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "skipped": false,
+      "status": "submitted"
+    },
+    "688db71167d530e9cdb35571d6e0ca06b4028ee67fa290e83dc9a769aa6527e8": {
+      "accepted": [
+        "marissa.burgoyne@va.gov"
+      ],
+      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "skipped": false,
+      "status": "submitted"
+    },
+    "68a64af3acbb883a11952164a8d9dac3e846332787c7dc7abad05a878835506f": {
+      "accepted": [
+        "ctxswsvjo@va.gov"
+      ],
+      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "skipped": false,
+      "status": "submitted"
+    },
+    "6d07551c76f40cd6992a5c64e0a3fd4fd5934472ab409644fc794bbdd6af1a27": {
+      "accepted": [
+        "vhahouvjo@va.gov"
+      ],
+      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "skipped": false,
+      "status": "submitted"
+    },
+    "72cf6a9f9a7239584aa4060f9bffb36ad48fffc9ed1ed5b320f21a2eab755ca8": {
+      "accepted": [
+        "alexander.hightower@va.gov"
+      ],
+      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "skipped": false,
+      "status": "submitted"
+    },
+    "7a5c2625b8d967ea68b95c7487d3284ea5ef681e395ee8ee04ee5a52e192553f": {
+      "accepted": [
+        "ntxvjo@va.gov"
+      ],
+      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "skipped": false,
+      "status": "submitted"
+    },
+    "7e2d49d5d94e44bd24fa18f30afa8782e0f3afca28efc291a6e821ba3863b77e": {
+      "accepted": [],
+      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
+      "rejected": [
+        "amber.lane2@va.gov"
+      ],
+      "response": "Delivery failure confirmed in Outlook",
+      "skipped": false,
+      "status": "bounced"
+    },
+    "80712397e015983480446026bd9c7bbbc20e151665f1cf5fa3d9dfddef773b04": {
+      "accepted": [
+        "vhaminmplsvjo@va.gov"
+      ],
+      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "skipped": false,
+      "status": "submitted"
+    },
+    "857d7b8bca99fd475adae0de71d6f5cbf4564e03dab55cf4ec588d84d6aa64d0": {
+      "accepted": [
+        "vhatomvjp@va.gov"
+      ],
+      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "skipped": false,
+      "status": "submitted"
+    },
+    "862fb1ffc7fb75fd8d8509a74f40510feec34749f23b5e636a450aac6f073b82": {
+      "accepted": [
+        "scott.dadaian@va.gov"
+      ],
+      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "skipped": false,
+      "status": "submitted"
+    },
+    "9041c74bb68ef11cd3dcb3e8fde0470d3a2ea11339987913710906bef6233711": {
+      "accepted": [
+        "vhalinveteranjusticeoutreach@va.gov"
+      ],
+      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "skipped": false,
+      "status": "submitted"
+    },
+    "92146922f7f53f9890a2d884f8824e7cbd0c817f566a5d0c40771a3b6ecab114": {
+      "accepted": [
+        "vhastxswsvjo@va.gov"
+      ],
+      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "skipped": false,
+      "status": "submitted"
+    },
+    "95dc0a1479f4d72484b050d79665d1240dd09b8d709b583b92be00bda4182c44": {
+      "accepted": [
+        "vhamiwvjp@va.gov"
+      ],
+      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "skipped": false,
+      "status": "submitted"
+    },
+    "976841394260745c986c26703f995bb6546e2718647fbf427795fca0126029ce": {
+      "accepted": [
+        "damien.horvath@va.gov"
+      ],
+      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "skipped": false,
+      "status": "submitted"
+    },
+    "9bcc9009d8d54a966571511de51b8d5bd3b9e7843ae20890aeebaa844b496f1c": {
+      "accepted": [
+        "alba.lopez@va.gov"
+      ],
+      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "skipped": false,
+      "status": "submitted"
+    },
+    "a0f4e0383c1f9faa008539349101145bfa4b7e7ac8ba13234dfc6fad3d2d4f04": {
+      "accepted": [
+        "vhaglaoutreach@va.gov"
+      ],
+      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "skipped": false,
+      "status": "submitted"
+    },
+    "a34d2c4185bf6ff0f5bb676f22f93c3b83585d510063b622506bf27df6ea3941": {
+      "accepted": [
+        "anne.karp@va.gov"
+      ],
+      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "skipped": false,
+      "status": "submitted"
+    },
+    "a35642ac5ad78ea890344e00b3bd8209bcddad17aa444c83e9528f4e2158531e": {
+      "accepted": [
+        "jonathan.gonzalez1@va.gov"
+      ],
+      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "skipped": false,
+      "status": "submitted"
+    },
+    "ac545236a80a1c0b3fd30927d53c0a12baff5dc038bc8624a8fb5795eb2dffea": {
+      "accepted": [
+        "homelessvets@va.gov"
+      ],
+      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "skipped": false,
+      "status": "submitted"
+    },
+    "b2e1f4e4277c9535a19ab3532cac70675f2bab260890b344d74ad8341722576f": {
+      "accepted": [
+        "kelty.fehling@va.gov"
+      ],
+      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "skipped": false,
+      "status": "submitted"
+    },
+    "c09aec59b1dbd082f9af32cdbabccb2ec444f64035d419b92dc95bae907913d1": {
+      "accepted": [
+        "chad.costello@va.gov"
+      ],
+      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "skipped": false,
+      "status": "submitted"
+    },
+    "c7b82863069101f21f34aca66547a69520074cb4aea3e2fd1c64606ebd651830": {
+      "accepted": [
+        "officeofsurvivors@va.gov"
+      ],
+      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "skipped": false,
+      "status": "submitted"
+    },
+    "c89d0c48b78ca7f0a5390b0276a3e02108d2f92b342d75488151a5c5b0de7cac": {
+      "accepted": [
+        "vhawimoutreachteam@va.gov"
+      ],
+      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "skipped": false,
+      "status": "submitted"
+    },
+    "d500a502b3de751208ca9af47d43d7ade7db5f9e0dcfb28e5976221fb2360377": {
+      "accepted": [
+        "vhaeaswriiscnj@va.gov"
+      ],
+      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "skipped": false,
+      "status": "submitted"
+    },
+    "dac6eb0e712942247e42d322891e258efaf00e8a9b47b83c58d69f5a41c6d2f4": {
+      "accepted": [
+        "seana.creech@va.gov"
+      ],
+      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "skipped": false,
+      "status": "submitted"
+    },
+    "e35224be31a04c1bc9514643a9383aa56dc8860693ae5fbd8d7fd67cb3950a1a": {
+      "accepted": [
+        "bethany.hamilton-clary@va.gov"
+      ],
+      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "skipped": false,
+      "status": "submitted"
+    },
+    "e3acdc5862cee3e013c3ff71ff2fe59f09d5cf2fd526b28e23fdf353dbe63127": {
+      "accepted": [
+        "tanya.kero@va.gov"
+      ],
+      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "skipped": false,
+      "status": "submitted"
+    },
+    "e656f02595f6aa5c3db21d531b97adf957d42057fe210960743b77cd4ea04cd4": {
+      "accepted": [
+        "vapublicaffairs@va.gov"
+      ],
+      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "skipped": false,
+      "status": "submitted"
+    },
+    "e83949a3c47766a1bfdf4607730e0e710db8ca6894982dd43c981c708c46dd93": {
+      "accepted": [
+        "vhacleoutreachcommittee@va.gov"
+      ],
+      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "skipped": false,
+      "status": "submitted"
+    },
+    "ed2fa331db203a5f657cd189ab7e397f174abefb0085055927948826fd4944fd": {
+      "accepted": [],
+      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
+      "rejected": [
+        "chymhvjo@va.gov"
+      ],
+      "response": "Delivery failure confirmed in Outlook",
+      "skipped": false,
+      "status": "bounced"
+    },
+    "f098df24f6bdc76d69d3f8b8db15f81225ee454e6acf5eb230b47975f163ee63": {
+      "accepted": [
+        "vhaannmhsvjo@va.gov"
+      ],
+      "at": "2026-09-09T13:59:05.758Z",
+      "messageId": null,
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "skipped": false,
+      "status": "submitted"
+    },
+    "outlook_heather_mcisaac_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "heather.mcisaac@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T18:06:23Z"
+    },
+    "outlook_kelli_nance_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "kelli.nance@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T18:06:11Z"
+    },
+    "outlook_daniel_gutkind_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "daniel.gutkind@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T18:05:59Z"
+    },
+    "outlook_rebecca_smith9_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "rebecca.smith9@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T18:05:48Z"
+    },
+    "outlook_frank_rainey_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "frank.rainey@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T18:05:37Z"
+    },
+    "outlook_sarah_whitley_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "sarah.whitley@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T18:05:25Z"
+    },
+    "outlook_nikki_balboa_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "nikki.balboa@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T18:05:14Z"
+    },
+    "outlook_vhalonsws_hchvveteranjusticeoutreach_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "vhalonsws-hchvveteranjusticeoutreach@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T18:05:03Z"
+    },
+    "outlook_sherry_delisle_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "sherry.delisle@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T18:04:51Z"
+    },
+    "outlook_vhawlaveteranjusticeprogram_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "vhawlaveteranjusticeprogram@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T18:04:41Z"
+    },
+    "outlook_vhalomvjp_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "vhalomvjp@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T18:04:31Z"
+    },
+    "outlook_nikki_garner_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "nikki.garner@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T18:04:20Z"
+    },
+    "outlook_debra_mattos_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "debra.mattos@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T18:04:10Z"
+    },
+    "outlook_gertrude_thompkins_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "gertrude.thompkins@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T18:04:00Z"
+    },
+    "outlook_stella_botello_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "stella.botello@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T18:03:44Z"
+    },
+    "outlook_charis_cook_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "charis.cook@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T18:03:34Z"
+    },
+    "outlook_alexandra_blondell_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "alexandra.blondell@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T18:03:26Z"
+    },
+    "outlook_eric_hudson2_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "eric.hudson2@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T18:03:15Z"
+    },
+    "outlook_julie_perkins_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "julie.perkins@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T18:03:06Z"
+    },
+    "outlook_lucia_loyd_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "lucia.loyd@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T18:02:57Z"
+    },
+    "outlook_marcy_vandeberg_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "marcy.vandeberg@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T18:02:48Z"
+    },
+    "outlook_wendy_clanton2_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "wendy.clanton2@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T18:02:40Z"
+    },
+    "outlook_kameil_nicholson_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "kameil.nicholson@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T18:02:31Z"
+    },
+    "outlook_amelia_hill_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "amelia.hill@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T18:02:22Z"
+    },
+    "outlook_david_glover_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "david.glover@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T18:02:14Z"
+    },
+    "outlook_elizabeth_santos1_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "elizabeth.santos1@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T18:02:03Z"
+    },
+    "outlook_steven_wenzel_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "steven.wenzel@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T18:01:52Z"
+    },
+    "outlook_gwendolyn_anderson1_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "gwendolyn.anderson1@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T18:01:45Z"
+    },
+    "outlook_lynda_woods_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "lynda.woods@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T18:01:37Z"
+    },
+    "outlook_debra_stutz_middleton_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "debra.stutz-middleton@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T18:01:30Z"
+    },
+    "outlook_dogtagdayfoundation_outlook_com": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "dogtagdayfoundation@outlook.com"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T15:23:59Z"
+    },
+    "outlook_anthony_love_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "anthony.love@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T15:23:59Z"
+    },
+    "outlook_michael_messmer1_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "michael.messmer1@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T14:10:26Z"
+    },
+    "outlook_sabrina_bordelon_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "sabrina.bordelon@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T14:10:20Z"
+    },
+    "outlook_valence_hebert_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "valence.hebert@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T14:10:14Z"
+    },
+    "outlook_vhatogmainevetjustice_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "vhatogmainevetjustice@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T14:10:07Z"
+    },
+    "outlook_sonny_hatfield_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "sonny.hatfield@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T14:10:00Z"
+    },
+    "outlook_jessica_mayeux_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "jessica.mayeux@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T14:09:50Z"
+    },
+    "outlook_janis_skilling_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "janis.skilling@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T14:09:43Z"
+    },
+    "outlook_leslie_stanley1_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "leslie.stanley1@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T14:09:35Z"
+    },
+    "outlook_nicole_lejeune_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "nicole.lejeune@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T14:09:29Z"
+    },
+    "outlook_scott_huisman_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "scott.huisman@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T14:09:22Z"
+    },
+    "outlook_dawne_james_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "dawne.james@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T14:09:12Z"
+    },
+    "outlook_marcie_goldheim_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "marcie.goldheim@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T14:09:04Z"
+    },
+    "outlook_kathy_vasquez2_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "kathy.vasquez2@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T14:08:56Z"
+    },
+    "outlook_jovanni_mooring_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "jovanni.mooring@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T14:08:49Z"
+    },
+    "outlook_james_haskell_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "james.haskell@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T14:08:42Z"
+    },
+    "outlook_sara_glenn_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "sara.glenn@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T14:08:30Z"
+    },
+    "outlook_randall_smith4_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "randall.smith4@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T14:08:24Z"
+    },
+    "outlook_mckenzie_gauthier_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "mckenzie.gauthier@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T14:08:17Z"
+    },
+    "outlook_keather_likins_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "keather.likins@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T14:08:07Z"
+    },
+    "outlook_danielle_alderson_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "danielle.alderson@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T14:07:59Z"
+    },
+    "outlook_autumn_kuehl_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "autumn.kuehl@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T14:07:53Z"
+    },
+    "outlook_eric_dungan_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "eric.dungan@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T14:07:47Z"
+    },
+    "outlook_jeffrey_friedlander2_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "jeffrey.friedlander2@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T14:07:39Z"
+    },
+    "outlook_ed_haycraft_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "ed.haycraft@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T14:07:31Z"
+    },
+    "outlook_darlene_seilheimer_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "darlene.seilheimer@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T14:07:25Z"
+    },
+    "outlook_jill_ertel_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "jill.ertel@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T14:07:18Z"
+    },
+    "outlook_indvjo_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "indvjo@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T14:07:12Z"
+    },
+    "outlook_stacy_downey_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "stacy.downey@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T14:07:06Z"
+    },
+    "outlook_christine_strohm99_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "christine.strohm99@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T14:06:59Z"
+    },
+    "outlook_rita_wynn_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "rita.wynn@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T14:06:53Z"
+    },
+    "outlook_ginger_garner_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "ginger.garner@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T14:05:25Z"
+    },
+    "outlook_denise_oconnor_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "denise.oconnor@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T14:05:20Z"
+    },
+    "outlook_fhcclovellvjo_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "fhcclovellvjo@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T14:05:13Z"
+    },
+    "outlook_rocky_peppers_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "rocky.peppers@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T14:05:07Z"
+    },
+    "outlook_hinesveteransjusticeprogram_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "hinesveteransjusticeprogram@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T14:05:00Z"
+    },
+    "outlook_rebecca_sanders2_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "rebecca.sanders2@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T14:04:54Z"
+    },
+    "outlook_jade_lopez_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "jade.lopez@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T14:04:49Z"
+    },
+    "outlook_edith_zamudio_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "edith.zamudio@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T14:04:42Z"
+    },
+    "outlook_luqretia_stuckey_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "luqretia.stuckey@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T14:04:36Z"
+    },
+    "outlook_jeffrey_gatch_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "jeffrey.gatch@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T14:04:30Z"
+    },
+    "outlook_chsjbveteransjusticeprogram_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "chsjbveteransjusticeprogram@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T14:04:24Z"
+    },
+    "outlook_sergio_grajeda_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "sergio.grajeda@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T14:04:17Z"
+    },
+    "outlook_marguerita_high_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "marguerita.high@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T14:04:10Z"
+    },
+    "outlook_krista_davis_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "krista.davis@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T14:04:05Z"
+    },
+    "outlook_lauran_olson_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "lauran.olson@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T14:03:59Z"
+    },
+    "outlook_quinton_pickett_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "quinton.pickett@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T14:03:53Z"
+    },
+    "outlook_christian_heaton_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "christian.heaton@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T14:03:47Z"
+    },
+    "outlook_standrez_warren_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "standrez.warren@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T14:03:42Z"
+    },
+    "outlook_kelly_estle_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "kelly.estle@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T14:03:37Z"
+    },
+    "outlook_rachel_parker_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "rachel.parker@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T14:03:31Z"
+    },
+    "outlook_pio_ndvs_veterans_nv_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "pio.ndvs@veterans.nv.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T01:20:27Z"
+    },
+    "outlook_v21sfcpublicaffairs_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "v21sfcpublicaffairs@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T01:20:05Z"
+    },
+    "outlook_veteransbusiness_sba_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "veteransbusiness@sba.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T01:19:37Z"
+    },
+    "outlook_stxmedia_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "stxmedia@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T01:18:27Z"
+    },
+    "outlook_vhaglapublicaffairs_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "vhaglapublicaffairs@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T01:18:18Z"
+    },
+    "outlook_vhaorlpublicaffairs_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "vhaorlpublicaffairs@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T01:18:08Z"
+    },
+    "outlook_dlwdalveterans_labor_maryland_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "dlwdalveterans-labor@maryland.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T01:17:01Z"
+    },
+    "outlook_rshure001_yahoo_com": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "rshure001@yahoo.com"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-09T01:04:00Z"
+    },
+    "outlook_artsfellowsgrant_arts_ca_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "artsfellowsgrant@arts.ca.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-08T23:04:51Z"
+    },
+    "outlook_amber_louisiana_arts_org": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "amber@louisiana-arts.org"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-08T23:04:46Z"
+    },
+    "outlook_arts_culture_seattle_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "arts.culture@seattle.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-08T23:04:40Z"
+    },
+    "outlook_grants_racc_org": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "grants@racc.org"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-08T23:04:35Z"
+    },
+    "outlook_grants_slcartscouncil_org": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "grants@slcartscouncil.org"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-08T23:04:29Z"
+    },
+    "outlook_uamgrants_utah_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "uamgrants@utah.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-08T23:03:36Z"
+    },
+    "outlook_briana_henry_delaware_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "briana.henry@delaware.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-08T23:03:31Z"
+    },
+    "outlook_iac_info_illinois_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "iac.info@illinois.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-08T23:03:24Z"
+    },
+    "outlook_cedrick_l_farmer_wv_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "cedrick.l.farmer@wv.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-08T23:03:19Z"
+    },
+    "outlook_info_oshkoshareacf_org": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "info@oshkoshareacf.org"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-08T23:03:13Z"
+    },
+    "outlook_grants_indyarts_org": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "grants@indyarts.org"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-08T23:03:07Z"
+    },
+    "outlook_info_ycfwv_org": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "info@ycfwv.org"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-08T23:03:02Z"
+    },
+    "outlook_katie_bigskyarts_org": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "katie@bigskyarts.org"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-08T23:02:57Z"
+    },
+    "outlook_ashley_marshall_arts_wa_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "ashley.marshall@arts.wa.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-08T23:02:51Z"
+    },
+    "outlook_emccrum_mainecf_org": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "emccrum@mainecf.org"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-08T23:02:46Z"
+    },
+    "outlook_v21macpublicaffairs_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "v21macpublicaffairs@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-08T22:53:26Z"
+    },
+    "outlook_pitches_taskandpurpose_com": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "pitches@taskandpurpose.com"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-08T22:50:28Z"
+    },
+    "outlook_jessie_williams_ktnv_com": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "jessie.williams@ktnv.com"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-08T22:50:28Z"
+    },
+    "outlook_magazine_legion_org": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "magazine@legion.org"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-08T22:50:28Z"
+    },
+    "outlook_desk_fox5vegas_com": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "desk@fox5vegas.com"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-08T22:50:27Z"
+    },
+    "outlook_tips_militarytimes_com": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "tips@militarytimes.com"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-08T22:48:38Z"
+    },
+    "outlook_publicrelations_mgmresorts_com": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "publicrelations@mgmresorts.com"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-08T22:48:32Z"
+    },
+    "outlook_pr_creditone_com": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "pr@creditone.com"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-08T22:48:26Z"
+    },
+    "outlook_foundation_wynnresorts_com": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "foundation@wynnresorts.com"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-08T22:48:21Z"
+    },
+    "outlook_desk_ktnv_com": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "desk@ktnv.com"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-08T22:48:15Z"
+    },
+    "outlook_sponsorships_vegasgoldenknights_com": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "sponsorships@vegasgoldenknights.com"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-08T22:48:09Z"
+    },
+    "outlook_foundation_vegasgoldenknights_com": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "foundation@vegasgoldenknights.com"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-08T22:48:09Z"
+    },
+    "outlook_partnerships_lasvegasaces_com": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "partnerships@lasvegasaces.com"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-08T22:48:03Z"
+    },
+    "outlook_mediarelations_allegiantair_com": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "mediarelations@allegiantair.com"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-08T22:47:58Z"
+    },
+    "outlook_media_amvets_org": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "media@amvets.org"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-08T22:47:12Z"
+    },
+    "outlook_info_teamrwb_org": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "info@teamrwb.org"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-08T22:47:07Z"
+    },
+    "outlook_press_teamrwb_org": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "press@teamrwb.org"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-08T22:47:07Z"
+    },
+    "outlook_rlaw_vfw_org": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "rlaw@vfw.org"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-08T22:46:59Z"
+    },
+    "outlook_media_bluestarfam_org": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "media@bluestarfam.org"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-08T22:46:54Z"
+    },
+    "outlook_sean_tuckey_va_gov": {
+      "skipped": false,
+      "status": "submitted",
+      "messageId": null,
+      "accepted": [
+        "sean.tuckey@va.gov"
+      ],
+      "rejected": [],
+      "response": "Verified in Outlook Sent Items",
+      "at": "2026-09-08T22:45:03Z"
+    }
+  }
 }
