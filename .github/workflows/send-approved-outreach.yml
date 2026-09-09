@@ -15,7 +15,7 @@ concurrency:
 jobs:
   send:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     env:
       YAHOO_EMAIL: ${{ secrets.YAHOO_EMAIL }}
       YAHOO_APP_PASSWORD: ${{ secrets.YAHOO_APP_PASSWORD }}
@@ -67,8 +67,8 @@ jobs:
                       continue
 
                   recipients = campaign.get("recipients", [])
-                  if not 1 <= len(recipients) <= 20:
-                      raise ValueError(f"{path}: each batch must contain 1 to 20 recipients")
+                  if not 1 <= len(recipients) <= 100:
+                      raise ValueError(f"{path}: each batch must contain 1 to 100 recipients")
 
                   subject = str(campaign.get("subject", "")).strip()
                   body_template = str(campaign.get("body_template", "")).strip()
