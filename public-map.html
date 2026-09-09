@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-dtd-map-build="2026-09-08-mobile-focus">
+<html lang="en" data-dtd-map-build="2026-09-09-contextual-fullscreen">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,viewport-fit=cover">
@@ -7,6 +7,7 @@
 <title>Dog Tag Day | Across America Map</title>
 <style>
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#01050a;color:#fff;font-family:Arial,Helvetica,sans-serif}
 body{padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
 .shell{position:relative;width:100%;height:100%;overflow:hidden;background:#01050a}
@@ -15,6 +16,7 @@ body{padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-i
 .mapCanvas{width:100%;min-width:100%;min-height:100%;display:grid;place-items:center;transition:width .16s ease}
 .mapCanvas img{display:block;width:100%;height:auto;max-width:none;user-select:none;-webkit-user-drag:none}
 .topbar{position:absolute;z-index:10;top:8px;left:8px;right:8px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px;pointer-events:none}
+.topbar.topLevel{grid-template-columns:auto 1fr}
 .topbar a,.title{pointer-events:auto;border:1px solid rgba(223,186,98,.9);background:rgba(2,9,16,.88);box-shadow:0 2px 12px rgba(0,0,0,.45);backdrop-filter:blur(4px)}
 .topbar a{min-height:42px;display:flex;align-items:center;justify-content:center;padding:0 13px;border-radius:999px;color:#fff;text-decoration:none;font-weight:900;font-size:.78rem;letter-spacing:.03em}
 .title{min-height:42px;display:flex;align-items:center;justify-content:center;padding:0 12px;border-radius:999px;text-align:center;color:#dfba62;font-weight:900;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase}
@@ -34,10 +36,10 @@ body{padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-i
       <img id="mapImage" src="assets/dog-tag-day-population-centered-map-20260905.jpg?v=20260908-mobile-focus" alt="Dog Tag Day Across America campaign map artwork with multicolored lights and its color key">
     </div>
   </div>
-  <div class="topbar" aria-label="Map navigation">
+  <div class="topbar" id="topbar" aria-label="Map navigation">
     <a href="index.html#map" target="_top" aria-label="Return to Dog Tag Day home page">← Home</a>
     <div class="title">Across America</div>
-    <a href="map.html?v=20260908-mobile-focus" target="_top" aria-label="Open the Across America map full screen">Full Screen</a>
+    <a id="fullScreenLink" href="map.html?v=20260909-contextual-fullscreen" target="_top" aria-label="Open the Across America map full screen">Full Screen</a>
   </div>
   <div class="controls" aria-label="Map zoom controls">
     <button id="zoomOut" type="button" aria-label="Zoom out">−</button>
@@ -51,7 +53,12 @@ body{padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-i
 (function(){
   var stage=document.getElementById('stage'),canvas=document.getElementById('mapCanvas'),img=document.getElementById('mapImage');
   var zin=document.getElementById('zoomIn'),zout=document.getElementById('zoomOut'),reset=document.getElementById('resetMap'),status=document.getElementById('zoomStatus');
+  var topbar=document.getElementById('topbar'),fullScreenLink=document.getElementById('fullScreenLink');
   var zoom=1;
+  if(window.top===window.self){
+    fullScreenLink.hidden=true;
+    topbar.classList.add('topLevel');
+  }
   function focusPoint(){
     return {
       x:(stage.scrollLeft+stage.clientWidth/2)/Math.max(stage.scrollWidth,stage.clientWidth,1),
