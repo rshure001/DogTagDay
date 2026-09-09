@@ -2,9 +2,505 @@
   "subject": "Dog Tag Day — April 18 Veteran Visibility Initiative",
   "replyTo": "rshure001@yahoo.com",
   "website": "https://dogtagday.org",
-  "body": "Hello,\n\nI’m Ronnie Shure, Founder & President of Dog Tag Day Foundation. We are establishing April 18 as a day of visible recognition for veterans, service members, and their families.\n\nThe idea is simple: veterans and active-duty service members may wear their dog tags, and families may wear or carry the tags of loved ones who served. Participation is voluntary. The purpose is visibility, recognition, and connection — a simple way of saying, ‘I see you.’\n\nI would welcome a conversation about how Dog Tag Day Foundation can help your work and how we might introduce April 18 to veterans and families.\n\nThank you for the work you do for our veteran community.\n\nRespectfully,\nRonnie Shure\nFounder & President\nDog Tag Day Foundation\nApril 18 | dogtagday.org\nrshure001@yahoo.com",
-  "statusModel": ["ready", "submitted", "delivered", "bounced", "failed"],
+  "body": "Hello,\n\nMy name is Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are building April 18 into a national day of veteran visibility.\n\nDog Tag Day asks Americans to recognize the person behind the dog tags, listen to veterans’ stories, and acknowledge their service. The dog tags mean “I served.” Acknowledging them means “I see you.”\n\nWe would welcome a conversation about how Dog Tag Day Foundation can help your organization and how we might support one another as April 18 grows nationally.\n\nPlease visit DogTagDay.org to learn more.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nDogTagDay.org\nrshure001@yahoo.com",
+  "statusModel": [
+    "ready",
+    "submitted",
+    "delivered",
+    "bounced",
+    "failed"
+  ],
   "recipientSource": "recipients.csv",
-  "recipientCount": 45,
-  "sendMode": "one-recipient-per-message"
+  "recipientCount": 54,
+  "sendMode": "one-recipient-per-message",
+  "queueUpdatedAt": "2026-09-09T21:15:32.793Z",
+  "sourceUrl": "https://department.va.gov/homeless/veterans-justice-programs/veterans-justice-outreach/vjo-contacts/",
+  "records": [
+    {
+      "email": "heather.west2@va.gov",
+      "name": "Heather West",
+      "organization": "Battle Creek VA Medical Center",
+      "status": "ready",
+      "verifiedAt": "2026-09-09T21:15:32.793Z",
+      "subject": "Dog Tag Day — April 18 Veteran Visibility Initiative",
+      "body": "Hello Heather West,\n\nMy name is Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are building April 18 into a national day of veteran visibility.\n\nDog Tag Day asks Americans to recognize the person behind the dog tags, listen to veterans’ stories, and acknowledge their service. The dog tags mean “I served.” Acknowledging them means “I see you.”\n\nWe would welcome a conversation about how Dog Tag Day Foundation can help your work at Battle Creek VA Medical Center and how we might support one another as April 18 grows nationally.\n\nPlease visit DogTagDay.org to learn more.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nDogTagDay.org\nrshure001@yahoo.com"
+    },
+    {
+      "email": "john.koch3@va.gov",
+      "name": "John Koch",
+      "organization": "Battle Creek VA Medical Center",
+      "status": "ready",
+      "verifiedAt": "2026-09-09T21:15:32.793Z",
+      "subject": "Dog Tag Day — April 18 Veteran Visibility Initiative",
+      "body": "Hello John Koch,\n\nMy name is Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are building April 18 into a national day of veteran visibility.\n\nDog Tag Day asks Americans to recognize the person behind the dog tags, listen to veterans’ stories, and acknowledge their service. The dog tags mean “I served.” Acknowledging them means “I see you.”\n\nWe would welcome a conversation about how Dog Tag Day Foundation can help your work at Battle Creek VA Medical Center and how we might support one another as April 18 grows nationally.\n\nPlease visit DogTagDay.org to learn more.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nDogTagDay.org\nrshure001@yahoo.com"
+    },
+    {
+      "email": "brenden.wright@va.gov",
+      "name": "Brenden Wright",
+      "organization": "Battle Creek VA Medical Center",
+      "status": "ready",
+      "verifiedAt": "2026-09-09T21:15:32.793Z",
+      "subject": "Dog Tag Day — April 18 Veteran Visibility Initiative",
+      "body": "Hello Brenden Wright,\n\nMy name is Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are building April 18 into a national day of veteran visibility.\n\nDog Tag Day asks Americans to recognize the person behind the dog tags, listen to veterans’ stories, and acknowledge their service. The dog tags mean “I served.” Acknowledging them means “I see you.”\n\nWe would welcome a conversation about how Dog Tag Day Foundation can help your work at Battle Creek VA Medical Center and how we might support one another as April 18 grows nationally.\n\nPlease visit DogTagDay.org to learn more.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nDogTagDay.org\nrshure001@yahoo.com"
+    },
+    {
+      "email": "daniel.cuschieri@va.gov",
+      "name": "Daniel Cuschieri",
+      "organization": "John D. Dingell VA Medical Center",
+      "status": "ready",
+      "verifiedAt": "2026-09-09T21:15:32.793Z",
+      "subject": "Dog Tag Day — April 18 Veteran Visibility Initiative",
+      "body": "Hello Daniel Cuschieri,\n\nMy name is Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are building April 18 into a national day of veteran visibility.\n\nDog Tag Day asks Americans to recognize the person behind the dog tags, listen to veterans’ stories, and acknowledge their service. The dog tags mean “I served.” Acknowledging them means “I see you.”\n\nWe would welcome a conversation about how Dog Tag Day Foundation can help your work at John D. Dingell VA Medical Center and how we might support one another as April 18 grows nationally.\n\nPlease visit DogTagDay.org to learn more.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nDogTagDay.org\nrshure001@yahoo.com"
+    },
+    {
+      "email": "cathy.louis@va.gov",
+      "name": "Cathy Louis",
+      "organization": "John D. Dingell VA Medical Center",
+      "status": "ready",
+      "verifiedAt": "2026-09-09T21:15:32.793Z",
+      "subject": "Dog Tag Day — April 18 Veteran Visibility Initiative",
+      "body": "Hello Cathy Louis,\n\nMy name is Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are building April 18 into a national day of veteran visibility.\n\nDog Tag Day asks Americans to recognize the person behind the dog tags, listen to veterans’ stories, and acknowledge their service. The dog tags mean “I served.” Acknowledging them means “I see you.”\n\nWe would welcome a conversation about how Dog Tag Day Foundation can help your work at John D. Dingell VA Medical Center and how we might support one another as April 18 grows nationally.\n\nPlease visit DogTagDay.org to learn more.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nDogTagDay.org\nrshure001@yahoo.com"
+    },
+    {
+      "email": "sarah.hannah5@va.gov",
+      "name": "S. Tess Hannah",
+      "organization": "John D. Dingell VA Medical Center",
+      "status": "ready",
+      "verifiedAt": "2026-09-09T21:15:32.793Z",
+      "subject": "Dog Tag Day — April 18 Veteran Visibility Initiative",
+      "body": "Hello S. Tess Hannah,\n\nMy name is Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are building April 18 into a national day of veteran visibility.\n\nDog Tag Day asks Americans to recognize the person behind the dog tags, listen to veterans’ stories, and acknowledge their service. The dog tags mean “I served.” Acknowledging them means “I see you.”\n\nWe would welcome a conversation about how Dog Tag Day Foundation can help your work at John D. Dingell VA Medical Center and how we might support one another as April 18 grows nationally.\n\nPlease visit DogTagDay.org to learn more.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nDogTagDay.org\nrshure001@yahoo.com"
+    },
+    {
+      "email": "trisha.meyers@va.gov",
+      "name": "Trisha Meyers",
+      "organization": "Adela E. Lutz VA Medical Center",
+      "status": "ready",
+      "verifiedAt": "2026-09-09T21:15:32.793Z",
+      "subject": "Dog Tag Day — April 18 Veteran Visibility Initiative",
+      "body": "Hello Trisha Meyers,\n\nMy name is Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are building April 18 into a national day of veteran visibility.\n\nDog Tag Day asks Americans to recognize the person behind the dog tags, listen to veterans’ stories, and acknowledge their service. The dog tags mean “I served.” Acknowledging them means “I see you.”\n\nWe would welcome a conversation about how Dog Tag Day Foundation can help your work at Adela E. Lutz VA Medical Center and how we might support one another as April 18 grows nationally.\n\nPlease visit DogTagDay.org to learn more.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nDogTagDay.org\nrshure001@yahoo.com"
+    },
+    {
+      "email": "kristin.larsen2@va.gov",
+      "name": "Kristin Larsen",
+      "organization": "Iron Mountain VA Medical Center",
+      "status": "ready",
+      "verifiedAt": "2026-09-09T21:15:32.793Z",
+      "subject": "Dog Tag Day — April 18 Veteran Visibility Initiative",
+      "body": "Hello Kristin Larsen,\n\nMy name is Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are building April 18 into a national day of veteran visibility.\n\nDog Tag Day asks Americans to recognize the person behind the dog tags, listen to veterans’ stories, and acknowledge their service. The dog tags mean “I served.” Acknowledging them means “I see you.”\n\nWe would welcome a conversation about how Dog Tag Day Foundation can help your work at Iron Mountain VA Medical Center and how we might support one another as April 18 grows nationally.\n\nPlease visit DogTagDay.org to learn more.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nDogTagDay.org\nrshure001@yahoo.com"
+    },
+    {
+      "email": "travis.vanderlist@va.gov",
+      "name": "Travis Vanderlist",
+      "organization": "Adela E. Lutz VA Medical Center",
+      "status": "ready",
+      "verifiedAt": "2026-09-09T21:15:32.793Z",
+      "subject": "Dog Tag Day — April 18 Veteran Visibility Initiative",
+      "body": "Hello Travis Vanderlist,\n\nMy name is Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are building April 18 into a national day of veteran visibility.\n\nDog Tag Day asks Americans to recognize the person behind the dog tags, listen to veterans’ stories, and acknowledge their service. The dog tags mean “I served.” Acknowledging them means “I see you.”\n\nWe would welcome a conversation about how Dog Tag Day Foundation can help your work at Adela E. Lutz VA Medical Center and how we might support one another as April 18 grows nationally.\n\nPlease visit DogTagDay.org to learn more.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nDogTagDay.org\nrshure001@yahoo.com"
+    },
+    {
+      "email": "barton.miller@va.gov",
+      "name": "Barton Miller",
+      "organization": "Adela E. Lutz VA Medical Center",
+      "status": "ready",
+      "verifiedAt": "2026-09-09T21:15:32.793Z",
+      "subject": "Dog Tag Day — April 18 Veteran Visibility Initiative",
+      "body": "Hello Barton Miller,\n\nMy name is Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are building April 18 into a national day of veteran visibility.\n\nDog Tag Day asks Americans to recognize the person behind the dog tags, listen to veterans’ stories, and acknowledge their service. The dog tags mean “I served.” Acknowledging them means “I see you.”\n\nWe would welcome a conversation about how Dog Tag Day Foundation can help your work at Adela E. Lutz VA Medical Center and how we might support one another as April 18 grows nationally.\n\nPlease visit DogTagDay.org to learn more.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nDogTagDay.org\nrshure001@yahoo.com"
+    },
+    {
+      "email": "julia.dunn1@va.gov",
+      "name": "Julia Dunn",
+      "organization": "Adela E. Lutz VA Medical Center",
+      "status": "ready",
+      "verifiedAt": "2026-09-09T21:15:32.793Z",
+      "subject": "Dog Tag Day — April 18 Veteran Visibility Initiative",
+      "body": "Hello Julia Dunn,\n\nMy name is Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are building April 18 into a national day of veteran visibility.\n\nDog Tag Day asks Americans to recognize the person behind the dog tags, listen to veterans’ stories, and acknowledge their service. The dog tags mean “I served.” Acknowledging them means “I see you.”\n\nWe would welcome a conversation about how Dog Tag Day Foundation can help your work at Adela E. Lutz VA Medical Center and how we might support one another as April 18 grows nationally.\n\nPlease visit DogTagDay.org to learn more.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nDogTagDay.org\nrshure001@yahoo.com"
+    },
+    {
+      "email": "michael.mynczywor@va.gov",
+      "name": "Michael Mynczywor",
+      "organization": "St. Cloud VA Medical Center",
+      "status": "ready",
+      "verifiedAt": "2026-09-09T21:15:32.793Z",
+      "subject": "Dog Tag Day — April 18 Veteran Visibility Initiative",
+      "body": "Hello Michael Mynczywor,\n\nMy name is Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are building April 18 into a national day of veteran visibility.\n\nDog Tag Day asks Americans to recognize the person behind the dog tags, listen to veterans’ stories, and acknowledge their service. The dog tags mean “I served.” Acknowledging them means “I see you.”\n\nWe would welcome a conversation about how Dog Tag Day Foundation can help your work at St. Cloud VA Medical Center and how we might support one another as April 18 grows nationally.\n\nPlease visit DogTagDay.org to learn more.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nDogTagDay.org\nrshure001@yahoo.com"
+    },
+    {
+      "email": "david.neslen@va.gov",
+      "name": "David Neslen",
+      "organization": "VA Gulf Coast Veterans Health Care System",
+      "status": "ready",
+      "verifiedAt": "2026-09-09T21:15:32.793Z",
+      "subject": "Dog Tag Day — April 18 Veteran Visibility Initiative",
+      "body": "Hello David Neslen,\n\nMy name is Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are building April 18 into a national day of veteran visibility.\n\nDog Tag Day asks Americans to recognize the person behind the dog tags, listen to veterans’ stories, and acknowledge their service. The dog tags mean “I served.” Acknowledging them means “I see you.”\n\nWe would welcome a conversation about how Dog Tag Day Foundation can help your work at VA Gulf Coast Veterans Health Care System and how we might support one another as April 18 grows nationally.\n\nPlease visit DogTagDay.org to learn more.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nDogTagDay.org\nrshure001@yahoo.com"
+    },
+    {
+      "email": "tomiko.daffin@va.gov",
+      "name": "Tomiko Daffin",
+      "organization": "VA Gulf Coast Veterans Health Care System",
+      "status": "ready",
+      "verifiedAt": "2026-09-09T21:15:32.793Z",
+      "subject": "Dog Tag Day — April 18 Veteran Visibility Initiative",
+      "body": "Hello Tomiko Daffin,\n\nMy name is Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are building April 18 into a national day of veteran visibility.\n\nDog Tag Day asks Americans to recognize the person behind the dog tags, listen to veterans’ stories, and acknowledge their service. The dog tags mean “I served.” Acknowledging them means “I see you.”\n\nWe would welcome a conversation about how Dog Tag Day Foundation can help your work at VA Gulf Coast Veterans Health Care System and how we might support one another as April 18 grows nationally.\n\nPlease visit DogTagDay.org to learn more.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nDogTagDay.org\nrshure001@yahoo.com"
+    },
+    {
+      "email": "david.germany@va.gov",
+      "name": "David Germany",
+      "organization": "G.V. Sonny Montgomery VA Medical Center",
+      "status": "ready",
+      "verifiedAt": "2026-09-09T21:15:32.793Z",
+      "subject": "Dog Tag Day — April 18 Veteran Visibility Initiative",
+      "body": "Hello David Germany,\n\nMy name is Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are building April 18 into a national day of veteran visibility.\n\nDog Tag Day asks Americans to recognize the person behind the dog tags, listen to veterans’ stories, and acknowledge their service. The dog tags mean “I served.” Acknowledging them means “I see you.”\n\nWe would welcome a conversation about how Dog Tag Day Foundation can help your work at G.V. Sonny Montgomery VA Medical Center and how we might support one another as April 18 grows nationally.\n\nPlease visit DogTagDay.org to learn more.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nDogTagDay.org\nrshure001@yahoo.com"
+    },
+    {
+      "email": "ronda.aldridge@va.gov",
+      "name": "Ronda Aldridge",
+      "organization": "G.V. Sonny Montgomery VA Medical Center",
+      "status": "ready",
+      "verifiedAt": "2026-09-09T21:15:32.793Z",
+      "subject": "Dog Tag Day — April 18 Veteran Visibility Initiative",
+      "body": "Hello Ronda Aldridge,\n\nMy name is Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are building April 18 into a national day of veteran visibility.\n\nDog Tag Day asks Americans to recognize the person behind the dog tags, listen to veterans’ stories, and acknowledge their service. The dog tags mean “I served.” Acknowledging them means “I see you.”\n\nWe would welcome a conversation about how Dog Tag Day Foundation can help your work at G.V. Sonny Montgomery VA Medical Center and how we might support one another as April 18 grows nationally.\n\nPlease visit DogTagDay.org to learn more.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nDogTagDay.org\nrshure001@yahoo.com"
+    },
+    {
+      "email": "julie.saxon@va.gov",
+      "name": "Julie Saxon",
+      "organization": "G.V. Sonny Montgomery VA Medical Center",
+      "status": "ready",
+      "verifiedAt": "2026-09-09T21:15:32.793Z",
+      "subject": "Dog Tag Day — April 18 Veteran Visibility Initiative",
+      "body": "Hello Julie Saxon,\n\nMy name is Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are building April 18 into a national day of veteran visibility.\n\nDog Tag Day asks Americans to recognize the person behind the dog tags, listen to veterans’ stories, and acknowledge their service. The dog tags mean “I served.” Acknowledging them means “I see you.”\n\nWe would welcome a conversation about how Dog Tag Day Foundation can help your work at G.V. Sonny Montgomery VA Medical Center and how we might support one another as April 18 grows nationally.\n\nPlease visit DogTagDay.org to learn more.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nDogTagDay.org\nrshure001@yahoo.com"
+    },
+    {
+      "email": "jaron.brown@va.gov",
+      "name": "Ja’Ron Brown",
+      "organization": "G.V. Sonny Montgomery VA Medical Center",
+      "status": "ready",
+      "verifiedAt": "2026-09-09T21:15:32.793Z",
+      "subject": "Dog Tag Day — April 18 Veteran Visibility Initiative",
+      "body": "Hello Ja’Ron Brown,\n\nMy name is Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are building April 18 into a national day of veteran visibility.\n\nDog Tag Day asks Americans to recognize the person behind the dog tags, listen to veterans’ stories, and acknowledge their service. The dog tags mean “I served.” Acknowledging them means “I see you.”\n\nWe would welcome a conversation about how Dog Tag Day Foundation can help your work at G.V. Sonny Montgomery VA Medical Center and how we might support one another as April 18 grows nationally.\n\nPlease visit DogTagDay.org to learn more.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nDogTagDay.org\nrshure001@yahoo.com"
+    },
+    {
+      "email": "madeline.ortego@va.gov",
+      "name": "Madeline Ortego",
+      "organization": "Harry S. Truman Memorial Veterans’ Hospital",
+      "status": "ready",
+      "verifiedAt": "2026-09-09T21:15:32.793Z",
+      "subject": "Dog Tag Day — April 18 Veteran Visibility Initiative",
+      "body": "Hello Madeline Ortego,\n\nMy name is Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are building April 18 into a national day of veteran visibility.\n\nDog Tag Day asks Americans to recognize the person behind the dog tags, listen to veterans’ stories, and acknowledge their service. The dog tags mean “I served.” Acknowledging them means “I see you.”\n\nWe would welcome a conversation about how Dog Tag Day Foundation can help your work at Harry S. Truman Memorial Veterans’ Hospital and how we might support one another as April 18 grows nationally.\n\nPlease visit DogTagDay.org to learn more.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nDogTagDay.org\nrshure001@yahoo.com"
+    },
+    {
+      "email": "allisen.deville@va.gov",
+      "name": "Allisen Deville",
+      "organization": "Harry S. Truman Memorial Veterans’ Hospital",
+      "status": "ready",
+      "verifiedAt": "2026-09-09T21:15:32.793Z",
+      "subject": "Dog Tag Day — April 18 Veteran Visibility Initiative",
+      "body": "Hello Allisen Deville,\n\nMy name is Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are building April 18 into a national day of veteran visibility.\n\nDog Tag Day asks Americans to recognize the person behind the dog tags, listen to veterans’ stories, and acknowledge their service. The dog tags mean “I served.” Acknowledging them means “I see you.”\n\nWe would welcome a conversation about how Dog Tag Day Foundation can help your work at Harry S. Truman Memorial Veterans’ Hospital and how we might support one another as April 18 grows nationally.\n\nPlease visit DogTagDay.org to learn more.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nDogTagDay.org\nrshure001@yahoo.com"
+    },
+    {
+      "email": "amy.hogan@va.gov",
+      "name": "Amy Hogan",
+      "organization": "Kansas City VA Medical Center",
+      "status": "ready",
+      "verifiedAt": "2026-09-09T21:15:32.793Z",
+      "subject": "Dog Tag Day — April 18 Veteran Visibility Initiative",
+      "body": "Hello Amy Hogan,\n\nMy name is Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are building April 18 into a national day of veteran visibility.\n\nDog Tag Day asks Americans to recognize the person behind the dog tags, listen to veterans’ stories, and acknowledge their service. The dog tags mean “I served.” Acknowledging them means “I see you.”\n\nWe would welcome a conversation about how Dog Tag Day Foundation can help your work at Kansas City VA Medical Center and how we might support one another as April 18 grows nationally.\n\nPlease visit DogTagDay.org to learn more.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nDogTagDay.org\nrshure001@yahoo.com"
+    },
+    {
+      "email": "leanne.little@va.gov",
+      "name": "Leanne Little",
+      "organization": "Kansas City VA Medical Center",
+      "status": "ready",
+      "verifiedAt": "2026-09-09T21:15:32.793Z",
+      "subject": "Dog Tag Day — April 18 Veteran Visibility Initiative",
+      "body": "Hello Leanne Little,\n\nMy name is Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are building April 18 into a national day of veteran visibility.\n\nDog Tag Day asks Americans to recognize the person behind the dog tags, listen to veterans’ stories, and acknowledge their service. The dog tags mean “I served.” Acknowledging them means “I see you.”\n\nWe would welcome a conversation about how Dog Tag Day Foundation can help your work at Kansas City VA Medical Center and how we might support one another as April 18 grows nationally.\n\nPlease visit DogTagDay.org to learn more.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nDogTagDay.org\nrshure001@yahoo.com"
+    },
+    {
+      "email": "kelly.mcdaniel@va.gov",
+      "name": "Kelly McDaniel",
+      "organization": "Kansas City VA Medical Center",
+      "status": "ready",
+      "verifiedAt": "2026-09-09T21:15:32.793Z",
+      "subject": "Dog Tag Day — April 18 Veteran Visibility Initiative",
+      "body": "Hello Kelly McDaniel,\n\nMy name is Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are building April 18 into a national day of veteran visibility.\n\nDog Tag Day asks Americans to recognize the person behind the dog tags, listen to veterans’ stories, and acknowledge their service. The dog tags mean “I served.” Acknowledging them means “I see you.”\n\nWe would welcome a conversation about how Dog Tag Day Foundation can help your work at Kansas City VA Medical Center and how we might support one another as April 18 grows nationally.\n\nPlease visit DogTagDay.org to learn more.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nDogTagDay.org\nrshure001@yahoo.com"
+    },
+    {
+      "email": "michele.parsons@va.gov",
+      "name": "Michele Parsons",
+      "organization": "Kansas City VA Medical Center",
+      "status": "ready",
+      "verifiedAt": "2026-09-09T21:15:32.793Z",
+      "subject": "Dog Tag Day — April 18 Veteran Visibility Initiative",
+      "body": "Hello Michele Parsons,\n\nMy name is Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are building April 18 into a national day of veteran visibility.\n\nDog Tag Day asks Americans to recognize the person behind the dog tags, listen to veterans’ stories, and acknowledge their service. The dog tags mean “I served.” Acknowledging them means “I see you.”\n\nWe would welcome a conversation about how Dog Tag Day Foundation can help your work at Kansas City VA Medical Center and how we might support one another as April 18 grows nationally.\n\nPlease visit DogTagDay.org to learn more.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nDogTagDay.org\nrshure001@yahoo.com"
+    },
+    {
+      "email": "gary.helle@va.gov",
+      "name": "Gary Helle",
+      "organization": "John J. Pershing VA Medical Center",
+      "status": "ready",
+      "verifiedAt": "2026-09-09T21:15:32.793Z",
+      "subject": "Dog Tag Day — April 18 Veteran Visibility Initiative",
+      "body": "Hello Gary Helle,\n\nMy name is Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are building April 18 into a national day of veteran visibility.\n\nDog Tag Day asks Americans to recognize the person behind the dog tags, listen to veterans’ stories, and acknowledge their service. The dog tags mean “I served.” Acknowledging them means “I see you.”\n\nWe would welcome a conversation about how Dog Tag Day Foundation can help your work at John J. Pershing VA Medical Center and how we might support one another as April 18 grows nationally.\n\nPlease visit DogTagDay.org to learn more.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nDogTagDay.org\nrshure001@yahoo.com"
+    },
+    {
+      "email": "matthew.miller4@va.gov",
+      "name": "Matt Miller",
+      "organization": "St. Louis VA Medical Center",
+      "status": "ready",
+      "verifiedAt": "2026-09-09T21:15:32.793Z",
+      "subject": "Dog Tag Day — April 18 Veteran Visibility Initiative",
+      "body": "Hello Matt Miller,\n\nMy name is Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are building April 18 into a national day of veteran visibility.\n\nDog Tag Day asks Americans to recognize the person behind the dog tags, listen to veterans’ stories, and acknowledge their service. The dog tags mean “I served.” Acknowledging them means “I see you.”\n\nWe would welcome a conversation about how Dog Tag Day Foundation can help your work at St. Louis VA Medical Center and how we might support one another as April 18 grows nationally.\n\nPlease visit DogTagDay.org to learn more.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nDogTagDay.org\nrshure001@yahoo.com"
+    },
+    {
+      "email": "amy.guffey2@va.gov",
+      "name": "Amy Guffey",
+      "organization": "St. Louis VA Medical Center",
+      "status": "ready",
+      "verifiedAt": "2026-09-09T21:15:32.793Z",
+      "subject": "Dog Tag Day — April 18 Veteran Visibility Initiative",
+      "body": "Hello Amy Guffey,\n\nMy name is Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are building April 18 into a national day of veteran visibility.\n\nDog Tag Day asks Americans to recognize the person behind the dog tags, listen to veterans’ stories, and acknowledge their service. The dog tags mean “I served.” Acknowledging them means “I see you.”\n\nWe would welcome a conversation about how Dog Tag Day Foundation can help your work at St. Louis VA Medical Center and how we might support one another as April 18 grows nationally.\n\nPlease visit DogTagDay.org to learn more.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nDogTagDay.org\nrshure001@yahoo.com"
+    },
+    {
+      "email": "paul.willhoft@va.gov",
+      "name": "Paul Willhoft",
+      "organization": "St. Louis VA Medical Center",
+      "status": "ready",
+      "verifiedAt": "2026-09-09T21:15:32.793Z",
+      "subject": "Dog Tag Day — April 18 Veteran Visibility Initiative",
+      "body": "Hello Paul Willhoft,\n\nMy name is Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are building April 18 into a national day of veteran visibility.\n\nDog Tag Day asks Americans to recognize the person behind the dog tags, listen to veterans’ stories, and acknowledge their service. The dog tags mean “I served.” Acknowledging them means “I see you.”\n\nWe would welcome a conversation about how Dog Tag Day Foundation can help your work at St. Louis VA Medical Center and how we might support one another as April 18 grows nationally.\n\nPlease visit DogTagDay.org to learn more.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nDogTagDay.org\nrshure001@yahoo.com"
+    },
+    {
+      "email": "keith.suedmeyer@va.gov",
+      "name": "Keith Suedmeyer",
+      "organization": "St. Louis VA Medical Center",
+      "status": "ready",
+      "verifiedAt": "2026-09-09T21:15:32.793Z",
+      "subject": "Dog Tag Day — April 18 Veteran Visibility Initiative",
+      "body": "Hello Keith Suedmeyer,\n\nMy name is Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are building April 18 into a national day of veteran visibility.\n\nDog Tag Day asks Americans to recognize the person behind the dog tags, listen to veterans’ stories, and acknowledge their service. The dog tags mean “I served.” Acknowledging them means “I see you.”\n\nWe would welcome a conversation about how Dog Tag Day Foundation can help your work at St. Louis VA Medical Center and how we might support one another as April 18 grows nationally.\n\nPlease visit DogTagDay.org to learn more.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nDogTagDay.org\nrshure001@yahoo.com"
+    },
+    {
+      "email": "jeri.anderson2@va.gov",
+      "name": "Jeri Anderson",
+      "organization": "VA Montana Health Care System",
+      "status": "ready",
+      "verifiedAt": "2026-09-09T21:15:32.793Z",
+      "subject": "Dog Tag Day — April 18 Veteran Visibility Initiative",
+      "body": "Hello Jeri Anderson,\n\nMy name is Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are building April 18 into a national day of veteran visibility.\n\nDog Tag Day asks Americans to recognize the person behind the dog tags, listen to veterans’ stories, and acknowledge their service. The dog tags mean “I served.” Acknowledging them means “I see you.”\n\nWe would welcome a conversation about how Dog Tag Day Foundation can help your work at VA Montana Health Care System and how we might support one another as April 18 grows nationally.\n\nPlease visit DogTagDay.org to learn more.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nDogTagDay.org\nrshure001@yahoo.com"
+    },
+    {
+      "email": "jackie.merritt@va.gov",
+      "name": "Jackie Merritt",
+      "organization": "VA Montana Health Care System",
+      "status": "ready",
+      "verifiedAt": "2026-09-09T21:15:32.793Z",
+      "subject": "Dog Tag Day — April 18 Veteran Visibility Initiative",
+      "body": "Hello Jackie Merritt,\n\nMy name is Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are building April 18 into a national day of veteran visibility.\n\nDog Tag Day asks Americans to recognize the person behind the dog tags, listen to veterans’ stories, and acknowledge their service. The dog tags mean “I served.” Acknowledging them means “I see you.”\n\nWe would welcome a conversation about how Dog Tag Day Foundation can help your work at VA Montana Health Care System and how we might support one another as April 18 grows nationally.\n\nPlease visit DogTagDay.org to learn more.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nDogTagDay.org\nrshure001@yahoo.com"
+    },
+    {
+      "email": "vhalasswsvjp@va.gov",
+      "name": "Southern Nevada VJP Team",
+      "organization": "VA Southern Nevada Healthcare System",
+      "status": "ready",
+      "verifiedAt": "2026-09-09T21:15:32.793Z",
+      "subject": "Dog Tag Day — April 18 Veteran Visibility Initiative",
+      "body": "Hello Southern Nevada VJP Team,\n\nMy name is Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are building April 18 into a national day of veteran visibility.\n\nDog Tag Day asks Americans to recognize the person behind the dog tags, listen to veterans’ stories, and acknowledge their service. The dog tags mean “I served.” Acknowledging them means “I see you.”\n\nWe would welcome a conversation about how Dog Tag Day Foundation can help your work at VA Southern Nevada Healthcare System and how we might support one another as April 18 grows nationally.\n\nPlease visit DogTagDay.org to learn more.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nDogTagDay.org\nrshure001@yahoo.com"
+    },
+    {
+      "email": "mary.moss2@va.gov",
+      "name": "Mary Ann Moss",
+      "organization": "VA Sierra Nevada Health Care System",
+      "status": "ready",
+      "verifiedAt": "2026-09-09T21:15:32.793Z",
+      "subject": "Dog Tag Day — April 18 Veteran Visibility Initiative",
+      "body": "Hello Mary Ann Moss,\n\nMy name is Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are building April 18 into a national day of veteran visibility.\n\nDog Tag Day asks Americans to recognize the person behind the dog tags, listen to veterans’ stories, and acknowledge their service. The dog tags mean “I served.” Acknowledging them means “I see you.”\n\nWe would welcome a conversation about how Dog Tag Day Foundation can help your work at VA Sierra Nevada Health Care System and how we might support one another as April 18 grows nationally.\n\nPlease visit DogTagDay.org to learn more.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nDogTagDay.org\nrshure001@yahoo.com"
+    },
+    {
+      "email": "virginia.dillon@va.gov",
+      "name": "Ginny Dillon",
+      "organization": "VA Sierra Nevada Health Care System",
+      "status": "ready",
+      "verifiedAt": "2026-09-09T21:15:32.793Z",
+      "subject": "Dog Tag Day — April 18 Veteran Visibility Initiative",
+      "body": "Hello Ginny Dillon,\n\nMy name is Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are building April 18 into a national day of veteran visibility.\n\nDog Tag Day asks Americans to recognize the person behind the dog tags, listen to veterans’ stories, and acknowledge their service. The dog tags mean “I served.” Acknowledging them means “I see you.”\n\nWe would welcome a conversation about how Dog Tag Day Foundation can help your work at VA Sierra Nevada Health Care System and how we might support one another as April 18 grows nationally.\n\nPlease visit DogTagDay.org to learn more.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nDogTagDay.org\nrshure001@yahoo.com"
+    },
+    {
+      "email": "john.moeling@va.gov",
+      "name": "Justin Moeling",
+      "organization": "Manchester VA Medical Center",
+      "status": "ready",
+      "verifiedAt": "2026-09-09T21:15:32.793Z",
+      "subject": "Dog Tag Day — April 18 Veteran Visibility Initiative",
+      "body": "Hello Justin Moeling,\n\nMy name is Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are building April 18 into a national day of veteran visibility.\n\nDog Tag Day asks Americans to recognize the person behind the dog tags, listen to veterans’ stories, and acknowledge their service. The dog tags mean “I served.” Acknowledging them means “I see you.”\n\nWe would welcome a conversation about how Dog Tag Day Foundation can help your work at Manchester VA Medical Center and how we might support one another as April 18 grows nationally.\n\nPlease visit DogTagDay.org to learn more.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nDogTagDay.org\nrshure001@yahoo.com"
+    },
+    {
+      "email": "michele.dussault@va.gov",
+      "name": "Michele Dussault",
+      "organization": "Manchester VA Medical Center",
+      "status": "ready",
+      "verifiedAt": "2026-09-09T21:15:32.793Z",
+      "subject": "Dog Tag Day — April 18 Veteran Visibility Initiative",
+      "body": "Hello Michele Dussault,\n\nMy name is Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are building April 18 into a national day of veteran visibility.\n\nDog Tag Day asks Americans to recognize the person behind the dog tags, listen to veterans’ stories, and acknowledge their service. The dog tags mean “I served.” Acknowledging them means “I see you.”\n\nWe would welcome a conversation about how Dog Tag Day Foundation can help your work at Manchester VA Medical Center and how we might support one another as April 18 grows nationally.\n\nPlease visit DogTagDay.org to learn more.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nDogTagDay.org\nrshure001@yahoo.com"
+    },
+    {
+      "email": "jjake.sanders@va.gov",
+      "name": "J. Jake Sanders",
+      "organization": "Wilmington VA Medical Center",
+      "status": "ready",
+      "verifiedAt": "2026-09-09T21:15:32.793Z",
+      "subject": "Dog Tag Day — April 18 Veteran Visibility Initiative",
+      "body": "Hello J. Jake Sanders,\n\nMy name is Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are building April 18 into a national day of veteran visibility.\n\nDog Tag Day asks Americans to recognize the person behind the dog tags, listen to veterans’ stories, and acknowledge their service. The dog tags mean “I served.” Acknowledging them means “I see you.”\n\nWe would welcome a conversation about how Dog Tag Day Foundation can help your work at Wilmington VA Medical Center and how we might support one another as April 18 grows nationally.\n\nPlease visit DogTagDay.org to learn more.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nDogTagDay.org\nrshure001@yahoo.com"
+    },
+    {
+      "email": "nmveteransjusticeprograms@va.gov",
+      "name": "New Mexico VJO Team",
+      "organization": "New Mexico VA Health Care System",
+      "status": "ready",
+      "verifiedAt": "2026-09-09T21:15:32.793Z",
+      "subject": "Dog Tag Day — April 18 Veteran Visibility Initiative",
+      "body": "Hello New Mexico VJO Team,\n\nMy name is Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are building April 18 into a national day of veteran visibility.\n\nDog Tag Day asks Americans to recognize the person behind the dog tags, listen to veterans’ stories, and acknowledge their service. The dog tags mean “I served.” Acknowledging them means “I see you.”\n\nWe would welcome a conversation about how Dog Tag Day Foundation can help your work at New Mexico VA Health Care System and how we might support one another as April 18 grows nationally.\n\nPlease visit DogTagDay.org to learn more.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nDogTagDay.org\nrshure001@yahoo.com"
+    },
+    {
+      "email": "montevis.price@va.gov",
+      "name": "Montevis Price",
+      "organization": "El Paso VA Health Care System",
+      "status": "ready",
+      "verifiedAt": "2026-09-09T21:15:32.793Z",
+      "subject": "Dog Tag Day — April 18 Veteran Visibility Initiative",
+      "body": "Hello Montevis Price,\n\nMy name is Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are building April 18 into a national day of veteran visibility.\n\nDog Tag Day asks Americans to recognize the person behind the dog tags, listen to veterans’ stories, and acknowledge their service. The dog tags mean “I served.” Acknowledging them means “I see you.”\n\nWe would welcome a conversation about how Dog Tag Day Foundation can help your work at El Paso VA Health Care System and how we might support one another as April 18 grows nationally.\n\nPlease visit DogTagDay.org to learn more.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nDogTagDay.org\nrshure001@yahoo.com"
+    },
+    {
+      "email": "alyssa.gibbons@va.gov",
+      "name": "Alyssa Gibbons",
+      "organization": "Albany VA Medical Center",
+      "status": "ready",
+      "verifiedAt": "2026-09-09T21:15:32.793Z",
+      "subject": "Dog Tag Day — April 18 Veteran Visibility Initiative",
+      "body": "Hello Alyssa Gibbons,\n\nMy name is Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are building April 18 into a national day of veteran visibility.\n\nDog Tag Day asks Americans to recognize the person behind the dog tags, listen to veterans’ stories, and acknowledge their service. The dog tags mean “I served.” Acknowledging them means “I see you.”\n\nWe would welcome a conversation about how Dog Tag Day Foundation can help your work at Albany VA Medical Center and how we might support one another as April 18 grows nationally.\n\nPlease visit DogTagDay.org to learn more.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nDogTagDay.org\nrshure001@yahoo.com"
+    },
+    {
+      "email": "savannah.monroe@va.gov",
+      "name": "Savannah Monroe",
+      "organization": "Bath VA Medical Center",
+      "status": "ready",
+      "verifiedAt": "2026-09-09T21:15:32.793Z",
+      "subject": "Dog Tag Day — April 18 Veteran Visibility Initiative",
+      "body": "Hello Savannah Monroe,\n\nMy name is Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are building April 18 into a national day of veteran visibility.\n\nDog Tag Day asks Americans to recognize the person behind the dog tags, listen to veterans’ stories, and acknowledge their service. The dog tags mean “I served.” Acknowledging them means “I see you.”\n\nWe would welcome a conversation about how Dog Tag Day Foundation can help your work at Bath VA Medical Center and how we might support one another as April 18 grows nationally.\n\nPlease visit DogTagDay.org to learn more.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nDogTagDay.org\nrshure001@yahoo.com"
+    },
+    {
+      "email": "eddie.marcano@va.gov",
+      "name": "Eddie Marcano",
+      "organization": "James J. Peters VA Medical Center",
+      "status": "ready",
+      "verifiedAt": "2026-09-09T21:15:32.793Z",
+      "subject": "Dog Tag Day — April 18 Veteran Visibility Initiative",
+      "body": "Hello Eddie Marcano,\n\nMy name is Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are building April 18 into a national day of veteran visibility.\n\nDog Tag Day asks Americans to recognize the person behind the dog tags, listen to veterans’ stories, and acknowledge their service. The dog tags mean “I served.” Acknowledging them means “I see you.”\n\nWe would welcome a conversation about how Dog Tag Day Foundation can help your work at James J. Peters VA Medical Center and how we might support one another as April 18 grows nationally.\n\nPlease visit DogTagDay.org to learn more.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nDogTagDay.org\nrshure001@yahoo.com"
+    },
+    {
+      "email": "john.lahood@va.gov",
+      "name": "John Lahood",
+      "organization": "VA Western New York Healthcare System",
+      "status": "ready",
+      "verifiedAt": "2026-09-09T21:15:32.793Z",
+      "subject": "Dog Tag Day — April 18 Veteran Visibility Initiative",
+      "body": "Hello John Lahood,\n\nMy name is Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are building April 18 into a national day of veteran visibility.\n\nDog Tag Day asks Americans to recognize the person behind the dog tags, listen to veterans’ stories, and acknowledge their service. The dog tags mean “I served.” Acknowledging them means “I see you.”\n\nWe would welcome a conversation about how Dog Tag Day Foundation can help your work at VA Western New York Healthcare System and how we might support one another as April 18 grows nationally.\n\nPlease visit DogTagDay.org to learn more.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nDogTagDay.org\nrshure001@yahoo.com"
+    },
+    {
+      "email": "carolyn.fagnan@va.gov",
+      "name": "Carolyn Fagnan",
+      "organization": "VA Western New York Healthcare System",
+      "status": "ready",
+      "verifiedAt": "2026-09-09T21:15:32.793Z",
+      "subject": "Dog Tag Day — April 18 Veteran Visibility Initiative",
+      "body": "Hello Carolyn Fagnan,\n\nMy name is Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are building April 18 into a national day of veteran visibility.\n\nDog Tag Day asks Americans to recognize the person behind the dog tags, listen to veterans’ stories, and acknowledge their service. The dog tags mean “I served.” Acknowledging them means “I see you.”\n\nWe would welcome a conversation about how Dog Tag Day Foundation can help your work at VA Western New York Healthcare System and how we might support one another as April 18 grows nationally.\n\nPlease visit DogTagDay.org to learn more.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nDogTagDay.org\nrshure001@yahoo.com"
+    },
+    {
+      "email": "justin.emerling@va.gov",
+      "name": "Justin Emerling",
+      "organization": "Canandaigua VA Medical Center",
+      "status": "ready",
+      "verifiedAt": "2026-09-09T21:15:32.793Z",
+      "subject": "Dog Tag Day — April 18 Veteran Visibility Initiative",
+      "body": "Hello Justin Emerling,\n\nMy name is Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are building April 18 into a national day of veteran visibility.\n\nDog Tag Day asks Americans to recognize the person behind the dog tags, listen to veterans’ stories, and acknowledge their service. The dog tags mean “I served.” Acknowledging them means “I see you.”\n\nWe would welcome a conversation about how Dog Tag Day Foundation can help your work at Canandaigua VA Medical Center and how we might support one another as April 18 grows nationally.\n\nPlease visit DogTagDay.org to learn more.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nDogTagDay.org\nrshure001@yahoo.com"
+    },
+    {
+      "email": "karetha.henry@va.gov",
+      "name": "Karetha Henry",
+      "organization": "VA Hudson Valley Health Care System",
+      "status": "ready",
+      "verifiedAt": "2026-09-09T21:15:32.793Z",
+      "subject": "Dog Tag Day — April 18 Veteran Visibility Initiative",
+      "body": "Hello Karetha Henry,\n\nMy name is Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are building April 18 into a national day of veteran visibility.\n\nDog Tag Day asks Americans to recognize the person behind the dog tags, listen to veterans’ stories, and acknowledge their service. The dog tags mean “I served.” Acknowledging them means “I see you.”\n\nWe would welcome a conversation about how Dog Tag Day Foundation can help your work at VA Hudson Valley Health Care System and how we might support one another as April 18 grows nationally.\n\nPlease visit DogTagDay.org to learn more.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nDogTagDay.org\nrshure001@yahoo.com"
+    },
+    {
+      "email": "sonie.williams@va.gov",
+      "name": "Sonie Williams",
+      "organization": "VA Hudson Valley Health Care System",
+      "status": "ready",
+      "verifiedAt": "2026-09-09T21:15:32.793Z",
+      "subject": "Dog Tag Day — April 18 Veteran Visibility Initiative",
+      "body": "Hello Sonie Williams,\n\nMy name is Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are building April 18 into a national day of veteran visibility.\n\nDog Tag Day asks Americans to recognize the person behind the dog tags, listen to veterans’ stories, and acknowledge their service. The dog tags mean “I served.” Acknowledging them means “I see you.”\n\nWe would welcome a conversation about how Dog Tag Day Foundation can help your work at VA Hudson Valley Health Care System and how we might support one another as April 18 grows nationally.\n\nPlease visit DogTagDay.org to learn more.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nDogTagDay.org\nrshure001@yahoo.com"
+    },
+    {
+      "email": "courtney.maat@va.gov",
+      "name": "Courtney Ma’at",
+      "organization": "VA New York Harbor Healthcare System",
+      "status": "ready",
+      "verifiedAt": "2026-09-09T21:15:32.793Z",
+      "subject": "Dog Tag Day — April 18 Veteran Visibility Initiative",
+      "body": "Hello Courtney Ma’at,\n\nMy name is Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are building April 18 into a national day of veteran visibility.\n\nDog Tag Day asks Americans to recognize the person behind the dog tags, listen to veterans’ stories, and acknowledge their service. The dog tags mean “I served.” Acknowledging them means “I see you.”\n\nWe would welcome a conversation about how Dog Tag Day Foundation can help your work at VA New York Harbor Healthcare System and how we might support one another as April 18 grows nationally.\n\nPlease visit DogTagDay.org to learn more.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nDogTagDay.org\nrshure001@yahoo.com"
+    },
+    {
+      "email": "jeffrey.rabinovici@va.gov",
+      "name": "Jeff Rabinovici",
+      "organization": "VA New York Harbor Healthcare System",
+      "status": "ready",
+      "verifiedAt": "2026-09-09T21:15:32.793Z",
+      "subject": "Dog Tag Day — April 18 Veteran Visibility Initiative",
+      "body": "Hello Jeff Rabinovici,\n\nMy name is Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are building April 18 into a national day of veteran visibility.\n\nDog Tag Day asks Americans to recognize the person behind the dog tags, listen to veterans’ stories, and acknowledge their service. The dog tags mean “I served.” Acknowledging them means “I see you.”\n\nWe would welcome a conversation about how Dog Tag Day Foundation can help your work at VA New York Harbor Healthcare System and how we might support one another as April 18 grows nationally.\n\nPlease visit DogTagDay.org to learn more.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nDogTagDay.org\nrshure001@yahoo.com"
+    },
+    {
+      "email": "kimberly.shaw2@va.gov",
+      "name": "Kimberly Shaw",
+      "organization": "VA New York Harbor Healthcare System",
+      "status": "ready",
+      "verifiedAt": "2026-09-09T21:15:32.793Z",
+      "subject": "Dog Tag Day — April 18 Veteran Visibility Initiative",
+      "body": "Hello Kimberly Shaw,\n\nMy name is Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are building April 18 into a national day of veteran visibility.\n\nDog Tag Day asks Americans to recognize the person behind the dog tags, listen to veterans’ stories, and acknowledge their service. The dog tags mean “I served.” Acknowledging them means “I see you.”\n\nWe would welcome a conversation about how Dog Tag Day Foundation can help your work at VA New York Harbor Healthcare System and how we might support one another as April 18 grows nationally.\n\nPlease visit DogTagDay.org to learn more.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nDogTagDay.org\nrshure001@yahoo.com"
+    },
+    {
+      "email": "ericjohn.bruno@va.gov",
+      "name": "Eric Bruno",
+      "organization": "Northport VA Medical Center",
+      "status": "ready",
+      "verifiedAt": "2026-09-09T21:15:32.793Z",
+      "subject": "Dog Tag Day — April 18 Veteran Visibility Initiative",
+      "body": "Hello Eric Bruno,\n\nMy name is Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are building April 18 into a national day of veteran visibility.\n\nDog Tag Day asks Americans to recognize the person behind the dog tags, listen to veterans’ stories, and acknowledge their service. The dog tags mean “I served.” Acknowledging them means “I see you.”\n\nWe would welcome a conversation about how Dog Tag Day Foundation can help your work at Northport VA Medical Center and how we might support one another as April 18 grows nationally.\n\nPlease visit DogTagDay.org to learn more.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nDogTagDay.org\nrshure001@yahoo.com"
+    },
+    {
+      "email": "tiffany.grant-zellem@va.gov",
+      "name": "Tiffany Grant-Zellem",
+      "organization": "Northport VA Medical Center",
+      "status": "ready",
+      "verifiedAt": "2026-09-09T21:15:32.793Z",
+      "subject": "Dog Tag Day — April 18 Veteran Visibility Initiative",
+      "body": "Hello Tiffany Grant-Zellem,\n\nMy name is Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are building April 18 into a national day of veteran visibility.\n\nDog Tag Day asks Americans to recognize the person behind the dog tags, listen to veterans’ stories, and acknowledge their service. The dog tags mean “I served.” Acknowledging them means “I see you.”\n\nWe would welcome a conversation about how Dog Tag Day Foundation can help your work at Northport VA Medical Center and how we might support one another as April 18 grows nationally.\n\nPlease visit DogTagDay.org to learn more.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nDogTagDay.org\nrshure001@yahoo.com"
+    },
+    {
+      "email": "janice.james2@va.gov",
+      "name": "Janice James",
+      "organization": "Syracuse VA Medical Center",
+      "status": "ready",
+      "verifiedAt": "2026-09-09T21:15:32.793Z",
+      "subject": "Dog Tag Day — April 18 Veteran Visibility Initiative",
+      "body": "Hello Janice James,\n\nMy name is Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are building April 18 into a national day of veteran visibility.\n\nDog Tag Day asks Americans to recognize the person behind the dog tags, listen to veterans’ stories, and acknowledge their service. The dog tags mean “I served.” Acknowledging them means “I see you.”\n\nWe would welcome a conversation about how Dog Tag Day Foundation can help your work at Syracuse VA Medical Center and how we might support one another as April 18 grows nationally.\n\nPlease visit DogTagDay.org to learn more.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nDogTagDay.org\nrshure001@yahoo.com"
+    },
+    {
+      "email": "wendy.varricchio-fletcher@va.gov",
+      "name": "Wendy Varricchio-Fletcher",
+      "organization": "Syracuse VA Medical Center",
+      "status": "ready",
+      "verifiedAt": "2026-09-09T21:15:32.793Z",
+      "subject": "Dog Tag Day — April 18 Veteran Visibility Initiative",
+      "body": "Hello Wendy Varricchio-Fletcher,\n\nMy name is Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are building April 18 into a national day of veteran visibility.\n\nDog Tag Day asks Americans to recognize the person behind the dog tags, listen to veterans’ stories, and acknowledge their service. The dog tags mean “I served.” Acknowledging them means “I see you.”\n\nWe would welcome a conversation about how Dog Tag Day Foundation can help your work at Syracuse VA Medical Center and how we might support one another as April 18 grows nationally.\n\nPlease visit DogTagDay.org to learn more.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nDogTagDay.org\nrshure001@yahoo.com"
+    }
+  ]
 }
