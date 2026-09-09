@@ -1,0 +1,508 @@
+{
+  "campaign": "Dog Tag Day — April 18",
+  "status": "approved",
+  "subject": "Dog Tag Day — April 18 | A simple way to say: I see you",
+  "body_template": "{{greeting}}\n\nI’m Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are establishing April 18 as a day of visible recognition for veterans, service members, and their families.\n\nThe idea is simple: veterans and active-duty service members may wear their dog tags, and families may wear or carry the tags of loved ones who served. Participation is voluntary. No explanation is required and no story is owed. The purpose is visibility, recognition, and connection — a simple way of saying, ‘I see you.’\n\nI would welcome a conversation about how Dog Tag Day Foundation can help {{organization}} and how we might introduce April 18 to veterans and families.\n\nThank you for the work you do for our veteran community.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nApril 18 | https://dogtagday.org\nrshure001@yahoo.com",
+  "recipients": [
+    {
+      "organization": "Disabled Veterans National Foundation",
+      "email": "info@dvnf.org",
+      "source_url": "https://www.dvnf.org/contact-us/"
+    },
+    {
+      "organization": "Veteran Support Foundation",
+      "email": "kpoynton@vsf-usa.org",
+      "source_url": "https://vsf-usa.org/"
+    },
+    {
+      "organization": "Florida Veterans Foundation",
+      "email": "fvf@fdva.fl.gov",
+      "source_url": "https://www.helpflvets.org/contact-us"
+    },
+    {
+      "organization": "U.S.VETS Veterans Fund",
+      "email": "lkapgan@usvets.org",
+      "source_url": "https://usvets.org/the-veterans-fund/"
+    },
+    {
+      "organization": "City of North Las Vegas Veterans and Community Resource Center",
+      "email": "lescanow@cityofnorthlasvegas.com",
+      "source_url": "https://www.cityofnorthlasvegas.com/residents/veterans-and-community-resource-center"
+    },
+    {
+      "organization": "Veterans and First Responders Foundation",
+      "email": "contact@vfrfoundation.org",
+      "source_url": "https://www.vfrfoundation.org/contact-us"
+    },
+    {
+      "organization": "Bronx Veterans Medical Research Foundation",
+      "email": "bvmrfadmin@va.gov",
+      "source_url": "https://www.bvmrf.org/donate"
+    },
+    {
+      "organization": "University of Kentucky Veterans Resource Center",
+      "email": "vetcenter@uky.edu",
+      "source_url": "https://studentsuccess.uky.edu/veterans-resource-center"
+    },
+    {
+      "organization": "University of Miami Veterans Resource Center",
+      "email": "doso@miami.edu",
+      "source_url": "https://doso.studentaffairs.miami.edu/veterans-resource-center/index.html"
+    },
+    {
+      "organization": "American Corporate Partners",
+      "email": "info@acp-usa.org",
+      "source_url": "https://www.acp-usa.org/contact/"
+    },
+    {
+      "organization": "University of Southern California Veterans Resource Center",
+      "email": "vrc@usc.edu",
+      "source_url": "https://vrc.usc.edu/"
+    },
+    {
+      "organization": "County College of Morris Veterans Resource Center",
+      "email": "veterans@ccm.edu",
+      "source_url": "https://www.ccm.edu/admissions/for-veterans/"
+    },
+    {
+      "organization": "Community College of Philadelphia Veterans Resource Center",
+      "email": "vets@ccp.edu",
+      "source_url": "https://www.ccp.edu/student-services/student-assistance-centers/veterans-resource-center"
+    },
+    {
+      "organization": "University of California Riverside Veterans Resource Center",
+      "email": "vasco@ucr.edu",
+      "source_url": "https://veterans.ucr.edu/community"
+    },
+    {
+      "organization": "University of Nebraska at Kearney Military and Veteran Services",
+      "email": "skarkala@unk.edu",
+      "source_url": "https://veterans.nebraska.gov/school-directory"
+    },
+    {
+      "organization": "Georgia Tech Veterans Resource Center",
+      "email": "dross35@gatech.edu",
+      "source_url": "https://registrar.gatech.edu/info/list-contacts-veterans-services"
+    },
+    {
+      "organization": "City of East Providence Veterans Services",
+      "email": "avargas@eastprovidenceri.gov",
+      "source_url": "https://eastprovidenceri.gov/executive-profiles/veterans-services-community-health-coordinator"
+    },
+    {
+      "organization": "Hawaii Office of Veterans Services",
+      "email": "ovs@hawaii.gov",
+      "source_url": "https://dod.hawaii.gov/ovs/"
+    },
+    {
+      "organization": "Eaton County Veterans Services",
+      "email": "veteransservicesweb@eatoncounty.org",
+      "source_url": "https://www.michigan.gov/mvaa/county-filter-search-locations"
+    },
+    {
+      "organization": "Massachusetts Executive Office of Veterans Services",
+      "email": "eovshousing@mass.gov",
+      "source_url": "https://www.mass.gov/info-details/veterans-services-leadership-program-directory"
+    },
+    {
+      "organization": "University of Texas Permian Basin Veteran and Military Support Services",
+      "email": "veteranservices@utpb.edu",
+      "source_url": "https://www.utpb.edu/directory/office/veterans-services"
+    },
+    {
+      "organization": "University of Texas Permian Basin Veteran and Military Support Services",
+      "email": "hazlewood@utpb.edu",
+      "source_url": "https://www.utpb.edu/directory/office/veterans-services"
+    },
+    {
+      "organization": "Paralyzed Veterans of America",
+      "email": "info@pva.org",
+      "source_url": "https://pva.org/contact-us/"
+    },
+    {
+      "organization": "Paralyzed Veterans of America",
+      "email": "donorservices@pva.org",
+      "source_url": "https://pva.org/contact-us/"
+    },
+    {
+      "organization": "National Park College Veteran Services",
+      "email": "npcvets@np.edu",
+      "source_url": "https://np.edu/student-life-services/veterans-services-center/"
+    },
+    {
+      "organization": "Veterans Association of America",
+      "email": "rworks@vetsaa.org",
+      "source_url": "https://www.vetsaa.org/"
+    },
+    {
+      "organization": "Silicon Valley Community Foundation",
+      "email": "donate@svcf.org",
+      "source_url": "https://www.svcf.org/contact-us"
+    },
+    {
+      "organization": "Lewis-Clark State College Veteran Services",
+      "email": "mckelton@lcsc.edu",
+      "source_url": "https://www.lcsc.edu/veterans/staff-directory"
+    },
+    {
+      "organization": "Crow Wing County Veteran Services",
+      "email": "erik.g.flowers@crowwing.gov",
+      "source_url": "https://www.crowwing.gov/209/Veteran-Services"
+    },
+    {
+      "organization": "Crow Wing County Veteran Services",
+      "email": "natalie.petersen@crowwing.gov",
+      "source_url": "https://www.crowwing.gov/209/Veteran-Services"
+    },
+    {
+      "organization": "Crow Wing County Veteran Services",
+      "email": "travis.w.svoboda@crowwing.gov",
+      "source_url": "https://www.crowwing.gov/209/Veteran-Services"
+    },
+    {
+      "organization": "Crow Wing County Veteran Services",
+      "email": "veterans.info@crowwing.gov",
+      "source_url": "https://www.crowwing.gov/209/Veteran-Services"
+    },
+    {
+      "organization": "Hawai'i Community Foundation",
+      "email": "info@hcf-hawaii.org",
+      "source_url": "https://www.hawaiicommunityfoundation.org/contact--us"
+    },
+    {
+      "organization": "Fresno City College Veterans Resource Center",
+      "email": "veterans@fresnocitycollege.edu",
+      "source_url": "https://www.fresnocitycollege.edu/student-services/veterans-resource-center/index.html"
+    },
+    {
+      "organization": "Door County Community Foundation",
+      "email": "grants@givedoorcounty.org",
+      "source_url": "https://doorcountycommunityfoundation.org/contact/"
+    },
+    {
+      "organization": "Door County Community Foundation",
+      "email": "donorservices@givedoorcounty.org",
+      "source_url": "https://doorcountycommunityfoundation.org/contact/"
+    },
+    {
+      "organization": "Door County Community Foundation",
+      "email": "newfund@givedoorcounty.org",
+      "source_url": "https://doorcountycommunityfoundation.org/contact/"
+    },
+    {
+      "organization": "Door County Community Foundation",
+      "email": "applications@givedoorcounty.org",
+      "source_url": "https://doorcountycommunityfoundation.org/contact/"
+    },
+    {
+      "organization": "Door County Community Foundation",
+      "email": "rsvp@givedoorcounty.org",
+      "source_url": "https://doorcountycommunityfoundation.org/contact/"
+    },
+    {
+      "organization": "Door County Community Foundation",
+      "email": "webmaster@givedoorcounty.org",
+      "source_url": "https://doorcountycommunityfoundation.org/contact/"
+    },
+    {
+      "organization": "Blue Grass Community Foundation",
+      "email": "info@bgcf.org",
+      "source_url": "https://www.bgcf.org/contact-us/"
+    },
+    {
+      "organization": "Community Foundation for Livingston County",
+      "email": "livingston@cfsem.org",
+      "source_url": "https://cfsem.org/affiliate/community-foundation-livingston-county/contact/"
+    },
+    {
+      "organization": "UCLA Veterans Resource Center",
+      "email": "deana.garay@va.gov",
+      "source_url": "https://veterans.ucla.edu/ms-deana-garay"
+    },
+    {
+      "organization": "We Honor Veterans",
+      "email": "veterans@allianceforcareathome.org",
+      "source_url": "https://www.wehonorveterans.org/join/community-partners/recruit-requirements/"
+    },
+    {
+      "organization": "University of Wisconsin Oshkosh Veterans Resource Center",
+      "email": "veterans@uwosh.edu",
+      "source_url": "https://www.uwosh.edu/veterans/contact-us-2/"
+    },
+    {
+      "organization": "Southeastern Oklahoma State University Veterans Services",
+      "email": "glangham@se.edu",
+      "source_url": "https://www.se.edu/veterans-services/directory/"
+    },
+    {
+      "organization": "City of Hawthorne Veterans Affairs Commission",
+      "email": "veteransaffairs@cityofhawthorne.org",
+      "source_url": "https://www.cityofhawthorne.org/government/commissions/veterans-affairs-commission/veterans-affairs/resources"
+    },
+    {
+      "organization": "California Student Aid Commission",
+      "email": "studentsupport@csac.ca.gov",
+      "source_url": "https://www.csac.ca.gov/cal-grant"
+    },
+    {
+      "organization": "University of Georgia Student Veterans Resource Center",
+      "email": "svrc@uga.edu",
+      "source_url": "https://svrc.uga.edu/category/graduating-student-veterans-list/"
+    },
+    {
+      "organization": "St. Cloud State University Veterans Resource Center",
+      "email": "veteransresource@stcloudstate.edu",
+      "source_url": "https://www.stcloudstate.edu/veterans/"
+    },
+    {
+      "organization": "Cal Poly Pomona Veterans Resource Center",
+      "email": "vetquestions@cpp.edu",
+      "source_url": "https://www.cpp.edu/veterans/"
+    },
+    {
+      "organization": "Dubuque County Veterans Affairs",
+      "email": "dubuque.veterans@dubuquecounty.us",
+      "source_url": "https://dubuquecountyiowa.gov/Calendar.aspx?EID=883"
+    },
+    {
+      "organization": "Ohio State Military and Veterans Services",
+      "email": "milvets@osu.edu",
+      "source_url": "https://ati.osu.edu/future-students/admissions/military-connected-students"
+    },
+    {
+      "organization": "University of New Mexico Veteran and Military Resource Center",
+      "email": "vrc@unm.edu",
+      "source_url": "https://vrc.unm.edu/"
+    },
+    {
+      "organization": "Portland State University Veterans Resource Center",
+      "email": "psuvrc@pdx.edu",
+      "source_url": "https://www.pdx.edu/veterans-resource-center/"
+    },
+    {
+      "organization": "University of Washington Tacoma Veteran and Military Resource Center",
+      "email": "uwtva@uw.edu",
+      "source_url": "https://directory.tacoma.uw.edu/department/veteran-and-military-resource-center"
+    },
+    {
+      "organization": "American Legion Department of Alaska",
+      "email": "philip.templin@va.gov",
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+    },
+    {
+      "organization": "American Legion Department of Arizona",
+      "email": "serviceofficer@azlegion.org",
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+    },
+    {
+      "organization": "American Legion Department of Arkansas",
+      "email": "alegion@swbell.net",
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+    },
+    {
+      "organization": "American Legion Department of California",
+      "email": "dso@calegion.org",
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+    },
+    {
+      "organization": "American Legion Department of Colorado",
+      "email": "william.davis1@va.gov",
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+    },
+    {
+      "organization": "American Legion Department of Connecticut",
+      "email": "kenneth.lewis3@va.gov",
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+    },
+    {
+      "organization": "American Legion Department of Delaware",
+      "email": "joseph.houghton@va.gov",
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+    },
+    {
+      "organization": "American Legion Department of Florida",
+      "email": "michael.white@fdva.fl.gov",
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+    },
+    {
+      "organization": "American Legion Department of Georgia",
+      "email": "tonjala.moton-williams@vs.state.ga.us",
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+    },
+    {
+      "organization": "American Legion Department of Hawaii",
+      "email": "dso@hilegion.org",
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+    },
+    {
+      "organization": "American Legion Department of Idaho",
+      "email": "tcolton@elmorecounty.org",
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+    },
+    {
+      "organization": "American Legion Department of Illinois",
+      "email": "georgiann.callaway@va.gov",
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+    },
+    {
+      "organization": "American Legion Department of Indiana",
+      "email": "al.vbaind@va.gov",
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+    },
+    {
+      "organization": "American Legion Department of Iowa",
+      "email": "shane.pankonen@va.gov",
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+    },
+    {
+      "organization": "American Legion Department of Kansas",
+      "email": "timothy.marlar@va.gov",
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+    },
+    {
+      "organization": "American Legion Department of Kentucky",
+      "email": "al42vso@gmail.com",
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+    },
+    {
+      "organization": "American Legion Department of Louisiana",
+      "email": "jimnfair@aol.com",
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+    },
+    {
+      "organization": "American Legion Department of Maine",
+      "email": "carl.curtis2@va.gov",
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+    },
+    {
+      "organization": "American Legion Department of Maryland",
+      "email": "serviceofficer@mdlegion.org",
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+    },
+    {
+      "organization": "American Legion Department of Massachusetts",
+      "email": "michael.whalen@va.gov",
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+    },
+    {
+      "organization": "American Legion Department of Michigan",
+      "email": "al.vbadet@va.gov",
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+    },
+    {
+      "organization": "American Legion Department of Minnesota",
+      "email": "dso@mnlegion.org",
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+    },
+    {
+      "organization": "American Legion Department of Mississippi",
+      "email": "tidefan@bellsouth.net",
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+    },
+    {
+      "organization": "American Legion Department of Missouri",
+      "email": "tracy.davis1@va.gov",
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+    },
+    {
+      "organization": "American Legion Department of Montana",
+      "email": "eric.beal@mt.gov",
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+    },
+    {
+      "organization": "American Legion Department of Nebraska",
+      "email": "levi.bennett@nebraska.gov",
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+    },
+    {
+      "organization": "American Legion Department of Nevada",
+      "email": "sandra.schneeberger@va.gov",
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+    },
+    {
+      "organization": "American Legion Department of New Hampshire",
+      "email": "michael.hartt@va.gov",
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+    },
+    {
+      "organization": "American Legion Department of New Jersey",
+      "email": "k.connors@njamericanlegion.org",
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+    },
+    {
+      "organization": "American Legion Department of New Mexico",
+      "email": "ibar.romero@va.gov",
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+    },
+    {
+      "organization": "American Legion Department of New York",
+      "email": "dsofisher@nylegion.org",
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+    },
+    {
+      "organization": "American Legion Department of North Carolina",
+      "email": "justin.nicholson318@va.gov",
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+    },
+    {
+      "organization": "American Legion Department of North Dakota",
+      "email": "summer.kristianson@va.gov",
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+    },
+    {
+      "organization": "American Legion Department of Ohio",
+      "email": "genochio@ohiolegion.com",
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+    },
+    {
+      "organization": "American Legion Department of Oklahoma",
+      "email": "michael.macy@va.gov",
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+    },
+    {
+      "organization": "American Legion Department of Oregon",
+      "email": "edward.vandyke@va.gov",
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+    },
+    {
+      "organization": "American Legion Department of Pennsylvania",
+      "email": "rblack@pa-legion.com",
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+    },
+    {
+      "organization": "American Legion Department of Puerto Rico",
+      "email": "oso9798@gmail.com",
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+    },
+    {
+      "organization": "American Legion Department of Rhode Island",
+      "email": "charles.petrarca@va.gov",
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+    },
+    {
+      "organization": "American Legion Department of South Carolina",
+      "email": "patricia.wortherly-foye@va.gov",
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+    },
+    {
+      "organization": "American Legion Department of South Dakota",
+      "email": "mpillar1@hotmail.com",
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+    },
+    {
+      "organization": "American Legion Department of Tennessee",
+      "email": "mark.harris@putnamcountytn.gov",
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+    },
+    {
+      "organization": "American Legion Department of Texas",
+      "email": "michael.lacy@va.gov",
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+    },
+    {
+      "organization": "American Legion Department of Utah",
+      "email": "adjutant@utlegion.org",
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+    }
+  ]
+}
