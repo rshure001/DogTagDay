@@ -1,18 +1,27 @@
 (()=>{
 const CADENCE_URL='https://d34w7g4gy10iej.cloudfront.net/video/1610/DOD_103717433/DOD_103717433-1920x1080-6221k.mp4';
 const SOFT_VOLUME=0.10;
-const FADE_MS=2400;
+const FADE_MS=1800;
+// Keep the same recording, but stay inside its quieter middle passage.
+const QUIET_START=24;
+const QUIET_END=54;
 let tries=0,fadeTimer=null;
 const fadeTo=(audio,target,done)=>{
   if(fadeTimer)clearInterval(fadeTimer);
   const start=audio.volume;
-  const steps=24;
+  const steps=18;
   let i=0;
   fadeTimer=setInterval(()=>{
     i++;
     audio.volume=Math.max(0,Math.min(1,start+(target-start)*(i/steps)));
     if(i>=steps){clearInterval(fadeTimer);fadeTimer=null;if(done)done();}
   },FADE_MS/steps);
+};
+const returnToQuiet=(audio)=>{
+  fadeTo(audio,0,()=>{
+    audio.currentTime=QUIET_START;
+    audio.play().then(()=>fadeTo(audio,SOFT_VOLUME)).catch(()=>{});
+  });
 };
 const swap=()=>{
   const old=document.getElementById('dtd-music-pill');
@@ -25,11 +34,18 @@ const swap=()=>{
   const button=wrap.querySelector('button');
   const status=wrap.querySelector('.dtd-music-status');
   const audio=new Audio(CADENCE_URL);
-  audio.preload='none';
+  audio.preload='metadata';
   audio.volume=0;
+  audio.addEventListener('loadedmetadata',()=>{
+    if(Number.isFinite(audio.duration)&&audio.duration>QUIET_START) audio.currentTime=QUIET_START;
+  });
+  audio.addEventListener('timeupdate',()=>{
+    if(!audio.paused && audio.currentTime>=QUIET_END) returnToQuiet(audio);
+  });
   button.addEventListener('click',async()=>{
     if(audio.paused){
       try{
+        if(audio.currentTime<QUIET_START || audio.currentTime>=QUIET_END) audio.currentTime=QUIET_START;
         audio.volume=0;
         await audio.play();
         fadeTo(audio,SOFT_VOLUME);
@@ -42,7 +58,7 @@ const swap=()=>{
       status.textContent='Paused';
     }
   });
-  audio.addEventListener('ended',()=>{audio.volume=0;button.textContent='▶ Play';status.textContent='Paused';});
+  audio.addEventListener('ended',()=>returnToQuiet(audio));
   audio.addEventListener('error',()=>{button.textContent='▶ Play';status.textContent='March unavailable';});
 };
 swap();
