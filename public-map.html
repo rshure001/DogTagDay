@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-dtd-map-build="2026-09-10-across-america-mobile-nav">
+<html lang="en" data-dtd-map-build="2026-09-11-across-america-anchor-nav">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -14,17 +14,18 @@ a{color:inherit}
 .mapPage{width:100%;max-width:1400px;margin:0 auto;background:#01050a}
 .mapNav{position:sticky;top:0;z-index:10;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px;min-height:54px;padding:7px 10px;background:rgba(7,17,27,.97);border-bottom:1px solid rgba(223,186,98,.5);box-shadow:0 4px 16px rgba(0,0,0,.35)}
 .navBtn{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:8px 12px;border:1px solid #dfba62;border-radius:999px;text-decoration:none;background:#102e50;color:#fff;font-size:.78rem;font-weight:900;letter-spacing:.02em;white-space:nowrap}
-.navBtn:focus-visible{outline:3px solid #fff;outline-offset:2px}
-.across{text-align:center;font-family:Georgia,serif;font-size:clamp(1.02rem,4.4vw,1.45rem);font-weight:900;color:#dfba62;line-height:1.05;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.mapWrap{width:100%;overflow:hidden;background:#01050a}
+.navBtn:focus-visible,.across:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.across{display:block;text-align:center;font-family:Georgia,serif;font-size:clamp(1.02rem,4.4vw,1.45rem);font-weight:900;color:#dfba62;line-height:1.05;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-decoration:none;border-radius:8px;padding:6px 4px}
+.across:hover,.across:active{text-decoration:underline;text-underline-offset:3px}
+.mapWrap{width:100%;overflow:hidden;background:#01050a;scroll-margin-top:66px}
 .mapWrap img{display:block;width:100%;height:auto;max-width:100%;user-select:none;-webkit-user-drag:none}
-.legend{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 14px;padding:12px 10px 10px;border-top:1px solid rgba(255,255,255,.15);background:#07111b}
+.legend{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 14px;padding:12px 10px 10px;border-top:1px solid rgba(255,255,255,.15);background:#07111b;scroll-margin-top:66px}
 .item{display:flex;align-items:center;gap:6px;color:#fff;font-size:.72rem;font-weight:800;white-space:nowrap}
 .dot{width:12px;height:12px;border-radius:50%;flex:0 0 12px;box-shadow:0 0 7px rgba(255,255,255,.18)}
 .green{background:#2bd35c}.white{background:#d6d6d6}.blue{background:#2387ff}.red{background:#ff3434}.orange{background:#ff8a1f}.purple{background:#9a37e8}.teal{background:#20c5d8}.yellow{background:#ffd329}.pink{background:#ff3c91}.olive{background:#b5c83c}.brown{background:#a36e42}
 .accuracy{margin:0;padding:10px 14px 16px;background:#07111b;color:#cbd5df;text-align:center;font-size:.72rem;line-height:1.45}
 .accuracy strong{color:#dfba62}
-@media(max-width:600px){.mapNav{min-height:50px;padding:5px 7px;gap:5px}.navBtn{min-height:40px;padding:7px 10px;font-size:.7rem}.legend{gap:7px 10px;padding:10px 8px 8px}.item{font-size:.64rem}.dot{width:10px;height:10px;flex-basis:10px}.accuracy{font-size:.66rem;padding:9px 12px 14px}}
+@media(max-width:600px){.mapNav{min-height:50px;padding:5px 7px;gap:5px}.navBtn{min-height:40px;padding:7px 10px;font-size:.7rem}.mapWrap,.legend{scroll-margin-top:58px}.legend{gap:7px 10px;padding:10px 8px 8px}.item{font-size:.64rem}.dot{width:10px;height:10px;flex-basis:10px}.accuracy{font-size:.66rem;padding:9px 12px 14px}}
 @media(max-width:390px){.navBtn{padding:7px 9px}.across{font-size:.98rem}}
 </style>
 </head>
@@ -32,11 +33,11 @@ a{color:inherit}
 <main class="mapPage" aria-label="Dog Tag Day Across America outreach map">
   <nav class="mapNav" aria-label="Across America map navigation">
     <a class="navBtn" href="/" aria-label="Return to Dog Tag Day home">← Home</a>
-    <div class="across" aria-current="page">Across America</div>
+    <a class="across" href="#map-image" aria-current="page" aria-label="Across America — return to the map">Across America</a>
     <a class="navBtn" href="#map-key">Map Key</a>
   </nav>
   <div class="mapWrap" id="map-image">
-    <img src="assets/dog-tag-day-population-centered-map-20260905.jpg?v=20260910-across-america-mobile-nav" alt="Dog Tag Day Across America outreach map artwork">
+    <img src="assets/dog-tag-day-population-centered-map-20260905.jpg?v=20260911-across-america-anchor-nav" alt="Dog Tag Day Across America outreach map artwork">
   </div>
   <div class="legend" id="map-key" aria-label="Map color codes">
     <div class="item"><span class="dot green"></span>Grants / Foundations</div>
