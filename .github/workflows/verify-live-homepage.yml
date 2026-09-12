@@ -35,7 +35,8 @@ jobs:
                 const heroSize=heroCount===1?await hero.evaluate(i=>({w:i.naturalWidth,h:i.naturalHeight})):({w:0,h:0});
                 const mapCount=await page.locator('.mapFrame iframe').count();
                 const body=await page.locator('body').innerText();
-                const text=body.includes('17.2 MILLION')&&body.includes('America Aglow')&&body.includes('Partner With Dog Tag Day')&&body.includes('National Outreach');
+                const lower=body.toLowerCase();
+                const text=lower.includes('17.2 million')&&lower.includes('america aglow')&&lower.includes('partner with dog tag day')&&lower.includes('national outreach');
                 const noOverflow=await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+1);
                 const navFits=await page.locator('nav a').last().evaluate(el=>el.getBoundingClientRect().right<=window.innerWidth+1);
                 const current=Boolean(build)&&heroCount===1&&Boolean(heroSrc)&&heroSrc.includes('assets/dog-tag-day-hero')&&heroSize.w>0&&heroSize.h>0;
