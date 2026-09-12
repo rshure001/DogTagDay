@@ -32,8 +32,9 @@ jobs:
           grep -q 'data-dtd-map-build=' public-map.html
           grep -q 'dog-tag-day-population-centered-map-20260905.jpg' public-map.html
           grep -q 'Across America' public-map.html
-          grep -q 'Campaign visualization' public-map.html
-          grep -q 'mapCanvas' public-map.html
+          grep -q 'Artwork key' public-map.html
+          grep -q 'quickKey' public-map.html
+          grep -q 'Accuracy note:' public-map.html
           ! grep -q '1,800 OUTREACH LIGHTS' public-map.html
       - name: Configure Pages
         uses: actions/configure-pages@v5
@@ -59,8 +60,9 @@ jobs:
               && printf '%s' "$map_html" | grep -q 'data-dtd-map-build=' \
               && printf '%s' "$map_html" | grep -q 'dog-tag-day-population-centered-map-20260905.jpg' \
               && printf '%s' "$map_html" | grep -q 'Across America' \
-              && printf '%s' "$map_html" | grep -q 'Campaign visualization' \
-              && printf '%s' "$map_html" | grep -q 'mapCanvas' \
+              && printf '%s' "$map_html" | grep -q 'Artwork key' \
+              && printf '%s' "$map_html" | grep -q 'quickKey' \
+              && printf '%s' "$map_html" | grep -q 'Accuracy note:' \
               && ! printf '%s' "$map_html" | grep -q '1,800 OUTREACH LIGHTS'; then
               echo LIVE_HOMEPAGE_AND_MAP_VERIFIED
               exit 0
