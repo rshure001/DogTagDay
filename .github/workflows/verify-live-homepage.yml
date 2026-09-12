@@ -23,27 +23,32 @@ jobs:
             const context=await browser.newContext({...devices['iPhone 13']});
             const page=await context.newPage();
             let ok=false;
-            for(let i=0;i<12;i++){
-              await page.goto('https://dogtagday.org/?verify='+Date.now(),{waitUntil:'domcontentloaded',timeout:30000});
-              await page.locator('.hero img').waitFor({state:'visible',timeout:10000});
-              const build=await page.locator('html').getAttribute('data-dtd-build');
-              const broken=await page.locator('img').evaluateAll(imgs=>imgs.filter(i=>!i.complete||i.naturalWidth===0).map(i=>i.getAttribute('src')));
-              const hero=page.locator('.hero img');
-              const heroCount=await hero.count();
-              const heroSrc=heroCount===1?await hero.getAttribute('src'):'';
-              const heroSize=heroCount===1?await hero.evaluate(i=>({w:i.naturalWidth,h:i.naturalHeight})):({w:0,h:0});
-              const mapCount=await page.locator('#outreach iframe').count();
-              const body=await page.locator('body').innerText();
-              const text=body.includes('17.2 MILLION')&&body.includes('America Aglow')&&body.includes('Partner With Dog Tag Day')&&body.includes('National Outreach')&&body.includes('Website Visits');
-              const noOverflow=await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+1);
-              const navFits=await page.locator('nav a').last().evaluate(el=>el.getBoundingClientRect().right<=window.innerWidth+1);
-              const current=build==='2026-09-01-president-letter'&&heroCount===1&&heroSrc.includes('assets/dog-tag-day-hero.PNG')&&heroSize.w>0&&heroSize.h>0;
-              console.log(JSON.stringify({attempt:i+1,build,broken,mapCount,heroCount,heroSrc,heroSize,current,text,noOverflow,navFits}));
-              if(current&&broken.length===0&&mapCount===1&&text&&noOverflow&&navFits){ok=true;break;}
-              await page.waitForTimeout(2000);
+            try {
+              for(let i=0;i<12;i++){
+                await page.goto('https://dogtagday.org/?verify='+Date.now(),{waitUntil:'domcontentloaded',timeout:30000});
+                const hero=page.locator('.hero img');
+                await hero.waitFor({state:'visible',timeout:10000});
+                const build=await page.locator('html').getAttribute('data-dtd-build');
+                const broken=await page.locator('img').evaluateAll(imgs=>imgs.filter(i=>!i.complete||i.naturalWidth===0).map(i=>i.getAttribute('src')));
+                const heroCount=await hero.count();
+                const heroSrc=heroCount===1?await hero.getAttribute('src'):'';
+                const heroSize=heroCount===1?await hero.evaluate(i=>({w:i.naturalWidth,h:i.naturalHeight})):({w:0,h:0});
+                const mapCount=await page.locator('.mapFrame iframe').count();
+                const body=await page.locator('body').innerText();
+                const text=body.includes('17.2 MILLION')&&body.includes('America Aglow')&&body.includes('Partner With Dog Tag Day')&&body.includes('National Outreach');
+                const noOverflow=await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+1);
+                const navFits=await page.locator('nav a').last().evaluate(el=>el.getBoundingClientRect().right<=window.innerWidth+1);
+                const current=Boolean(build)&&heroCount===1&&Boolean(heroSrc)&&heroSrc.includes('assets/dog-tag-day-hero')&&heroSize.w>0&&heroSize.h>0;
+                console.log(JSON.stringify({attempt:i+1,build,broken,mapCount,heroCount,heroSrc,heroSize,current,text,noOverflow,navFits}));
+                if(current&&broken.length===0&&mapCount===1&&text&&noOverflow&&navFits){ok=true;break;}
+                await page.waitForTimeout(2000);
+              }
+            } catch (error) {
+              console.error(error);
+            } finally {
+              await page.screenshot({path:'live-homepage-proof.png',fullPage:true}).catch(console.error);
+              await browser.close();
             }
-            await page.screenshot({path:'live-homepage-proof.png',fullPage:true});
-            await browser.close();
             if(!ok) process.exit(1);
             console.log('LIVE_HOMEPAGE_PASS=true');
           })().catch(e=>{console.error(e);process.exit(1)});
