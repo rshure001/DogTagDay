@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-dtd-map-build="2026-09-11-across-america-anchor-nav">
+<html lang="en" data-dtd-map-build="2026-09-12-mobile-key-strip">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -17,6 +17,12 @@ a{color:inherit}
 .navBtn:focus-visible,.across:focus-visible{outline:3px solid #fff;outline-offset:2px}
 .across{display:block;text-align:center;font-family:Georgia,serif;font-size:clamp(1.02rem,4.4vw,1.45rem);font-weight:900;color:#dfba62;line-height:1.05;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-decoration:none;border-radius:8px;padding:6px 4px}
 .across:hover,.across:active{text-decoration:underline;text-underline-offset:3px}
+.mapContext{padding:7px 10px;background:#07111b;border-bottom:1px solid rgba(255,255,255,.12);text-align:center}
+.contextNote{color:#d7e0e8;font-size:.68rem;line-height:1.35;font-weight:700}
+.contextNote strong{color:#dfba62}
+.quickKey{display:none;overflow-x:auto;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;scrollbar-width:none;gap:10px;padding:1px 2px 2px;text-align:left}
+.quickKey::-webkit-scrollbar{display:none}
+.quickKey .item{flex:0 0 auto;font-size:.64rem}
 .mapWrap{width:100%;overflow:hidden;background:#01050a;scroll-margin-top:66px}
 .mapWrap img{display:block;width:100%;height:auto;max-width:100%;user-select:none;-webkit-user-drag:none}
 .legend{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 14px;padding:12px 10px 10px;border-top:1px solid rgba(255,255,255,.15);background:#07111b;scroll-margin-top:66px}
@@ -25,7 +31,8 @@ a{color:inherit}
 .green{background:#2bd35c}.white{background:#d6d6d6}.blue{background:#2387ff}.red{background:#ff3434}.orange{background:#ff8a1f}.purple{background:#9a37e8}.teal{background:#20c5d8}.yellow{background:#ffd329}.pink{background:#ff3c91}.olive{background:#b5c83c}.brown{background:#a36e42}
 .accuracy{margin:0;padding:10px 14px 16px;background:#07111b;color:#cbd5df;text-align:center;font-size:.72rem;line-height:1.45}
 .accuracy strong{color:#dfba62}
-@media(max-width:600px){.mapNav{min-height:50px;padding:5px 7px;gap:5px}.navBtn{min-height:40px;padding:7px 10px;font-size:.7rem}.mapWrap,.legend{scroll-margin-top:58px}.legend{gap:7px 10px;padding:10px 8px 8px}.item{font-size:.64rem}.dot{width:10px;height:10px;flex-basis:10px}.accuracy{font-size:.66rem;padding:9px 12px 14px}}
+@media(max-width:700px){.mapContext{position:sticky;top:50px;z-index:9;padding:5px 7px 6px;box-shadow:0 4px 12px rgba(0,0,0,.28)}.contextNote{font-size:.61rem}.quickKey{display:flex;margin-top:5px}.mapWrap,.legend{scroll-margin-top:126px}}
+@media(max-width:600px){.mapNav{min-height:50px;padding:5px 7px;gap:5px}.navBtn{min-height:40px;padding:7px 10px;font-size:.7rem}.legend{gap:7px 10px;padding:10px 8px 8px}.item{font-size:.64rem}.dot{width:10px;height:10px;flex-basis:10px}.accuracy{font-size:.66rem;padding:9px 12px 14px}}
 @media(max-width:390px){.navBtn{padding:7px 9px}.across{font-size:.98rem}}
 </style>
 </head>
@@ -36,8 +43,24 @@ a{color:inherit}
     <a class="across" href="#map-image" aria-current="page" aria-label="Across America — return to the map">Across America</a>
     <a class="navBtn" href="#map-key">Map Key</a>
   </nav>
+  <section class="mapContext" aria-label="Map accuracy and mobile color key">
+    <div class="contextNote"><strong>Artwork key — not a contact count.</strong> Colors describe outreach categories only; they do not prove a send, delivery, open, or participation.</div>
+    <div class="quickKey" role="list" aria-label="Quick map color key; swipe horizontally for all categories">
+      <div class="item" role="listitem"><span class="dot green"></span>Grants / Foundations</div>
+      <div class="item" role="listitem"><span class="dot white"></span>Attorneys / Legal</div>
+      <div class="item" role="listitem"><span class="dot blue"></span>Veterans Organizations</div>
+      <div class="item" role="listitem"><span class="dot red"></span>Media / Newsrooms</div>
+      <div class="item" role="listitem"><span class="dot orange"></span>First Responders</div>
+      <div class="item" role="listitem"><span class="dot purple"></span>Restaurants / Food</div>
+      <div class="item" role="listitem"><span class="dot teal"></span>Government / Civic</div>
+      <div class="item" role="listitem"><span class="dot yellow"></span>Businesses / Retail</div>
+      <div class="item" role="listitem"><span class="dot pink"></span>Faith / Churches</div>
+      <div class="item" role="listitem"><span class="dot olive"></span>Sports / Athletics</div>
+      <div class="item" role="listitem"><span class="dot brown"></span>Other</div>
+    </div>
+  </section>
   <div class="mapWrap" id="map-image">
-    <img src="assets/dog-tag-day-population-centered-map-20260905.jpg?v=20260911-across-america-anchor-nav" alt="Dog Tag Day Across America outreach map artwork">
+    <img src="assets/dog-tag-day-population-centered-map-20260905.jpg?v=20260912-mobile-key-strip" alt="Dog Tag Day Across America outreach map artwork">
   </div>
   <div class="legend" id="map-key" aria-label="Map color codes">
     <div class="item"><span class="dot green"></span>Grants / Foundations</div>
