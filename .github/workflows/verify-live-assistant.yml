@@ -11,10 +11,10 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'
       - run: npm install playwright
       - run: npx playwright install --with-deps webkit
-      - name: Verify homepage support section and holiday accent on mobile WebKit
+      - name: Verify current homepage on mobile WebKit
         run: |
           node <<'NODE'
           const { webkit, devices } = require('playwright');
@@ -22,17 +22,28 @@ jobs:
             const browser=await webkit.launch({headless:true});
             const context=await browser.newContext({...devices['iPhone 13']});
             const page=await context.newPage();
-            await page.goto('https://dogtagday.org/?verify='+Date.now(),{waitUntil:'networkidle',timeout:30000});
-            const body=await page.locator('body').innerText();
-            const support=body.includes('Help Build Dog Tag Day') && body.includes('Become a Sponsor') && body.includes('Fund the Mission') && body.includes('Partner With Us');
-            const hero=await page.locator('.hero-frame img').getAttribute('src');
-            const accent=await page.locator('.hero-frame [aria-label]').count();
-            console.log('SUPPORT_VISIBLE='+support);
-            console.log('HERO_SRC='+hero);
-            console.log('HOLIDAY_ACCENT_COUNT='+accent);
-            await page.screenshot({path:'live-homepage-proof.png',fullPage:true});
-            await browser.close();
-            if(!support || !hero || !hero.includes('approved-dog-tags.PNG')) process.exit(1);
+            let failed=false;
+            try {
+              await page.goto('https://dogtagday.org/?verify='+Date.now(),{waitUntil:'domcontentloaded',timeout:30000});
+              const hero=page.locator('.hero img');
+              await hero.waitFor({state:'visible',timeout:15000});
+              const heroSrc=await hero.getAttribute('src');
+              const heroSize=await hero.evaluate(i=>({w:i.naturalWidth,h:i.naturalHeight}));
+              const body=await page.locator('body').innerText();
+              const required=['17.2 MILLION','Partner With Dog Tag Day','National Outreach'];
+              const missing=required.filter(text=>!body.includes(text));
+              const noOverflow=await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+1);
+              console.log(JSON.stringify({heroSrc,heroSize,missing,noOverflow}));
+              if(!heroSrc || !heroSrc.includes('assets/dog-tag-day-hero') || heroSize.w===0 || heroSize.h===0 || missing.length || !noOverflow) failed=true;
+            } catch (error) {
+              console.error(error);
+              failed=true;
+            } finally {
+              await page.screenshot({path:'live-homepage-proof.png',fullPage:true}).catch(console.error);
+              await browser.close();
+            }
+            if(failed) process.exit(1);
+            console.log('LIVE_ASSISTANT_PASS=true');
           })().catch(e=>{console.error(e);process.exit(1)});
           NODE
       - uses: actions/upload-artifact@v4
