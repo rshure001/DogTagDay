@@ -85,6 +85,18 @@ header nav{margin:0;justify-content:center;border-top:1px solid #24384a;padding-
 .battlefieldWitness img{display:block;width:100%;height:auto;max-width:100%;object-fit:contain;object-position:center}
 @media(max-width:760px){.battlefieldWitness{padding:0 10px;margin:24px auto 42px}.battlefieldWitness figure{box-shadow:0 0 0 3px #143b68,0 14px 30px rgba(0,0,0,.45)}}
 </style>
+<style>
+.staticOutreachMap{padding:36px 20px 48px;background:#040b12;border-block:2px solid #dfba62}
+.staticMapImage{width:min(1180px,100%);margin:0 auto;border:2px solid #dfba62;background:#010409;box-shadow:0 0 0 5px #143b68,0 18px 55px rgba(0,0,0,.55);overflow:hidden}
+.staticMapImage img{display:block;width:100%;height:auto;max-width:100%}
+.staticMapKey{width:min(1180px,100%);margin:22px auto 0;padding:22px 18px;border:1px solid #dfba62;background:#07131f}
+.staticMapKey h2{margin:0 0 18px;text-align:center;color:#dfba62;font-size:clamp(1.5rem,3vw,2.25rem)}
+.staticMapItems{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px 16px}
+.staticMapItem{display:flex;align-items:center;gap:8px;color:#fff;font-size:.88rem;font-weight:800}
+.staticDot{width:13px;height:13px;border-radius:50%;flex:0 0 13px;box-shadow:0 0 7px rgba(255,255,255,.25)}
+.dotGreen{background:#2bd35c}.dotWhite{background:#d6d6d6}.dotBlue{background:#2387ff}.dotRed{background:#ff3434}.dotOrange{background:#ff8a1f}.dotPurple{background:#9a37e8}.dotTeal{background:#20c5d8}.dotYellow{background:#ffd329}.dotPink{background:#ff3c91}.dotOlive{background:#b5c83c}.dotBrown{background:#a36e42}
+@media(max-width:760px){.staticOutreachMap{padding:24px 10px 34px}.staticMapImage{box-shadow:0 0 0 3px #143b68,0 14px 34px rgba(0,0,0,.5)}.staticMapKey{padding:18px 12px}.staticMapItems{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.staticMapItem{font-size:.76rem}}
+</style>
 </head>
 <body>
 <div class="patriotTop">
@@ -130,12 +142,26 @@ header nav{margin:0;justify-content:center;border-top:1px solid #24384a;padding-
 <span>LIVING U.S. VETERANS</span>
 <small>Approximate 2026 veteran population • U.S. Department of Veterans Affairs</small>
 </section>
-<section class="nationalMapBand" id="map" aria-labelledby="map-title">
-<div class="eyebrow">America Aglow</div>
-<h2 id="map-title">From every city and town, let the lights reach every veteran.</h2>
-<p class="mapIntro">A single national picture in red, white, blue, green, and amber light. The complete map and its color key stay visible together.</p>
-<div class="mapFrame"><iframe src="public-map.html?v=20260905-complete-population-map" title="Dog Tag Day national outreach map" loading="lazy" scrolling="no"></iframe></div>
-<small class="mapNote">Campaign artwork. Public outreach totals are counted only from confirmed send records.</small>
+<section class="staticOutreachMap" id="map" aria-label="Dog Tag Day Across America outreach map">
+<div class="staticMapImage">
+<img src="assets/dog-tag-day-population-centered-map-20260905.jpg?v=20260912-static-map" alt="Dog Tag Day Across America outreach map artwork">
+</div>
+<div class="staticMapKey" aria-label="What the map dots mean">
+<h2>What the dots mean</h2>
+<div class="staticMapItems">
+<div class="staticMapItem"><span class="staticDot dotGreen"></span>Grants / Foundations</div>
+<div class="staticMapItem"><span class="staticDot dotWhite"></span>Attorneys / Legal</div>
+<div class="staticMapItem"><span class="staticDot dotBlue"></span>Veterans Organizations</div>
+<div class="staticMapItem"><span class="staticDot dotRed"></span>Media / Newsrooms</div>
+<div class="staticMapItem"><span class="staticDot dotOrange"></span>First Responders</div>
+<div class="staticMapItem"><span class="staticDot dotPurple"></span>Restaurants / Food</div>
+<div class="staticMapItem"><span class="staticDot dotTeal"></span>Government / Civic</div>
+<div class="staticMapItem"><span class="staticDot dotYellow"></span>Businesses / Retail</div>
+<div class="staticMapItem"><span class="staticDot dotPink"></span>Faith / Churches</div>
+<div class="staticMapItem"><span class="staticDot dotOlive"></span>Sports / Athletics</div>
+<div class="staticMapItem"><span class="staticDot dotBrown"></span>Other</div>
+</div>
+</div>
 </section>
 <section class="worldShare" aria-label="Share Dog Tag Day worldwide">
 <div class="worldSharePanel">
