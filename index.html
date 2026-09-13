@@ -159,6 +159,21 @@ header{padding:8px 14px}.head{max-width:1280px}.badge{width:42px;height:42px}.br
 .staticMapKey{width:min(340px,25vw)!important}
 @media(max-width:760px){.staticMapKey{width:25vw!important;min-width:0!important}.staticMapKey h2{font-size:.75rem!important}.staticMapItems{grid-template-columns:1fr!important}.staticMapItem{font-size:.75rem!important}}
 </style>
+<style>
+/* September 13: full-width map with legend placed over the Atlantic Ocean. */
+.staticOutreachMap{padding:8px 0 24px!important;overflow:hidden}
+.staticMapImage{position:relative!important;width:100vw!important;max-width:none!important;margin-left:50%!important;transform:translateX(-50%)!important;border-left:0!important;border-right:0!important}
+.staticMapImage img{width:100%!important}
+.staticMapKey{position:absolute!important;right:1.4%!important;top:22%!important;width:21%!important;max-width:310px!important;margin:0!important;padding:8px 9px!important;border:1px solid rgba(223,186,98,.82)!important;border-radius:7px!important;background:rgba(4,11,18,.84)!important;backdrop-filter:blur(2px);z-index:3}
+.staticMapKey h2{font-size:clamp(.72rem,1.05vw,.95rem)!important;margin:0 0 5px!important}
+.staticMapItems{grid-template-columns:1fr!important;gap:2px!important}
+.staticMapItem{font-size:clamp(.6rem,.78vw,.75rem)!important;line-height:1.08!important;text-shadow:0 1px 2px #000}
+.staticDot{width:7px!important;height:7px!important;flex-basis:7px!important}
+@media(max-width:760px){
+.staticOutreachMap{padding-top:4px!important}.staticMapKey{right:1%!important;top:16%!important;width:24%!important;padding:4px!important;border-radius:4px!important}
+.staticMapKey h2{font-size:.62rem!important;margin-bottom:3px!important}.staticMapItem{font-size:.52rem!important;gap:3px!important}.staticDot{width:5px!important;height:5px!important;flex-basis:5px!important}
+}
+</style>
 </head>
 <body>
 <div class="patriotTop">
@@ -212,7 +227,6 @@ header{padding:8px 14px}.head{max-width:1280px}.badge{width:42px;height:42px}.br
 <section class="staticOutreachMap" id="map" aria-label="Dog Tag Day Across America outreach map">
 <div class="staticMapImage">
 <img src="assets/dog-tag-day-national-map-gulf-of-america-20260913.png?v=20260913-gulf-of-america" alt="Dog Tag Day Across America outreach map artwork">
-</div>
 <div class="staticMapKey" aria-label="What the map dots mean">
 <h2>What the dots mean</h2>
 <div class="staticMapItems">
@@ -227,6 +241,7 @@ header{padding:8px 14px}.head{max-width:1280px}.badge{width:42px;height:42px}.br
 <div class="staticMapItem"><span class="staticDot dotPink"></span>Faith / Churches</div>
 <div class="staticMapItem"><span class="staticDot dotOlive"></span>Sports / Athletics</div>
 <div class="staticMapItem"><span class="staticDot dotBrown"></span>Other</div>
+</div>
 </div>
 </div>
 </section>
