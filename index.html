@@ -140,6 +140,20 @@ header{padding:8px 14px}.head{max-width:1280px}.badge{width:42px;height:42px}.br
 .honorJarButton{width:145px;height:145px}
 }
 </style>
+<style>
+/* September 13: outreach map dominates; legend is about one-quarter of map width. */
+.staticOutreachMap{padding-left:0!important;padding-right:0!important}
+.staticMapImage{width:min(1550px,100vw)!important;max-width:none!important}
+.staticMapKey{width:min(380px,calc(100% - 32px))!important;padding:6px 8px!important;margin-top:7px!important}
+.staticMapKey h2{font-size:.9rem!important;margin:0 0 5px!important}
+.staticMapItems{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:3px 7px!important}
+.staticMapItem{font-size:.75rem!important;line-height:1.15!important}
+@media(max-width:760px){
+.staticMapImage{width:100vw!important}
+.staticMapKey{width:min(300px,78vw)!important}
+.staticMapItems{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+</style>
 </head>
 <body>
 <div class="patriotTop">
