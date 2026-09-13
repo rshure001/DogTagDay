@@ -30,7 +30,9 @@ jobs:
           grep -q 'National Outreach' index.html
           grep -q 'Partner With Dog Tag Day' index.html
           grep -q 'data-dtd-map-build=' public-map.html
-          grep -q 'dog-tag-day-population-centered-map-20260905.jpg' public-map.html
+          expected_map_src=$(grep -oE 'src="assets/[^"]+"' public-map.html | head -n1 | cut -d'"' -f2 | cut -d'?' -f1)
+          test -n "$expected_map_src"
+          test -s "$expected_map_src"
           grep -q 'Across America' public-map.html
           grep -q 'Artwork key' public-map.html
           grep -q 'quickKey' public-map.html
@@ -51,6 +53,7 @@ jobs:
       - name: Verify production
         run: |
           set -e
+          expected_map_src=$(grep -oE 'src="assets/[^"]+"' public-map.html | head -n1 | cut -d'"' -f2 | cut -d'?' -f1)
           for i in $(seq 1 36); do
             html=$(curl -fsSL -H 'Cache-Control: no-cache' "https://dogtagday.org/?verify=${GITHUB_SHA}-${GITHUB_RUN_ID}-$i" || true)
             map_html=$(curl -fsSL -H 'Cache-Control: no-cache' "https://dogtagday.org/public-map.html?verify=${GITHUB_SHA}-${GITHUB_RUN_ID}-$i" || true)
@@ -58,7 +61,7 @@ jobs:
               && printf '%s' "$html" | grep -q 'National Outreach' \
               && printf '%s' "$html" | grep -q 'Partner With Dog Tag Day' \
               && printf '%s' "$map_html" | grep -q 'data-dtd-map-build=' \
-              && printf '%s' "$map_html" | grep -q 'dog-tag-day-population-centered-map-20260905.jpg' \
+              && printf '%s' "$map_html" | grep -Fq "$expected_map_src" \
               && printf '%s' "$map_html" | grep -q 'Across America' \
               && printf '%s' "$map_html" | grep -q 'Artwork key' \
               && printf '%s' "$map_html" | grep -q 'quickKey' \
