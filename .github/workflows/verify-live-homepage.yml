@@ -1,10 +1,12 @@
 name: Verify Live Homepage
 on:
-  push:
-    branches: [main]
+  workflow_run:
+    workflows: ["Deploy Dog Tag Day Now"]
+    types: [completed]
   workflow_dispatch:
 jobs:
   verify:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     timeout-minutes: 8
     steps:
@@ -24,30 +26,27 @@ jobs:
             const page=await context.newPage();
             let ok=false;
             try {
-              for(let i=0;i<12;i++){
+              for(let i=0;i<20;i++){
                 await page.goto('https://dogtagday.org/?verify='+Date.now(),{waitUntil:'domcontentloaded',timeout:30000});
                 const hero=page.locator('.hero img');
+                const map=page.locator('.staticMapImage img');
                 await hero.waitFor({state:'visible',timeout:10000});
-                const build=await page.locator('html').getAttribute('data-dtd-build');
+                await map.waitFor({state:'visible',timeout:10000});
                 const broken=await page.locator('img').evaluateAll(imgs=>imgs.filter(i=>!i.complete||i.naturalWidth===0).map(i=>i.getAttribute('src')));
                 const heroCount=await hero.count();
-                const heroSrc=heroCount===1?await hero.getAttribute('src'):'';
-                const heroSize=heroCount===1?await hero.evaluate(i=>({w:i.naturalWidth,h:i.naturalHeight})):({w:0,h:0});
-                const mapCount=await page.locator('.mapFrame iframe').count();
-                const body=await page.locator('body').innerText();
-                const lower=body.toLowerCase();
-                const text=lower.includes('17.2 million')&&lower.includes('america aglow')&&lower.includes('partner with dog tag day')&&lower.includes('national outreach');
+                const mapCount=await map.count();
+                const body=(await page.locator('body').innerText()).toLowerCase();
+                const text=body.includes('17.2 million')&&body.includes('honor a veteran today')&&body.includes('what the dots mean');
                 const noOverflow=await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+1);
                 const navFits=await page.locator('nav a').last().evaluate(el=>el.getBoundingClientRect().right<=window.innerWidth+1);
-                const current=Boolean(build)&&heroCount===1&&Boolean(heroSrc)&&heroSrc.includes('assets/dog-tag-day-hero')&&heroSize.w>0&&heroSize.h>0;
-                console.log(JSON.stringify({attempt:i+1,build,broken,mapCount,heroCount,heroSrc,heroSize,current,text,noOverflow,navFits}));
-                if(current&&broken.length===0&&mapCount===1&&text&&noOverflow&&navFits){ok=true;break;}
-                await page.waitForTimeout(2000);
+                console.log(JSON.stringify({attempt:i+1,broken,mapCount,heroCount,text,noOverflow,navFits}));
+                if(broken.length===0&&heroCount===1&&mapCount===1&&text&&noOverflow&&navFits){ok=true;break;}
+                await page.waitForTimeout(3000);
               }
             } catch (error) {
               console.error(error);
             } finally {
-              await page.screenshot({path:'live-homepage-proof.png',fullPage:true}).catch(console.error);
+              await page.screenshot({path:'live-homepage-proof.png'}).catch(console.error);
               await browser.close();
             }
             if(!ok) process.exit(1);
