@@ -6777,6 +6777,14 @@
       "status": "failed",
       "transport": "outlook-connector",
       "response": "429 ErrorExceededMessageLimit: Outlook daily message/recipient limit exceeded"
+    },
+    {
+      "at": "2026-09-13T08:03:20.577Z",
+      "email": "beatriz.hernandez@va.gov",
+      "messageId": null,
+      "status": "failed",
+      "transport": "outlook-connector",
+      "response": "429 ErrorExceededMessageLimit: Outlook daily message/recipient limit exceeded"
     }
   ],
   "sent": {
