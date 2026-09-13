@@ -1,6 +1,6 @@
 {
   "body": "Hello,\n\nMy name is Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are building April 18 into a national day of veteran visibility.\n\nDog Tag Day asks Americans to recognize the person behind the dog tags, listen to veterans’ stories, and acknowledge their service. The dog tags mean “I served.” Acknowledging them means “I see you.”\n\nWe would welcome a conversation about how Dog Tag Day Foundation can help your organization and how we might support one another as April 18 grows nationally.\n\nPlease visit DogTagDay.org to learn more.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nDogTagDay.org\nrshure001@yahoo.com",
-  "queueUpdatedAt": "2026-09-13T06:16:00Z",
+  "queueUpdatedAt": "2026-09-13T07:05:30.565Z",
   "recipientCount": 30,
   "recipientSource": "Official publicly listed veteran-serving organizational contacts, deduplicated against the delivery ledger and Outlook Sent Items.",
   "records": [
@@ -156,7 +156,19 @@
       "attemptedAt": "2026-09-13T06:14:43Z",
       "messageId": null,
       "transport": "outlook-connector",
-      "response": "429 ErrorExceededMessageLimit: Outlook daily message/recipient limit exceeded"
+      "response": "429 ErrorExceededMessageLimit: Outlook daily message/recipient limit exceeded",
+      "lastAttemptedAt": "2026-09-13T07:05:30.565Z",
+      "attemptCount": 2,
+      "failureAttempts": [
+        {
+          "at": "2026-09-13T06:14:43Z",
+          "response": "429 ErrorExceededMessageLimit: Outlook daily message/recipient limit exceeded"
+        },
+        {
+          "at": "2026-09-13T07:05:30.565Z",
+          "response": "429 ErrorExceededMessageLimit: Outlook daily message/recipient limit exceeded"
+        }
+      ]
     },
     {
       "name": "Arthur Noda",
