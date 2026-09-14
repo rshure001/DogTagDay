@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Honor a Veteran | Dog Tag Day</title>
+<style>
+*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px;background:linear-gradient(180deg,#061421,#102e50);color:#fff;font-family:Arial,Helvetica,sans-serif}.card{width:min(560px,100%);padding:36px 24px;text-align:center;border:2px solid #dfba62;background:#07131f;box-shadow:inset 6px 0 #b62035,inset -6px 0 #143b68}h1{margin:0 0 14px;font-family:Georgia,serif;font-size:clamp(2rem,8vw,3.4rem)}p{color:#dce5ef;line-height:1.6}.eyebrow{color:#dfba62;font-weight:900;letter-spacing:.14em;text-transform:uppercase}.btn{display:inline-block;margin-top:12px;padding:14px 22px;border:2px solid #fff;border-radius:999px;background:#dfba62;color:#07131f;font-weight:900;text-decoration:none}
+</style>
+</head>
+<body>
+<main class="card">
+<p class="eyebrow">The Honor Jar</p>
+<h1>Honor a Veteran Today</h1>
+<p>You are being securely connected to PayPal to complete your gift to Dog Tag Day Foundation.</p>
+<a class="btn" id="continueDonation" href="https://paypal.me/ronnieshure">Continue to Secure PayPal Donation</a>
+<noscript><p>Please use the button above to continue.</p></noscript>
+</main>
+<script>
+(function(){
+  var raw=new URLSearchParams(window.location.search).get('amount');
+  var amount=Number(raw);
+  var destination='https://paypal.me/ronnieshure';
+  if(Number.isFinite(amount)&&amount>=1){
+    destination+='/'+encodeURIComponent(amount.toFixed(2))+'USD';
+  }
+  document.getElementById('continueDonation').href=destination;
+  window.setTimeout(function(){window.location.replace(destination)},700);
+})();
+</script>
+</body>
+</html>
