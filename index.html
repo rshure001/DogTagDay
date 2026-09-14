@@ -307,8 +307,7 @@ header{padding:8px 14px}.head{max-width:1280px}.badge{width:42px;height:42px}.br
 <p>Your gift helps preserve veterans’ stories, build April 18 community events, and connect veterans who ask for help with trusted local resources.</p>
 <p class="impactLine">Even $1 adds your name to the mission.</p>
 <div class="buttons" style="justify-content:center">
-<a class="btn secondary" href="/donate.html?amount=1">Give $1</a>
-<button class="btn primary" id="openHonorJar" type="button">Donate Through the Honor Jar</button>
+<button class="btn primary" type="button" disabled aria-disabled="true">Secure Donation Page Coming Soon</button>
 </div>
 <small class="donationTrust">Secure donation through PayPal • Dog Tag Day Foundation</small>
 </div>
@@ -501,7 +500,7 @@ header{padding:8px 14px}.head{max-width:1280px}.badge{width:42px;height:42px}.br
 <label><input type="radio" name="donation_amount" value="100"><span>$100</span></label>
 </div>
 <label class="pledgeOther">Other amount<input type="number" name="other_amount" inputmode="decimal" min="1" step="0.01" placeholder="$"></label>
-<button class="pledgeSubmit" type="submit">Place Your Gift in the Honor Jar</button>
+<button class="pledgeSubmit" type="button" disabled aria-disabled="true">Secure Donation Page Coming Soon</button>
 <small>Secure donation through PayPal • Dog Tag Day Foundation. Contributions are not represented here as tax-deductible.</small>
 </form>
 <button class="honorJarButton" id="honorJarButton" type="button" aria-expanded="false" aria-controls="honorJarPanel" aria-label="Click and pledge to Dog Tag Day">
@@ -512,7 +511,7 @@ header{padding:8px 14px}.head{max-width:1280px}.badge{width:42px;height:42px}.br
 </script>
 <script>(function(){var a=document.getElementById('dtdMarch'),b=document.getElementById('musicControl'),l=document.getElementById('musicLabel'),start=68,end=108;a.volume=.16;function reset(){if(a.currentTime<start||a.currentTime>=end)a.currentTime=start}b.addEventListener('click',function(){if(a.paused){reset();a.play().then(function(){b.setAttribute('aria-pressed','true');l.textContent='Pause Quiet March'}).catch(function(){l.textContent='Tap Again to Play'})}else{a.pause();b.setAttribute('aria-pressed','false');l.textContent='Play Quiet March'}});a.addEventListener('timeupdate',function(){if(a.currentTime>=end)a.currentTime=start});a.addEventListener('ended',function(){a.currentTime=start});})();</script>
 <script>(function(){var b=document.getElementById('shareWorldBtn'),s=document.getElementById('shareStatus'),u='https://dogtagday.org/',t='Dog Tag Day — April 18',x='Put them on. Share the story. Help the world see who served.';b.addEventListener('click',async function(){try{if(navigator.share){await navigator.share({title:t,text:x,url:u});s.textContent='Thank you for carrying the mission forward.'}else{await navigator.clipboard.writeText(u);s.textContent='Website link copied—paste it into any social app.'}}catch(e){if(e&&e.name!=='AbortError')s.textContent='Visit and share: '+u}})})();</script>
-<script>(function(){var w=document.getElementById('honorJarWidget'),b=document.getElementById('honorJarButton'),p=document.getElementById('honorJarPanel'),c=document.getElementById('honorJarClose'),o=p.elements.other_amount;function setOpen(open){p.hidden=!open;b.setAttribute('aria-expanded',String(open));w.classList.toggle('is-open',open)}b.addEventListener('click',function(){setOpen(p.hidden)});var d=document.getElementById('openHonorJar');if(d)d.addEventListener('click',function(){setOpen(true);setTimeout(function(){p.querySelector('input[name="donation_amount"]').focus()},0)});c.addEventListener('click',function(){setOpen(false);b.focus()});p.addEventListener('submit',function(e){e.preventDefault();var chosen=p.querySelector('input[name="donation_amount"]:checked'),amount=o.value||chosen&&chosen.value;if(!amount||Number(amount)<1){o.focus();return}window.location.href='/donate.html?amount='+encodeURIComponent(Number(amount).toFixed(2))});o.addEventListener('input',function(){if(o.value){var chosen=p.querySelector('input[name="donation_amount"]:checked');if(chosen)chosen.checked=false}});document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!p.hidden){setOpen(false);b.focus()}})})();</script>
+<script>(function(){var w=document.getElementById('honorJarWidget'),b=document.getElementById('honorJarButton'),p=document.getElementById('honorJarPanel'),c=document.getElementById('honorJarClose');function setOpen(open){p.hidden=!open;b.setAttribute('aria-expanded',String(open));w.classList.toggle('is-open',open)}b.addEventListener('click',function(){setOpen(p.hidden)});c.addEventListener('click',function(){setOpen(false);b.focus()});document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!p.hidden){setOpen(false);b.focus()}})})();</script>
 <script>(function(){var el=document.getElementById('websiteVisits'),key='dogtagday-org-visits-20260905',url='https://countapi.mileshilliard.com/api/v1/hit/'+key;function show(v){var n=Number(v);if(Number.isFinite(n)){el.textContent=n.toLocaleString();return true}return false}function request(){return fetch(url,{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error('counter unavailable');return r.json()}).then(function(data){if(!show(data.value))throw new Error('invalid counter value')})}request().catch(function(){setTimeout(function(){request().catch(function(){el.textContent='Temporarily unavailable'})},1200)})})();</script>
 </body>
 </html>
