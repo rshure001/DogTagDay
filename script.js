@@ -15,7 +15,7 @@
     section.innerHTML=`
       <div class="fieldProofInner">
         <div class="fieldProofImageWrap">
-          <img class="fieldProofImage" alt="Dog Tag Day founder sitting beside a veteran during a recorded street outreach conversation" src="data:image/jpeg;base64,${b64}">
+          <img class="fieldProofImage" alt="Dog Tag Day founder sitting beside a veteran during a recorded street outreach conversation" src="assets/swipe-page2.jpg?v=20260915-field">
         </div>
         <div class="fieldProofCopy">
           <div class="eyebrow">What We Do — In the Field</div>
@@ -42,7 +42,7 @@
       .fieldProofCopy blockquote{margin:22px 0;padding:18px 20px;border-left:5px solid #b62035;border-top:1px solid rgba(223,186,98,.55);border-bottom:1px solid rgba(223,186,98,.55);background:rgba(2,7,12,.54);font-family:Georgia,serif;font-size:clamp(1.35rem,2.7vw,2rem);line-height:1.32;color:#fff}
       .fieldProofNote{font-size:.95rem!important;color:#b9c7d4!important}
       .fieldProofActions{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
-      @media(max-width:820px){#field-outreach-proof{padding:0 10px;margin-top:24px}.fieldProofInner{grid-template-columns:1fr}.fieldProofImageWrap{min-height:auto;aspect-ratio:750/435}.fieldProofCopy{padding:28px 20px}.fieldProofActions{display:grid;grid-template-columns:1fr}.fieldProofActions .btn{text-align:center}}
+      @media(max-width:820px){#field-outreach-proof{padding:0 10px;margin-top:24px}.fieldProofInner{grid-template-columns:1fr}.fieldProofImageWrap{min-height:auto;aspect-ratio:675/1200}.fieldProofCopy{padding:28px 20px}.fieldProofActions{display:grid;grid-template-columns:1fr}.fieldProofActions .btn{text-align:center}}
     `;
     document.head.appendChild(style);
 
