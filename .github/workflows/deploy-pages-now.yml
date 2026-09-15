@@ -19,6 +19,22 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Hard-remove broken homepage gallery from deploy artifact
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('index.html')
+          s=p.read_text(encoding='utf-8')
+          s=re.sub(r'\n?<section class="battlefieldWitness"[^>]*>.*?</section>\s*','\n',s,count=1,flags=re.S)
+          s=s.replace('data-dtd-build="2026-09-01-president-letter"','data-dtd-build="2026-09-14-gallery-removed-clean"')
+          if 'data-dtd-build="2026-09-14-gallery-removed-clean"' not in s:
+              s=s.replace('<html lang="en"','<html lang="en" data-dtd-build="2026-09-14-gallery-removed-clean"',1)
+          marker='<style id="emergency-gallery-hide">.battlefieldWitness{display:none!important}</style>'
+          if marker not in s:
+              s=s.replace('</head>',marker+'\n</head>',1)
+          p.write_text(s,encoding='utf-8')
+          PY
       - name: Verify site files
         run: |
           set -e
@@ -29,6 +45,10 @@ jobs:
           grep -q '17.2 MILLION' index.html
           grep -q 'National Outreach' index.html
           grep -q 'Partner With Dog Tag Day' index.html
+          grep -q 'data-dtd-build="2026-09-14-gallery-removed-clean"' index.html
+          ! grep -q 'battlefieldWitness' index.html || grep -q 'emergency-gallery-hide' index.html
+          ! grep -q 'exec-0a82963c-15bc-40f0-9613-ff65109115fe.png' index.html
+          ! grep -q 'dog-tag-day-civilian-veterans-silencers-20260912.png' index.html
           grep -q 'data-dtd-map-build=' public-map.html
           expected_map_src=$(grep -oE 'src="assets/[^"]+"' public-map.html | head -n1 | cut -d'"' -f2 | cut -d'?' -f1)
           test -n "$expected_map_src"
@@ -50,16 +70,19 @@ jobs:
         uses: actions/deploy-pages@v4
         with:
           artifact_name: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
-      - name: Verify production
+      - name: Verify production exact clean build
         run: |
           set -e
           expected_map_src=$(grep -oE 'src="assets/[^"]+"' public-map.html | head -n1 | cut -d'"' -f2 | cut -d'?' -f1)
           for i in $(seq 1 36); do
             html=$(curl -fsSL -H 'Cache-Control: no-cache' "https://dogtagday.org/?verify=${GITHUB_SHA}-${GITHUB_RUN_ID}-$i" || true)
             map_html=$(curl -fsSL -H 'Cache-Control: no-cache' "https://dogtagday.org/public-map.html?verify=${GITHUB_SHA}-${GITHUB_RUN_ID}-$i" || true)
-            if printf '%s' "$html" | grep -q '17.2 MILLION' \
+            if printf '%s' "$html" | grep -q 'data-dtd-build="2026-09-14-gallery-removed-clean"' \
+              && printf '%s' "$html" | grep -q '17.2 MILLION' \
               && printf '%s' "$html" | grep -q 'National Outreach' \
               && printf '%s' "$html" | grep -q 'Partner With Dog Tag Day' \
+              && ! printf '%s' "$html" | grep -q 'exec-0a82963c-15bc-40f0-9613-ff65109115fe.png' \
+              && ! printf '%s' "$html" | grep -q 'dog-tag-day-civilian-veterans-silencers-20260912.png' \
               && printf '%s' "$map_html" | grep -q 'data-dtd-map-build=' \
               && printf '%s' "$map_html" | grep -Fq "$expected_map_src" \
               && printf '%s' "$map_html" | grep -q 'Across America' \
@@ -67,7 +90,7 @@ jobs:
               && printf '%s' "$map_html" | grep -q 'quickKey' \
               && printf '%s' "$map_html" | grep -q 'Accuracy note:' \
               && ! printf '%s' "$map_html" | grep -q '1,800 OUTREACH LIGHTS'; then
-              echo LIVE_HOMEPAGE_AND_MAP_VERIFIED
+              echo LIVE_HOMEPAGE_CLEAN_BUILD_VERIFIED
               exit 0
             fi
             sleep 5
