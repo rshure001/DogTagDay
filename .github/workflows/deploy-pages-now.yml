@@ -23,12 +23,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Verify redirect homepage
+      - name: Verify reborn homepage
         run: |
           set -e
           test -s index.html
-          grep -q 'dog-tag-day-oqc7wd.v2.appdeploy.ai' index.html
-          grep -q 'http-equiv="refresh"' index.html
+          grep -q '2026-09-15-rebirth' index.html
+          grep -q 'Swipe left or peel the curled corner' index.html
+          grep -q 'camera-crew-approved-20260915.svg' index.html
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload site
@@ -41,13 +42,13 @@ jobs:
         uses: actions/deploy-pages@v4
         with:
           artifact_name: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
-      - name: Verify production redirects to rebuilt site
+      - name: Verify production homepage
         run: |
           set -e
           for i in $(seq 1 36); do
             html=$(curl -fsSL -H 'Cache-Control: no-cache' "https://dogtagday.org/?verify=${GITHUB_SHA}-${GITHUB_RUN_ID}-$i" || true)
-            if printf '%s' "$html" | grep -q 'dog-tag-day-oqc7wd.v2.appdeploy.ai'; then
-              echo LIVE_REDIRECT_VERIFIED
+            if printf '%s' "$html" | grep -q '2026-09-15-rebirth'; then
+              echo LIVE_REBIRTH_VERIFIED
               exit 0
             fi
             sleep 5
