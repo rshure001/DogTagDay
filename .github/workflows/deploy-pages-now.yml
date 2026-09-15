@@ -23,12 +23,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Verify clean homepage
+      - name: Verify mixed-scroll homepage
         run: |
           set -e
           test -s index.html
           grep -q '2026-09-15-clean' index.html
-          grep -q 'Swipe left or peel the curled corner' index.html
+          grep -q 'Swipe left or right' index.html
           grep -q 'camera-crew-approved-20260915.svg' index.html
       - name: Configure Pages
         uses: actions/configure-pages@v5
@@ -47,8 +47,8 @@ jobs:
           set -e
           for i in $(seq 1 36); do
             html=$(curl -fsSL -H 'Cache-Control: no-cache' "https://dogtagday.org/?verify=${GITHUB_SHA}-${GITHUB_RUN_ID}-$i" || true)
-            if printf '%s' "$html" | grep -q '2026-09-15-clean'; then
-              echo LIVE_CLEAN_VERIFIED
+            if printf '%s' "$html" | grep -q 'Swipe left or right'; then
+              echo LIVE_MIXED_SCROLL_VERIFIED
               exit 0
             fi
             sleep 5
