@@ -23,11 +23,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Verify reborn homepage
+      - name: Verify clean homepage
         run: |
           set -e
           test -s index.html
-          grep -q '2026-09-15-rebirth' index.html
+          grep -q '2026-09-15-clean' index.html
           grep -q 'Swipe left or peel the curled corner' index.html
           grep -q 'camera-crew-approved-20260915.svg' index.html
       - name: Configure Pages
@@ -47,8 +47,8 @@ jobs:
           set -e
           for i in $(seq 1 36); do
             html=$(curl -fsSL -H 'Cache-Control: no-cache' "https://dogtagday.org/?verify=${GITHUB_SHA}-${GITHUB_RUN_ID}-$i" || true)
-            if printf '%s' "$html" | grep -q '2026-09-15-rebirth'; then
-              echo LIVE_REBIRTH_VERIFIED
+            if printf '%s' "$html" | grep -q '2026-09-15-clean'; then
+              echo LIVE_CLEAN_VERIFIED
               exit 0
             fi
             sleep 5
