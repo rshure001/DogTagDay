@@ -1,1 +1,1 @@
-Force clean DogTagDay.org Pages deployment — 2026-08-30 18:28 PT — rebuild and cache refresh after restoring working hero image asset. Keep current map and horizontal Sponsors | Donations | Partnerships strip unchanged.
+Force clean DogTagDay.org Pages deployment — 2026-09-14 20:12 PT — publish current main index.html with broken gallery removed and refresh live site/CDN.
