@@ -1,49 +1,13 @@
 name: Emergency remove broken homepage gallery
 
 on:
-  push:
-    branches: [main]
+  workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  repair-homepage:
+  disabled:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Remove broken gallery and bust CSS cache
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-          import re
-
-          p = Path('index.html')
-          s = p.read_text(encoding='utf-8')
-          original = s
-
-          # Remove the entire defective battlefield/civilian gallery from the homepage.
-          s = re.sub(r'\n?<section class="battlefieldWitness"[^>]*>.*?</section>\s*', '\n', s, count=1, flags=re.S)
-
-          # Force browsers to fetch the clean stylesheet instead of reusing the broken cached copy.
-          s = re.sub(r'nav-soft-military\.css\?v=[^"\']+', 'nav-soft-military.css?v=20260914-clean-final', s, count=1)
-
-          # Belt-and-suspenders protection in case an older HTML copy survives briefly.
-          marker = '<style id="emergency-gallery-hide">.battlefieldWitness{display:none!important}</style>'
-          if marker not in s:
-              s = s.replace('</head>', marker + '\n</head>', 1)
-
-          if s != original:
-              p.write_text(s, encoding='utf-8')
-          PY
-      - name: Commit repair if needed
-        run: |
-          if git diff --quiet; then
-            echo "Homepage already repaired"
-            exit 0
-          fi
-          git config user.name "Dog Tag Day Site Repair"
-          git config user.email "actions@users.noreply.github.com"
-          git add index.html
-          git commit -m "Emergency remove broken homepage gallery"
-          git push
+      - run: echo "Legacy homepage repair workflow disabled."
