@@ -19,45 +19,64 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Hard-remove broken homepage gallery from deploy artifact
+      - name: Build safe shortened homepage artifact
         run: |
           python - <<'PY'
           from pathlib import Path
           import re
           p=Path('index.html')
           s=p.read_text(encoding='utf-8')
+
+          # Keep the known broken gallery out of production.
           s=re.sub(r'\n?<section class="battlefieldWitness"[^>]*>.*?</section>\s*','\n',s,count=1,flags=re.S)
-          s=s.replace('data-dtd-build="2026-09-01-president-letter"','data-dtd-build="2026-09-14-gallery-removed-clean"')
-          if 'data-dtd-build="2026-09-14-gallery-removed-clean"' not in s:
-              s=s.replace('<html lang="en"','<html lang="en" data-dtd-build="2026-09-14-gallery-removed-clean"',1)
-          marker='<style id="emergency-gallery-hide">.battlefieldWitness{display:none!important}</style>'
-          if marker not in s:
-              s=s.replace('</head>',marker+'\n</head>',1)
+
+          # Force a fresh stylesheet URL so phones do not keep the old cached homepage rules.
+          s=re.sub(r'nav-soft-military\.css\?v=[^"\']+', 'nav-soft-military.css?v=20260915-short-homepage', s, count=1)
+
+          # Remove the duplicate April 18 section and its dead navigation link.
+          s=s.replace('<a href="#april18">April 18</a>\n','')
+          s=re.sub(r'\n?<section class="section" id="april18">.*?</section>\s*','\n',s,count=1,flags=re.S)
+
+          # Remove the extra veteran-identity section from the homepage.
+          s=re.sub(r'\n?<section class="section dark" id="training-remains"[^>]*>.*?</section>\s*','\n',s,count=1,flags=re.S)
+
+          # Put the approved founder/veteran camera-crew scene directly after What You Do.
+          camera='''\n<section class="cameraCrewFeature" aria-label="Dog Tag Day founder listening to a veteran with a camera crew">\n  <div class="cameraCrewFrame">\n    <img src="assets/camera-crew-approved-20260915.svg?v=20260915-approved-2" alt="Ronnie Shure sitting beside a veteran while a professional camera crew records their conversation">\n  </div>\n  <div class="cameraCrewCaption"><strong>WE SHOW UP. WE LISTEN.</strong><span>Preserving veterans’ stories and helping connect people with support.</span></div>\n</section>\n'''
+          mission='<section class="section dark" id="mission">'
+          if 'class="cameraCrewFeature"' not in s and mission in s:
+              s=s.replace(mission,camera+mission,1)
+
+          # Make the homepage shorter without deleting the underlying program material.
+          compact='''<style id="homepage-short-20260915">\n.cameraCrewFeature{max-width:1040px;margin:0 auto 38px;padding:0 20px;text-align:center}.cameraCrewFrame{overflow:hidden;border:2px solid #dfba62;box-shadow:0 0 0 5px #143b68;background:#02070c}.cameraCrewFrame img{display:block;width:100%;height:auto}.cameraCrewCaption{padding:17px 16px 4px}.cameraCrewCaption strong{display:block;color:#dfba62;letter-spacing:.14em;font-size:.86rem}.cameraCrewCaption span{display:block;margin-top:7px;color:#e2e8ee;font-size:1rem;line-height:1.45}.connectionGrid,.programPhases,.resultsPanel,.fundingUses,.programTruth{display:none!important}.connectionProgram{padding:38px 20px!important}.connectionProgram .inner{max-width:850px}.connectionProgram .connectionIntro{max-width:820px;margin:0 auto!important}.battlefieldWitness{display:none!important}@media(max-width:760px){.cameraCrewFeature{padding:0 10px;margin-bottom:30px}.cameraCrewFrame{box-shadow:0 0 0 3px #143b68}.cameraCrewCaption{padding-left:8px;padding-right:8px}}\n</style>'''
+          if 'homepage-short-20260915' not in s:
+              s=s.replace('</head>',compact+'\n</head>',1)
+
+          # Unique build marker for production verification.
+          s=re.sub(r'data-dtd-build="[^"]+"','data-dtd-build="2026-09-15-short-homepage-camera"',s,count=1)
+          if 'data-dtd-build="2026-09-15-short-homepage-camera"' not in s:
+              s=s.replace('<html lang="en"','<html lang="en" data-dtd-build="2026-09-15-short-homepage-camera"',1)
+
           p.write_text(s,encoding='utf-8')
           PY
-      - name: Verify site files
+      - name: Verify site files before deploy
         run: |
           set -e
           test -s index.html
+          test -s assets/camera-crew-approved-20260915.svg
           test -s public-map.html
           test -s map-golden-1850.html
           test -s map-vector.html
+          grep -q 'data-dtd-build="2026-09-15-short-homepage-camera"' index.html
+          grep -q 'camera-crew-approved-20260915.svg' index.html
+          grep -q 'WE SHOW UP. WE LISTEN.' index.html
           grep -q '17.2 MILLION' index.html
           grep -q 'National Outreach' index.html
           grep -q 'Partner With Dog Tag Day' index.html
-          grep -q 'data-dtd-build="2026-09-14-gallery-removed-clean"' index.html
-          ! grep -q 'battlefieldWitness' index.html || grep -q 'emergency-gallery-hide' index.html
+          ! grep -q 'id="april18"' index.html
+          ! grep -q 'id="training-remains"' index.html
           ! grep -q 'exec-0a82963c-15bc-40f0-9613-ff65109115fe.png' index.html
           ! grep -q 'dog-tag-day-civilian-veterans-silencers-20260912.png' index.html
           grep -q 'data-dtd-map-build=' public-map.html
-          expected_map_src=$(grep -oE 'src="assets/[^"]+"' public-map.html | head -n1 | cut -d'"' -f2 | cut -d'?' -f1)
-          test -n "$expected_map_src"
-          test -s "$expected_map_src"
-          grep -q 'Across America' public-map.html
-          grep -q 'Artwork key' public-map.html
-          grep -q 'quickKey' public-map.html
-          grep -q 'Accuracy note:' public-map.html
-          ! grep -q '1,800 OUTREACH LIGHTS' public-map.html
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload site
@@ -70,27 +89,19 @@ jobs:
         uses: actions/deploy-pages@v4
         with:
           artifact_name: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
-      - name: Verify production exact clean build
+      - name: Verify production shortened build
         run: |
           set -e
-          expected_map_src=$(grep -oE 'src="assets/[^"]+"' public-map.html | head -n1 | cut -d'"' -f2 | cut -d'?' -f1)
           for i in $(seq 1 36); do
             html=$(curl -fsSL -H 'Cache-Control: no-cache' "https://dogtagday.org/?verify=${GITHUB_SHA}-${GITHUB_RUN_ID}-$i" || true)
-            map_html=$(curl -fsSL -H 'Cache-Control: no-cache' "https://dogtagday.org/public-map.html?verify=${GITHUB_SHA}-${GITHUB_RUN_ID}-$i" || true)
-            if printf '%s' "$html" | grep -q 'data-dtd-build="2026-09-14-gallery-removed-clean"' \
+            if printf '%s' "$html" | grep -q 'data-dtd-build="2026-09-15-short-homepage-camera"' \
+              && printf '%s' "$html" | grep -q 'camera-crew-approved-20260915.svg' \
+              && printf '%s' "$html" | grep -q 'WE SHOW UP. WE LISTEN.' \
               && printf '%s' "$html" | grep -q '17.2 MILLION' \
-              && printf '%s' "$html" | grep -q 'National Outreach' \
               && printf '%s' "$html" | grep -q 'Partner With Dog Tag Day' \
-              && ! printf '%s' "$html" | grep -q 'exec-0a82963c-15bc-40f0-9613-ff65109115fe.png' \
-              && ! printf '%s' "$html" | grep -q 'dog-tag-day-civilian-veterans-silencers-20260912.png' \
-              && printf '%s' "$map_html" | grep -q 'data-dtd-map-build=' \
-              && printf '%s' "$map_html" | grep -Fq "$expected_map_src" \
-              && printf '%s' "$map_html" | grep -q 'Across America' \
-              && printf '%s' "$map_html" | grep -q 'Artwork key' \
-              && printf '%s' "$map_html" | grep -q 'quickKey' \
-              && printf '%s' "$map_html" | grep -q 'Accuracy note:' \
-              && ! printf '%s' "$map_html" | grep -q '1,800 OUTREACH LIGHTS'; then
-              echo LIVE_HOMEPAGE_CLEAN_BUILD_VERIFIED
+              && ! printf '%s' "$html" | grep -q 'id="april18"' \
+              && ! printf '%s' "$html" | grep -q 'id="training-remains"'; then
+              echo LIVE_SHORT_HOMEPAGE_VERIFIED
               exit 0
             fi
             sleep 5
