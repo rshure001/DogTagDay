@@ -1,15 +1,19 @@
 name: Deploy Dog Tag Day Now
+
 on:
   push:
     branches: [main]
   workflow_dispatch:
+
 permissions:
   contents: read
   pages: write
   id-token: write
+
 concurrency:
   group: pages-production
   cancel-in-progress: true
+
 jobs:
   deploy:
     environment:
@@ -19,33 +23,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Build safe shortened homepage artifact
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-          import re
-          p=Path('index.html')
-          s=p.read_text(encoding='utf-8')
-          s=re.sub(r'\n?<section class="battlefieldWitness"[^>]*>.*?</section>\s*','\n',s,count=1,flags=re.S)
-          s=s.replace('<a href="#april18">April 18</a>\n','')
-          s=re.sub(r'\n?<section class="section" id="april18">.*?</section>\s*','\n',s,count=1,flags=re.S)
-          s=re.sub(r'\n?<section class="section dark" id="training-remains"[^>]*>.*?</section>\s*','\n',s,count=1,flags=re.S)
-          s=re.sub(r'data-dtd-build="[^"]+"','data-dtd-build="2026-09-15-short-homepage-camera"',s,count=1)
-          if 'data-dtd-build="2026-09-15-short-homepage-camera"' not in s:
-              s=s.replace('<html lang="en"','<html lang="en" data-dtd-build="2026-09-15-short-homepage-camera"',1)
-          p.write_text(s,encoding='utf-8')
-          PY
-      - name: Verify site files before deploy
+      - name: Verify redirect homepage
         run: |
           set -e
           test -s index.html
-          test -s assets/camera-crew-approved-20260915.svg
-          grep -q 'data-dtd-build="2026-09-15-short-homepage-camera"' index.html
-          grep -q 'camera-crew-approved-20260915.svg' index.html
-          grep -q 'WE SHOW UP. WE LISTEN.' index.html
-          grep -q '17.2 MILLION' index.html
-          ! grep -q 'id="april18"' index.html
-          ! grep -q 'id="training-remains"' index.html
+          grep -q 'dog-tag-day-oqc7wd.v2.appdeploy.ai' index.html
+          grep -q 'http-equiv="refresh"' index.html
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload site
@@ -58,18 +41,13 @@ jobs:
         uses: actions/deploy-pages@v4
         with:
           artifact_name: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
-      - name: Verify production shortened build
+      - name: Verify production redirects to rebuilt site
         run: |
           set -e
           for i in $(seq 1 36); do
             html=$(curl -fsSL -H 'Cache-Control: no-cache' "https://dogtagday.org/?verify=${GITHUB_SHA}-${GITHUB_RUN_ID}-$i" || true)
-            if printf '%s' "$html" | grep -q 'data-dtd-build="2026-09-15-short-homepage-camera"' \
-              && printf '%s' "$html" | grep -q 'camera-crew-approved-20260915.svg' \
-              && printf '%s' "$html" | grep -q 'WE SHOW UP. WE LISTEN.' \
-              && printf '%s' "$html" | grep -q '17.2 MILLION' \
-              && ! printf '%s' "$html" | grep -q 'id="april18"' \
-              && ! printf '%s' "$html" | grep -q 'id="training-remains"'; then
-              echo LIVE_SHORT_HOMEPAGE_VERIFIED
+            if printf '%s' "$html" | grep -q 'dog-tag-day-oqc7wd.v2.appdeploy.ai'; then
+              echo LIVE_REDIRECT_VERIFIED
               exit 0
             fi
             sleep 5
