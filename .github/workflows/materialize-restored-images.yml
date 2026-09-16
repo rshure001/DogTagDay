@@ -9,14 +9,14 @@ permissions:
 
 jobs:
   restore:
-    if: github.event.head_commit.message != 'Materialize exact homepage photos'
+    if: github.event.head_commit.message != 'Materialize exact homepage photos' && github.event.head_commit.message != 'Publish corrected Ronnie conversation photo'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Decode exact approved homepage photos
+      - name: Materialize approved homepage photos
         run: |
           set -e
           mkdir -p assets
@@ -28,20 +28,28 @@ jobs:
               ('.imageparts/final-founder.b64','assets/founder-hands-final-20260916.jpg'),
           ]
           for src, dst in pairs:
-              s = Path(src).read_text()
-              s = re.sub(r'[^A-Za-z0-9+/=]', '', s)
-              s += '=' * ((4 - len(s) % 4) % 4)
-              Path(dst).write_bytes(base64.b64decode(s, validate=False))
+              if Path(src).exists():
+                  s = Path(src).read_text()
+                  s = re.sub(r'[^A-Za-z0-9+/=]', '', s)
+                  s += '=' * ((4 - len(s) % 4) % 4)
+                  Path(dst).write_bytes(base64.b64decode(s, validate=False))
           PY
-          file assets/camera-crew-final-20260916.jpg | grep -qi 'JPEG image data'
-          file assets/founder-hands-final-20260916.jpg | grep -qi 'JPEG image data'
-          test -s assets/camera-crew-final-20260916.jpg
-          test -s assets/founder-hands-final-20260916.jpg
-      - name: Commit exact assets
+          curl -L --fail --silent --show-error 'https://gcdn.picsart.com/editing-temp/926682f4-0105-438c-a2c7-c780d228a358.jpeg' -o assets/ronnie-street-conversation-final.jpg
+          file assets/ronnie-street-conversation-final.jpg | grep -qi 'JPEG image data'
+          test -s assets/ronnie-street-conversation-final.jpg
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text()
+          s=s.replace('assets/ronnie-listening-veteran.jpg?v=book4','assets/ronnie-street-conversation-final.jpg?v=book5')
+          s=s.replace('2026-09-16-seven-page-book-v4','2026-09-16-seven-page-book-v5')
+          p.write_text(s)
+          PY
+      - name: Commit approved assets
         run: |
           git config user.name 'rshure001'
           git config user.email 'rshure001@yahoo.com'
-          git add assets/camera-crew-final-20260916.jpg assets/founder-hands-final-20260916.jpg
+          git add assets/ronnie-street-conversation-final.jpg index.html
           if git diff --cached --quiet; then exit 0; fi
-          git commit -m 'Materialize exact homepage photos'
+          git commit -m 'Publish corrected Ronnie conversation photo'
           git push origin HEAD:main
