@@ -14,7 +14,7 @@ jobs:
           node-version: '24'
       - run: npm install playwright
       - run: npx playwright install --with-deps webkit
-      - name: Verify current homepage on mobile WebKit
+      - name: Verify rebuilt homepage on mobile WebKit
         run: |
           node <<'NODE'
           const { webkit, devices } = require('playwright');
@@ -24,23 +24,20 @@ jobs:
             const page=await context.newPage();
             let failed=false;
             try {
-              await page.goto('https://dogtagday.org/?verify='+Date.now(),{waitUntil:'domcontentloaded',timeout:30000});
-              const hero=page.locator('.hero img');
-              await hero.waitFor({state:'visible',timeout:15000});
-              const heroSrc=await hero.getAttribute('src');
-              const heroSize=await hero.evaluate(i=>({w:i.naturalWidth,h:i.naturalHeight}));
-              const body=await page.locator('body').innerText();
-              const required=['17.2 million','partner with dog tag day','national outreach'];
-              const lower=body.toLowerCase();
-              const missing=required.filter(text=>!lower.includes(text));
-              const noOverflow=await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+1);
-              console.log(JSON.stringify({heroSrc,heroSize,missing,noOverflow}));
-              if(!heroSrc || !heroSrc.includes('assets/dog-tag-day-hero') || heroSize.w===0 || heroSize.h===0 || missing.length || !noOverflow) failed=true;
-            } catch (error) {
-              console.error(error);
-              failed=true;
-            } finally {
-              await page.screenshot({path:'live-homepage-proof.png',fullPage:true}).catch(console.error);
+              await page.goto('https://dogtagday.org/?verify='+Date.now(),{waitUntil:'networkidle',timeout:45000});
+              const marker=await page.locator('html').getAttribute('data-dtd-build');
+              const imgs=await page.locator('img').evaluateAll(list=>list.map(i=>({src:i.getAttribute('src'),w:i.naturalWidth,h:i.naturalHeight,visible:!!(i.offsetWidth||i.offsetHeight||i.getClientRects().length)})));
+              const broken=imgs.filter(i=>i.visible && (!i.w || !i.h));
+              const required=['hero-inline.svg','combat-inline.svg','bbq-inline.svg','camera-inline.svg'];
+              const missing=required.filter(x=>!imgs.some(i=>String(i.src||'').includes(x)));
+              const layout=await page.evaluate(()=>({scrollWidth:document.documentElement.scrollWidth,innerWidth:window.innerWidth,bodyText:document.body.innerText}));
+              const noOverflow=layout.scrollWidth<=layout.innerWidth+2;
+              const phrase=layout.bodyText.includes('PUT THEM ON.')&&layout.bodyText.includes('ACKNOWLEDGE ONE.');
+              console.log(JSON.stringify({marker,imgs,broken,missing,noOverflow,scrollWidth:layout.scrollWidth,innerWidth:layout.innerWidth,phrase},null,2));
+              if(marker!=='2026-09-15-rebuilt-photos-v2'||broken.length||missing.length||!noOverflow||!phrase) failed=true;
+            } catch(e){console.error(e);failed=true;}
+            finally{
+              await page.screenshot({path:'live-homepage-proof.png',fullPage:true});
               await browser.close();
             }
             if(failed) process.exit(1);
