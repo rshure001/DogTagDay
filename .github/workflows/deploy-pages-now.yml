@@ -38,17 +38,18 @@ jobs:
           p=Path('index.html')
           s=p.read_text()
 
-          # Counter: compact, quiet, exact 4,062 with no plus sign.
+          # Counter: compact, quiet, exact 4,300 with no plus sign.
           s=s.replace('.visitorCounter{padding:26px 18px;border:3px solid var(--gold);border-radius:10px;background:linear-gradient(145deg,#102947,#071426);box-shadow:inset 0 0 0 2px #fff}',
                       '.visitorCounter{width:min(300px,84vw);margin:0 auto;padding:8px 12px;border:1px solid #7e6a38;border-radius:7px;background:#0b1d33;box-shadow:none}')
           s=s.replace('.visitorCounter strong{display:block;font:900 clamp(3rem,15vw,6rem)/.9 Georgia,serif}',
                       '.visitorCounter strong{display:block;font:900 clamp(1.55rem,7vw,2.1rem)/1 Georgia,serif}')
           s=s.replace('.visitorCounter span{display:block;color:var(--gold);font-weight:900;letter-spacing:.1em;margin-top:10px}',
                       '.visitorCounter span{display:block;color:#aeb8c4;font-weight:700;letter-spacing:.06em;margin-top:3px;font-size:.58rem}')
-          s=s.replace('<strong id="visitCount">4,300</strong>','<strong id="visitCount">4,062</strong>')
-          s=s.replace('<strong id="visitCount">4300</strong>','<strong id="visitCount">4,062</strong>')
+          s=s.replace('<strong id="visitCount">4,062</strong>','<strong id="visitCount">4,300</strong>')
+          s=s.replace('<strong id="visitCount">4,300</strong>','<strong id="visitCount">4,300</strong>')
+          s=s.replace('<strong id="visitCount">4300</strong>','<strong id="visitCount">4,300</strong>')
           s=re.sub(r"\(function\(\)\{const el=document\.getElementById\('visitCount'\).*?\}\)\(\);",
-                   "(function(){const el=document.getElementById('visitCount');if(el)el.textContent='4,062';})();",
+                   "(function(){const el=document.getElementById('visitCount');if(el)el.textContent='4,300';})();",
                    s, count=1, flags=re.S)
 
           # Approved photo order: listening first, community/camera-support second.
@@ -68,7 +69,7 @@ jobs:
               s=s.replace('</body>',override+'\n</body>')
           p.write_text(s)
           PY
-          grep -q 'id="visitCount">4,062' index.html
+          grep -q 'id="visitCount">4,300' index.html
           grep -q 'width:min(300px,84vw)' index.html
           grep -q 'ronnie-listening-veteran.jpg' index.html
           grep -q 'ronnie-community-support.jpg' index.html
