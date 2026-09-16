@@ -27,9 +27,14 @@ jobs:
         run: |
           set -e
           test -s index.html
-          grep -q '2026-09-16-photo-assets-restored' index.html
-          grep -q '4,300+' index.html
-          grep -q 'holidayStrip' index.html
+          grep -q '2026-09-16-restored-original-layout' index.html
+          grep -q 'approved-dog-tags.PNG' index.html
+          grep -q 'peopleSlider' index.html
+          grep -q 'workSlider' index.html
+          grep -q 'id="visitCount">4,300' index.html
+          grep -q 'VISITS TO DOGTAGDAY.ORG' index.html
+          grep -q 'NEXT HOLIDAY:' index.html
+          grep -q 'HALLOWEEN' index.html
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload site
