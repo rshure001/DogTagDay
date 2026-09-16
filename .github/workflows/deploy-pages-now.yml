@@ -23,13 +23,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Validate current swipe gallery
+      - name: Validate restored homepage
         run: |
           set -e
           test -s index.html
-          grep -q 'six-page-upswipe' index.html
-          grep -q 'Swipe up' index.html
-          grep -q '1 / 6' index.html
+          grep -q '2026-09-16-approved-visual-v5' index.html
+          grep -q 'Veterans should not become invisible' index.html
+          grep -q 'What We Do All Year' index.html
+          grep -q 'Donate Through the Honor Jar' index.html
+          grep -q 'Open Letter to President Donald J. Trump' index.html
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload site
