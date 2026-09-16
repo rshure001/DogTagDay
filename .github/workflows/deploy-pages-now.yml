@@ -27,11 +27,12 @@ jobs:
         run: |
           set -e
           test -s index.html
-          grep -q '2026-09-16-action-photo-restored' index.html
+          grep -q '2026-09-16-final-picture-fix' index.html
           grep -q 'dog-tag-day-hero.PNG' index.html
           grep -q 'dog-tag-day-realistic-veterans-20260901.jpg' index.html
-          grep -q 'camera-crew-final.jpg' index.html
+          grep -q 'ronnie-founder-natural-facial-hair-20260903.jpg' index.html
           grep -q 'ronnie-shure-founder-20260901.jpg' index.html
+          ! grep -q 'camera-crew-final.jpg' index.html
           grep -q 'peopleSlider' index.html
           grep -q 'workSlider' index.html
           grep -q 'letter-to-president.html' index.html
