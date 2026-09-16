@@ -27,14 +27,17 @@ jobs:
         run: |
           set -e
           test -s index.html
-          grep -q '2026-09-15-counter-holidays-restored' index.html
+          grep -q '2026-09-16-photo-assets-restored' index.html
           grep -q '4,300+' index.html
           grep -q 'holidayStrip' index.html
-          grep -q 'camera-inline.svg' index.html
-          test -s assets/hero-inline.svg
-          test -s assets/combat-inline.svg
-          test -s assets/bbq-inline.svg
-          test -s assets/camera-inline.svg
+          grep -q 'approved-dog-tags.PNG' index.html
+          grep -q 'dog-tag-day-realistic-veterans-20260901.jpg' index.html
+          grep -q 'ronnie-founder-natural-facial-hair-20260903.jpg' index.html
+          test -s assets/approved-dog-tags.PNG
+          test -s assets/dog-tag-day-realistic-veterans-20260901.jpg
+          test -s assets/dog-tag-day-civilian-veterans-silencers-20260912.png
+          test -s assets/ronnie-founder-natural-facial-hair-20260903.jpg
+          test -s assets/dog-tag-day-national-map-brighter-20260913.jpg
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload site
@@ -52,7 +55,7 @@ jobs:
           set -e
           for i in $(seq 1 36); do
             html=$(curl -fsSL -H 'Cache-Control: no-cache' "https://dogtagday.org/?verify=${GITHUB_SHA}-${GITHUB_RUN_ID}-$i" || true)
-            if printf '%s' "$html" | grep -q '2026-09-15-counter-holidays-restored' && printf '%s' "$html" | grep -q '4,300+' && printf '%s' "$html" | grep -q 'holidayStrip' && printf '%s' "$html" | grep -q 'camera-inline.svg'; then
+            if printf '%s' "$html" | grep -q '2026-09-16-photo-assets-restored' && printf '%s' "$html" | grep -q '4,300+' && printf '%s' "$html" | grep -q 'holidayStrip' && printf '%s' "$html" | grep -q 'approved-dog-tags.PNG'; then
               echo LIVE_CURRENT_HOMEPAGE_VERIFIED
               exit 0
             fi
