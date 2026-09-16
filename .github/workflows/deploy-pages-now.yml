@@ -23,28 +23,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Replace broken What We Do image
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-          p = Path('index.html')
-          s = p.read_text()
-          s = s.replace('assets/camera-crew-final.jpg?v=20260916', 'assets/dogtagday-no-hats-final.jpg?v=20260916-work-safe')
-          s = s.replace('Camera crew documenting a veteran story', 'Veterans and community together')
-          p.write_text(s)
-          PY
       - name: Verify homepage exists
         run: |
           set -e
           test -s index.html
-          grep -q '2026-09-16-original-hero-working-sliders' index.html
+          grep -q '2026-09-16-next-holiday-only' index.html
           grep -q 'dog-tag-day-hero.PNG' index.html
           grep -q 'dogtagday-no-hats-final.jpg?v=20260916-work-safe' index.html
-          ! grep -q 'camera-crew-final.jpg' index.html
           grep -q 'peopleSlider' index.html
           grep -q 'workSlider' index.html
           grep -q 'id="visitCount">4,300' index.html
           grep -q 'VISITS TO DOGTAGDAY.ORG' index.html
+          grep -q 'id="holidayTicker"' index.html
           grep -q 'NEXT HOLIDAY:' index.html
           grep -q 'HALLOWEEN' index.html
       - name: Configure Pages
