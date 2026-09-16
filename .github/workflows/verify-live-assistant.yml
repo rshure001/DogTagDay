@@ -36,7 +36,7 @@ jobs:
               const textOK=phrases.every(x=>layout.bodyText.includes(x));
               const firstImageTransform=await page.locator('.cover .visual img').evaluate(el=>getComputedStyle(el).transform);
               console.log(JSON.stringify({marker,pages,imgs,broken,missing,noOverflow,textOK,firstImageTransform},null,2));
-              if(marker!=='2026-09-16-seven-page-book-v1'||pages!==7||broken.length||missing.length||!noOverflow||!textOK||firstImageTransform==='none') failed=true;
+              if(marker!=='2026-09-16-seven-page-book-v4'||pages!==7||broken.length||missing.length||!noOverflow||!textOK||firstImageTransform==='none') failed=true;
             } catch(e){console.error(e);failed=true;} finally {await page.screenshot({path:'live-homepage-proof.png',fullPage:true}); await browser.close();}
             if(failed) process.exit(1); console.log('LIVE_ASSISTANT_PASS=true');
           })().catch(e=>{console.error(e);process.exit(1)});
