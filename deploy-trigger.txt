@@ -1,1 +1,1 @@
-Force clean DogTagDay.org Pages deployment — 2026-09-16 05:38 PT — publish current main to custom domain and refresh live site/CDN after homepage counter and photo-order changes.
+Publish approved camera-crew homepage design — 2026-09-16 06:40 PT.
