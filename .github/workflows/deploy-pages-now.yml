@@ -27,17 +27,17 @@ jobs:
         run: |
           set -e
           test -s index.html
-          grep -q '2026-09-16-approved-visual-v7' index.html
+          grep -q '2026-09-16-approved-visual-v8-new-six-images' index.html
           grep -q 'Veterans should not become invisible' index.html
           grep -q 'What We Do All Year' index.html
           grep -q 'Donate Through the Honor Jar' index.html
           grep -q 'Open Letter to President Donald J. Trump' index.html
-          grep -q '25271eea-4822-4fb3-973b-f944f7da9961.png' index.html
-          grep -q '62c16051-50ed-4eb1-955e-0c133709d962.png' index.html
-          grep -q '218d9855-89bc-4e8a-8f81-a89fec267374.png' index.html
-          grep -q '33af325c-d736-4804-add0-815b72f85661.png' index.html
-          grep -q '43d71ff5-f9ca-4d41-b0ba-544612cb750d.png' index.html
-          grep -q 'd9eead0f-908e-465d-954b-a532c18385de.png' index.html
+          grep -q '2d86c0c7-449c-4e1c-b1b7-4b6a20ab2974.png' index.html
+          grep -q '2e6c7dc1-ecf5-4018-b68c-1656da4779d7.png' index.html
+          grep -q 'de5ee881-4b6b-4503-9c4e-5b06069b252d.png' index.html
+          grep -q 'a2477f7e-1543-4ff8-a1bc-e48ec43b8df0.png' index.html
+          grep -q '0527c2cd-b83e-4666-a379-241ae57cee0e.png' index.html
+          grep -q 'f7d4f439-9f21-4fc9-ba2a-e4fa1ebfea06.png' index.html
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload site
