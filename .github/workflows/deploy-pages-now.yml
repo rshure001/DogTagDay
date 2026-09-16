@@ -27,15 +27,16 @@ jobs:
         run: |
           set -e
           test -s index.html
-          grep -q '2026-09-16-final-homepage-v9' index.html
+          grep -q '2026-09-16-final-homepage-v10' index.html
           grep -q 'assets/dog-tag-day-hero.PNG' index.html
-          grep -q 'Veterans should not become invisible' index.html
           grep -q 'NO MAN LEFT BEHIND' index.html
           grep -q 'THE UNIFORM COMES OFF' index.html
-          grep -q 'Ronnie Shure — Founder' index.html
+          grep -q 'ronnie-street-conversation-final.jpg' index.html
+          grep -q 'ronnie-founder-natural-facial-hair-20260903.jpg' index.html
+          grep -q 'ronnie-community-support.jpg' index.html
           grep -q '4,817' index.html
-          grep -q 'Donate Through the Honor Jar' index.html
-          grep -q 'Open Letter to President Donald J. Trump' index.html
+          grep -q 'NEXT HOLIDAY:' index.html
+          grep -q 'HALLOWEEN' index.html
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload site
