@@ -23,16 +23,19 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Verify rebuilt homepage
+      - name: Verify rebuilt photo homepage
         run: |
           set -e
           test -s index.html
-          grep -q '2026-09-15-full-rebuild' index.html
-          grep -q 'PUT THEM ON.' index.html
-          grep -q 'ACKNOWLEDGE ONE.' index.html
-          grep -q 'approved-dog-tags.PNG' index.html
-          grep -q 'dog-tag-day-realistic-veterans-20260901.jpg' index.html
-          grep -q 'ronnie-founder-natural-facial-hair-20260903.jpg' index.html
+          grep -q '2026-09-15-rebuilt-photos-v2' index.html
+          grep -q 'hero-inline.svg' index.html
+          grep -q 'combat-inline.svg' index.html
+          grep -q 'bbq-inline.svg' index.html
+          grep -q 'camera-inline.svg' index.html
+          test -s assets/hero-inline.svg
+          test -s assets/combat-inline.svg
+          test -s assets/bbq-inline.svg
+          test -s assets/camera-inline.svg
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload site
@@ -50,8 +53,8 @@ jobs:
           set -e
           for i in $(seq 1 36); do
             html=$(curl -fsSL -H 'Cache-Control: no-cache' "https://dogtagday.org/?verify=${GITHUB_SHA}-${GITHUB_RUN_ID}-$i" || true)
-            if printf '%s' "$html" | grep -q '2026-09-15-full-rebuild'; then
-              echo LIVE_FULL_REBUILD_VERIFIED
+            if printf '%s' "$html" | grep -q '2026-09-15-rebuilt-photos-v2' && printf '%s' "$html" | grep -q 'camera-inline.svg'; then
+              echo LIVE_REBUILT_PHOTOS_VERIFIED
               exit 0
             fi
             sleep 5
