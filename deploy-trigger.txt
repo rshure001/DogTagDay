@@ -1,1 +1,1 @@
-Force clean DogTagDay.org Pages deployment — 2026-09-14 20:15 PT — publish current main after deleting both broken homepage image assets; refresh live site/CDN again.
+Force clean DogTagDay.org Pages deployment — 2026-09-16 05:38 PT — publish current main to custom domain and refresh live site/CDN after homepage counter and photo-order changes.
