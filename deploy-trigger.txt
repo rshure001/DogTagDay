@@ -1,1 +1,1 @@
-Force deploy exact uploaded camera crew and founder images — 2026-09-16 15:26
+Force deploy v10 homepage and bypass stale Pages cache — 2026-09-16 22:00 UTC
