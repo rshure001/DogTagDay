@@ -23,14 +23,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Validate clean rebuilt homepage
+      - name: Validate live homepage fix
         run: |
           set -e
           test -s index.html
-          grep -q '2026-09-16-clean-rebuild-v11' index.html
+          grep -q '2026-09-16-live-fix-v12' index.html
           grep -q 'assets/dog-tag-day-hero.PNG' index.html
-          grep -q 'NO MAN LEFT BEHIND' index.html
-          grep -q 'THE UNIFORM COMES OFF' index.html
+          grep -q 'assets/combat-team-final.jpg' index.html
+          grep -q 'assets/dogtagday-no-hats-final.jpg' index.html
+          grep -q 'assets/barbecue-team-final.jpg' index.html
+          grep -q 'assets/camera-crew-final.jpg' index.html
           grep -q 'ronnie-street-conversation-final.jpg' index.html
           grep -q 'ronnie-shure-founder-20260901.jpg' index.html
           grep -q 'ronnie-listening-veteran.jpg' index.html
