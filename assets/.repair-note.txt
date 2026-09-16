@@ -1,0 +1,1 @@
+Photo repair in progress: replacing corrupted generated image assets with verified JPEG bytes.
