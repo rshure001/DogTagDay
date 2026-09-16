@@ -14,7 +14,7 @@ jobs:
           node-version: '24'
       - run: npm install playwright
       - run: npx playwright install --with-deps webkit
-      - name: Verify current homepage on mobile WebKit
+      - name: Verify 7-page homepage on mobile WebKit
         run: |
           node <<'NODE'
           const { webkit, devices } = require('playwright');
@@ -25,15 +25,18 @@ jobs:
             try {
               await page.goto('https://dogtagday.org/?verify='+Date.now(),{waitUntil:'networkidle',timeout:45000});
               const marker=await page.locator('html').getAttribute('data-dtd-build');
+              const pages=await page.locator('.page').count();
               const imgs=await page.locator('img').evaluateAll(list=>list.map(i=>({src:i.getAttribute('src'),w:i.naturalWidth,h:i.naturalHeight,visible:!!(i.offsetWidth||i.offsetHeight||i.getClientRects().length)})));
               const broken=imgs.filter(i=>i.visible && (!i.w || !i.h));
-              const required=['dog-tag-day-hero.PNG','dtd-home-visual.jpg','dog-tag-day-national-map-brighter-20260913.jpg','honor-jar-click-pledge.png'];
+              const required=['dog-tag-day-hero.PNG','ronnie-listening-veteran.jpg','swipe-page3.jpg','ronnie-founder-natural-facial-hair-20260903.jpg','dog-tag-day-realistic-veterans-20260901.jpg','dog-tag-day-national-map-brighter-20260913.jpg','honor-jar-click-pledge.png'];
               const missing=required.filter(x=>!imgs.some(i=>String(i.src||'').includes(x)));
               const layout=await page.evaluate(()=>({scrollWidth:document.documentElement.scrollWidth,innerWidth:window.innerWidth,bodyText:document.body.innerText}));
               const noOverflow=layout.scrollWidth<=layout.innerWidth+2;
-              const phrase=layout.bodyText.includes('Put them on. Acknowledge one.') && layout.bodyText.includes('4,304');
-              console.log(JSON.stringify({marker,imgs,broken,missing,noOverflow,phrase},null,2));
-              if(marker!=='2026-09-16-approved-visual-v5'||broken.length||missing.length||!noOverflow||!phrase) failed=true;
+              const phrases=['DOG TAG DAY','APRIL 18','1 / 7','Put them on. Acknowledge one.'];
+              const textOK=phrases.every(x=>layout.bodyText.includes(x));
+              const firstImageTransform=await page.locator('.cover .visual img').evaluate(el=>getComputedStyle(el).transform);
+              console.log(JSON.stringify({marker,pages,imgs,broken,missing,noOverflow,textOK,firstImageTransform},null,2));
+              if(marker!=='2026-09-16-seven-page-book-v1'||pages!==7||broken.length||missing.length||!noOverflow||!textOK||firstImageTransform==='none') failed=true;
             } catch(e){console.error(e);failed=true;} finally {await page.screenshot({path:'live-homepage-proof.png',fullPage:true}); await browser.close();}
             if(failed) process.exit(1); console.log('LIVE_ASSISTANT_PASS=true');
           })().catch(e=>{console.error(e);process.exit(1)});
