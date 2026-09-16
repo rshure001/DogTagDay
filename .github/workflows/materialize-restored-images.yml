@@ -9,41 +9,28 @@ permissions:
 
 jobs:
   restore:
-    if: github.event.head_commit.message != 'Materialize restored photo assets'
+    if: github.event.head_commit.message != 'Materialize exact homepage photos'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Decode approved photos and update sliders
+      - name: Decode exact approved homepage photos
         run: |
           set -e
           mkdir -p assets
-          cat .imageparts/rv1.01 .imageparts/rv1.02 .imageparts/rv1.03 | base64 -d > assets/ronnie-listening-veteran.jpg
-          cat .imageparts/rv3m.01 .imageparts/rv3m.02 | base64 -d > assets/ronnie-community-support.jpg
-          file assets/ronnie-listening-veteran.jpg | grep -qi 'JPEG image data'
-          file assets/ronnie-community-support.jpg | grep -qi 'JPEG image data'
-          python - <<'PY'
-          from pathlib import Path
-          p=Path('index.html')
-          s=p.read_text()
-          old_people='<div class="slider" id="peopleSlider"><figure class="slide"><img src="assets/dog-tag-day-realistic-veterans-20260901.jpg?v=20260916-final" alt="Veterans together"><figcaption>THE PEOPLE BEHIND THE TAGS</figcaption></figure><figure class="slide"><img src="assets/ronnie-founder-natural-facial-hair-20260903.jpg?v=20260916-final" alt="Ronnie Shure, Founder and CEO"><figcaption>RONNIE SHURE • FOUNDER &amp; CEO</figcaption></figure><figure class="slide"><img src="assets/ronnie-shure-founder-20260901.jpg?v=20260916-final" alt="Ronnie Shure"><figcaption>REAL PEOPLE • REAL STORIES • A STRONGER TOMORROW</figcaption></figure></div>'
-          new_people='<div class="slider" id="peopleSlider"><figure class="slide"><img src="assets/ronnie-listening-veteran.jpg?v=20260916-restored" alt="Ronnie Shure sitting face to face with a veteran and listening"><figcaption>SIT DOWN • HEAR THE STORY • STAY WITH THEM</figcaption></figure><figure class="slide"><img src="assets/ronnie-community-support.jpg?v=20260916-restored" alt="Ronnie Shure supporting veterans and community members"><figcaption>REAL SUPPORT • REAL PEOPLE • REAL COMMUNITY</figcaption></figure><figure class="slide"><img src="assets/dog-tag-day-realistic-veterans-20260901.jpg?v=20260916-final" alt="Veterans together"><figcaption>THE PEOPLE BEHIND THE TAGS</figcaption></figure></div>'
-          old_work='<div class="slider" id="workSlider"><figure class="slide"><img src="assets/dog-tag-day-realistic-veterans-20260901.jpg?v=20260916-work-final" alt="Veterans and community together"><figcaption>LISTEN • CONNECT • STAY WITH THE STORY</figcaption></figure><figure class="slide"><img src="assets/ronnie-founder-natural-facial-hair-20260903.jpg?v=20260916-work-final" alt="Ronnie Shure"><figcaption>SHOW UP • LISTEN • STAY</figcaption></figure><figure class="slide"><img src="assets/ronnie-shure-founder-20260901.jpg?v=20260916-work-final" alt="Ronnie Shure"><figcaption>REAL SUPPORT • REAL PEOPLE • REAL STORIES</figcaption></figure></div>'
-          new_work='<div class="slider" id="workSlider"><figure class="slide"><img src="assets/ronnie-community-support.jpg?v=20260916-restored" alt="Dog Tag Day real support scenes with Ronnie Shure beside veterans and community members"><figcaption>WE SHOW UP • WE LISTEN • WE STAY</figcaption></figure><figure class="slide"><img src="assets/ronnie-listening-veteran.jpg?v=20260916-restored" alt="Ronnie Shure sitting and talking with a veteran"><figcaption>PERSON TO PERSON • HEAR THE STORY</figcaption></figure><figure class="slide"><img src="assets/dog-tag-day-realistic-veterans-20260901.jpg?v=20260916-final" alt="Veterans together"><figcaption>IDENTITY • BROTHERHOOD • HONOR</figcaption></figure></div>'
-          if old_people in s: s=s.replace(old_people,new_people)
-          if old_work in s: s=s.replace(old_work,new_work)
-          s=s.replace('data-dtd-build="2026-09-16-formal-homepage"','data-dtd-build="2026-09-16-restored-action-photos"')
-          p.write_text(s)
-          PY
-          grep -q 'ronnie-listening-veteran.jpg' index.html
-          grep -q 'ronnie-community-support.jpg' index.html
-      - name: Commit restored assets
+          base64 -d .imageparts/final-camera.b64 > assets/camera-crew-final-20260916.jpg
+          base64 -d .imageparts/final-founder.b64 > assets/founder-hands-final-20260916.jpg
+          file assets/camera-crew-final-20260916.jpg | grep -qi 'JPEG image data'
+          file assets/founder-hands-final-20260916.jpg | grep -qi 'JPEG image data'
+          test -s assets/camera-crew-final-20260916.jpg
+          test -s assets/founder-hands-final-20260916.jpg
+      - name: Commit exact assets
         run: |
           git config user.name 'rshure001'
           git config user.email 'rshure001@yahoo.com'
-          git add index.html assets/ronnie-listening-veteran.jpg assets/ronnie-community-support.jpg
+          git add assets/camera-crew-final-20260916.jpg assets/founder-hands-final-20260916.jpg
           if git diff --cached --quiet; then exit 0; fi
-          git commit -m 'Materialize restored photo assets'
+          git commit -m 'Materialize exact homepage photos'
           git push origin HEAD:main
