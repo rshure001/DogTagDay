@@ -23,15 +23,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Verify final military homepage
+      - name: Verify final military photos homepage
         run: |
           set -e
           test -s index.html
-          grep -q '2026-09-15-final-military-homepage' index.html
+          grep -q '2026-09-15-final-military-photos' index.html
           grep -q 'Identity • Brotherhood • Honor' index.html
           grep -q 'SWIPE SIDE TO SIDE' index.html
-          grep -q 'camera-crew-approved-20260915.svg' index.html
-          grep -q 'dog-tag-day-five-no-hats.webp' index.html
+          grep -q 'combat-team-final.jpg' index.html
+          grep -q 'barbecue-team-final.jpg' index.html
+          grep -q 'camera-crew-final.jpg' index.html
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload site
@@ -49,8 +50,8 @@ jobs:
           set -e
           for i in $(seq 1 36); do
             html=$(curl -fsSL -H 'Cache-Control: no-cache' "https://dogtagday.org/?verify=${GITHUB_SHA}-${GITHUB_RUN_ID}-$i" || true)
-            if printf '%s' "$html" | grep -q 'final-military-homepage' && printf '%s' "$html" | grep -q 'Identity • Brotherhood • Honor'; then
-              echo LIVE_FINAL_MILITARY_HOMEPAGE_VERIFIED
+            if printf '%s' "$html" | grep -q 'final-military-photos' && printf '%s' "$html" | grep -q 'combat-team-final.jpg' && printf '%s' "$html" | grep -q 'camera-crew-final.jpg'; then
+              echo LIVE_FINAL_MILITARY_PHOTOS_VERIFIED
               exit 0
             fi
             sleep 5
