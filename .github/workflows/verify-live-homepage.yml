@@ -28,24 +28,28 @@ jobs:
             try {
               for(let i=0;i<20;i++){
                 await page.goto('https://dogtagday.org/?verify='+Date.now(),{waitUntil:'networkidle',timeout:30000});
-                const hero=page.locator('.hero img');
+                const hero=page.locator('.heroOriginal img');
                 const map=page.locator('img[alt="Dog Tag Day outreach across America"]');
+                const people=page.locator('#peopleSlider img');
+                const work=page.locator('#workSlider img');
+                const visits=page.locator('#visitCount');
+                const ticker=page.locator('.ticker');
                 await hero.waitFor({state:'visible',timeout:10000});
                 await map.waitFor({state:'visible',timeout:10000});
+                await people.first().waitFor({state:'visible',timeout:10000});
+                await work.first().waitFor({state:'visible',timeout:10000});
                 const broken=await page.locator('img').evaluateAll(imgs=>imgs.filter(i=>!i.complete||i.naturalWidth===0).map(i=>i.getAttribute('src')));
-                const heroCount=await hero.count();
-                const mapCount=await map.count();
+                const heroSrc=await hero.getAttribute('src');
                 const body=(await page.locator('body').innerText()).toLowerCase();
-                const text=body.includes('veterans should not become invisible')&&body.includes('what we do all year')&&body.includes('dog tag day foundation')&&body.includes('april 18');
+                const text=body.includes('veterans should not become invisible')&&body.includes('what we do all year')&&body.includes('dog tag day foundation')&&body.includes('visits to dogtagday.org')&&body.includes('next holiday:')&&body.includes('halloween');
                 const noOverflow=await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+1);
-                const menuScrollable=await page.locator('nav.menu').evaluate(el=>el.scrollWidth>=el.clientWidth);
-                console.log(JSON.stringify({attempt:i+1,broken,mapCount,heroCount,text,noOverflow,menuScrollable}));
-                if(broken.length===0&&heroCount===1&&mapCount===1&&text&&noOverflow&&menuScrollable){ok=true;break;}
+                const result={attempt:i+1,broken,heroSrc,heroCount:await hero.count(),mapCount:await map.count(),peopleCount:await people.count(),workCount:await work.count(),visitCount:await visits.count(),tickerCount:await ticker.count(),text,noOverflow};
+                console.log(JSON.stringify(result));
+                if(broken.length===0&&result.heroCount===1&&result.mapCount===1&&result.peopleCount>=3&&result.workCount>=3&&result.visitCount===1&&result.tickerCount===1&&heroSrc&&heroSrc.includes('dog-tag-day-hero.PNG')&&text&&noOverflow){ok=true;break;}
                 await page.waitForTimeout(3000);
               }
-            } catch (error) {
-              console.error(error);
-            } finally {
+            } catch (error) { console.error(error); }
+            finally {
               await page.screenshot({path:'live-homepage-proof.png',fullPage:true}).catch(console.error);
               await browser.close();
             }
