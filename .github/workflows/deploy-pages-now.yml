@@ -23,31 +23,38 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Prepare verified homepage
+      - name: Restore approved Ronnie photos and prepare homepage
         run: |
           set -e
           test -s index.html
-          grep -q '2026-09-16-final-picture-fix' index.html
-          grep -q 'dog-tag-day-hero.PNG' index.html
-          grep -q 'dog-tag-day-realistic-veterans-20260901.jpg' index.html
-          grep -q 'ronnie-founder-natural-facial-hair-20260903.jpg' index.html
-          grep -q 'ronnie-shure-founder-20260901.jpg' index.html
-          ! grep -q 'camera-crew-final.jpg' index.html
-          grep -q 'peopleSlider' index.html
-          grep -q 'workSlider' index.html
-          grep -q 'letter-to-president.html' index.html
-          grep -q 'id="visitCount">4,300' index.html
-          grep -q 'VISITS TO DOGTAGDAY.ORG' index.html
-          grep -q 'id="holidayTicker"' index.html
+          mkdir -p assets
+          cat .imageparts/rv1.01 .imageparts/rv1.02 .imageparts/rv1.03 | base64 -d > assets/ronnie-listening-veteran.jpg
+          cat .imageparts/rv3m.01 .imageparts/rv3m.02 | base64 -d > assets/ronnie-community-support.jpg
+          test -s assets/ronnie-listening-veteran.jpg
+          test -s assets/ronnie-community-support.jpg
+          file assets/ronnie-listening-veteran.jpg | grep -qi 'JPEG image data'
+          file assets/ronnie-community-support.jpg | grep -qi 'JPEG image data'
           python - <<'PY'
           from pathlib import Path
           p=Path('index.html')
           s=p.read_text()
-          override='''<script id="holiday-final-override">(function(){const t=document.getElementById('holidayTicker');if(!t)return;const n=new Date(),y=n.getFullYear();const nth=(Y,M,W,N)=>{const d=new Date(Y,M,1),a=(7+W-d.getDay())%7;return new Date(Y,M,1+a+7*(N-1),23,59,59)};const dates=[{d:new Date(2026,9,31,23,59,59),l:'🎃 HALLOWEEN • OCTOBER 31'},{d:new Date(2026,10,11,23,59,59),l:'🇺🇸 VETERANS DAY • NOVEMBER 11'},{d:nth(2026,10,4,4),l:'🦃 THANKSGIVING'},{d:new Date(2026,11,7,23,59,59),l:'⚓ PEARL HARBOR DAY • DECEMBER 7'},{d:new Date(2026,11,25,23,59,59),l:'🎄 CHRISTMAS • DECEMBER 25'},{d:new Date(2027,0,1,23,59,59),l:"🎆 NEW YEAR'S DAY • JANUARY 1"},{d:nth(2027,0,1,3),l:'✊ MLK DAY'},{d:nth(2027,1,1,3),l:'🏛️ PRESIDENTS DAY'},{d:new Date(2027,3,18,23,59,59),l:'🏷️ DOG TAG DAY • APRIL 18'}].filter(x=>x.d>=n).sort((a,b)=>a.d-b.d);if(dates[0])t.innerHTML='<span class="tickerItem"><strong>NEXT HOLIDAY:</strong> '+dates[0].l+'</span>';})();</script>'''
+          old_people='<div class="slider" id="peopleSlider"><figure class="slide"><img src="assets/dog-tag-day-realistic-veterans-20260901.jpg?v=20260916-final" alt="Veterans together"><figcaption>THE PEOPLE BEHIND THE TAGS</figcaption></figure><figure class="slide"><img src="assets/ronnie-founder-natural-facial-hair-20260903.jpg?v=20260916-final" alt="Ronnie Shure, Founder and CEO"><figcaption>RONNIE SHURE • FOUNDER &amp; CEO</figcaption></figure><figure class="slide"><img src="assets/ronnie-shure-founder-20260901.jpg?v=20260916-final" alt="Ronnie Shure"><figcaption>REAL PEOPLE • REAL STORIES • A STRONGER TOMORROW</figcaption></figure></div>'
+          new_people='<div class="slider" id="peopleSlider"><figure class="slide"><img src="assets/ronnie-listening-veteran.jpg?v=20260916-restored" alt="Ronnie Shure sitting face to face with a veteran and listening"><figcaption>SIT DOWN • HEAR THE STORY • STAY WITH THEM</figcaption></figure><figure class="slide"><img src="assets/ronnie-community-support.jpg?v=20260916-restored" alt="Ronnie Shure supporting veterans and community members"><figcaption>REAL SUPPORT • REAL PEOPLE • REAL COMMUNITY</figcaption></figure><figure class="slide"><img src="assets/dog-tag-day-realistic-veterans-20260901.jpg?v=20260916-final" alt="Veterans together"><figcaption>THE PEOPLE BEHIND THE TAGS</figcaption></figure></div>'
+          old_work='<div class="slider" id="workSlider"><figure class="slide"><img src="assets/dog-tag-day-realistic-veterans-20260901.jpg?v=20260916-work-final" alt="Veterans and community together"><figcaption>LISTEN • CONNECT • STAY WITH THE STORY</figcaption></figure><figure class="slide"><img src="assets/ronnie-founder-natural-facial-hair-20260903.jpg?v=20260916-work-final" alt="Ronnie Shure"><figcaption>SHOW UP • LISTEN • STAY</figcaption></figure><figure class="slide"><img src="assets/ronnie-shure-founder-20260901.jpg?v=20260916-work-final" alt="Ronnie Shure"><figcaption>REAL SUPPORT • REAL PEOPLE • REAL STORIES</figcaption></figure></div>'
+          new_work='<div class="slider" id="workSlider"><figure class="slide"><img src="assets/ronnie-community-support.jpg?v=20260916-restored" alt="Dog Tag Day real support scenes with Ronnie Shure beside veterans and community members"><figcaption>WE SHOW UP • WE LISTEN • WE STAY</figcaption></figure><figure class="slide"><img src="assets/ronnie-listening-veteran.jpg?v=20260916-restored" alt="Ronnie Shure sitting and talking with a veteran"><figcaption>PERSON TO PERSON • HEAR THE STORY</figcaption></figure><figure class="slide"><img src="assets/dog-tag-day-realistic-veterans-20260901.jpg?v=20260916-final" alt="Veterans together"><figcaption>IDENTITY • BROTHERHOOD • HONOR</figcaption></figure></div>'
+          if old_people not in s: raise SystemExit('people slider source changed; refusing blind patch')
+          if old_work not in s: raise SystemExit('work slider source changed; refusing blind patch')
+          s=s.replace(old_people,new_people).replace(old_work,new_work)
+          override='''<script id="holiday-final-override">(function(){const t=document.getElementById('holidayTicker');if(!t)return;const n=new Date();const nth=(Y,M,W,N)=>{const d=new Date(Y,M,1),a=(7+W-d.getDay())%7;return new Date(Y,M,1+a+7*(N-1),23,59,59)};const dates=[{d:new Date(2026,9,31,23,59,59),l:'🎃 HALLOWEEN • OCTOBER 31'},{d:new Date(2026,10,11,23,59,59),l:'🇺🇸 VETERANS DAY • NOVEMBER 11'},{d:nth(2026,10,4,4),l:'🦃 THANKSGIVING'},{d:new Date(2026,11,7,23,59,59),l:'⚓ PEARL HARBOR DAY • DECEMBER 7'},{d:new Date(2026,11,25,23,59,59),l:'🎄 CHRISTMAS • DECEMBER 25'}].filter(x=>x.d>=n).sort((a,b)=>a.d-b.d);if(dates[0])t.innerHTML='<span class="tickerItem"><strong>NEXT HOLIDAY:</strong> '+dates[0].l+'</span>';})();</script>'''
           s=s.replace('</body>',override+'\n</body>')
           p.write_text(s)
           PY
-          grep -q 'holiday-final-override' index.html
+          grep -q 'ronnie-listening-veteran.jpg' index.html
+          grep -q 'ronnie-community-support.jpg' index.html
+          grep -q 'peopleSlider' index.html
+          grep -q 'workSlider' index.html
+          grep -q 'letter-to-president.html' index.html
+          grep -q 'id="visitCount">4,300' index.html
           grep -q 'HALLOWEEN' index.html
       - name: Configure Pages
         uses: actions/configure-pages@v5
