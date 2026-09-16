@@ -20,8 +20,19 @@ jobs:
         run: |
           set -e
           mkdir -p assets
-          base64 -d .imageparts/final-camera.b64 > assets/camera-crew-final-20260916.jpg
-          base64 -d .imageparts/final-founder.b64 > assets/founder-hands-final-20260916.jpg
+          python - <<'PY'
+          from pathlib import Path
+          import base64, re
+          pairs = [
+              ('.imageparts/final-camera.b64','assets/camera-crew-final-20260916.jpg'),
+              ('.imageparts/final-founder.b64','assets/founder-hands-final-20260916.jpg'),
+          ]
+          for src, dst in pairs:
+              s = Path(src).read_text()
+              s = re.sub(r'[^A-Za-z0-9+/=]', '', s)
+              s += '=' * ((4 - len(s) % 4) % 4)
+              Path(dst).write_bytes(base64.b64decode(s, validate=False))
+          PY
           file assets/camera-crew-final-20260916.jpg | grep -qi 'JPEG image data'
           file assets/founder-hands-final-20260916.jpg | grep -qi 'JPEG image data'
           test -s assets/camera-crew-final-20260916.jpg
