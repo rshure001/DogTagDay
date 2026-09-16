@@ -16,7 +16,7 @@ jobs:
           node-version: '24'
       - run: npm install playwright
       - run: npx playwright install --with-deps webkit
-      - name: Verify live iPhone homepage
+      - name: Verify live iPhone homepage v13
         run: |
           node <<'NODE'
           const { webkit, devices } = require('playwright');
@@ -29,43 +29,37 @@ jobs:
               for(let i=0;i<20;i++){
                 await page.goto('https://dogtagday.org/?verify='+Date.now(),{waitUntil:'networkidle',timeout:30000});
                 const hero=page.locator('.hero img');
-                const gallery=page.locator('#newstories .new-card img');
+                const storyImgs=page.locator('#story .storygrid img');
+                const founderImgs=page.locator('#founder .foundergrid img');
                 const map=page.locator('img[alt="Dog Tag Day outreach across America"]');
-                const ticker=page.locator('.ticker');
                 await hero.waitFor({state:'visible',timeout:10000});
-                await gallery.first().waitFor({state:'visible',timeout:10000});
                 await map.waitFor({state:'visible',timeout:10000});
                 const broken=await page.locator('img').evaluateAll(imgs=>imgs.filter(i=>!i.complete||i.naturalWidth===0).map(i=>i.getAttribute('src')));
-                const body=(await page.locator('body').innerText()).toLowerCase();
+                const body=(await page.locator('body').innerText());
+                const lower=body.toLowerCase();
                 const build=await page.locator('html').getAttribute('data-dtd-build');
-                const srcs=await gallery.evaluateAll(imgs=>imgs.map(i=>i.getAttribute('src')||''));
-                const expected=[
-                  '25271eea-4822-4fb3-973b-f944f7da9961.png',
-                  '62c16051-50ed-4eb1-955e-0c133709d962.png',
-                  '218d9855-89bc-4e8a-8f81-a89fec267374.png',
-                  '33af325c-d736-4804-add0-815b72f85661.png',
-                  '43d71ff5-f9ca-4d41-b0ba-544612cb750d.png',
-                  'd9eead0f-908e-465d-954b-a532c18385de.png'
-                ];
-                const six=expected.every(x=>srcs.some(s=>s.includes(x)));
-                const text=body.includes('veterans should not become invisible')&&body.includes('new dog tag day images')&&body.includes('stories in action')&&body.includes('what we do all year')&&body.includes('dog tag day foundation');
+                const srcs=await page.locator('img').evaluateAll(imgs=>imgs.map(i=>i.getAttribute('src')||''));
+                const noPicsart=!srcs.some(s=>s.includes('gcdn.picsart.com'));
                 const noOverflow=await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+1);
-                const result={attempt:i+1,build,broken,heroCount:await hero.count(),galleryCount:await gallery.count(),mapCount:await map.count(),tickerCount:await ticker.count(),six,text,noOverflow,srcs};
+                const topPosition=await page.locator('.top').evaluate(el=>getComputedStyle(el).position);
+                const nextHoliday=(body.match(/NEXT HOLIDAY:/g)||[]).length===1 && body.includes('HALLOWEEN') && !body.includes('VETERANS DAY') && !body.includes('THANKSGIVING') && !body.includes('CHRISTMAS') && !body.includes("NEW YEAR'S DAY");
+                const text=lower.includes('veterans should not become invisible')&&lower.includes('no man left behind')&&lower.includes('the uniform comes off')&&lower.includes('different paths')&&lower.includes('see the veteran')&&lower.includes('4,817')&&lower.includes('ronnie shure');
+                const result={attempt:i+1,build,broken,heroCount:await hero.count(),storyImageCount:await storyImgs.count(),founderImageCount:await founderImgs.count(),mapCount:await map.count(),noPicsart,noOverflow,topPosition,nextHoliday,text,srcs};
                 console.log(JSON.stringify(result));
-                if(build&&build.includes('approved-visual-v7')&&broken.length===0&&result.heroCount===1&&result.galleryCount===6&&result.mapCount===1&&result.tickerCount===1&&six&&text&&noOverflow){ok=true;break;}
+                if(build==='2026-09-16-live-fix-v13'&&broken.length===0&&result.heroCount===1&&result.storyImageCount===3&&result.founderImageCount===3&&result.mapCount===1&&noPicsart&&noOverflow&&topPosition==='relative'&&nextHoliday&&text){ok=true;break;}
                 await page.waitForTimeout(3000);
               }
             } catch (error) { console.error(error); }
             finally {
-              await page.screenshot({path:'live-homepage-proof.png',fullPage:true}).catch(console.error);
+              await page.screenshot({path:'live-homepage-proof-v13.png',fullPage:true}).catch(console.error);
               await browser.close();
             }
             if(!ok) process.exit(1);
-            console.log('LIVE_HOMEPAGE_PASS=true');
+            console.log('LIVE_HOMEPAGE_V13_PASS=true');
           })().catch(e=>{console.error(e);process.exit(1)});
           NODE
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: live-homepage-proof
-          path: live-homepage-proof.png
+          name: live-homepage-proof-v13
+          path: live-homepage-proof-v13.png
