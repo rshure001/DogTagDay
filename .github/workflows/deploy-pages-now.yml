@@ -23,51 +23,75 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Build approved live homepage
+
+      - name: Build approved homepage
         run: |
           set -e
-          test -s index.html
-          mkdir -p assets
-          cat .imageparts/rv1.01 .imageparts/rv1.02 .imageparts/rv1.03 | base64 -d > assets/ronnie-listening-veteran.jpg
-          cat .imageparts/rv3m.01 .imageparts/rv3m.02 | base64 -d > assets/ronnie-community-support.jpg
-          file assets/ronnie-listening-veteran.jpg | grep -qi 'JPEG image data'
-          file assets/ronnie-community-support.jpg | grep -qi 'JPEG image data'
-          file assets/camera-crew-final.jpg | grep -qi 'JPEG image data'
-          python - <<'PY'
-          from pathlib import Path
-          import re
-          p=Path('index.html')
-          s=p.read_text()
+          test -s assets/dtd-home-visual.jpg
+          cat > index.html <<'HTML'
+          <!doctype html>
+          <html lang="en">
+          <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width,initial-scale=1">
+            <title>Dog Tag Day Foundation — April 18</title>
+            <meta name="description" content="Dog Tag Day Foundation honors veterans by helping their stories be seen, heard, and remembered — not just on April 18, but all year long.">
+            <style>
+              :root{--navy:#061a2e;--navy2:#0b2744;--gold:#d7a94d;--white:#fff;--muted:#c8d2dc}
+              *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--navy);color:var(--white);font-family:Arial,Helvetica,sans-serif}
+              a{color:inherit;text-decoration:none}.wrap{max-width:1120px;margin:auto;padding:0 18px}
+              header{position:sticky;top:0;z-index:20;background:rgba(6,26,46,.97);border-bottom:1px solid rgba(215,169,77,.45)}
+              .nav{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 0}.brand{font:700 22px Georgia,serif}.brand small{display:block;font:600 10px Arial,sans-serif;letter-spacing:.16em;color:var(--gold)}
+              nav{display:flex;gap:14px;flex-wrap:wrap;justify-content:flex-end;font-size:13px}.donateTop{background:var(--gold);color:#081525;padding:9px 12px;border-radius:8px;font-weight:800}
+              .poster{background:#000}.poster img{display:block;width:100%;height:auto;margin:auto;max-width:1312px}
+              .counterBar{display:grid;grid-template-columns:1fr 1.3fr 1fr;gap:18px;align-items:center;padding:22px 0;border-top:1px solid #20527d;border-bottom:1px solid #20527d;background:linear-gradient(90deg,#07172a,#0b2744,#07172a)}
+              .counter{text-align:center}.counter strong{display:block;font:800 clamp(2rem,7vw,3.2rem) Georgia,serif;letter-spacing:.06em}.counter span{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.15em}
+              .quote{text-align:center;font:italic 700 clamp(1.05rem,2.5vw,1.5rem) Georgia,serif}.quote b{display:block;color:var(--gold);font:700 12px Arial,sans-serif;margin-top:8px}
+              .jar{text-align:center}.jar h3{margin:0 0 10px;font-family:Georgia,serif}.amounts{display:flex;justify-content:center;flex-wrap:wrap;gap:7px}.amounts a{border:1px solid #5ca4e6;background:#0d5a9a;padding:8px 12px;border-radius:6px;font-weight:800}
+              .sections{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:26px 0}.card{background:#0c223a;border:1px solid rgba(215,169,77,.35);padding:20px;border-radius:10px}.card h2{font:700 22px Georgia,serif;margin:0 0 8px;color:var(--gold)}.card p{color:#d8e0e8;line-height:1.55;margin:0}.card a{display:inline-block;margin-top:12px;color:var(--gold);font-weight:800}
+              footer{padding:24px 0 38px;color:#d2dae3;text-align:center;border-top:1px solid rgba(215,169,77,.35)}footer strong{color:#fff}
+              @media(max-width:760px){.nav{align-items:flex-start}.brand{font-size:19px}nav{gap:8px;font-size:11px}.counterBar{grid-template-columns:1fr}.sections{grid-template-columns:1fr}.poster img{width:100%}}
+            </style>
+          </head>
+          <body>
+            <header>
+              <div class="wrap nav">
+                <a class="brand" href="#top">Dog Tag Day<small>FOUNDATION • APRIL 18</small></a>
+                <nav>
+                  <a href="#mission">Mission</a><a href="#april18">April 18th</a><a href="#what-we-do">What We Do</a><a href="#share-story">Share Story</a><a href="#founder">Founder</a><a href="#contact">Contact</a>
+                  <a class="donateTop" href="donate.html">Honor Jar</a>
+                </nav>
+              </div>
+            </header>
 
-          s=s.replace('.visitorCounter{padding:26px 18px;border:3px solid var(--gold);border-radius:10px;background:linear-gradient(145deg,#102947,#071426);box-shadow:inset 0 0 0 2px #fff}',
-                      '.visitorCounter{width:min(300px,84vw);margin:0 auto;padding:8px 12px;border:1px solid #7e6a38;border-radius:7px;background:#0b1d33;box-shadow:none}')
-          s=s.replace('.visitorCounter strong{display:block;font:900 clamp(3rem,15vw,6rem)/.9 Georgia,serif}',
-                      '.visitorCounter strong{display:block;font:900 clamp(1.55rem,7vw,2.1rem)/1 Georgia,serif}')
-          s=s.replace('.visitorCounter span{display:block;color:var(--gold);font-weight:900;letter-spacing:.1em;margin-top:10px}',
-                      '.visitorCounter span{display:block;color:#aeb8c4;font-weight:700;letter-spacing:.06em;margin-top:3px;font-size:.58rem}')
-          s=re.sub(r'<strong id="visitCount">[^<]+</strong>','<strong id="visitCount">4,304</strong>',s,count=1)
-          s=re.sub(r"\(function\(\)\{const el=document\.getElementById\('visitCount'\).*?\}\)\(\);",
-                   "(function(){const el=document.getElementById('visitCount');if(el)el.textContent='4,304';})();",
-                   s, count=1, flags=re.S)
+            <main id="top">
+              <section class="poster" aria-label="Dog Tag Day campaign overview">
+                <img src="assets/dtd-home-visual.jpg?v=20260916-final" alt="Dog Tag Day Foundation campaign showing the long-haired founder in a white rolled-sleeve shirt and blue tie sitting beside a veteran while a camera crew records the conversation, with veteran portraits and April 18 campaign messaging.">
+              </section>
 
-          people = '''<div class="slider" id="peopleSlider"><figure class="slide"><img src="assets/camera-crew-final.jpg?v=20260916c" alt="Long-haired founder in white shirt and blue tie sitting beside a veteran while a camera crew documents the conversation"><figcaption>WE SHOW UP • WE LISTEN • WE STAY</figcaption></figure><figure class="slide"><img src="assets/ronnie-listening-veteran.jpg?v=20260916c" alt="Founder sitting face to face with a veteran and listening"><figcaption>SIT DOWN • HEAR THE STORY • STAY WITH THEM</figcaption></figure></div>'''
-          s=re.sub(r'<div class="slider" id="peopleSlider">.*?</div><div class="sliderBtns">', people+'<div class="sliderBtns">', s, count=1, flags=re.S)
+              <section class="counterBar">
+                <div class="counter"><strong>4,304</strong><span>Visitors to DogTagDay.org</span></div>
+                <div class="quote">“Those stories deserve to be seen, heard, and remembered.”<b>RONNIE SHURE — FOUNDER &amp; CEO</b></div>
+                <div class="jar"><h3>Donate Through the Honor Jar</h3><div class="amounts"><a href="donate.html?amount=1">$1</a><a href="donate.html?amount=5">$5</a><a href="donate.html?amount=20">$20</a><a href="donate.html?amount=100">$100</a></div></div>
+              </section>
 
-          work = '''<div class="slider" id="workSlider"><figure class="slide"><img src="assets/camera-crew-final.jpg?v=20260916c" alt="Long-haired founder in white shirt and blue tie seated beside a veteran with camera crew filming"><figcaption>REAL SUPPORT • REAL PEOPLE • REAL COMMUNITY</figcaption></figure><figure class="slide"><img src="assets/ronnie-community-support.jpg?v=20260916c" alt="Founder supporting a veteran"><figcaption>PERSON TO PERSON • HEAR THE STORY</figcaption></figure></div>'''
-          s=re.sub(r'<div class="slider" id="workSlider">.*?</div><div class="sliderBtns">', work+'<div class="sliderBtns">', s, count=1, flags=re.S)
+              <div class="wrap sections">
+                <section class="card" id="mission"><h2>Mission</h2><p>Veterans should not disappear into the background when the uniform comes off. Dog Tag Day makes service visible and gives veterans a simple way to share the story behind the tags.</p></section>
+                <section class="card" id="april18"><h2>April 18</h2><p>Wear or display dog tags. Start a conversation. Honor a veteran. Make sure the story is seen, heard, and remembered.</p></section>
+                <section class="card" id="what-we-do"><h2>What We Do</h2><p>We listen, preserve stories, connect veterans to resources, follow up, and build community all year long.</p></section>
+                <section class="card" id="share-story"><h2>Share a Story</h2><p>Tell us about the person, service, or dog tags you want remembered.</p><a href="share.html">Share a Story →</a></section>
+                <section class="card" id="founder"><h2>Founder</h2><p><strong>Ronnie Shure</strong><br>Founder &amp; CEO, Dog Tag Day Foundation</p></section>
+                <section class="card" id="contact"><h2>Contact</h2><p>DogTagDay.org<br>Identity • Brotherhood • Honor</p></section>
+              </div>
+            </main>
 
-          s=re.sub(r'(<section id="founder".*?<div class="founderPortrait"><img src=")[^"]+("[^>]*>)',
-                   r'\1assets/ronnie-founder-crowsfeet-20260906.jpg?v=20260916c\2', s, count=1, flags=re.S)
+            <footer><div class="wrap"><strong>Dog Tag Day Foundation</strong><br>Put them on. Acknowledge one.<br><span style="color:#d7a94d">You don’t have to be invisible.</span></div></footer>
+          </body>
+          </html>
+          HTML
+          grep -q '4,304' index.html
+          grep -q 'dtd-home-visual.jpg' index.html
 
-          override='''<script id="holiday-final-override">(function(){const t=document.getElementById('holidayTicker');if(!t)return;const n=new Date();const dates=[{d:new Date(2026,9,31,23,59,59),l:'🎃 HALLOWEEN • OCTOBER 31'},{d:new Date(2026,10,11,23,59,59),l:'🇺🇸 VETERANS DAY • NOVEMBER 11'},{d:new Date(2026,11,7,23,59,59),l:'⚓ PEARL HARBOR DAY • DECEMBER 7'},{d:new Date(2026,11,25,23,59,59),l:'🎄 CHRISTMAS • DECEMBER 25'}].filter(x=>x.d>=n).sort((a,b)=>a.d-b.d);if(dates[0])t.innerHTML='<span class="tickerItem"><strong>NEXT HOLIDAY:</strong> '+dates[0].l+'</span>';})();</script>'''
-          if 'holiday-final-override' not in s:
-              s=s.replace('</body>',override+'\n</body>')
-          p.write_text(s)
-          PY
-          grep -q 'id="visitCount">4,304' index.html
-          grep -q 'camera-crew-final.jpg' index.html
-          grep -q 'ronnie-founder-crowsfeet-20260906.jpg' index.html
-          grep -q 'HALLOWEEN' index.html
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload site
