@@ -27,11 +27,14 @@ jobs:
         run: |
           set -e
           test -s index.html
-          grep -q '2026-09-16-next-holiday-only' index.html
+          grep -q '2026-09-16-pictures-restored' index.html
           grep -q 'dog-tag-day-hero.PNG' index.html
-          grep -q 'dogtagday-no-hats-final.jpg?v=20260916-work-safe' index.html
+          grep -q 'dog-tag-day-realistic-veterans-20260901.jpg' index.html
+          grep -q 'ronnie-founder-natural-facial-hair-20260903.jpg' index.html
+          grep -q 'ronnie-shure-founder-20260901.jpg' index.html
           grep -q 'peopleSlider' index.html
           grep -q 'workSlider' index.html
+          grep -q 'letter-to-president.html' index.html
           grep -q 'id="visitCount">4,300' index.html
           grep -q 'VISITS TO DOGTAGDAY.ORG' index.html
           grep -q 'id="holidayTicker"' index.html
