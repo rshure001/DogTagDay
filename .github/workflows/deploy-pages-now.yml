@@ -27,8 +27,9 @@ jobs:
         run: |
           set -e
           test -s index.html
-          grep -q '2026-09-16-restored-original-layout' index.html
-          grep -q 'approved-dog-tags.PNG' index.html
+          grep -q '2026-09-16-original-hero-working-sliders' index.html
+          grep -q 'dog-tag-day-hero.PNG' index.html
+          grep -q 'camera-crew-final.jpg' index.html
           grep -q 'peopleSlider' index.html
           grep -q 'workSlider' index.html
           grep -q 'id="visitCount">4,300' index.html
