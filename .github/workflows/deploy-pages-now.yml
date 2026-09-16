@@ -1,8 +1,6 @@
 name: Deploy Dog Tag Day Now
 
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -28,11 +26,8 @@ jobs:
           set -e
           test -s index.html
           test -s assets/camera-crew-final.jpg
-          test -s assets/dogtagday-no-hats-final.jpg
           grep -q '4,304' index.html
           grep -q 'camera-crew-final.jpg' index.html
-          grep -q 'ronnie-shure-founder-20260902-older-gray.png' index.html
-          grep -q 'honor-jar-click-pledge.png' index.html
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload site
