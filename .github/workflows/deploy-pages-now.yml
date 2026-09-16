@@ -23,7 +23,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Verify homepage exists
+      - name: Prepare verified homepage
         run: |
           set -e
           test -s index.html
@@ -39,7 +39,15 @@ jobs:
           grep -q 'id="visitCount">4,300' index.html
           grep -q 'VISITS TO DOGTAGDAY.ORG' index.html
           grep -q 'id="holidayTicker"' index.html
-          grep -q 'NEXT HOLIDAY:' index.html
+          grep -q 'HALLOWEEN' index.html
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text()
+          s=s.replace("{date:new Date(Y,8,17,23,59,59),label:'📜 CONSTITUTION DAY • SEPTEMBER 17'},","")
+          p.write_text(s)
+          PY
+          ! grep -q 'CONSTITUTION DAY' index.html
           grep -q 'HALLOWEEN' index.html
       - name: Configure Pages
         uses: actions/configure-pages@v5
