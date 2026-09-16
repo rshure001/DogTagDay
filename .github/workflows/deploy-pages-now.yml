@@ -45,26 +45,26 @@ jobs:
                       '.visitorCounter strong{display:block;font:900 clamp(1.55rem,7vw,2.1rem)/1 Georgia,serif}')
           s=s.replace('.visitorCounter span{display:block;color:var(--gold);font-weight:900;letter-spacing:.1em;margin-top:10px}',
                       '.visitorCounter span{display:block;color:#aeb8c4;font-weight:700;letter-spacing:.06em;margin-top:3px;font-size:.58rem}')
-          s=re.sub(r'<strong id="visitCount">[^<]+</strong>','<strong id="visitCount">4,300</strong>',s,count=1)
+          s=re.sub(r'<strong id="visitCount">[^<]+</strong>','<strong id="visitCount">4,304</strong>',s,count=1)
           s=re.sub(r"\(function\(\)\{const el=document\.getElementById\('visitCount'\).*?\}\)\(\);",
-                   "(function(){const el=document.getElementById('visitCount');if(el)el.textContent='4,300';})();",
+                   "(function(){const el=document.getElementById('visitCount');if(el)el.textContent='4,304';})();",
                    s, count=1, flags=re.S)
 
-          people = '''<div class="slider" id="peopleSlider"><figure class="slide"><img src="assets/ronnie-listening-veteran.jpg?v=20260916b" alt="Founder sitting face to face with a veteran and listening"><figcaption>SIT DOWN • HEAR THE STORY • STAY WITH THEM</figcaption></figure><figure class="slide"><img src="assets/camera-crew-final.jpg?v=20260916b" alt="Long-haired founder in white shirt and blue tie sitting beside a veteran while a camera crew documents the conversation"><figcaption>REAL SUPPORT • REAL PEOPLE • REAL COMMUNITY</figcaption></figure></div>'''
+          people = '''<div class="slider" id="peopleSlider"><figure class="slide"><img src="assets/camera-crew-final.jpg?v=20260916c" alt="Long-haired founder in white shirt and blue tie sitting beside a veteran while a camera crew documents the conversation"><figcaption>WE SHOW UP • WE LISTEN • WE STAY</figcaption></figure><figure class="slide"><img src="assets/ronnie-listening-veteran.jpg?v=20260916c" alt="Founder sitting face to face with a veteran and listening"><figcaption>SIT DOWN • HEAR THE STORY • STAY WITH THEM</figcaption></figure></div>'''
           s=re.sub(r'<div class="slider" id="peopleSlider">.*?</div><div class="sliderBtns">', people+'<div class="sliderBtns">', s, count=1, flags=re.S)
 
-          work = '''<div class="slider" id="workSlider"><figure class="slide"><img src="assets/camera-crew-final.jpg?v=20260916b" alt="Long-haired founder in white shirt and blue tie seated beside a veteran with camera crew filming"><figcaption>WE SHOW UP • WE LISTEN • WE STAY</figcaption></figure><figure class="slide"><img src="assets/ronnie-community-support.jpg?v=20260916b" alt="Founder supporting a veteran"><figcaption>PERSON TO PERSON • HEAR THE STORY</figcaption></figure></div>'''
+          work = '''<div class="slider" id="workSlider"><figure class="slide"><img src="assets/camera-crew-final.jpg?v=20260916c" alt="Long-haired founder in white shirt and blue tie seated beside a veteran with camera crew filming"><figcaption>REAL SUPPORT • REAL PEOPLE • REAL COMMUNITY</figcaption></figure><figure class="slide"><img src="assets/ronnie-community-support.jpg?v=20260916c" alt="Founder supporting a veteran"><figcaption>PERSON TO PERSON • HEAR THE STORY</figcaption></figure></div>'''
           s=re.sub(r'<div class="slider" id="workSlider">.*?</div><div class="sliderBtns">', work+'<div class="sliderBtns">', s, count=1, flags=re.S)
 
           s=re.sub(r'(<section id="founder".*?<div class="founderPortrait"><img src=")[^"]+("[^>]*>)',
-                   r'\1assets/ronnie-founder-crowsfeet-20260906.jpg?v=20260916b\2', s, count=1, flags=re.S)
+                   r'\1assets/ronnie-founder-crowsfeet-20260906.jpg?v=20260916c\2', s, count=1, flags=re.S)
 
           override='''<script id="holiday-final-override">(function(){const t=document.getElementById('holidayTicker');if(!t)return;const n=new Date();const dates=[{d:new Date(2026,9,31,23,59,59),l:'🎃 HALLOWEEN • OCTOBER 31'},{d:new Date(2026,10,11,23,59,59),l:'🇺🇸 VETERANS DAY • NOVEMBER 11'},{d:new Date(2026,11,7,23,59,59),l:'⚓ PEARL HARBOR DAY • DECEMBER 7'},{d:new Date(2026,11,25,23,59,59),l:'🎄 CHRISTMAS • DECEMBER 25'}].filter(x=>x.d>=n).sort((a,b)=>a.d-b.d);if(dates[0])t.innerHTML='<span class="tickerItem"><strong>NEXT HOLIDAY:</strong> '+dates[0].l+'</span>';})();</script>'''
           if 'holiday-final-override' not in s:
               s=s.replace('</body>',override+'\n</body>')
           p.write_text(s)
           PY
-          grep -q 'id="visitCount">4,300' index.html
+          grep -q 'id="visitCount">4,304' index.html
           grep -q 'camera-crew-final.jpg' index.html
           grep -q 'ronnie-founder-crowsfeet-20260906.jpg' index.html
           grep -q 'HALLOWEEN' index.html
