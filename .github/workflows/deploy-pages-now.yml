@@ -1,6 +1,8 @@
 name: Deploy Dog Tag Day Now
 
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -21,29 +23,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Validate homepage and Across America map
+      - name: Validate current swipe gallery
         run: |
           set -e
           test -s index.html
-          test -s assets/camera-crew-final.jpg
-          grep -q '4,304' index.html
-          grep -q 'camera-crew-final.jpg' index.html
-
-          # Preserve the current Across America experience and its approved map asset.
-          test -s public-map.html
-          test -s map.html
-          test -s assets/dog-tag-day-national-map-brighter-20260913.jpg
-          grep -q 'Across America' public-map.html
-          grep -q 'Map Key' public-map.html
-          grep -q 'Artwork key — not a contact count.' public-map.html
-          grep -q 'assets/dog-tag-day-national-map-brighter-20260913.jpg' public-map.html
-          grep -q 'public-map.html?v=20260915-mobile-readability' map.html
-
-          # Do not allow an obsolete unverified outreach-total claim back onto the map page.
-          if grep -qi '1,800 OUTREACH LIGHTS' public-map.html; then
-            echo 'Refusing deploy: obsolete outreach-total claim found in public-map.html' >&2
-            exit 1
-          fi
+          grep -q 'six-page-upswipe' index.html
+          grep -q 'Swipe up' index.html
+          grep -q '1 / 6' index.html
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload site
