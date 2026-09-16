@@ -23,13 +23,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Verify mixed-scroll homepage
+      - name: Verify professional military homepage
         run: |
           set -e
           test -s index.html
-          grep -q '2026-09-15-clean' index.html
-          grep -q 'Swipe left or right' index.html
-          grep -q 'camera-crew-approved-20260915.svg' index.html
+          grep -q '2026-09-15-professional-military-visuals' index.html
+          grep -q 'Identity • Brotherhood • Honor' index.html
+          grep -q 'SWIPE SIDE TO SIDE' index.html
+          grep -q 'approved-dog-tags.PNG' index.html
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload site
@@ -47,8 +48,8 @@ jobs:
           set -e
           for i in $(seq 1 36); do
             html=$(curl -fsSL -H 'Cache-Control: no-cache' "https://dogtagday.org/?verify=${GITHUB_SHA}-${GITHUB_RUN_ID}-$i" || true)
-            if printf '%s' "$html" | grep -q 'Swipe left or right'; then
-              echo LIVE_MIXED_SCROLL_VERIFIED
+            if printf '%s' "$html" | grep -q 'professional-military-visuals' && printf '%s' "$html" | grep -q 'Identity • Brotherhood • Honor'; then
+              echo LIVE_PROFESSIONAL_MILITARY_VERIFIED
               exit 0
             fi
             sleep 5
