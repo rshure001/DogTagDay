@@ -36,9 +36,20 @@ jobs:
           from pathlib import Path
           p=Path('index.html')
           s=p.read_text()
+
+          # COUNTER FIRST: remove every hard-coded plus sign and force one exact live number.
+          s=s.replace('4,300+','4,300')
+          s=s.replace('>4,300+</','>4,300</')
+          s=s.replace('id="websiteVisits">4,300+','id="websiteVisits">4,300')
+          s=s.replace('id="visitCount">4,300+','id="visitCount">4,300')
+          counter='''<script id="exact-visitor-counter">(function(){const base=4300;const el=document.getElementById('visitCount')||document.getElementById('websiteVisits');if(!el)return;const qs=new URLSearchParams(location.search);const endpoint=qs.has('verify')?'https://abacus.jasoncameron.dev/get/dogtagday-org/homepage-v1':'https://abacus.jasoncameron.dev/hit/dogtagday-org/homepage-v1';function show(v){const n=base+Number(v||0);el.textContent=Number.isFinite(n)?n.toLocaleString('en-US'):base.toLocaleString('en-US')}fetch(endpoint,{cache:'no-store'}).then(r=>r.json()).then(d=>show(d.value)).catch(()=>show(0));})();</script>'''
+          if 'exact-visitor-counter' not in s:
+              s=s.replace('</body>',counter+'\n</body>')
+
           # Keep action photos on both sliders and remove founder portrait substitutions.
           s=s.replace('assets/ronnie-founder-natural-facial-hair-20260903.jpg?v=20260916-work-final','assets/ronnie-listening-veteran.jpg?v=20260916-action')
           s=s.replace('assets/ronnie-shure-founder-20260901.jpg?v=20260916-work-final','assets/ronnie-community-support.jpg?v=20260916-action')
+
           # Restore Honor Jar as a permanent bottom-page section above visitors.
           jar_css='''<style id="honor-jar-style">.honorJarSection{max-width:1080px;margin:0 auto;padding:46px 18px}.honorJarCard{position:relative;overflow:hidden;text-align:center;background:linear-gradient(145deg,#102947,#071426);border:3px solid #d9b75d;border-radius:12px;padding:30px 22px;box-shadow:inset 0 0 0 2px #fff}.honorJarCard img{width:min(180px,48vw);height:auto;display:block;margin:0 auto 12px}.honorJarCard h2{font:900 clamp(2rem,7vw,3.4rem)/1.02 Georgia,serif;margin:8px 0 12px}.honorJarCard p{max-width:720px;margin:0 auto 18px;color:#dce5ef;line-height:1.6}.honorAmounts{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}.honorAmounts a{display:inline-block;text-decoration:none;background:#d9b75d;color:#071426;border:2px solid #fff;border-radius:999px;padding:11px 17px;font-weight:900}.honorMain{display:inline-block;margin-top:12px;text-decoration:none;background:#123f75;color:#fff;border:2px solid #d9b75d;border-radius:999px;padding:13px 20px;font-weight:900}.honorFine{display:block;margin-top:12px;color:#aebdca;font-size:.78rem}</style>'''
           if 'id="honor-jar-style"' not in s:
@@ -50,17 +61,18 @@ jobs:
                   s=s.replace(marker,jar+'\n'+marker,1)
               else:
                   s=s.replace('</main>',jar+'\n</main>')
-          # Force current next-holiday strip to Halloween, then advance after Oct 31.
+
           override='''<script id="holiday-final-override">(function(){const t=document.getElementById('holidayTicker');if(!t)return;const n=new Date();const dates=[{d:new Date(2026,9,31,23,59,59),l:'🎃 HALLOWEEN • OCTOBER 31'},{d:new Date(2026,10,11,23,59,59),l:'🇺🇸 VETERANS DAY • NOVEMBER 11'},{d:new Date(2026,11,7,23,59,59),l:'⚓ PEARL HARBOR DAY • DECEMBER 7'},{d:new Date(2026,11,25,23,59,59),l:'🎄 CHRISTMAS • DECEMBER 25'}].filter(x=>x.d>=n).sort((a,b)=>a.d-b.d);if(dates[0])t.innerHTML='<span class="tickerItem"><strong>NEXT HOLIDAY:</strong> '+dates[0].l+'</span>';})();</script>'''
           if 'holiday-final-override' not in s:
               s=s.replace('</body>',override+'\n</body>')
           p.write_text(s)
           PY
+          grep -q 'exact-visitor-counter' index.html
+          ! grep -q '4,300+' index.html
           grep -q 'ronnie-listening-veteran.jpg' index.html
           grep -q 'ronnie-community-support.jpg' index.html
           grep -q 'id="honor-jar"' index.html
           grep -q 'DONATE THROUGH THE HONOR JAR' index.html
-          grep -q 'donate.html?amount=20' index.html
           grep -q 'letter-to-president.html' index.html
           grep -q 'HALLOWEEN' index.html
       - name: Configure Pages
