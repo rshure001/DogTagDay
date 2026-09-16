@@ -23,18 +23,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Verify image-safe homepage
+      - name: Verify repaired homepage
         run: |
           set -e
           test -s index.html
-          grep -q '2026-09-15-image-safe' index.html
+          grep -q '2026-09-15-no-broken-images' index.html
           grep -q 'Identity • Brotherhood • Honor' index.html
           grep -q 'dog-tag-day-realistic-veterans-20260901.jpg' index.html
-          grep -q 'camera-crew-approved-20260915.svg' index.html
+          grep -q 'dog-tag-day-five-no-hats.webp' index.html
           grep -q 'ronnie-founder-natural-facial-hair-20260903.jpg' index.html
           file assets/dog-tag-day-realistic-veterans-20260901.jpg | grep -qi 'JPEG image data'
+          file assets/dog-tag-day-five-no-hats.webp | grep -qi 'Web/P image'
           file assets/ronnie-founder-natural-facial-hair-20260903.jpg | grep -qi 'JPEG image data'
-          grep -q '<svg' assets/camera-crew-approved-20260915.svg
           file assets/dog-tag-day-national-map-brighter-20260913.jpg | grep -qi 'JPEG image data'
       - name: Configure Pages
         uses: actions/configure-pages@v5
@@ -53,8 +53,8 @@ jobs:
           set -e
           for i in $(seq 1 36); do
             html=$(curl -fsSL -H 'Cache-Control: no-cache' "https://dogtagday.org/?verify=${GITHUB_SHA}-${GITHUB_RUN_ID}-$i" || true)
-            if printf '%s' "$html" | grep -q '2026-09-15-image-safe'; then
-              echo LIVE_IMAGE_SAFE_VERIFIED
+            if printf '%s' "$html" | grep -q '2026-09-15-no-broken-images'; then
+              echo LIVE_REPAIRED_HOMEPAGE_VERIFIED
               exit 0
             fi
             sleep 5
