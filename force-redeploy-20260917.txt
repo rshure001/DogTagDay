@@ -1,1 +1,1 @@
-Force redeploy of current six-image Dog Tag Day homepage on 2026-09-17.
+Force deploy corrected v13 homepage from gh-pages through main workflow on 2026-09-16 15:36 PT.
