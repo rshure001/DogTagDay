@@ -25,16 +25,16 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: gh-pages
-      - name: Validate corrected live homepage
+      - name: Validate corrected live homepage v14
         run: |
           set -e
           test -s index.html
-          grep -q '2026-09-16-live-fix-v13' index.html
+          grep -q '2026-09-16-live-fix-v14' index.html
           grep -q 'assets/dog-tag-day-hero.PNG' index.html
-          grep -q 'assets/combat-team-final.jpg' index.html
-          grep -q 'assets/dogtagday-no-hats-final.jpg' index.html
-          grep -q 'DIFFERENT PATHS • THE SAME PURPOSE' index.html
-          grep -q 'assets/camera-crew-final.jpg' index.html
+          grep -q 'assets/story-combat-v13.svg' index.html
+          grep -q 'assets/story-civilian-v13.svg' index.html
+          grep -q 'assets/story-roles-v13.svg' index.html
+          grep -q 'assets/story-invisible-v13.svg' index.html
           grep -q 'ronnie-street-conversation-final.jpg' index.html
           grep -q 'ronnie-shure-founder-20260901.jpg' index.html
           grep -q 'ronnie-community-support.jpg' index.html
