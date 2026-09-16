@@ -21,9 +21,11 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout live gh-pages branch
         uses: actions/checkout@v4
-      - name: Validate v13 homepage
+        with:
+          ref: gh-pages
+      - name: Validate corrected live homepage
         run: |
           set -e
           test -s index.html
@@ -37,8 +39,9 @@ jobs:
           grep -q 'ronnie-shure-founder-20260901.jpg' index.html
           grep -q 'ronnie-community-support.jpg' index.html
           grep -q '4,817' index.html
+          grep -q 'NEXT HOLIDAY:' index.html
           grep -q 'HALLOWEEN' index.html
-          grep -q 'Donate Through the Honor Jar' index.html
+          ! grep -q 'gcdn.picsart.com' index.html
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload site
