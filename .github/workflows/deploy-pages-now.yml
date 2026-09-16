@@ -23,75 +23,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Build approved homepage
+      - name: Validate rebuilt homepage
         run: |
           set -e
-          test -s assets/dtd-home-visual.jpg
-          cat > index.html <<'HTML'
-          <!doctype html>
-          <html lang="en">
-          <head>
-            <meta charset="utf-8">
-            <meta name="viewport" content="width=device-width,initial-scale=1">
-            <title>Dog Tag Day Foundation — April 18</title>
-            <meta name="description" content="Dog Tag Day Foundation honors veterans by helping their stories be seen, heard, and remembered — not just on April 18, but all year long.">
-            <style>
-              :root{--navy:#061a2e;--navy2:#0b2744;--gold:#d7a94d;--white:#fff;--muted:#c8d2dc}
-              *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--navy);color:var(--white);font-family:Arial,Helvetica,sans-serif}
-              a{color:inherit;text-decoration:none}.wrap{max-width:1120px;margin:auto;padding:0 18px}
-              header{position:sticky;top:0;z-index:20;background:rgba(6,26,46,.97);border-bottom:1px solid rgba(215,169,77,.45)}
-              .nav{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 0}.brand{font:700 22px Georgia,serif}.brand small{display:block;font:600 10px Arial,sans-serif;letter-spacing:.16em;color:var(--gold)}
-              nav{display:flex;gap:14px;flex-wrap:wrap;justify-content:flex-end;font-size:13px}.donateTop{background:var(--gold);color:#081525;padding:9px 12px;border-radius:8px;font-weight:800}
-              .poster{background:#000}.poster img{display:block;width:100%;height:auto;margin:auto;max-width:1312px}
-              .counterBar{display:grid;grid-template-columns:1fr 1.3fr 1fr;gap:18px;align-items:center;padding:22px 0;border-top:1px solid #20527d;border-bottom:1px solid #20527d;background:linear-gradient(90deg,#07172a,#0b2744,#07172a)}
-              .counter{text-align:center}.counter strong{display:block;font:800 clamp(2rem,7vw,3.2rem) Georgia,serif;letter-spacing:.06em}.counter span{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.15em}
-              .quote{text-align:center;font:italic 700 clamp(1.05rem,2.5vw,1.5rem) Georgia,serif}.quote b{display:block;color:var(--gold);font:700 12px Arial,sans-serif;margin-top:8px}
-              .jar{text-align:center}.jar h3{margin:0 0 10px;font-family:Georgia,serif}.amounts{display:flex;justify-content:center;flex-wrap:wrap;gap:7px}.amounts a{border:1px solid #5ca4e6;background:#0d5a9a;padding:8px 12px;border-radius:6px;font-weight:800}
-              .sections{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:26px 0}.card{background:#0c223a;border:1px solid rgba(215,169,77,.35);padding:20px;border-radius:10px}.card h2{font:700 22px Georgia,serif;margin:0 0 8px;color:var(--gold)}.card p{color:#d8e0e8;line-height:1.55;margin:0}.card a{display:inline-block;margin-top:12px;color:var(--gold);font-weight:800}
-              footer{padding:24px 0 38px;color:#d2dae3;text-align:center;border-top:1px solid rgba(215,169,77,.35)}footer strong{color:#fff}
-              @media(max-width:760px){.nav{align-items:flex-start}.brand{font-size:19px}nav{gap:8px;font-size:11px}.counterBar{grid-template-columns:1fr}.sections{grid-template-columns:1fr}.poster img{width:100%}}
-            </style>
-          </head>
-          <body>
-            <header>
-              <div class="wrap nav">
-                <a class="brand" href="#top">Dog Tag Day<small>FOUNDATION • APRIL 18</small></a>
-                <nav>
-                  <a href="#mission">Mission</a><a href="#april18">April 18th</a><a href="#what-we-do">What We Do</a><a href="#share-story">Share Story</a><a href="#founder">Founder</a><a href="#contact">Contact</a>
-                  <a class="donateTop" href="donate.html">Honor Jar</a>
-                </nav>
-              </div>
-            </header>
-
-            <main id="top">
-              <section class="poster" aria-label="Dog Tag Day campaign overview">
-                <img src="assets/dtd-home-visual.jpg?v=20260916-final" alt="Dog Tag Day Foundation campaign showing the long-haired founder in a white rolled-sleeve shirt and blue tie sitting beside a veteran while a camera crew records the conversation, with veteran portraits and April 18 campaign messaging.">
-              </section>
-
-              <section class="counterBar">
-                <div class="counter"><strong>4,304</strong><span>Visitors to DogTagDay.org</span></div>
-                <div class="quote">“Those stories deserve to be seen, heard, and remembered.”<b>RONNIE SHURE — FOUNDER &amp; CEO</b></div>
-                <div class="jar"><h3>Donate Through the Honor Jar</h3><div class="amounts"><a href="donate.html?amount=1">$1</a><a href="donate.html?amount=5">$5</a><a href="donate.html?amount=20">$20</a><a href="donate.html?amount=100">$100</a></div></div>
-              </section>
-
-              <div class="wrap sections">
-                <section class="card" id="mission"><h2>Mission</h2><p>Veterans should not disappear into the background when the uniform comes off. Dog Tag Day makes service visible and gives veterans a simple way to share the story behind the tags.</p></section>
-                <section class="card" id="april18"><h2>April 18</h2><p>Wear or display dog tags. Start a conversation. Honor a veteran. Make sure the story is seen, heard, and remembered.</p></section>
-                <section class="card" id="what-we-do"><h2>What We Do</h2><p>We listen, preserve stories, connect veterans to resources, follow up, and build community all year long.</p></section>
-                <section class="card" id="share-story"><h2>Share a Story</h2><p>Tell us about the person, service, or dog tags you want remembered.</p><a href="share.html">Share a Story →</a></section>
-                <section class="card" id="founder"><h2>Founder</h2><p><strong>Ronnie Shure</strong><br>Founder &amp; CEO, Dog Tag Day Foundation</p></section>
-                <section class="card" id="contact"><h2>Contact</h2><p>DogTagDay.org<br>Identity • Brotherhood • Honor</p></section>
-              </div>
-            </main>
-
-            <footer><div class="wrap"><strong>Dog Tag Day Foundation</strong><br>Put them on. Acknowledge one.<br><span style="color:#d7a94d">You don’t have to be invisible.</span></div></footer>
-          </body>
-          </html>
-          HTML
+          test -s index.html
+          test -s assets/camera-crew-final.jpg
+          test -s assets/dogtagday-no-hats-final.jpg
           grep -q '4,304' index.html
-          grep -q 'dtd-home-visual.jpg' index.html
-
+          grep -q 'camera-crew-final.jpg' index.html
+          grep -q 'ronnie-shure-founder-20260902-older-gray.png' index.html
+          grep -q 'honor-jar-click-pledge.png' index.html
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload site
