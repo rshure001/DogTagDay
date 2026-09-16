@@ -23,14 +23,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Verify repaired homepage
+      - name: Verify rebuilt homepage
         run: |
           set -e
           test -s index.html
-          grep -q '2026-09-15-no-broken-images' index.html
-          grep -q 'Identity • Brotherhood • Honor' index.html
+          grep -q '2026-09-15-full-rebuild' index.html
+          grep -q 'PUT THEM ON.' index.html
+          grep -q 'ACKNOWLEDGE ONE.' index.html
+          grep -q 'approved-dog-tags.PNG' index.html
           grep -q 'dog-tag-day-realistic-veterans-20260901.jpg' index.html
-          grep -q 'dog-tag-day-five-no-hats.webp' index.html
           grep -q 'ronnie-founder-natural-facial-hair-20260903.jpg' index.html
       - name: Configure Pages
         uses: actions/configure-pages@v5
@@ -49,8 +50,8 @@ jobs:
           set -e
           for i in $(seq 1 36); do
             html=$(curl -fsSL -H 'Cache-Control: no-cache' "https://dogtagday.org/?verify=${GITHUB_SHA}-${GITHUB_RUN_ID}-$i" || true)
-            if printf '%s' "$html" | grep -q '2026-09-15-no-broken-images'; then
-              echo LIVE_REPAIRED_HOMEPAGE_VERIFIED
+            if printf '%s' "$html" | grep -q '2026-09-15-full-rebuild'; then
+              echo LIVE_FULL_REBUILD_VERIFIED
               exit 0
             fi
             sleep 5
