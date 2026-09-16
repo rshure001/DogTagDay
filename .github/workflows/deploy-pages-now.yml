@@ -23,14 +23,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Verify rebuilt photo homepage
+      - name: Verify current homepage
         run: |
           set -e
           test -s index.html
-          grep -q '2026-09-15-rebuilt-photos-v2' index.html
-          grep -q 'hero-inline.svg' index.html
-          grep -q 'combat-inline.svg' index.html
-          grep -q 'bbq-inline.svg' index.html
+          grep -q '2026-09-15-counter-holidays-restored' index.html
+          grep -q '4,300+' index.html
+          grep -q 'holidayStrip' index.html
           grep -q 'camera-inline.svg' index.html
           test -s assets/hero-inline.svg
           test -s assets/combat-inline.svg
@@ -53,8 +52,8 @@ jobs:
           set -e
           for i in $(seq 1 36); do
             html=$(curl -fsSL -H 'Cache-Control: no-cache' "https://dogtagday.org/?verify=${GITHUB_SHA}-${GITHUB_RUN_ID}-$i" || true)
-            if printf '%s' "$html" | grep -q '2026-09-15-rebuilt-photos-v2' && printf '%s' "$html" | grep -q 'camera-inline.svg'; then
-              echo LIVE_REBUILT_PHOTOS_VERIFIED
+            if printf '%s' "$html" | grep -q '2026-09-15-counter-holidays-restored' && printf '%s' "$html" | grep -q '4,300+' && printf '%s' "$html" | grep -q 'holidayStrip' && printf '%s' "$html" | grep -q 'camera-inline.svg'; then
+              echo LIVE_CURRENT_HOMEPAGE_VERIFIED
               exit 0
             fi
             sleep 5
