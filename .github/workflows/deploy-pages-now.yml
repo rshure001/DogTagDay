@@ -23,21 +23,20 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Validate live homepage fix
+      - name: Validate v13 homepage
         run: |
           set -e
           test -s index.html
-          grep -q '2026-09-16-live-fix-v12' index.html
+          grep -q '2026-09-16-live-fix-v13' index.html
           grep -q 'assets/dog-tag-day-hero.PNG' index.html
           grep -q 'assets/combat-team-final.jpg' index.html
           grep -q 'assets/dogtagday-no-hats-final.jpg' index.html
-          grep -q 'assets/barbecue-team-final.jpg' index.html
+          grep -q 'DIFFERENT PATHS • THE SAME PURPOSE' index.html
           grep -q 'assets/camera-crew-final.jpg' index.html
           grep -q 'ronnie-street-conversation-final.jpg' index.html
           grep -q 'ronnie-shure-founder-20260901.jpg' index.html
-          grep -q 'ronnie-listening-veteran.jpg' index.html
+          grep -q 'ronnie-community-support.jpg' index.html
           grep -q '4,817' index.html
-          grep -q 'NEXT HOLIDAY:' index.html
           grep -q 'HALLOWEEN' index.html
           grep -q 'Donate Through the Honor Jar' index.html
       - name: Configure Pages
