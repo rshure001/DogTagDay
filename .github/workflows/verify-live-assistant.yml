@@ -32,10 +32,10 @@ jobs:
                 const broken=await page.locator('img').evaluateAll(imgs=>imgs.filter(i=>!i.complete||i.naturalWidth===0).map(i=>i.getAttribute('src')));
                 const noOverflow=await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+1);
                 const srcs=await page.locator('img').evaluateAll(imgs=>imgs.map(i=>i.getAttribute('src')||''));
-                const storyOk=['combat-team-final.jpg','dog-tag-day-realistic-veterans-20260901.jpg','barbecue-team-final.jpg','camera-crew-final.jpg'].every(n=>srcs.some(s=>s.includes(n)));
+                const storyOk=['dog-tag-day-realistic-veterans-20260901.jpg','ronnie-street-conversation-final.jpg','dog-tag-day-hero.PNG','ronnie-shure-founder-20260901.jpg'].every(n=>srcs.some(s=>s.includes(n)));
                 const result={attempt:i+1,build,broken,heroCount:await hero.count(),storyImageCount:await storyImgs.count(),founderImageCount:await founderImgs.count(),noOverflow,storyOk};
                 console.log(JSON.stringify(result));
-                if(build==='2026-09-16-final-v20'&&broken.length===0&&result.heroCount===1&&result.storyImageCount===4&&result.founderImageCount===2&&noOverflow&&storyOk){ok=true;break;}
+                if(build==='2026-09-16-final-v21'&&broken.length===0&&result.heroCount===1&&result.storyImageCount===4&&result.founderImageCount===2&&noOverflow&&storyOk){ok=true;break;}
                 await page.waitForTimeout(3000);
               }
             } finally {
