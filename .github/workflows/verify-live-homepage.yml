@@ -16,7 +16,7 @@ jobs:
           node-version: '24'
       - run: npm install playwright
       - run: npx playwright install --with-deps webkit
-      - name: Verify live iPhone homepage v23
+      - name: Verify live iPhone homepage v24
         run: |
           node <<'NODE'
           const { webkit, devices } = require('playwright');
@@ -38,7 +38,7 @@ jobs:
                 const body=await page.locator('body').innerText();
                 const lower=body.toLowerCase();
                 const srcs=await page.locator('img').evaluateAll(imgs=>imgs.map(i=>i.getAttribute('src')||''));
-                const storyOk=['combat-team-final.jpg','dog-tag-day-realistic-veterans-20260901.jpg','barbecue-team-final.jpg','camera-crew-final.jpg'].every(n=>srcs.some(s=>s.includes(n)));
+                const storyOk=['combat-inline-v2.svg','dog-tag-day-realistic-veterans-20260901.jpg','bbq-inline.svg','camera-crew-approved-20260915.svg'].every(n=>srcs.some(s=>s.includes(n)));
                 const foundersOk=srcs.some(s=>s.includes('ronnie-street-conversation-final.jpg'))&&srcs.some(s=>s.includes('ronnie-shure-founder-20260901.jpg'));
                 const noOverflow=await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+1);
                 const topPosition=await page.locator('.top').evaluate(el=>getComputedStyle(el).position);
@@ -47,19 +47,19 @@ jobs:
                 const text=lower.includes('veterans should not become invisible')&&lower.includes('no man left behind')&&lower.includes('the uniform comes off')&&lower.includes('different paths')&&lower.includes('see the veteran')&&lower.includes('4,817')&&lower.includes('ronnie shure');
                 const result={attempt:i+1,build,broken,heroCount:await hero.count(),storyImageCount:await storyImgs.count(),founderImageCount:await founderImgs.count(),mapCount:await map.count(),storyOk,foundersOk,noOverflow,topPosition,heroTransform,nextHoliday,text};
                 console.log(JSON.stringify(result));
-                if(build==='2026-09-16-final-v23'&&broken.length===0&&result.heroCount===1&&result.storyImageCount===4&&result.founderImageCount===2&&result.mapCount===1&&storyOk&&foundersOk&&noOverflow&&topPosition==='relative'&&heroTransform==='none'&&nextHoliday&&text){ok=true;break;}
+                if(build==='2026-09-16-final-v24'&&broken.length===0&&result.heroCount===1&&result.storyImageCount===4&&result.founderImageCount===2&&result.mapCount===1&&storyOk&&foundersOk&&noOverflow&&topPosition==='relative'&&heroTransform==='none'&&nextHoliday&&text){ok=true;break;}
                 await page.waitForTimeout(3000);
               }
             } catch(e){console.error(e);} finally {
-              await page.screenshot({path:'live-homepage-proof-v23.png',fullPage:true}).catch(()=>{});
+              await page.screenshot({path:'live-homepage-proof-v24.png',fullPage:true}).catch(()=>{});
               await browser.close();
             }
             if(!ok) process.exit(1);
-            console.log('LIVE_HOMEPAGE_V23_PASS=true');
+            console.log('LIVE_HOMEPAGE_V24_PASS=true');
           })().catch(e=>{console.error(e);process.exit(1)});
           NODE
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: live-homepage-proof-v23
-          path: live-homepage-proof-v23.png
+          name: live-homepage-proof-v24
+          path: live-homepage-proof-v24.png
