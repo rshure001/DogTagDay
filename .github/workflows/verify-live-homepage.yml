@@ -16,7 +16,7 @@ jobs:
           node-version: '24'
       - run: npm install playwright
       - run: npx playwright install --with-deps webkit
-      - name: Verify live iPhone homepage v44
+      - name: Verify live iPhone homepage v45
         run: |
           node <<'NODE'
           const { webkit, devices } = require('playwright');
@@ -28,27 +28,27 @@ jobs:
               for(let i=0;i<20;i++){
                 await page.goto('https://dogtagday.org/?verify='+Date.now(),{waitUntil:'networkidle',timeout:30000});
                 const build=await page.locator('html').getAttribute('data-dtd-build');
-                const hero=page.locator('.poster img');
-                await hero.waitFor({state:'visible',timeout:10000});
+                const hero=page.locator('.hero img');
+                const feature=page.locator('#story .feature img');
                 const broken=await page.locator('img').evaluateAll(imgs=>imgs.filter(i=>!i.complete||i.naturalWidth===0).map(i=>i.getAttribute('src')));
                 const noOverflow=await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+1);
-                const heroSrc=await hero.getAttribute('src');
                 const body=await page.locator('body').innerText();
-                const result={attempt:i+1,build,broken,heroSrc,heroCount:await hero.count(),noOverflow,body};
-                console.log(JSON.stringify(result));
-                if(build==='2026-09-17-final-v44'&&broken.length===0&&heroSrc.includes('fffa5d79-85d8-4be8-93ea-16e2c752723b.png')&&result.heroCount===1&&noOverflow){ok=true;break;}
+                const okText=body.includes('Veterans should not become invisible.')&&body.includes('4,874')&&body.includes('HONOR JAR')&&body.includes('RONNIE SHURE');
+                const featureSrc=await feature.getAttribute('src');
+                console.log(JSON.stringify({attempt:i+1,build,broken,noOverflow,okText,featureSrc}));
+                if(build==='2026-09-17-final-v45'&&broken.length===0&&noOverflow&&okText&&featureSrc.includes('fffa5d79-85d8-4be8-93ea-16e2c752723b.png')){ok=true;break;}
                 await page.waitForTimeout(3000);
               }
             } catch(e){console.error(e);} finally {
-              await page.screenshot({path:'live-homepage-proof-v44.png',fullPage:true}).catch(()=>{});
+              await page.screenshot({path:'live-homepage-proof-v45.png',fullPage:true}).catch(()=>{});
               await browser.close();
             }
             if(!ok) process.exit(1);
-            console.log('LIVE_HOMEPAGE_V44_PASS=true');
+            console.log('LIVE_HOMEPAGE_V45_PASS=true');
           })().catch(e=>{console.error(e);process.exit(1)});
           NODE
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: live-homepage-proof-v44
-          path: live-homepage-proof-v44.png
+          name: live-homepage-proof-v45
+          path: live-homepage-proof-v45.png
