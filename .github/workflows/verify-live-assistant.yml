@@ -22,20 +22,22 @@ jobs:
             const browser=await webkit.launch({headless:true});
             const context=await browser.newContext({...devices['iPhone 13']});
             const page=await context.newPage(); let ok=false;
+            const expectedBuild='2026-09-17-final-v58';
+            const expectedCamera='c8bf4eab-3376-4f58-8bbf-1b55f0f009f3.png';
             try {
               for(let i=0;i<20;i++){
                 await page.goto('https://dogtagday.org/?verify='+Date.now(),{waitUntil:'networkidle',timeout:30000});
                 const build=await page.locator('html').getAttribute('data-dtd-build');
-                const hero=page.locator('.hero img');
-                const storyImgs=page.locator('#story img.storyart');
+                const heroCount=await page.locator('.hero img').count();
                 const founderImgs=page.locator('#founder .foundergrid img');
+                const founderImageCount=await founderImgs.count();
+                const cameraSrc=founderImageCount>1 ? await founderImgs.nth(1).getAttribute('src') : '';
+                const counter=(await page.locator('.counter-note').innerText().catch(()=>'' )).replace(/\s+/g,' ').trim();
                 const broken=await page.locator('img').evaluateAll(imgs=>imgs.filter(i=>!i.complete||i.naturalWidth===0).map(i=>i.getAttribute('src')));
                 const noOverflow=await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+1);
-                const srcs=await page.locator('img').evaluateAll(imgs=>imgs.map(i=>i.getAttribute('src')||''));
-                const storyOk=['dog-tag-day-realistic-veterans-20260901.jpg','ronnie-street-conversation-final.jpg','dog-tag-day-hero.PNG','ronnie-shure-founder-20260901.jpg'].every(n=>srcs.some(s=>s.includes(n)));
-                const result={attempt:i+1,build,broken,heroCount:await hero.count(),storyImageCount:await storyImgs.count(),founderImageCount:await founderImgs.count(),noOverflow,storyOk};
+                const result={attempt:i+1,build,broken,heroCount,founderImageCount,cameraSrc,counter,noOverflow};
                 console.log(JSON.stringify(result));
-                if(build==='2026-09-16-final-v21'&&broken.length===0&&result.heroCount===1&&result.storyImageCount===4&&result.founderImageCount===2&&noOverflow&&storyOk){ok=true;break;}
+                if(build===expectedBuild && broken.length===0 && heroCount===1 && founderImageCount===2 && cameraSrc.includes(expectedCamera) && counter.includes('4,892') && noOverflow){ok=true;break;}
                 await page.waitForTimeout(3000);
               }
             } finally {
