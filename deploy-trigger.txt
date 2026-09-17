@@ -1,1 +1,1 @@
-Force deploy v10 homepage and bypass stale Pages cache — 2026-09-16 22:00 UTC
+Deploy corrected live iPhone hero orientation — 2026-09-17 00:01 UTC
