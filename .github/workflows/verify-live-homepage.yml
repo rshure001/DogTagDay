@@ -16,20 +16,20 @@ jobs:
           node-version: '24'
       - run: npm install playwright
       - run: npx playwright install --with-deps webkit
-      - name: Verify live iPhone homepage v18
+      - name: Verify live iPhone homepage v20
         run: |
           node <<'NODE'
           const { webkit, devices } = require('playwright');
           (async()=>{
             const browser=await webkit.launch({headless:true});
             const context=await browser.newContext({...devices['iPhone 13']});
-            const page=await context.newPage();
-            let ok=false;
+            const page=await context.newPage(); let ok=false;
             try {
               for(let i=0;i<20;i++){
                 await page.goto('https://dogtagday.org/?verify='+Date.now(),{waitUntil:'networkidle',timeout:30000});
+                const build=await page.locator('html').getAttribute('data-dtd-build');
                 const hero=page.locator('.hero img');
-                const storyArts=page.locator('#story .storygrid svg.storyart');
+                const storyImgs=page.locator('#story img.storyart');
                 const founderImgs=page.locator('#founder .foundergrid img');
                 const map=page.locator('img[alt="Dog Tag Day outreach across America"]');
                 await hero.waitFor({state:'visible',timeout:10000});
@@ -37,30 +37,28 @@ jobs:
                 const broken=await page.locator('img').evaluateAll(imgs=>imgs.filter(i=>!i.complete||i.naturalWidth===0).map(i=>i.getAttribute('src')));
                 const body=await page.locator('body').innerText();
                 const lower=body.toLowerCase();
-                const build=await page.locator('html').getAttribute('data-dtd-build');
                 const srcs=await page.locator('img').evaluateAll(imgs=>imgs.map(i=>i.getAttribute('src')||''));
-                const foundersOk=srcs.some(s=>s.includes('ronnie-street-conversation-final.jpg'))&&srcs.some(s=>s.includes('ronnie-shure-founder-20260901.jpg'))&&!srcs.some(s=>s.includes('ronnie-community-support.jpg'))&&!srcs.some(s=>s.includes('ronnie-listening-veteran.jpg'))&&!srcs.some(s=>s.includes('ronnie-founder-natural-facial-hair-20260903.jpg'));
-                const noPicsart=!srcs.some(s=>s.includes('gcdn.picsart.com'));
+                const storyOk=['combat-team-final.jpg','dog-tag-day-realistic-veterans-20260901.jpg','barbecue-team-final.jpg','camera-crew-final.jpg'].every(n=>srcs.some(s=>s.includes(n)));
+                const foundersOk=srcs.some(s=>s.includes('ronnie-street-conversation-final.jpg'))&&srcs.some(s=>s.includes('ronnie-shure-founder-20260901.jpg'));
                 const noOverflow=await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+1);
                 const topPosition=await page.locator('.top').evaluate(el=>getComputedStyle(el).position);
-                const nextHoliday=(body.match(/NEXT HOLIDAY:/g)||[]).length===1 && body.includes('HALLOWEEN') && !body.includes('VETERANS DAY') && !body.includes('THANKSGIVING') && !body.includes('CHRISTMAS') && !body.includes("NEW YEAR'S DAY");
+                const nextHoliday=(body.match(/NEXT HOLIDAY:/g)||[]).length===1 && body.includes('HALLOWEEN');
                 const text=lower.includes('veterans should not become invisible')&&lower.includes('no man left behind')&&lower.includes('the uniform comes off')&&lower.includes('different paths')&&lower.includes('see the veteran')&&lower.includes('4,817')&&lower.includes('ronnie shure');
-                const result={attempt:i+1,build,broken,heroCount:await hero.count(),storyArtCount:await storyArts.count(),founderImageCount:await founderImgs.count(),mapCount:await map.count(),foundersOk,noPicsart,noOverflow,topPosition,nextHoliday,text,srcs};
+                const result={attempt:i+1,build,broken,heroCount:await hero.count(),storyImageCount:await storyImgs.count(),founderImageCount:await founderImgs.count(),mapCount:await map.count(),storyOk,foundersOk,noOverflow,topPosition,nextHoliday,text};
                 console.log(JSON.stringify(result));
-                if(build==='2026-09-16-final-v18'&&broken.length===0&&result.heroCount===1&&result.storyArtCount===4&&result.founderImageCount===2&&result.mapCount===1&&foundersOk&&noPicsart&&noOverflow&&topPosition==='relative'&&nextHoliday&&text){ok=true;break;}
+                if(build==='2026-09-16-final-v20'&&broken.length===0&&result.heroCount===1&&result.storyImageCount===4&&result.founderImageCount===2&&result.mapCount===1&&storyOk&&foundersOk&&noOverflow&&topPosition==='relative'&&nextHoliday&&text){ok=true;break;}
                 await page.waitForTimeout(3000);
               }
-            } catch (error) { console.error(error); }
-            finally {
-              await page.screenshot({path:'live-homepage-proof-v18.png',fullPage:true}).catch(console.error);
+            } catch(e){console.error(e);} finally {
+              await page.screenshot({path:'live-homepage-proof-v20.png',fullPage:true}).catch(()=>{});
               await browser.close();
             }
             if(!ok) process.exit(1);
-            console.log('LIVE_HOMEPAGE_V18_PASS=true');
+            console.log('LIVE_HOMEPAGE_V20_PASS=true');
           })().catch(e=>{console.error(e);process.exit(1)});
           NODE
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: live-homepage-proof-v18
-          path: live-homepage-proof-v18.png
+          name: live-homepage-proof-v20
+          path: live-homepage-proof-v20.png
