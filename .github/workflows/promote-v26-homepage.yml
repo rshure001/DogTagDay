@@ -1,0 +1,36 @@
+name: Promote v26 Homepage
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: write
+jobs:
+  promote:
+    if: github.event.head_commit.message == 'Add v26 visual promotion'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Publish v26 visual assets
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text()
+          s=s.replace('2026-09-16-final-v25','2026-09-16-final-v26')
+          s=s.replace('assets/dog-tag-day-hero-unique-20260906.jpg?v=20260916-v25','assets/hero-inline-v2.svg?v=20260916-v26')
+          s=s.replace('assets/swipe-page1.jpg?v=20260916-v25','assets/combat-inline-v2.svg?v=20260916-v26')
+          s=s.replace('assets/dog-tag-day-realistic-veterans-20260901.jpg?v=20260916-v25','assets/dog-tag-day-realistic-veterans-20260901.jpg?v=20260916-v26')
+          s=s.replace('assets/swipe-page3.jpg?v=20260916-v25','assets/bbq-inline.svg?v=20260916-v26')
+          s=s.replace('assets/swipe-page4.jpg?v=20260916-v25','assets/camera-crew-approved-20260915.svg?v=20260916-v26')
+          s=s.replace('?v=20260916-v25','?v=20260916-v26')
+          p.write_text(s)
+          PY
+      - name: Commit v26
+        run: |
+          git config user.name 'rshure001'
+          git config user.email 'rshure001@yahoo.com'
+          git add index.html
+          git commit -m 'Publish final v26 visual homepage'
+          git push origin HEAD:main
