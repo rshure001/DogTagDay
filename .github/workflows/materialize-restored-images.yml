@@ -9,47 +9,41 @@ permissions:
 
 jobs:
   refine:
-    if: github.event.head_commit.message != 'Apply v48 camera crew and formal letter trim'
+    if: github.event.head_commit.message != 'Apply v49 camera crew cleanup'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Apply homepage and letter refinements
+      - name: Apply v49 camera crew cleanup
         run: |
           set -e
           python - <<'PY'
           from pathlib import Path
-
           p=Path('index.html')
           s=p.read_text()
-          s=s.replace('2026-09-17-final-v47','2026-09-17-final-v48')
-          s=s.replace('?v=20260917-v47','?v=20260917-v48')
-          s=s.replace('body{margin:0;background:var(--navy);color:#fff;font-family:Arial,Helvetica,sans-serif;overflow-x:hidden}', 'body{margin:0;background:var(--navy);color:#fff;font-family:Arial,Helvetica,sans-serif;overflow-x:hidden;border-left:3px solid var(--gold);border-right:3px solid var(--gold)}')
-          s=s.replace('.foundergrid{max-width:620px;margin-left:auto;margin-right:auto}.foundergrid img', '.foundergrid{max-width:920px;margin-left:auto;margin-right:auto}.foundergrid img')
-          s=s.replace('.program{grid-template-columns:repeat(4,1fr)}.bottomtools', '.foundergrid{grid-template-columns:repeat(2,1fr)}.program{grid-template-columns:repeat(4,1fr)}.bottomtools')
-          old='''<div class="foundergrid"><figure class="photo"><img src="https://gcdn.picsart.com/editing-temp/d52c4f6b-f563-4b97-b0e6-dc4830c71620.jpeg" alt="Ronnie Shure founder portrait"><figcaption class="cap">THE PERSON BEHIND THE MISSION</figcaption></figure></div>'''
-          new='''<div class="foundergrid"><figure class="photo"><img src="https://gcdn.picsart.com/editing-temp/d52c4f6b-f563-4b97-b0e6-dc4830c71620.jpeg" alt="Ronnie Shure founder portrait"><figcaption class="cap">THE PERSON BEHIND THE MISSION</figcaption></figure><figure class="photo"><img src="https://gcdn.picsart.com/editing-temp/54c6751d-b876-4e3a-8f0c-e61061b80d79.jpeg" alt="Ronnie Shure being filmed by a camera crew for Dog Tag Day"><figcaption class="cap">TELLING THE STORY</figcaption></figure></div>'''
-          if old in s:
-              s=s.replace(old,new)
-          p.write_text(s)
-
-          p=Path('letter-to-president.html')
-          s=p.read_text()
-          s=s.replace('2026-09-16-formal-open-letter','2026-09-17-formal-open-letter-v48')
-          s=s.replace('*{box-sizing:border-box}html,body{margin:0;background:#061421;color:#fff;font-family:Arial,Helvetica,sans-serif}body{background:linear-gradient(180deg,#061421,#0b1d33 48%,#07131f)}', '*{box-sizing:border-box}html,body{margin:0;background:#061421;color:#fff;font-family:Arial,Helvetica,sans-serif}body{background:linear-gradient(180deg,#061421,#0b1d33 48%,#07131f);border-left:4px solid #dfba62;border-right:4px solid #dfba62}')
-          s=s.replace('.stars{text-align:center;color:#dfba62;font-size:1.15rem;letter-spacing:.45em;margin:15px 0}', '.stars{text-align:center;color:#dfba62;font-size:clamp(.72rem,2.4vw,1.05rem);letter-spacing:.18em;margin:15px 0;white-space:nowrap}.letterstars{text-align:center;color:#8f762f;font-size:.86rem;letter-spacing:.16em;margin:0 0 18px;white-space:nowrap}')
-          s=s.replace('.paper{color:#17212b;background:#fffdf8;border:1px solid #bca76b;box-shadow:0 20px 60px rgba(0,0,0,.45);padding:clamp(28px,7vw,68px);position:relative}', '.paper{color:#17212b;background:#fffdf8;border:2px solid #bca76b;box-shadow:0 0 0 4px #102a48,0 0 0 6px #dfba62,0 20px 60px rgba(0,0,0,.45);padding:clamp(28px,7vw,68px);position:relative}')
-          s=s.replace('<div class="stars">★ ★ ★</div>', '<div class="stars">★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★</div>')
-          s=s.replace('<article class="paper">', '<article class="paper"><div class="letterstars">★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★</div>')
+          s=s.replace('2026-09-17-final-v47','2026-09-17-final-v49')
+          s=s.replace('2026-09-17-final-v48','2026-09-17-final-v49')
+          s=s.replace('?v=20260917-v47','?v=20260917-v49')
+          s=s.replace('?v=20260917-v48','?v=20260917-v49')
+          old='https://gcdn.picsart.com/editing-temp/54c6751d-b876-4e3a-8f0c-e61061b80d79.jpeg'
+          new='https://gcdn.picsart.com/editing-temp/7bb97213-09f6-4626-8e0c-f14d1bc2bcdb.png?v=20260917-v49'
+          s=s.replace(old,new)
+          portrait='https://gcdn.picsart.com/editing-temp/d52c4f6b-f563-4b97-b0e6-dc4830c71620.jpeg'
+          s=s.replace(portrait+'?v=20260917-v49',portrait+'?v=20260917-v49')
+          s=s.replace(portrait+'"',portrait+'?v=20260917-v49"')
+          viewport='<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">'
+          cache='''<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0">'''
+          if cache not in s:
+              s=s.replace(viewport,viewport+cache)
           p.write_text(s)
           PY
-      - name: Commit refinements
+      - name: Commit v49 cleanup
         run: |
           git config user.name 'rshure001'
           git config user.email 'rshure001@yahoo.com'
-          git add index.html letter-to-president.html
+          git add index.html
           if git diff --cached --quiet; then exit 0; fi
-          git commit -m 'Apply v48 camera crew and formal letter trim'
+          git commit -m 'Apply v49 camera crew cleanup'
           git push origin HEAD:main
