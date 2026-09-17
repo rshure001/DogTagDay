@@ -1,0 +1,31 @@
+name: Publish Approved Film Crew Scene
+on:
+  push:
+    paths:
+      - '.github/workflows/publish-approved-film-crew.yml'
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Replace approved scene and counter
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text()
+          s=s.replace('https://gcdn.picsart.com/editing-temp/4d5c067c-ef79-4719-b828-71dd2b4a15ba.jpeg?v=20260917-v54','https://gcdn.picsart.com/editing-temp/c2200d6b-22c0-4502-ac19-e142f202f921.png?v=20260917-approved')
+          s=s.replace('<strong>4,300+</strong>VISITORS TO DOGTAGDAY.ORG','<strong>4,892</strong>VISITORS TO DOGTAGDAY.ORG')
+          s=s.replace('data-dtd-build="2026-09-17-final-v54"','data-dtd-build="2026-09-17-final-v55"')
+          p.write_text(s)
+          PY
+      - name: Commit
+        run: |
+          git config user.name 'Dog Tag Day Publisher'
+          git config user.email 'actions@users.noreply.github.com'
+          git add index.html
+          git diff --cached --quiet && exit 0
+          git commit -m 'Publish approved film crew scene and 4892 counter'
+          git push
