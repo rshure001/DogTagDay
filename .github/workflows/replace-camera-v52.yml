@@ -1,0 +1,36 @@
+name: Replace Camera Crew v52
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/replace-camera-v52.yml'
+permissions:
+  contents: write
+jobs:
+  replace:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Replace only the camera crew image
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text()
+          old='https://gcdn.picsart.com/editing-temp/5c61045a-8ab3-4679-859e-4bdddefc3be2.jpeg?v=20260917-v51'
+          new='https://gcdn.picsart.com/editing-temp/4d5c067c-ef79-4719-b828-71dd2b4a15ba.jpeg?v=20260917-v52'
+          if old not in s:
+              raise SystemExit('Old camera image URL not found')
+          s=s.replace(old,new,1)
+          s=s.replace('data-dtd-build="2026-09-17-final-v51"','data-dtd-build="2026-09-17-final-v52"',1)
+          p.write_text(s)
+          PY
+      - name: Commit replacement
+        run: |
+          git config user.name 'rshure001'
+          git config user.email 'rshure001@yahoo.com'
+          git add index.html
+          git commit -m 'Use approved sharp camera crew photo v52'
+          git push origin main
