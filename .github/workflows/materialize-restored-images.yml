@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   restore:
-    if: github.event.head_commit.message != 'Materialize exact homepage photos' && github.event.head_commit.message != 'Publish corrected Ronnie conversation photo'
+    if: github.event.head_commit.message != 'Materialize exact homepage photos' && github.event.head_commit.message != 'Publish corrected Ronnie conversation photo' && github.event.head_commit.message != 'Publish approved Ronnie portrait'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -26,6 +26,7 @@ jobs:
           pairs = [
               ('.imageparts/final-camera.b64','assets/camera-crew-final-20260916.jpg'),
               ('.imageparts/final-founder.b64','assets/founder-hands-final-20260916.jpg'),
+              ('.imageparts/ronnie-approved-portrait.b64','assets/ronnie-approved-portrait.jpg'),
           ]
           for src, dst in pairs:
               if Path(src).exists():
@@ -34,22 +35,13 @@ jobs:
                   s += '=' * ((4 - len(s) % 4) % 4)
                   Path(dst).write_bytes(base64.b64decode(s, validate=False))
           PY
-          curl -L --fail --silent --show-error 'https://gcdn.picsart.com/editing-temp/926682f4-0105-438c-a2c7-c780d228a358.jpeg' -o assets/ronnie-street-conversation-final.jpg
-          file assets/ronnie-street-conversation-final.jpg | grep -qi 'JPEG image data'
-          test -s assets/ronnie-street-conversation-final.jpg
-          python - <<'PY'
-          from pathlib import Path
-          p=Path('index.html')
-          s=p.read_text()
-          s=s.replace('assets/ronnie-listening-veteran.jpg?v=book4','assets/ronnie-street-conversation-final.jpg?v=book5')
-          s=s.replace('2026-09-16-seven-page-book-v4','2026-09-16-seven-page-book-v5')
-          p.write_text(s)
-          PY
+          file assets/ronnie-approved-portrait.jpg | grep -qi 'JPEG image data'
+          test -s assets/ronnie-approved-portrait.jpg
       - name: Commit approved assets
         run: |
           git config user.name 'rshure001'
           git config user.email 'rshure001@yahoo.com'
-          git add assets/ronnie-street-conversation-final.jpg index.html
+          git add assets/ronnie-approved-portrait.jpg
           if git diff --cached --quiet; then exit 0; fi
-          git commit -m 'Publish corrected Ronnie conversation photo'
+          git commit -m 'Publish approved Ronnie portrait'
           git push origin HEAD:main
