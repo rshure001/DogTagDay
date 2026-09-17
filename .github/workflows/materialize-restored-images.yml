@@ -1,4 +1,4 @@
-name: Materialize Restored Ronnie Photos
+name: Apply Dog Tag Day Visual Refinements
 
 on:
   push:
@@ -8,40 +8,48 @@ permissions:
   contents: write
 
 jobs:
-  restore:
-    if: github.event.head_commit.message != 'Materialize exact homepage photos' && github.event.head_commit.message != 'Publish corrected Ronnie conversation photo' && github.event.head_commit.message != 'Publish approved Ronnie portrait'
+  refine:
+    if: github.event.head_commit.message != 'Apply v48 camera crew and formal letter trim'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Materialize approved homepage photos
+      - name: Apply homepage and letter refinements
         run: |
           set -e
-          mkdir -p assets
           python - <<'PY'
           from pathlib import Path
-          import base64, re
-          pairs = [
-              ('.imageparts/final-camera.b64','assets/camera-crew-final-20260916.jpg'),
-              ('.imageparts/final-founder.b64','assets/founder-hands-final-20260916.jpg'),
-              ('.imageparts/ronnie-approved-portrait.b64','assets/ronnie-approved-portrait.jpg'),
-          ]
-          for src, dst in pairs:
-              if Path(src).exists():
-                  s = Path(src).read_text()
-                  s = re.sub(r'[^A-Za-z0-9+/=]', '', s)
-                  s += '=' * ((4 - len(s) % 4) % 4)
-                  Path(dst).write_bytes(base64.b64decode(s, validate=False))
+
+          p=Path('index.html')
+          s=p.read_text()
+          s=s.replace('2026-09-17-final-v47','2026-09-17-final-v48')
+          s=s.replace('?v=20260917-v47','?v=20260917-v48')
+          s=s.replace('body{margin:0;background:var(--navy);color:#fff;font-family:Arial,Helvetica,sans-serif;overflow-x:hidden}', 'body{margin:0;background:var(--navy);color:#fff;font-family:Arial,Helvetica,sans-serif;overflow-x:hidden;border-left:3px solid var(--gold);border-right:3px solid var(--gold)}')
+          s=s.replace('.foundergrid{max-width:620px;margin-left:auto;margin-right:auto}.foundergrid img', '.foundergrid{max-width:920px;margin-left:auto;margin-right:auto}.foundergrid img')
+          s=s.replace('.program{grid-template-columns:repeat(4,1fr)}.bottomtools', '.foundergrid{grid-template-columns:repeat(2,1fr)}.program{grid-template-columns:repeat(4,1fr)}.bottomtools')
+          old='''<div class="foundergrid"><figure class="photo"><img src="https://gcdn.picsart.com/editing-temp/d52c4f6b-f563-4b97-b0e6-dc4830c71620.jpeg" alt="Ronnie Shure founder portrait"><figcaption class="cap">THE PERSON BEHIND THE MISSION</figcaption></figure></div>'''
+          new='''<div class="foundergrid"><figure class="photo"><img src="https://gcdn.picsart.com/editing-temp/d52c4f6b-f563-4b97-b0e6-dc4830c71620.jpeg" alt="Ronnie Shure founder portrait"><figcaption class="cap">THE PERSON BEHIND THE MISSION</figcaption></figure><figure class="photo"><img src="https://gcdn.picsart.com/editing-temp/54c6751d-b876-4e3a-8f0c-e61061b80d79.jpeg" alt="Ronnie Shure being filmed by a camera crew for Dog Tag Day"><figcaption class="cap">TELLING THE STORY</figcaption></figure></div>'''
+          if old in s:
+              s=s.replace(old,new)
+          p.write_text(s)
+
+          p=Path('letter-to-president.html')
+          s=p.read_text()
+          s=s.replace('2026-09-16-formal-open-letter','2026-09-17-formal-open-letter-v48')
+          s=s.replace('*{box-sizing:border-box}html,body{margin:0;background:#061421;color:#fff;font-family:Arial,Helvetica,sans-serif}body{background:linear-gradient(180deg,#061421,#0b1d33 48%,#07131f)}', '*{box-sizing:border-box}html,body{margin:0;background:#061421;color:#fff;font-family:Arial,Helvetica,sans-serif}body{background:linear-gradient(180deg,#061421,#0b1d33 48%,#07131f);border-left:4px solid #dfba62;border-right:4px solid #dfba62}')
+          s=s.replace('.stars{text-align:center;color:#dfba62;font-size:1.15rem;letter-spacing:.45em;margin:15px 0}', '.stars{text-align:center;color:#dfba62;font-size:clamp(.72rem,2.4vw,1.05rem);letter-spacing:.18em;margin:15px 0;white-space:nowrap}.letterstars{text-align:center;color:#8f762f;font-size:.86rem;letter-spacing:.16em;margin:0 0 18px;white-space:nowrap}')
+          s=s.replace('.paper{color:#17212b;background:#fffdf8;border:1px solid #bca76b;box-shadow:0 20px 60px rgba(0,0,0,.45);padding:clamp(28px,7vw,68px);position:relative}', '.paper{color:#17212b;background:#fffdf8;border:2px solid #bca76b;box-shadow:0 0 0 4px #102a48,0 0 0 6px #dfba62,0 20px 60px rgba(0,0,0,.45);padding:clamp(28px,7vw,68px);position:relative}')
+          s=s.replace('<div class="stars">★ ★ ★</div>', '<div class="stars">★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★</div>')
+          s=s.replace('<article class="paper">', '<article class="paper"><div class="letterstars">★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★</div>')
+          p.write_text(s)
           PY
-          file assets/ronnie-approved-portrait.jpg | grep -qi 'JPEG image data'
-          test -s assets/ronnie-approved-portrait.jpg
-      - name: Commit approved assets
+      - name: Commit refinements
         run: |
           git config user.name 'rshure001'
           git config user.email 'rshure001@yahoo.com'
-          git add assets/ronnie-approved-portrait.jpg
+          git add index.html letter-to-president.html
           if git diff --cached --quiet; then exit 0; fi
-          git commit -m 'Publish approved Ronnie portrait'
+          git commit -m 'Apply v48 camera crew and formal letter trim'
           git push origin HEAD:main
