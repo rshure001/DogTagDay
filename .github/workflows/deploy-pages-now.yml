@@ -29,7 +29,7 @@ jobs:
         run: |
           set -e
           test -s index.html
-          grep -q '2026-09-17-final-v35' index.html
+          grep -q '2026-09-17-final-v36' index.html
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload site
