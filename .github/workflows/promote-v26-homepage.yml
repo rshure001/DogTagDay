@@ -1,36 +1,47 @@
-name: Promote v26 Homepage
+name: Publish v30 Repair
 on:
   push:
     branches: [main]
 permissions:
   contents: write
 jobs:
-  promote:
-    if: github.event.head_commit.message == 'Add v26 visual promotion'
+  repair:
+    if: github.event.head_commit.message == 'Launch v30 repair'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Publish v26 visual assets
+      - name: Repair homepage and deployment checks
         run: |
           python - <<'PY'
           from pathlib import Path
-          p=Path('index.html')
-          s=p.read_text()
-          s=s.replace('2026-09-16-final-v25','2026-09-16-final-v26')
-          s=s.replace('assets/dog-tag-day-hero-unique-20260906.jpg?v=20260916-v25','assets/hero-inline-v2.svg?v=20260916-v26')
-          s=s.replace('assets/swipe-page1.jpg?v=20260916-v25','assets/combat-inline-v2.svg?v=20260916-v26')
-          s=s.replace('assets/dog-tag-day-realistic-veterans-20260901.jpg?v=20260916-v25','assets/dog-tag-day-realistic-veterans-20260901.jpg?v=20260916-v26')
-          s=s.replace('assets/swipe-page3.jpg?v=20260916-v25','assets/bbq-inline.svg?v=20260916-v26')
-          s=s.replace('assets/swipe-page4.jpg?v=20260916-v25','assets/camera-crew-approved-20260915.svg?v=20260916-v26')
-          s=s.replace('?v=20260916-v25','?v=20260916-v26')
-          p.write_text(s)
+          files = [
+              Path('index.html'),
+              Path('.github/workflows/deploy-pages-now.yml'),
+              Path('.github/workflows/verify-live-homepage.yml'),
+          ]
+          for p in files:
+              s = p.read_text()
+              s = s.replace('2026-09-17-final-v29','2026-09-17-final-v30')
+              s = s.replace('dog-tag-day-five-no-hats.webp','swipe-page2.jpg')
+              s = s.replace('20260917-v29','20260917-v30')
+              s = s.replace('homepage v29','homepage v30')
+              s = s.replace('HOMEPAGE_V29','HOMEPAGE_V30')
+              s = s.replace('proof-v29','proof-v30')
+              p.write_text(s)
           PY
-      - name: Commit v26
+          grep -q '2026-09-17-final-v30' index.html
+          grep -q 'assets/swipe-page2.jpg?v=20260917-v30' index.html
+          ! grep -q 'dog-tag-day-five-no-hats.webp' index.html
+          grep -q '2026-09-17-final-v30' .github/workflows/deploy-pages-now.yml
+          grep -q 'swipe-page2.jpg' .github/workflows/deploy-pages-now.yml
+          grep -q '2026-09-17-final-v30' .github/workflows/verify-live-homepage.yml
+          grep -q 'swipe-page2.jpg' .github/workflows/verify-live-homepage.yml
+      - name: Commit v30 repair
         run: |
           git config user.name 'rshure001'
           git config user.email 'rshure001@yahoo.com'
-          git add index.html
-          git commit -m 'Publish final v26 visual homepage'
+          git add index.html .github/workflows/deploy-pages-now.yml .github/workflows/verify-live-homepage.yml
+          git commit -m 'Publish v30 verified repair'
           git push origin HEAD:main
