@@ -1,0 +1,79 @@
+name: Publish v27 Final
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: write
+jobs:
+  publish:
+    if: github.event.head_commit.message == 'Add final v27 visual publisher'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build final real visual assets and page
+        run: |
+          set -e
+          python -m pip install pillow
+          python - <<'PY'
+          from PIL import Image
+          from pathlib import Path
+          hero=Image.open('assets/dog-tag-day-hero.PNG').convert('RGB')
+          upright=hero.rotate(90, expand=True)
+          upright.save('assets/hero-upright-v27.jpg', quality=94, optimize=True)
+          w,h=upright.size
+          # Crop the soldier formation from the real hero art into a distinct 16:9 story image.
+          left=int(w*0.42); right=int(w*0.99); bottom=int(h*0.98)
+          cw=right-left; ch=int(cw*9/16)
+          top=max(0,bottom-ch)
+          crop=upright.crop((left,top,right,bottom))
+          crop.save('assets/combat-soldiers-v27.jpg', quality=94, optimize=True)
+          p=Path('index.html')
+          s=p.read_text()
+          import re
+          s=re.sub(r'2026-09-16-final-v\d+','2026-09-16-final-v27',s)
+          s=re.sub(r'assets/(?:hero-inline-v2\.svg|dog-tag-day-hero-unique-20260906\.jpg|dog-tag-day-hero\.PNG)[^\" ]*','assets/hero-upright-v27.jpg?v=20260916-v27',s)
+          # Replace the four story image sources by position, preserving captions/alt text.
+          repl=[
+            'assets/combat-soldiers-v27.jpg?v=20260916-v27',
+            'assets/dog-tag-day-realistic-veterans-20260901.jpg?v=20260916-v27',
+            'assets/ronnie-listening-veteran.jpg?v=20260916-v27',
+            'assets/ronnie-street-conversation-final.jpg?v=20260916-v27',
+          ]
+          n=0
+          def story(m):
+            global n
+            src=repl[n]; n+=1
+            return m.group(1)+src+m.group(3)
+          s=re.sub(r'(<img class="storyart" src=")([^\"]+)(" alt=")',story,s)
+          s=s.replace('?v=20260916-v26','?v=20260916-v27')
+          p.write_text(s)
+          # Deploy workflow v27
+          d=Path('.github/workflows/deploy-pages-now.yml')
+          ds=d.read_text()
+          ds=re.sub(r'v26','v27',ds)
+          ds=ds.replace('assets/hero-inline-v2.svg','assets/hero-upright-v27.jpg')
+          ds=ds.replace('assets/combat-inline-v2.svg','assets/combat-soldiers-v27.jpg')
+          ds=ds.replace('assets/bbq-inline.svg','assets/ronnie-listening-veteran.jpg')
+          ds=ds.replace('assets/camera-crew-approved-20260915.svg','assets/ronnie-street-conversation-final.jpg')
+          d.write_text(ds)
+          # Verify workflow v27
+          v=Path('.github/workflows/verify-live-homepage.yml')
+          vs=v.read_text()
+          vs=re.sub(r'v26','v27',vs)
+          vs=vs.replace("'combat-inline-v2.svg','dog-tag-day-realistic-veterans-20260901.jpg','bbq-inline.svg','camera-crew-approved-20260915.svg'","'combat-soldiers-v27.jpg','dog-tag-day-realistic-veterans-20260901.jpg','ronnie-listening-veteran.jpg','ronnie-street-conversation-final.jpg'")
+          v.write_text(vs)
+          PY
+          python - <<'PY'
+          from PIL import Image
+          for f in ['assets/hero-upright-v27.jpg','assets/combat-soldiers-v27.jpg','assets/dog-tag-day-realistic-veterans-20260901.jpg','assets/ronnie-listening-veteran.jpg','assets/ronnie-street-conversation-final.jpg']:
+              im=Image.open(f); im.verify(); print(f, 'OK')
+          PY
+      - name: Commit final v27
+        run: |
+          git config user.name 'rshure001'
+          git config user.email 'rshure001@yahoo.com'
+          git add index.html assets/hero-upright-v27.jpg assets/combat-soldiers-v27.jpg .github/workflows/deploy-pages-now.yml .github/workflows/verify-live-homepage.yml
+          git commit -m 'Publish final v27 visual homepage'
+          git push origin HEAD:main
