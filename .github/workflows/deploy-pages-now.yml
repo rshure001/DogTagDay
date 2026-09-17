@@ -34,6 +34,7 @@ jobs:
           grep -q 'assets/combat-soldiers-v27.jpg' index.html
           grep -q 'assets/dog-tag-day-realistic-veterans-20260901.jpg' index.html
           grep -q 'assets/ronnie-listening-veteran.jpg' index.html
+          grep -q 'assets/camera-crew-final-20260916.jpg' index.html
           grep -q 'assets/ronnie-street-conversation-final.jpg' index.html
           grep -q 'ronnie-shure-founder-20260901.jpg' index.html
           grep -q '4,817' index.html
@@ -42,6 +43,7 @@ jobs:
           test -s assets/combat-soldiers-v27.jpg
           test -s assets/dog-tag-day-realistic-veterans-20260901.jpg
           test -s assets/ronnie-listening-veteran.jpg
+          test -s assets/camera-crew-final-20260916.jpg
           test -s assets/ronnie-street-conversation-final.jpg
       - name: Configure Pages
         uses: actions/configure-pages@v5
