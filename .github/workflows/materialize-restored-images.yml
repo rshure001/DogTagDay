@@ -9,41 +9,36 @@ permissions:
 
 jobs:
   refine:
-    if: github.event.head_commit.message != 'Apply v49 camera crew cleanup'
+    if: github.event.head_commit.message != 'Apply v50 camera crew cleanup'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Apply v49 camera crew cleanup
+      - name: Apply v50 camera crew cleanup
         run: |
           set -e
           python - <<'PY'
           from pathlib import Path
           p=Path('index.html')
           s=p.read_text()
-          s=s.replace('2026-09-17-final-v47','2026-09-17-final-v49')
-          s=s.replace('2026-09-17-final-v48','2026-09-17-final-v49')
-          s=s.replace('?v=20260917-v47','?v=20260917-v49')
-          s=s.replace('?v=20260917-v48','?v=20260917-v49')
-          old='https://gcdn.picsart.com/editing-temp/54c6751d-b876-4e3a-8f0c-e61061b80d79.jpeg'
-          new='https://gcdn.picsart.com/editing-temp/7bb97213-09f6-4626-8e0c-f14d1bc2bcdb.png?v=20260917-v49'
+          s=s.replace('2026-09-17-final-v49','2026-09-17-final-v50')
+          s=s.replace('?v=20260917-v49','?v=20260917-v50')
+          old='https://gcdn.picsart.com/editing-temp/7bb97213-09f6-4626-8e0c-f14d1bc2bcdb.png?v=20260917-v50'
+          new='https://gcdn.picsart.com/editing-temp/5c61045a-8ab3-4679-859e-4bdddefc3be2.jpeg?v=20260917-v50'
           s=s.replace(old,new)
-          portrait='https://gcdn.picsart.com/editing-temp/d52c4f6b-f563-4b97-b0e6-dc4830c71620.jpeg'
-          s=s.replace(portrait+'?v=20260917-v49',portrait+'?v=20260917-v49')
-          s=s.replace(portrait+'"',portrait+'?v=20260917-v49"')
-          viewport='<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">'
-          cache='''<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0">'''
-          if cache not in s:
-              s=s.replace(viewport,viewport+cache)
+          old2='https://gcdn.picsart.com/editing-temp/7bb97213-09f6-4626-8e0c-f14d1bc2bcdb.png?v=20260917-v49'
+          s=s.replace(old2,new)
+          old3='https://gcdn.picsart.com/editing-temp/7bb97213-09f6-4626-8e0c-f14d1bc2bcdb.png'
+          s=s.replace(old3,new)
           p.write_text(s)
           PY
-      - name: Commit v49 cleanup
+      - name: Commit v50 cleanup
         run: |
           git config user.name 'rshure001'
           git config user.email 'rshure001@yahoo.com'
           git add index.html
           if git diff --cached --quiet; then exit 0; fi
-          git commit -m 'Apply v49 camera crew cleanup'
+          git commit -m 'Apply v50 camera crew cleanup'
           git push origin HEAD:main
