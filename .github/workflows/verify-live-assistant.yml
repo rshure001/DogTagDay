@@ -6,7 +6,7 @@ on:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 6
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -14,31 +14,40 @@ jobs:
           node-version: '24'
       - run: npm install playwright
       - run: npx playwright install --with-deps webkit
-      - name: Verify and capture all 7 pages on mobile WebKit
+      - name: Verify current homepage on mobile WebKit
         run: |
           node <<'NODE'
           const { webkit, devices } = require('playwright');
           (async()=>{
             const browser=await webkit.launch({headless:true});
             const context=await browser.newContext({...devices['iPhone 13']});
-            const page=await context.newPage(); let failed=false;
+            const page=await context.newPage(); let ok=false;
             try {
-              await page.goto('https://dogtagday.org/?verify='+Date.now(),{waitUntil:'networkidle',timeout:45000});
-              const marker=await page.locator('html').getAttribute('data-dtd-build');
-              const pages=await page.locator('.page').count();
-              const imgs=await page.locator('img').evaluateAll(list=>list.map(i=>({src:i.getAttribute('src'),w:i.naturalWidth,h:i.naturalHeight,visible:!!(i.offsetWidth||i.offsetHeight||i.getClientRects().length)})));
-              const broken=imgs.filter(i=>i.visible && (!i.w || !i.h));
-              if(marker!=='2026-09-16-seven-page-book-v4'||pages!==7||broken.length) failed=true;
-              for(let n=1;n<=7;n++){
-                await page.screenshot({path:`page-${n}.png`,fullPage:true});
-                if(n<7){await page.locator('#next').click(); await page.waitForTimeout(450);}
+              for(let i=0;i<20;i++){
+                await page.goto('https://dogtagday.org/?verify='+Date.now(),{waitUntil:'networkidle',timeout:30000});
+                const build=await page.locator('html').getAttribute('data-dtd-build');
+                const hero=page.locator('.hero img');
+                const storyImgs=page.locator('#story img.storyart');
+                const founderImgs=page.locator('#founder .foundergrid img');
+                const broken=await page.locator('img').evaluateAll(imgs=>imgs.filter(i=>!i.complete||i.naturalWidth===0).map(i=>i.getAttribute('src')));
+                const noOverflow=await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+1);
+                const srcs=await page.locator('img').evaluateAll(imgs=>imgs.map(i=>i.getAttribute('src')||''));
+                const storyOk=['combat-team-final.jpg','dog-tag-day-realistic-veterans-20260901.jpg','barbecue-team-final.jpg','camera-crew-final.jpg'].every(n=>srcs.some(s=>s.includes(n)));
+                const result={attempt:i+1,build,broken,heroCount:await hero.count(),storyImageCount:await storyImgs.count(),founderImageCount:await founderImgs.count(),noOverflow,storyOk};
+                console.log(JSON.stringify(result));
+                if(build==='2026-09-16-final-v20'&&broken.length===0&&result.heroCount===1&&result.storyImageCount===4&&result.founderImageCount===2&&noOverflow&&storyOk){ok=true;break;}
+                await page.waitForTimeout(3000);
               }
-            } catch(e){console.error(e);failed=true;} finally {await browser.close();}
-            if(failed) process.exit(1); console.log('LIVE_ASSISTANT_PASS=true');
+            } finally {
+              await page.screenshot({path:'live-homepage-mobile.png',fullPage:true}).catch(()=>{});
+              await browser.close();
+            }
+            if(!ok) process.exit(1);
+            console.log('LIVE_ASSISTANT_PASS=true');
           })().catch(e=>{console.error(e);process.exit(1)});
           NODE
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: live-homepage-all-pages
-          path: page-*.png
+          name: live-homepage-mobile
+          path: live-homepage-mobile.png
