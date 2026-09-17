@@ -16,7 +16,7 @@ jobs:
           node-version: '24'
       - run: npm install playwright
       - run: npx playwright install --with-deps webkit
-      - name: Verify live iPhone homepage and letter v48
+      - name: Verify live iPhone homepage and letter v50
         run: |
           node <<'NODE'
           const { webkit, devices } = require('playwright');
@@ -31,32 +31,34 @@ jobs:
                 const broken=await page.locator('img').evaluateAll(imgs=>imgs.filter(i=>!i.complete||i.naturalWidth===0).map(i=>i.getAttribute('src')));
                 const noOverflow=await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+1);
                 const body=await page.locator('body').innerText();
-                const cameraCount=await page.locator('img[alt*="camera crew"]').count();
+                const camera=page.locator('img[alt*="camera crew"]');
+                const cameraCount=await camera.count();
+                const cameraSrc=cameraCount?await camera.getAttribute('src'):'';
                 const portraitCount=await page.locator('img[alt="Ronnie Shure founder portrait"]').count();
                 const okText=body.includes('Veterans should not become invisible.')&&body.includes('4,874')&&body.includes('HONOR JAR')&&body.includes('RONNIE SHURE');
-                console.log(JSON.stringify({attempt:i+1,build,broken,noOverflow,okText,cameraCount,portraitCount}));
-                if(build==='2026-09-17-final-v48'&&broken.length===0&&noOverflow&&okText&&cameraCount===1&&portraitCount===1){ok=true;break;}
+                console.log(JSON.stringify({attempt:i+1,build,broken,noOverflow,okText,cameraCount,cameraSrc,portraitCount}));
+                if(build==='2026-09-17-final-v50'&&broken.length===0&&noOverflow&&okText&&cameraCount===1&&portraitCount===1&&cameraSrc.includes('5c61045a-8ab3-4679-859e-4bdddefc3be2.jpeg')){ok=true;break;}
                 await page.waitForTimeout(3000);
               }
-              await page.screenshot({path:'live-homepage-proof-v48.png',fullPage:true});
+              await page.screenshot({path:'live-homepage-proof-v50.png',fullPage:true});
               await page.goto('https://dogtagday.org/letter-to-president.html?verify='+Date.now(),{waitUntil:'networkidle',timeout:30000});
               const stars=(await page.locator('.stars').innerText()).replace(/\s+/g,' ').trim();
               const paper=await page.locator('.paper').count();
               const letterOverflow=await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+1);
               console.log(JSON.stringify({letterStars:stars,paper,letterOverflow}));
               if(!stars.includes('★')||paper!==1||!letterOverflow) ok=false;
-              await page.screenshot({path:'live-letter-proof-v48.png',fullPage:true});
+              await page.screenshot({path:'live-letter-proof-v50.png',fullPage:true});
             } catch(e){console.error(e); ok=false;} finally {
               await browser.close();
             }
             if(!ok) process.exit(1);
-            console.log('LIVE_V48_IPHONE_PASS=true');
+            console.log('LIVE_V50_IPHONE_PASS=true');
           })().catch(e=>{console.error(e);process.exit(1)});
           NODE
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: live-v48-iphone-proof
+          name: live-v50-iphone-proof
           path: |
-            live-homepage-proof-v48.png
-            live-letter-proof-v48.png
+            live-homepage-proof-v50.png
+            live-letter-proof-v50.png
