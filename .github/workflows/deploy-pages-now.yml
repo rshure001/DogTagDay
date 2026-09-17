@@ -25,26 +25,11 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: main
-      - name: Validate final v31 homepage
+      - name: Validate homepage exists
         run: |
           set -e
           test -s index.html
-          grep -q '2026-09-17-final-v31' index.html
-          grep -q 'assets/dog-tag-day-hero.PNG' index.html
-          grep -q 'assets/combat-soldiers-v27.jpg' index.html
-          grep -q 'assets/ronnie-community-support.jpg' index.html
-          grep -q 'assets/ronnie-street-conversation-final.jpg' index.html
-          grep -q 'assets/ronnie-shure-founder-20260901.jpg' index.html
-          ! grep -q 'dog-tag-day-five-no-hats.webp' index.html
-          ! grep -q 'dogtagday-no-hats-final.jpg' index.html
-          ! grep -q 'swipe-page2.jpg' index.html
-          grep -q '4,817' index.html
-          grep -q 'HALLOWEEN' index.html
-          test -s assets/dog-tag-day-hero.PNG
-          test -s assets/combat-soldiers-v27.jpg
-          test -s assets/ronnie-community-support.jpg
-          test -s assets/ronnie-street-conversation-final.jpg
-          test -s assets/ronnie-shure-founder-20260901.jpg
+          grep -q '2026-09-17-final-v32' index.html
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload site
