@@ -21,28 +21,26 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout live gh-pages branch
+      - name: Checkout current main branch
         uses: actions/checkout@v4
         with:
-          ref: gh-pages
-      - name: Validate corrected live homepage v15
+          ref: main
+      - name: Validate final v23 homepage
         run: |
           set -e
           test -s index.html
-          grep -q '2026-09-16-live-fix-v15' index.html
+          grep -q '2026-09-16-final-v23' index.html
           grep -q 'assets/dog-tag-day-hero.PNG' index.html
-          grep -q 'assets/story-combat-v13.svg' index.html
-          grep -q 'assets/story-civilian-v13.svg' index.html
-          grep -q 'assets/story-roles-v13.svg' index.html
-          grep -q 'assets/story-invisible-v13.svg' index.html
+          grep -q 'assets/combat-team-final.jpg' index.html
+          grep -q 'assets/dog-tag-day-realistic-veterans-20260901.jpg' index.html
+          grep -q 'assets/barbecue-team-final.jpg' index.html
+          grep -q 'assets/camera-crew-final.jpg' index.html
           grep -q 'ronnie-street-conversation-final.jpg' index.html
           grep -q 'ronnie-shure-founder-20260901.jpg' index.html
-          grep -q 'ronnie-listening-veteran.jpg' index.html
-          ! grep -q 'ronnie-community-support.jpg' index.html
           grep -q '4,817' index.html
           grep -q 'NEXT HOLIDAY:' index.html
           grep -q 'HALLOWEEN' index.html
-          ! grep -q 'gcdn.picsart.com' index.html
+          ! grep -q 'rotate(90deg)' index.html
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload site
