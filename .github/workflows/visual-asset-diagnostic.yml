@@ -1,0 +1,60 @@
+name: Visual Asset Diagnostic
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  diagnose:
+    if: github.event.head_commit.message == 'Add visual asset diagnostic'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Pillow
+        run: python -m pip install pillow
+      - name: Build visual contact sheet
+        run: |
+          python - <<'PY'
+          from PIL import Image, ImageOps, ImageDraw, ImageFont
+          from pathlib import Path
+          files = [
+            'assets/dog-tag-day-hero.PNG',
+            'assets/dogtagday-no-hats-final.jpg',
+            'assets/dog-tag-day-five-no-hats.webp',
+            'assets/dtd-home-visual.jpg',
+            'assets/combat-team-final.jpg',
+            'assets/barbecue-team-final.jpg',
+            'assets/camera-crew-final.jpg',
+            'assets/camera-crew-final-20260916.jpg',
+            'assets/ronnie-community-support.jpg',
+            'assets/ronnie-listening-veteran.jpg',
+            'assets/dog-tag-day-realistic-veterans-20260901.jpg',
+            'assets/ronnie-street-conversation-final.jpg',
+          ]
+          cards=[]
+          def card(img,label):
+            bg=Image.new('RGB',(600,390),'white')
+            im=ImageOps.contain(img.convert('RGB'),(570,310))
+            bg.paste(im,((600-im.width)//2,10))
+            d=ImageDraw.Draw(bg)
+            d.text((15,330),label,fill='black')
+            d.text((15,355),f'{img.width}x{img.height}',fill='black')
+            return bg
+          hero=Image.open('assets/dog-tag-day-hero.PNG')
+          cards.append(card(hero.rotate(90,expand=True),'HERO ROTATE +90'))
+          cards.append(card(hero.rotate(-90,expand=True),'HERO ROTATE -90'))
+          for f in files[1:]:
+            try:
+              im=Image.open(f); im.load()
+              cards.append(card(im,Path(f).name))
+            except Exception as e:
+              bad=Image.new('RGB',(600,390),'white'); d=ImageDraw.Draw(bad); d.text((15,20),f'FAILED: {Path(f).name}',fill='red'); d.text((15,50),str(e)[:80],fill='black'); cards.append(bad)
+          cols=2; rows=(len(cards)+1)//2
+          sheet=Image.new('RGB',(cols*600,rows*390),(220,220,220))
+          for i,c in enumerate(cards): sheet.paste(c,((i%2)*600,(i//2)*390))
+          sheet.save('visual-asset-diagnostic.jpg',quality=92)
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: visual-asset-diagnostic
+          path: visual-asset-diagnostic.jpg
