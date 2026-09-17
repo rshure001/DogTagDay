@@ -1,43 +1,14 @@
 name: Apply Dog Tag Day Visual Refinements
 
 on:
-  push:
-    branches: [main]
+  workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
   refine:
-    if: github.event.head_commit.message != 'Apply v51 subtle red accents'
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Apply v51 subtle red accents
-        run: |
-          set -e
-          python - <<'PY'
-          from pathlib import Path
-          p=Path('index.html')
-          s=p.read_text()
-          s=s.replace('2026-09-17-final-v50','2026-09-17-final-v51')
-          s=s.replace('?v=20260917-v50','?v=20260917-v51')
-          s=s.replace('--muted:#cbd5df','--muted:#cbd5df;--red:#b62035')
-          s=s.replace('.top{background:#06101f;border-bottom:2px solid var(--gold)}','.top{background:#06101f;border-top:4px solid var(--red);border-bottom:2px solid var(--gold)}')
-          s=s.replace('.callout{max-width:780px;margin:22px auto 0;padding:22px;border:3px solid var(--gold);','.callout{max-width:780px;margin:22px auto 0;padding:22px;border:3px solid var(--gold);border-left:6px solid var(--red);')
-          s=s.replace('.nextHoliday{text-align:center;border-top:3px solid var(--gold);border-bottom:3px solid var(--gold);','.nextHoliday{text-align:center;border-top:3px solid var(--gold);border-bottom:3px solid var(--red);')
-          s=s.replace('.mini{flex:0 0 auto;min-width:120px;max-width:180px;border:2px solid var(--gold);','.mini{flex:0 0 auto;min-width:120px;max-width:180px;border:2px solid var(--gold);border-top:3px solid var(--red);')
-          s=s.replace('footer{text-align:center;padding:24px 18px 34px;color:#dfe5ea}','footer{text-align:center;padding:24px 18px 34px;color:#dfe5ea;border-top:3px solid var(--red)}')
-          p.write_text(s)
-          PY
-      - name: Commit v51 accents
-        run: |
-          git config user.name 'rshure001'
-          git config user.email 'rshure001@yahoo.com'
-          git add index.html
-          if git diff --cached --quiet; then exit 0; fi
-          git commit -m 'Apply v51 subtle red accents'
-          git push origin HEAD:main
+      - name: No automatic homepage overwrite
+        run: echo "Legacy visual refinement is disabled from automatic pushes."
