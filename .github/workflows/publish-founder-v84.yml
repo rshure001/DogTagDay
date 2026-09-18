@@ -1,0 +1,32 @@
+name: Publish Founder Portrait v84
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: write
+jobs:
+  publish:
+    if: ${{ !contains(github.event.head_commit.message, 'Publish approved Founder portrait v84') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Replace Founder portrait
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text()
+          s=s.replace('2026-09-18-final-v83','2026-09-18-final-v84')
+          s=s.replace('https://gcdn.picsart.com/editing-temp/92f83730-5d49-4010-b6ab-296cb6ad7314.jpeg?v=20260918-v76','https://gcdn.picsart.com/editing-temp/3485ae56-8ff0-48e0-8838-38557163e50d.png?v=20260918-v84')
+          s=s.replace('alt="Ronnie Shure supporting a veteran on the steps"','alt="Ronnie Shure, Founder and CEO of Dog Tag Day Foundation"')
+          p.write_text(s)
+          PY
+      - name: Commit
+        run: |
+          git config user.name "rshure001"
+          git config user.email "rshure001@yahoo.com"
+          git add index.html
+          git diff --cached --quiet || git commit -m "Publish approved Founder portrait v84"
+          git push
