@@ -22,10 +22,9 @@ jobs:
             const browser=await webkit.launch({headless:true});
             const context=await browser.newContext({...devices['iPhone 13']});
             const page=await context.newPage();
-            const expectedBuild='2026-09-17-final-v71';
-            const expectedFounder='4650089b-18be-467b-a098-34587c5cfd9e.png';
-            const expectedInterview='41e23de4-8354-419a-b5ab-eab06c5f5c28.png';
-            const expectedTags='d203ec6d-8bbd-4dbe-8c48-fd423fedfe42.png';
+            const expectedBuild='2026-09-17-final-v74';
+            const expectedFounder='101421fe-e1ec-4334-9baa-33a834c8c1a3.png';
+                        const expectedTags='d203ec6d-8bbd-4dbe-8c48-fd423fedfe42.png';
             await page.route('**/dogtagday-counter', route => route.abort());
             let homepageOk=false;
             try {
@@ -39,9 +38,9 @@ jobs:
                 const storySrc=await page.locator('#story .feature img').getAttribute('src');
                 const broken=await page.locator('img').evaluateAll(imgs=>imgs.filter(i=>!i.complete||i.naturalWidth===0).map(i=>i.getAttribute('src')));
                 const noOverflow=await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+1);
-                const photosOk=srcs.some(s=>s.includes(expectedFounder))&&srcs.some(s=>s.includes(expectedInterview))&&srcs.some(s=>s.includes(expectedTags))&&(storySrc||'').includes('f58b165e-9962-4792-9173-4da0bf08291b.png');
+                const photosOk=srcs.some(s=>s.includes(expectedFounder))&&srcs.some(s=>s.includes(expectedTags))&&(storySrc||'').includes('f58b165e-9962-4792-9173-4da0bf08291b.png')&&!srcs.some(s=>s.includes('41e23de4-8354-419a-b5ab-eab06c5f5c28.png'));
                 console.log(JSON.stringify({page:'home',attempt:i+1,build,broken,heroCount,founderImageCount,srcs,storySrc,noOverflow,photosOk}));
-                if(build===expectedBuild && broken.length===0 && heroCount===1 && founderImageCount===3 && photosOk && noOverflow){homepageOk=true;break;}
+                if(build===expectedBuild && broken.length===0 && heroCount===1 && founderImageCount===2 && photosOk && noOverflow){homepageOk=true;break;}
                 await page.waitForTimeout(2000);
               }
               if(!homepageOk) throw new Error('Homepage verification failed');
