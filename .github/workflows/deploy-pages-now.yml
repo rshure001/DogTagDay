@@ -30,8 +30,7 @@ jobs:
           set -e
           test -s index.html
           grep -Eq 'data-dtd-build="2026-09-[0-9]{2}-final-v[0-9]+"' index.html
-          grep -q 'assets/dogtagday-no-hats-final.jpg' stories.html
-          test -s assets/dogtagday-no-hats-final.jpg
+          grep -q 'data:image/jpeg;base64,' stories.html
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload site
