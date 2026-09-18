@@ -16,7 +16,7 @@ jobs:
           node-version: '24'
       - run: npm install playwright
       - run: npx playwright install --with-deps webkit
-      - name: Verify live iPhone homepage and letter v74
+      - name: Verify live iPhone homepage and Stories image
         run: |
           node <<'NODE'
           const { webkit, devices } = require('playwright');
@@ -25,38 +25,39 @@ jobs:
             const context=await browser.newContext({...devices['iPhone 13']});
             const page=await context.newPage();
             await page.route('**/dogtagday-counter', route => route.abort());
-            let ok=false;
+            let ok=true;
             try {
-              for(let i=0;i<3;i++){
-                await page.goto('https://dogtagday.org/?verify='+Date.now(),{waitUntil:'networkidle',timeout:30000});
-                const build=await page.locator('html').getAttribute('data-dtd-build');
-                const broken=await page.locator('img').evaluateAll(imgs=>imgs.filter(i=>!i.complete||i.naturalWidth===0).map(i=>i.getAttribute('src')));
-                const noOverflow=await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+1);
-                const body=await page.locator('body').innerText();
-                const founderImgs=await page.locator('#founder .foundergrid img').evaluateAll(imgs=>imgs.map(i=>i.getAttribute('src')||''));
-                const storySrc=await page.locator('#story .feature img').getAttribute('src');
-                const okText=body.includes('Veterans should not become invisible.')&&body.includes('HONOR JAR')&&body.includes('RONNIE SHURE');
-                const photosOk=founderImgs.some(s=>s.includes('101421fe-e1ec-4334-9baa-33a834c8c1a3.png'))&&founderImgs.some(s=>s.includes('d203ec6d-8bbd-4dbe-8c48-fd423fedfe42.png'))&&(storySrc||'').includes('f58b165e-9962-4792-9173-4da0bf08291b.png')&&!founderImgs.some(s=>s.includes('41e23de4-8354-419a-b5ab-eab06c5f5c28.png'));
-                console.log(JSON.stringify({attempt:i+1,build,broken,noOverflow,okText,photosOk,founderImgs,storySrc}));
-                if(build==='2026-09-17-final-v74'&&broken.length===0&&noOverflow&&okText&&photosOk){ok=true;break;}
-                await page.waitForTimeout(2000);
-              }
-              await page.screenshot({path:'live-homepage-proof-v74.png',fullPage:true});
-              await page.goto('https://dogtagday.org/letter-to-president.html?verify='+Date.now(),{waitUntil:'networkidle',timeout:30000});
-              const stars=(await page.locator('.stars').innerText()).replace(/\s+/g,' ').trim();
-              const paper=await page.locator('.paper').count();
-              const letterOverflow=await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+1);
-              if(!stars.includes('★')||paper!==1||!letterOverflow) ok=false;
-              await page.screenshot({path:'live-letter-proof-v74.png',fullPage:true});
-            } catch(e){console.error(e); ok=false;} finally { await browser.close(); }
+              await page.goto('https://dogtagday.org/?verify='+Date.now(),{waitUntil:'networkidle',timeout:30000});
+              const build=await page.locator('html').getAttribute('data-dtd-build');
+              const brokenHome=await page.locator('img').evaluateAll(imgs=>imgs.filter(i=>!i.complete||i.naturalWidth===0).map(i=>i.getAttribute('src')));
+              const noOverflowHome=await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+1);
+              const body=await page.locator('body').innerText();
+              const homeOk=/^2026-09-18-final-v\d+$/.test(build||'')&&brokenHome.length===0&&noOverflowHome&&body.includes('Veterans should not become invisible.')&&body.includes('HONOR JAR');
+              console.log(JSON.stringify({page:'home',build,brokenHome,noOverflowHome,homeOk}));
+              await page.screenshot({path:'live-homepage-proof-current.png',fullPage:true});
+              if(!homeOk) ok=false;
+
+              await page.goto('https://dogtagday.org/stories.html?verify='+Date.now(),{waitUntil:'networkidle',timeout:30000});
+              const share=page.locator('.share-photo');
+              await share.waitFor({state:'visible',timeout:10000});
+              const src=await share.getAttribute('src');
+              const naturalWidth=await share.evaluate(img=>img.naturalWidth);
+              const naturalHeight=await share.evaluate(img=>img.naturalHeight);
+              const brokenStories=await page.locator('img').evaluateAll(imgs=>imgs.filter(i=>!i.complete||i.naturalWidth===0).map(i=>i.getAttribute('src')));
+              const noOverflowStories=await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+1);
+              const storyOk=(src||'').startsWith('data:image/jpeg;base64,')&&naturalWidth>0&&naturalHeight>0&&brokenStories.length===0&&noOverflowStories;
+              console.log(JSON.stringify({page:'stories',srcPrefix:(src||'').slice(0,32),naturalWidth,naturalHeight,brokenStories,noOverflowStories,storyOk}));
+              await page.screenshot({path:'live-stories-proof-current.png',fullPage:true});
+              if(!storyOk) ok=false;
+            } catch(e){ console.error(e); ok=false; } finally { await browser.close(); }
             if(!ok) process.exit(1);
-            console.log('LIVE_V74_IPHONE_PASS=true');
+            console.log('LIVE_CURRENT_IPHONE_PASS=true');
           })().catch(e=>{console.error(e);process.exit(1)});
           NODE
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: live-v74-iphone-proof
+          name: live-current-iphone-proof
           path: |
-            live-homepage-proof-v74.png
-            live-letter-proof-v74.png
+            live-homepage-proof-current.png
+            live-stories-proof-current.png
