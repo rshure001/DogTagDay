@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-dtd-map-build="2026-09-15-mobile-readability">
+<html lang="en" data-dtd-map-build="2026-09-18-location-accuracy">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -44,7 +44,7 @@ a{color:inherit}
     <a class="navBtn" href="#map-key">Map Key</a>
   </nav>
   <section class="mapContext" aria-label="Map accuracy and mobile color key">
-    <div class="contextNote"><strong>Artwork key — not a contact count.</strong> Colors describe outreach categories only; they do not prove a send, delivery, open, or participation.</div>
+    <div class="contextNote" id="map-accuracy-summary"><strong>Campaign visualization — not verified contact locations or counts.</strong> Colors show outreach categories; dot placement does not prove a recipient's location, and the artwork does not prove a send, delivery, open, or participation.</div>
     <div class="quickKey" role="list" aria-label="Quick map color key; swipe horizontally for all categories">
       <div class="item" role="listitem"><span class="dot green"></span>Grants / Foundations</div>
       <div class="item" role="listitem"><span class="dot white"></span>Attorneys / Legal</div>
@@ -60,22 +60,22 @@ a{color:inherit}
     </div>
   </section>
   <div class="mapWrap" id="map-image">
-    <img src="assets/dog-tag-day-national-map-brighter-20260913.jpg?v=20260913-brighter-map" alt="Dog Tag Day Across America outreach map artwork">
+    <img src="assets/dog-tag-day-national-map-brighter-20260913.jpg?v=20260913-brighter-map" alt="Dog Tag Day Across America campaign map artwork; see the map key and accuracy note" aria-describedby="map-accuracy-summary map-accuracy-note">
   </div>
-  <div class="legend" id="map-key" aria-label="Map color codes">
-    <div class="item"><span class="dot green"></span>Grants / Foundations</div>
-    <div class="item"><span class="dot white"></span>Attorneys / Legal</div>
-    <div class="item"><span class="dot blue"></span>Veterans Organizations</div>
-    <div class="item"><span class="dot red"></span>Media / Newsrooms</div>
-    <div class="item"><span class="dot orange"></span>First Responders</div>
-    <div class="item"><span class="dot purple"></span>Restaurants / Food</div>
-    <div class="item"><span class="dot teal"></span>Government / Civic</div>
-    <div class="item"><span class="dot yellow"></span>Businesses / Retail</div>
-    <div class="item"><span class="dot pink"></span>Faith / Churches</div>
-    <div class="item"><span class="dot olive"></span>Sports / Athletics</div>
-    <div class="item"><span class="dot brown"></span>Other</div>
+  <div class="legend" id="map-key" aria-label="Map color codes" role="list">
+    <div class="item" role="listitem"><span class="dot green"></span>Grants / Foundations</div>
+    <div class="item" role="listitem"><span class="dot white"></span>Attorneys / Legal</div>
+    <div class="item" role="listitem"><span class="dot blue"></span>Veterans Organizations</div>
+    <div class="item" role="listitem"><span class="dot red"></span>Media / Newsrooms</div>
+    <div class="item" role="listitem"><span class="dot orange"></span>First Responders</div>
+    <div class="item" role="listitem"><span class="dot purple"></span>Restaurants / Food</div>
+    <div class="item" role="listitem"><span class="dot teal"></span>Government / Civic</div>
+    <div class="item" role="listitem"><span class="dot yellow"></span>Businesses / Retail</div>
+    <div class="item" role="listitem"><span class="dot pink"></span>Faith / Churches</div>
+    <div class="item" role="listitem"><span class="dot olive"></span>Sports / Athletics</div>
+    <div class="item" role="listitem"><span class="dot brown"></span>Other</div>
   </div>
-  <p class="accuracy"><strong>Accuracy note:</strong> this is campaign map artwork. Category colors describe the map’s outreach categories; they do not by themselves prove an email was sent, delivered, opened, or that an organization participated. Pinch-to-zoom is available on mobile for closer inspection.</p>
+  <p class="accuracy" id="map-accuracy-note"><strong>Accuracy note:</strong> this is campaign map artwork. Dots and their placement are not a verified recipient-location record. Category colors describe outreach categories; the map does not by itself prove an email was sent, delivered, opened, or that an organization participated. Pinch-to-zoom is available on mobile for closer inspection.</p>
 </main>
 </body>
 </html>
