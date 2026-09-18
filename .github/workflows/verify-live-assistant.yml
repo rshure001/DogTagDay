@@ -22,25 +22,23 @@ jobs:
             const browser=await webkit.launch({headless:true});
             const context=await browser.newContext({...devices['iPhone 13']});
             const page=await context.newPage();
-            const expectedBuild='2026-09-18-final-v79';
-            const expectedTags='d203ec6d-8bbd-4dbe-8c48-fd423fedfe42.png';
+            const expectedBuild='2026-09-18-final-v88';
             await page.route('**/dogtagday-counter', route => route.abort());
             let homepageOk=false;
             try {
-              for(let i=0;i<3;i++){
+              for(let i=0;i<5;i++){
                 await page.goto('https://dogtagday.org/?verify='+Date.now(),{waitUntil:'networkidle',timeout:30000});
                 const build=await page.locator('html').getAttribute('data-dtd-build');
                 const heroCount=await page.locator('.hero img').count();
-                const founderImgs=page.locator('#founder .foundergrid img');
-                const founderImageCount=await founderImgs.count();
-                const srcs=await founderImgs.evaluateAll(imgs=>imgs.map(i=>i.getAttribute('src')||''));
-                const storySrc=await page.locator('#story .feature img').getAttribute('src');
                 const broken=await page.locator('img').evaluateAll(imgs=>imgs.filter(i=>!i.complete||i.naturalWidth===0).map(i=>i.getAttribute('src')));
                 const noOverflow=await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+1);
-                const topStrip=await page.locator('.topstory .strip').getAttribute('src'); const topPhotos=await page.locator('.topstory .photoquad img').evaluateAll(imgs=>imgs.map(i=>i.getAttribute('src')||'')); const statText=(await page.locator('.veteranstat').innerText()).replace(/\s+/g,' '); const photosOk=topStrip.includes('524c4be2-8978-426b-8c81-b4c30b2e3afb.png')&&topPhotos.length===2&&topPhotos.some(s=>s.includes('c8bf4eab-3376-4f58-8bbf-1b55f0f009f3.png'))&&topPhotos.some(s=>s.includes('926682f4-0105-438c-a2c7-c780d228a358.jpeg'))&&statText.includes('17.2M')&&(storySrc||'').includes('f58b165e-9962-4792-9173-4da0bf08291b.png');
-                console.log(JSON.stringify({page:'home',attempt:i+1,build,broken,heroCount,founderImageCount,srcs,storySrc,noOverflow,photosOk}));
-                if(build===expectedBuild && broken.length===0 && heroCount===1 && photosOk && noOverflow){homepageOk=true;break;}
-                await page.waitForTimeout(2000);
+                const founderSrc=await page.locator('#founder .foundergrid img').first().getAttribute('src');
+                const cleanFounder=(founderSrc||'').includes('7bb2dd32-f893-495f-9fc2-db5810376584.png');
+                const recruitSrcs=await page.locator('img').evaluateAll(imgs=>imgs.map(i=>i.getAttribute('src')||''));
+                const recruitOk=recruitSrcs.some(s=>s.includes('a488895e-ec17-4a1d-8d0a-bc41ddfea1f7.png'));
+                console.log(JSON.stringify({page:'home',attempt:i+1,build,broken,heroCount,noOverflow,founderSrc,cleanFounder,recruitOk}));
+                if(build===expectedBuild && broken.length===0 && heroCount===1 && cleanFounder && recruitOk && noOverflow){homepageOk=true;break;}
+                await page.waitForTimeout(3000);
               }
               if(!homepageOk) throw new Error('Homepage verification failed');
 
