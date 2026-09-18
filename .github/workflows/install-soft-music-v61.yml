@@ -1,36 +1,8 @@
-name: Install Soft Music v61
+name: Install Soft Music v61 (disabled)
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
-permissions:
-  contents: write
 jobs:
-  patch:
-    if: ${{ !contains(github.event.head_commit.message, 'Install soft Marine Corps music v61') }}
+  disabled:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: main
-      - name: Patch homepage music
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-          p=Path('index.html')
-          s=p.read_text()
-          s=s.replace('2026-09-17-final-v60','2026-09-17-final-v61')
-          s=s.replace('20260917-v60','20260917-v61')
-          marker='<script>(function(){const el=document.getElementById(\'visitorCount\');'
-          music='''<audio id="dtdMusic" loop preload="auto" playsinline src="https://gcdn.picsart.com/editing-temp/0e1cf8b8-6614-4c65-abb8-f5ccf355c82d.mpeg"></audio><script>(function(){const a=document.getElementById('dtdMusic');if(!a)return;a.volume=.08;const start=()=>{a.play().catch(()=>{});};start();['pointerdown','touchstart','click','keydown'].forEach(e=>document.addEventListener(e,start,{once:true,passive:true}));window.addEventListener('pageshow',start);document.addEventListener('visibilitychange',()=>{if(!document.hidden&&a.paused)start();});})();</script>'''
-          if 'id="dtdMusic"' not in s:
-              s=s.replace(marker,music+marker)
-          p.write_text(s)
-          PY
-      - name: Commit music
-        run: |
-          git config user.name "rshure001"
-          git config user.email "rshure001@yahoo.com"
-          git add index.html
-          git diff --cached --quiet || git commit -m "Install soft Marine Corps music v61"
-          git push
+      - run: echo "Music installer disabled by site owner."
