@@ -22,7 +22,7 @@ jobs:
             const browser=await webkit.launch({headless:true});
             const context=await browser.newContext({...devices['iPhone 13']});
             const page=await context.newPage();
-            const expectedBuild='2026-09-18-final-v77';
+            const expectedBuild='2026-09-18-final-v78';
             const expectedTags='d203ec6d-8bbd-4dbe-8c48-fd423fedfe42.png';
             await page.route('**/dogtagday-counter', route => route.abort());
             let homepageOk=false;
@@ -37,7 +37,7 @@ jobs:
                 const storySrc=await page.locator('#story .feature img').getAttribute('src');
                 const broken=await page.locator('img').evaluateAll(imgs=>imgs.filter(i=>!i.complete||i.naturalWidth===0).map(i=>i.getAttribute('src')));
                 const noOverflow=await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+1);
-                const topStrip=await page.locator('.topstory .strip').getAttribute('src'); const topPhotos=await page.locator('.topstory .topphotos img').evaluateAll(imgs=>imgs.map(i=>i.getAttribute('src')||'')); const photosOk=topStrip.includes('524c4be2-8978-426b-8c81-b4c30b2e3afb.png')&&topPhotos.length===2&&topPhotos.some(s=>s.includes('92f83730-5d49-4010-b6ab-296cb6ad7314.jpeg'))&&topPhotos.some(s=>s.includes('b1c9d9af-b4ae-44c1-9e4f-20db296963bb.jpeg'))&&(storySrc||'').includes('f58b165e-9962-4792-9173-4da0bf08291b.png');
+                const topStrip=await page.locator('.topstory .strip').getAttribute('src'); const topPhotos=await page.locator('.topstory .photoquad img').evaluateAll(imgs=>imgs.map(i=>i.getAttribute('src')||'')); const statText=(await page.locator('.veteranstat').innerText()).replace(/\s+/g,' '); const photosOk=topStrip.includes('524c4be2-8978-426b-8c81-b4c30b2e3afb.png')&&topPhotos.length===4&&topPhotos.some(s=>s.includes('92f83730-5d49-4010-b6ab-296cb6ad7314.jpeg'))&&topPhotos.some(s=>s.includes('b1c9d9af-b4ae-44c1-9e4f-20db296963bb.jpeg'))&&topPhotos.some(s=>s.includes('c8bf4eab-3376-4f58-8bbf-1b55f0f009f3.png'))&&topPhotos.some(s=>s.includes('926682f4-0105-438c-a2c7-c780d228a358.jpeg'))&&statText.includes('17.2M')&&(storySrc||'').includes('f58b165e-9962-4792-9173-4da0bf08291b.png');
                 console.log(JSON.stringify({page:'home',attempt:i+1,build,broken,heroCount,founderImageCount,srcs,storySrc,noOverflow,photosOk}));
                 if(build===expectedBuild && broken.length===0 && heroCount===1 && photosOk && noOverflow){homepageOk=true;break;}
                 await page.waitForTimeout(2000);
