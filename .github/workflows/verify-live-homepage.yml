@@ -38,15 +38,12 @@ jobs:
               if(!homeOk) ok=false;
 
               await page.goto('https://dogtagday.org/stories.html?verify='+Date.now(),{waitUntil:'networkidle',timeout:30000});
-              const share=page.locator('.share-photo');
-              await share.waitFor({state:'visible',timeout:10000});
-              const src=await share.getAttribute('src');
-              const naturalWidth=await share.evaluate(img=>img.naturalWidth);
-              const naturalHeight=await share.evaluate(img=>img.naturalHeight);
+              const shareCount=await page.locator('.share-photo').count();
               const brokenStories=await page.locator('img').evaluateAll(imgs=>imgs.filter(i=>!i.complete||i.naturalWidth===0).map(i=>i.getAttribute('src')));
               const noOverflowStories=await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+1);
-              const storyOk=(src||'').startsWith('data:image/jpeg;base64,')&&naturalWidth>0&&naturalHeight>0&&brokenStories.length===0&&noOverflowStories;
-              console.log(JSON.stringify({page:'stories',srcPrefix:(src||'').slice(0,32),naturalWidth,naturalHeight,brokenStories,noOverflowStories,storyOk}));
+              const storyBody=await page.locator('body').innerText();
+              const storyOk=shareCount===0&&brokenStories.length===0&&noOverflowStories&&storyBody.includes('SHARE THE STORY BEHIND THE TAGS')&&storyBody.includes('Tell your story.');
+              console.log(JSON.stringify({page:'stories',shareCount,brokenStories,noOverflowStories,storyOk}));
               await page.screenshot({path:'live-stories-proof-current.png',fullPage:true});
               if(!storyOk) ok=false;
             } catch(e){ console.error(e); ok=false; } finally { await browser.close(); }
