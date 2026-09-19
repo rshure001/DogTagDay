@@ -22,7 +22,7 @@ jobs:
             const browser=await webkit.launch({headless:true});
             const context=await browser.newContext({...devices['iPhone 13']});
             const page=await context.newPage();
-            const expectedBuild='2026-09-18-final-v88';
+            const expectedBuild='2026-09-18-final-v99';
             await page.route('**/dogtagday-counter', route => route.abort());
             let homepageOk=false;
             try {
@@ -44,9 +44,14 @@ jobs:
 
               await page.goto('https://dogtagday.org/donate.html?verify='+Date.now(),{waitUntil:'domcontentloaded',timeout:30000});
               const donateText=(await page.locator('body').innerText()).replace(/\s+/g,' ');
-              const paypal=await page.locator('#continueDonation').getAttribute('href');
-              const donateOk=donateText.includes('Honor a Veteran Today') && (paypal||'').includes('paypal.me/ronnieshure');
-              console.log(JSON.stringify({page:'donate',donateOk,paypal}));
+              const paypalAction=await page.locator('#paypalDonate').getAttribute('action');
+              const business=await page.locator('#paypalDonate input[name="business"]').getAttribute('value');
+              const itemName=await page.locator('#paypalDonate input[name="item_name"]').getAttribute('value');
+              const donateOk=donateText.includes('Honor a Veteran Today') &&
+                (paypalAction||'').includes('paypal.com/cgi-bin/webscr') &&
+                business==='rshure001@yahoo.com' &&
+                (itemName||'').includes('Dog Tag Day Foundation');
+              console.log(JSON.stringify({page:'donate',donateOk,paypalAction,business,itemName}));
               if(!donateOk) throw new Error('Donation page verification failed');
 
               await page.goto('https://dogtagday.org/letter-to-president.html?verify='+Date.now(),{waitUntil:'networkidle',timeout:30000});
