@@ -286,62 +286,110 @@
     {
       "organization": "Crow Wing County Veteran Services",
       "email": "veterans.info@crowwing.gov",
-      "source_url": "https://www.crowwing.gov/209/Veteran-Services"
+      "source_url": "https://www.crowwing.gov/209/Veteran-Services",
+      "sent_at": "2026-09-19T01:11:17.013Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b737447d-2a5100dc-397c-42cc-9680-f4e281083d75-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "Hawai'i Community Foundation",
       "email": "info@hcf-hawaii.org",
-      "source_url": "https://www.hawaiicommunityfoundation.org/contact--us"
+      "source_url": "https://www.hawaiicommunityfoundation.org/contact--us",
+      "sent_at": "2026-09-19T01:11:17.013Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b7374ee5-17d5919b-ce54-4e64-8717-d35d54f2246a-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "Fresno City College Veterans Resource Center",
       "email": "veterans@fresnocitycollege.edu",
-      "source_url": "https://www.fresnocitycollege.edu/student-services/veterans-resource-center/index.html"
+      "source_url": "https://www.fresnocitycollege.edu/student-services/veterans-resource-center/index.html",
+      "sent_at": "2026-09-19T01:11:17.013Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b7375b07-6647dd34-a2a0-4472-874e-ccdf1f391c92-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "Door County Community Foundation",
       "email": "grants@givedoorcounty.org",
-      "source_url": "https://doorcountycommunityfoundation.org/contact/"
+      "source_url": "https://doorcountycommunityfoundation.org/contact/",
+      "sent_at": "2026-09-19T01:11:17.013Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b73767be-9e7190ae-cc65-4d96-992a-3d89c8ce8a13-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "Door County Community Foundation",
       "email": "donorservices@givedoorcounty.org",
-      "source_url": "https://doorcountycommunityfoundation.org/contact/"
+      "source_url": "https://doorcountycommunityfoundation.org/contact/",
+      "sent_at": "2026-09-19T01:11:17.013Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b7377069-671453d4-a94c-424c-902c-e1a1c2dba1dd-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "Door County Community Foundation",
       "email": "newfund@givedoorcounty.org",
-      "source_url": "https://doorcountycommunityfoundation.org/contact/"
+      "source_url": "https://doorcountycommunityfoundation.org/contact/",
+      "sent_at": "2026-09-19T01:11:17.013Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b7377b1e-a7582da8-700d-4e6d-aa60-e8df9ad1d12c-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "Door County Community Foundation",
       "email": "applications@givedoorcounty.org",
-      "source_url": "https://doorcountycommunityfoundation.org/contact/"
+      "source_url": "https://doorcountycommunityfoundation.org/contact/",
+      "sent_at": "2026-09-19T01:11:17.013Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b737843a-115d9a22-70b3-46dc-9b07-00e317f6cf27-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "Door County Community Foundation",
       "email": "rsvp@givedoorcounty.org",
-      "source_url": "https://doorcountycommunityfoundation.org/contact/"
+      "source_url": "https://doorcountycommunityfoundation.org/contact/",
+      "sent_at": "2026-09-19T01:11:17.013Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b7378e5b-2e646f54-2f39-4ea8-9b39-1859504a58d9-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "Door County Community Foundation",
       "email": "webmaster@givedoorcounty.org",
-      "source_url": "https://doorcountycommunityfoundation.org/contact/"
+      "source_url": "https://doorcountycommunityfoundation.org/contact/",
+      "sent_at": "2026-09-19T01:11:17.013Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b73799ab-2519ee3d-ac86-4d6d-bb61-bbd3b32d7de1-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "Blue Grass Community Foundation",
       "email": "info@bgcf.org",
-      "source_url": "https://www.bgcf.org/contact-us/"
+      "source_url": "https://www.bgcf.org/contact-us/",
+      "sent_at": "2026-09-19T01:11:17.013Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b737a31a-06235830-4b9e-434f-86e8-9f5ad0bbcf41-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "Community Foundation for Livingston County",
       "email": "livingston@cfsem.org",
-      "source_url": "https://cfsem.org/affiliate/community-foundation-livingston-county/contact/"
+      "source_url": "https://cfsem.org/affiliate/community-foundation-livingston-county/contact/",
+      "sent_at": "2026-09-19T01:11:17.013Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b737acef-ccd11c98-7b3a-461b-a204-fe05901002d8-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "UCLA Veterans Resource Center",
       "email": "deana.garay@va.gov",
-      "source_url": "https://veterans.ucla.edu/ms-deana-garay"
+      "source_url": "https://veterans.ucla.edu/ms-deana-garay",
+      "sent_at": "2026-09-19T01:11:17.013Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b737b5f3-e5b8ba2b-bf99-4b16-9955-3b88e3d9783a-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "We Honor Veterans",
