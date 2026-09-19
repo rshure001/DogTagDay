@@ -14,24 +14,15 @@
 <main class="card">
 <p class="eyebrow">The Honor Jar</p>
 <h1>Honor a Veteran Today</h1>
-<p>Your gift will be completed securely on PayPal. This page goes directly to PayPal and does not use Instagram.</p>
-<form id="paypalDonate" action="https://www.paypal.com/cgi-bin/webscr" method="post">
-  <input type="hidden" name="cmd" value="_donations">
-  <input type="hidden" name="business" value="rshure001@yahoo.com">
-  <input type="hidden" name="item_name" value="Dog Tag Day Foundation - Honor Jar">
-  <input type="hidden" name="currency_code" value="USD">
-  <input type="hidden" name="no_shipping" value="1">
-  <input type="hidden" name="no_note" value="0">
-  <input type="hidden" id="amountField" name="amount" value="">
-  <button class="btn" type="submit">Continue Directly to PayPal</button>
-</form>
+<p>Your gift will be completed securely on PayPal. Choose the button below to continue to PayPal.</p>
+<a id="paypalDonate" class="btn" href="https://www.paypal.me/ronnieshure">Continue Directly to PayPal</a>
 <p class="small">Secure payment is processed by PayPal. Dog Tag Day Foundation does not receive your card or bank login information.</p>
 </main>
 <script>
 (function(){
   var raw=new URLSearchParams(window.location.search).get('amount');
   var n=Number(raw);
-  if(Number.isFinite(n)&&n>=1){document.getElementById('amountField').value=n.toFixed(2)}
+  if(Number.isFinite(n)&&n>=1){document.getElementById('paypalDonate').href='https://www.paypal.me/ronnieshure/'+n.toFixed(2)+'USD'}
 })();
 </script>
 </body>
