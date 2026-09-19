@@ -1,103 +1,179 @@
 {
   "campaign": "Dog Tag Day — April 18",
-  "status": "approved",
+  "status": "partially_sent",
   "subject": "Dog Tag Day — April 18 | A simple way to say: I see you",
   "body_template": "{{greeting}}\n\nI’m Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are establishing April 18 as a day of visible recognition for veterans, service members, and their families.\n\nThe idea is simple: veterans and active-duty service members may wear their dog tags, and families may wear or carry the tags of loved ones who served. Participation is voluntary. No explanation is required and no story is owed. The purpose is visibility, recognition, and connection — a simple way of saying, ‘I see you.’\n\nI would welcome a conversation about how Dog Tag Day Foundation can help {{organization}} and how we might introduce April 18 to veterans and families.\n\nThank you for the work you do for our veteran community.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nApril 18 | https://dogtagday.org\nrshure001@yahoo.com",
   "recipients": [
     {
       "organization": "Disabled Veterans National Foundation",
       "email": "info@dvnf.org",
-      "source_url": "https://www.dvnf.org/contact-us/"
+      "source_url": "https://www.dvnf.org/contact-us/",
+      "sent_at": "2026-09-19T01:08:33.181Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b7353747-5f5e5e36-c777-4d11-a25f-44e8ac001b08-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "Veteran Support Foundation",
       "email": "kpoynton@vsf-usa.org",
-      "source_url": "https://vsf-usa.org/"
+      "source_url": "https://vsf-usa.org/",
+      "sent_at": "2026-09-19T01:08:36.353Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b73543b5-44ab1b13-9d56-4b8e-be4b-a2dab3398c7c-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "Florida Veterans Foundation",
       "email": "fvf@fdva.fl.gov",
-      "source_url": "https://www.helpflvets.org/contact-us"
+      "source_url": "https://www.helpflvets.org/contact-us",
+      "sent_at": "2026-09-19T01:08:38.945Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b7354dcb-0e0bda86-64c0-4286-a57a-e91cc41e3c16-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "U.S.VETS Veterans Fund",
       "email": "lkapgan@usvets.org",
-      "source_url": "https://usvets.org/the-veterans-fund/"
+      "source_url": "https://usvets.org/the-veterans-fund/",
+      "sent_at": "2026-09-19T01:08:42.513Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b7355bb1-d65062cf-5a55-4e1a-b352-e2c545e4abfc-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "City of North Las Vegas Veterans and Community Resource Center",
       "email": "lescanow@cityofnorthlasvegas.com",
-      "source_url": "https://www.cityofnorthlasvegas.com/residents/veterans-and-community-resource-center"
+      "source_url": "https://www.cityofnorthlasvegas.com/residents/veterans-and-community-resource-center",
+      "sent_at": "2026-09-19T01:08:47.135Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b7356dce-864f05e7-560c-4136-b81b-36cdcfe4278f-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "Veterans and First Responders Foundation",
       "email": "contact@vfrfoundation.org",
-      "source_url": "https://www.vfrfoundation.org/contact-us"
+      "source_url": "https://www.vfrfoundation.org/contact-us",
+      "sent_at": "2026-09-19T01:08:49.951Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b73578ca-88278e8f-eff1-4efb-83e6-619132905fa9-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "Bronx Veterans Medical Research Foundation",
       "email": "bvmrfadmin@va.gov",
-      "source_url": "https://www.bvmrf.org/donate"
+      "source_url": "https://www.bvmrf.org/donate",
+      "sent_at": "2026-09-19T01:08:53.064Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b73584f2-00f8a825-c94d-4fec-bcae-0125ffff0c5a-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "University of Kentucky Veterans Resource Center",
       "email": "vetcenter@uky.edu",
-      "source_url": "https://studentsuccess.uky.edu/veterans-resource-center"
+      "source_url": "https://studentsuccess.uky.edu/veterans-resource-center",
+      "sent_at": "2026-09-19T01:08:55.589Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b7358ef6-f79f88a8-bb0c-4f0c-917a-846fc4cfb84c-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "University of Miami Veterans Resource Center",
       "email": "doso@miami.edu",
-      "source_url": "https://doso.studentaffairs.miami.edu/veterans-resource-center/index.html"
+      "source_url": "https://doso.studentaffairs.miami.edu/veterans-resource-center/index.html",
+      "sent_at": "2026-09-19T01:08:58.402Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b73599c3-9b8b7205-1c73-4fa3-9f43-3c36054fcc21-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "American Corporate Partners",
       "email": "info@acp-usa.org",
-      "source_url": "https://www.acp-usa.org/contact/"
+      "source_url": "https://www.acp-usa.org/contact/",
+      "sent_at": "2026-09-19T01:09:00.869Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b735a37b-03410e23-38ba-4320-a1e6-a62d32418ab4-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "University of Southern California Veterans Resource Center",
       "email": "vrc@usc.edu",
-      "source_url": "https://vrc.usc.edu/"
+      "source_url": "https://vrc.usc.edu/",
+      "sent_at": "2026-09-19T01:09:03.681Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b735ae6d-f422bb9d-4abc-4d96-961d-98ef6be17cdb-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "County College of Morris Veterans Resource Center",
       "email": "veterans@ccm.edu",
-      "source_url": "https://www.ccm.edu/admissions/for-veterans/"
+      "source_url": "https://www.ccm.edu/admissions/for-veterans/",
+      "sent_at": "2026-09-19T01:09:07.067Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b735bbb1-a5a9f0c3-85f9-4dba-8169-3b4096c04d3a-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "Community College of Philadelphia Veterans Resource Center",
       "email": "vets@ccp.edu",
-      "source_url": "https://www.ccp.edu/student-services/student-assistance-centers/veterans-resource-center"
+      "source_url": "https://www.ccp.edu/student-services/student-assistance-centers/veterans-resource-center",
+      "sent_at": "2026-09-19T01:09:10.219Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b735c802-9188c052-1015-4719-b66d-0cfc6e19cd7f-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "University of California Riverside Veterans Resource Center",
       "email": "vasco@ucr.edu",
-      "source_url": "https://veterans.ucr.edu/community"
+      "source_url": "https://veterans.ucr.edu/community",
+      "sent_at": "2026-09-19T01:09:13.058Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b735d312-c204a5ff-43c9-4dec-9a85-7ff52d9606a4-000000@email.amazonses.com>",
+      "delivery_status": "bounced"
     },
     {
       "organization": "University of Nebraska at Kearney Military and Veteran Services",
       "email": "skarkala@unk.edu",
-      "source_url": "https://veterans.nebraska.gov/school-directory"
+      "source_url": "https://veterans.nebraska.gov/school-directory",
+      "sent_at": "2026-09-19T01:09:15.922Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b735deac-2481156e-4721-4715-a862-097ad295b8ca-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "Georgia Tech Veterans Resource Center",
       "email": "dross35@gatech.edu",
-      "source_url": "https://registrar.gatech.edu/info/list-contacts-veterans-services"
+      "source_url": "https://registrar.gatech.edu/info/list-contacts-veterans-services",
+      "sent_at": "2026-09-19T01:09:18.806Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b735e985-374c4247-11a8-427e-a832-3e3bcc3ca2ea-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "City of East Providence Veterans Services",
       "email": "avargas@eastprovidenceri.gov",
-      "source_url": "https://eastprovidenceri.gov/executive-profiles/veterans-services-community-health-coordinator"
+      "source_url": "https://eastprovidenceri.gov/executive-profiles/veterans-services-community-health-coordinator",
+      "sent_at": "2026-09-19T01:09:22.210Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b735f6d7-b2990e27-b1d3-40af-83b9-799f81178072-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "Hawaii Office of Veterans Services",
       "email": "ovs@hawaii.gov",
-      "source_url": "https://dod.hawaii.gov/ovs/"
+      "source_url": "https://dod.hawaii.gov/ovs/",
+      "sent_at": "2026-09-19T01:09:24.921Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b7360167-a71c31e8-8e35-48cb-95eb-f1b05e967a27-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "Eaton County Veterans Services",
       "email": "veteransservicesweb@eatoncounty.org",
-      "source_url": "https://www.michigan.gov/mvaa/county-filter-search-locations"
+      "source_url": "https://www.michigan.gov/mvaa/county-filter-search-locations",
+      "sent_at": "2026-09-19T01:09:27.394Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b7360b1a-42781326-50d7-4dd3-9472-d8a19a4b7106-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "Massachusetts Executive Office of Veterans Services",
@@ -506,5 +582,7 @@
     }
   ],
   "requeued_at": "2026-09-19T01:10:00Z",
-  "requeue_reason": "Resume verified outreach as priority 3"
+  "requeue_reason": "Resume verified outreach as priority 3",
+  "last_send_via": "dogtagday@agentmail.to",
+  "reply_to": "rshure001@yahoo.com"
 }
