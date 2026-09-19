@@ -504,5 +504,7 @@
       "email": "adjutant@utlegion.org",
       "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
     }
-  ]
+  ],
+  "requeued_at": "2026-09-19T01:10:00Z",
+  "requeue_reason": "Resume verified outreach as priority 3"
 }
