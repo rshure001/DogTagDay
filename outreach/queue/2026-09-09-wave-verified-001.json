@@ -502,62 +502,110 @@
     {
       "organization": "University of Washington Tacoma Veteran and Military Resource Center",
       "email": "uwtva@uw.edu",
-      "source_url": "https://directory.tacoma.uw.edu/department/veteran-and-military-resource-center"
+      "source_url": "https://directory.tacoma.uw.edu/department/veteran-and-military-resource-center",
+      "sent_at": "2026-09-19T01:12:45.250Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b7389c41-036fbdb7-7470-48c2-829a-00a1d8bb22a6-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "American Legion Department of Alaska",
       "email": "philip.templin@va.gov",
-      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer",
+      "sent_at": "2026-09-19T01:12:45.250Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b738a540-c50e3b67-517d-401d-bdef-4ee18eddf554-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "American Legion Department of Arizona",
       "email": "serviceofficer@azlegion.org",
-      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer",
+      "sent_at": "2026-09-19T01:12:45.250Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b738b017-9000a028-ecf8-4f25-9f6f-c54ba643149b-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "American Legion Department of Arkansas",
       "email": "alegion@swbell.net",
-      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer",
+      "sent_at": "2026-09-19T01:12:45.250Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b738b9c3-2fc2d560-6b3c-4ec9-b4cb-b35b4ce9630a-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "American Legion Department of California",
       "email": "dso@calegion.org",
-      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer",
+      "sent_at": "2026-09-19T01:12:45.250Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b738c556-89ec69e1-cbfa-4099-a03e-9d62c4649e9a-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "American Legion Department of Colorado",
       "email": "william.davis1@va.gov",
-      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer",
+      "sent_at": "2026-09-19T01:12:45.250Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b738cf8a-d4c903a4-9430-4f93-a07b-8cef4a694861-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "American Legion Department of Connecticut",
       "email": "kenneth.lewis3@va.gov",
-      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer",
+      "sent_at": "2026-09-19T01:12:45.250Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b738da3b-6c9998cd-ac6a-4804-abb1-1c7524a4286e-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "American Legion Department of Delaware",
       "email": "joseph.houghton@va.gov",
-      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer",
+      "sent_at": "2026-09-19T01:12:45.250Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b738e490-8a804171-e6a2-4352-b4b0-5751a52b74ef-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "American Legion Department of Florida",
       "email": "michael.white@fdva.fl.gov",
-      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer",
+      "sent_at": "2026-09-19T01:12:45.250Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b738ee57-2c93e4f9-d84d-4067-ba38-edb6fd6b3c7e-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "American Legion Department of Georgia",
       "email": "tonjala.moton-williams@vs.state.ga.us",
-      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer",
+      "sent_at": "2026-09-19T01:12:45.250Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b738f93c-e6e16a21-2b40-4a3f-b2f2-7fd90970ea45-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "American Legion Department of Hawaii",
       "email": "dso@hilegion.org",
-      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer",
+      "sent_at": "2026-09-19T01:12:45.250Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b739035c-e0b0ce8f-4740-4399-a2a3-276279bee394-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "American Legion Department of Idaho",
       "email": "tcolton@elmorecounty.org",
-      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer",
+      "sent_at": "2026-09-19T01:12:45.250Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b7390eb6-0f0ef04a-b926-4a89-931a-cbed731ddfc3-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "American Legion Department of Illinois",
