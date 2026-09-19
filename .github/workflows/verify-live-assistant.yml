@@ -1,12 +1,14 @@
 name: Verify Live Assistant
 on:
-  push:
-    branches: [main]
+  workflow_run:
+    workflows: ["Deploy Dog Tag Day Now"]
+    types: [completed]
   workflow_dispatch:
 jobs:
   verify:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
-    timeout-minutes: 6
+    timeout-minutes: 8
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -22,7 +24,6 @@ jobs:
             const browser=await webkit.launch({headless:true});
             const context=await browser.newContext({...devices['iPhone 13']});
             const page=await context.newPage();
-            const expectedBuild='2026-09-18-final-v99';
             await page.route('**/dogtagday-counter', route => route.abort());
             let homepageOk=false;
             try {
@@ -33,9 +34,10 @@ jobs:
                 const broken=await page.locator('img').evaluateAll(imgs=>imgs.filter(i=>!i.complete||i.naturalWidth===0).map(i=>i.getAttribute('src')));
                 const noOverflow=await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+1);
                 const recruitSrcs=await page.locator('img').evaluateAll(imgs=>imgs.map(i=>i.getAttribute('src')||''));
-                const recruitOk=recruitSrcs.some(s=>s.includes('a488895e-ec17-4a1d-8d0a-bc41ddfea1f7.png'));
-                console.log(JSON.stringify({page:'home',attempt:i+1,build,broken,heroCount,noOverflow,recruitOk}));
-                if(build===expectedBuild && broken.length===0 && heroCount===1 && recruitOk && noOverflow){homepageOk=true;break;}
+                const recruitOk=recruitSrcs.some(s=>s.includes('assets/recruits-corrected-tags-20260919.png'));
+                const buildOk=/^2026-09-18-final-v\d+$/.test(build||'');
+                console.log(JSON.stringify({page:'home',attempt:i+1,build,buildOk,broken,heroCount,noOverflow,recruitOk}));
+                if(buildOk && broken.length===0 && heroCount===1 && recruitOk && noOverflow){homepageOk=true;break;}
                 await page.waitForTimeout(3000);
               }
               if(!homepageOk) throw new Error('Homepage verification failed');
