@@ -394,62 +394,110 @@
     {
       "organization": "We Honor Veterans",
       "email": "veterans@allianceforcareathome.org",
-      "source_url": "https://www.wehonorveterans.org/join/community-partners/recruit-requirements/"
+      "source_url": "https://www.wehonorveterans.org/join/community-partners/recruit-requirements/",
+      "sent_at": "2026-09-19T01:12:03.559Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b737f1cf-45d25b55-80b1-4fc7-8467-7cfca7179ed7-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "University of Wisconsin Oshkosh Veterans Resource Center",
       "email": "veterans@uwosh.edu",
-      "source_url": "https://www.uwosh.edu/veterans/contact-us-2/"
+      "source_url": "https://www.uwosh.edu/veterans/contact-us-2/",
+      "sent_at": "2026-09-19T01:12:03.559Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b737fd4d-eb97636a-43d1-4a2e-8cb4-434b405c999e-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "Southeastern Oklahoma State University Veterans Services",
       "email": "glangham@se.edu",
-      "source_url": "https://www.se.edu/veterans-services/directory/"
+      "source_url": "https://www.se.edu/veterans-services/directory/",
+      "sent_at": "2026-09-19T01:12:03.559Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b73808c2-b49dcc96-2ec8-4b7d-9b72-f5f1b360a6be-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "City of Hawthorne Veterans Affairs Commission",
       "email": "veteransaffairs@cityofhawthorne.org",
-      "source_url": "https://www.cityofhawthorne.org/government/commissions/veterans-affairs-commission/veterans-affairs/resources"
+      "source_url": "https://www.cityofhawthorne.org/government/commissions/veterans-affairs-commission/veterans-affairs/resources",
+      "sent_at": "2026-09-19T01:12:03.559Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b7381380-e93e22c9-2648-4d75-a041-c928c825667a-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "California Student Aid Commission",
       "email": "studentsupport@csac.ca.gov",
-      "source_url": "https://www.csac.ca.gov/cal-grant"
+      "source_url": "https://www.csac.ca.gov/cal-grant",
+      "sent_at": "2026-09-19T01:12:03.559Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b7381f35-a06ac7ff-30e7-4d81-ae8f-f7bd418b0c9e-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "University of Georgia Student Veterans Resource Center",
       "email": "svrc@uga.edu",
-      "source_url": "https://svrc.uga.edu/category/graduating-student-veterans-list/"
+      "source_url": "https://svrc.uga.edu/category/graduating-student-veterans-list/",
+      "sent_at": "2026-09-19T01:12:03.559Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b7382998-9504b73b-01f0-4f75-8489-a8ee95753097-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "St. Cloud State University Veterans Resource Center",
       "email": "veteransresource@stcloudstate.edu",
-      "source_url": "https://www.stcloudstate.edu/veterans/"
+      "source_url": "https://www.stcloudstate.edu/veterans/",
+      "sent_at": "2026-09-19T01:12:03.559Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b73835be-a9d87a8d-8a8b-4f85-90f6-96090236fb9d-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "Cal Poly Pomona Veterans Resource Center",
       "email": "vetquestions@cpp.edu",
-      "source_url": "https://www.cpp.edu/veterans/"
+      "source_url": "https://www.cpp.edu/veterans/",
+      "sent_at": "2026-09-19T01:12:03.559Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b7384072-a9be3161-7389-4bb6-94f7-8aa70ac5d3e5-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "Dubuque County Veterans Affairs",
       "email": "dubuque.veterans@dubuquecounty.us",
-      "source_url": "https://dubuquecountyiowa.gov/Calendar.aspx?EID=883"
+      "source_url": "https://dubuquecountyiowa.gov/Calendar.aspx?EID=883",
+      "sent_at": "2026-09-19T01:12:03.559Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b738494d-d3529f2f-4f18-4fd3-aa11-31ce82d775c8-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "Ohio State Military and Veterans Services",
       "email": "milvets@osu.edu",
-      "source_url": "https://ati.osu.edu/future-students/admissions/military-connected-students"
+      "source_url": "https://ati.osu.edu/future-students/admissions/military-connected-students",
+      "sent_at": "2026-09-19T01:12:03.559Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b73853d3-3472e502-c3fd-40ec-af23-8516bdf915bf-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "University of New Mexico Veteran and Military Resource Center",
       "email": "vrc@unm.edu",
-      "source_url": "https://vrc.unm.edu/"
+      "source_url": "https://vrc.unm.edu/",
+      "sent_at": "2026-09-19T01:12:03.559Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b7386144-0aaa7127-3de3-4190-a100-fcb4ca54eb3d-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "Portland State University Veterans Resource Center",
       "email": "psuvrc@pdx.edu",
-      "source_url": "https://www.pdx.edu/veterans-resource-center/"
+      "source_url": "https://www.pdx.edu/veterans-resource-center/",
+      "sent_at": "2026-09-19T01:12:03.559Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b7386bc5-0e87f704-1eff-42b2-9de1-9f06fd6613e1-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "University of Washington Tacoma Veteran and Military Resource Center",
