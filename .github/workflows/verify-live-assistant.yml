@@ -44,14 +44,10 @@ jobs:
 
               await page.goto('https://dogtagday.org/donate.html?verify='+Date.now(),{waitUntil:'domcontentloaded',timeout:30000});
               const donateText=(await page.locator('body').innerText()).replace(/\s+/g,' ');
-              const paypalAction=await page.locator('#paypalDonate').getAttribute('action');
-              const business=await page.locator('#paypalDonate input[name="business"]').getAttribute('value');
-              const itemName=await page.locator('#paypalDonate input[name="item_name"]').getAttribute('value');
+              const paypalHref=await page.locator('#paypalDonate').getAttribute('href');
               const donateOk=donateText.includes('Honor a Veteran Today') &&
-                (paypalAction||'').includes('paypal.com/cgi-bin/webscr') &&
-                business==='rshure001@yahoo.com' &&
-                (itemName||'').includes('Dog Tag Day Foundation');
-              console.log(JSON.stringify({page:'donate',donateOk,paypalAction,business,itemName}));
+                (paypalHref||'').startsWith('https://www.paypal.com/paypalme/ronnieshure');
+              console.log(JSON.stringify({page:'donate',donateOk,paypalHref}));
               if(!donateOk) throw new Error('Donation page verification failed');
 
               await page.goto('https://dogtagday.org/letter-to-president.html?verify='+Date.now(),{waitUntil:'networkidle',timeout:30000});
