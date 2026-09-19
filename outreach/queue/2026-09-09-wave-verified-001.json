@@ -227,7 +227,7 @@
       "sent_at": "2026-09-19T01:10:34.945Z",
       "send_via": "AgentMail",
       "message_id": "<010001a0b736d44c-aaef43f8-8ef9-48a7-9d5d-16a1a4f68c38-000000@email.amazonses.com>",
-      "delivery_status": "sent_unconfirmed"
+      "delivery_status": "bounced"
     },
     {
       "organization": "Veterans Association of America",
@@ -605,7 +605,7 @@
       "sent_at": "2026-09-19T01:12:45.250Z",
       "send_via": "AgentMail",
       "message_id": "<010001a0b7390eb6-0f0ef04a-b926-4a89-931a-cbed731ddfc3-000000@email.amazonses.com>",
-      "delivery_status": "sent_unconfirmed"
+      "delivery_status": "bounced"
     },
     {
       "organization": "American Legion Department of Illinois",
@@ -758,7 +758,7 @@
       "sent_at": "2026-09-19T01:14:16.605Z",
       "send_via": "AgentMail",
       "message_id": "<010001a0b73a1e39-63ba757e-3e44-46dc-b9ed-b638032b4f51-000000@email.amazonses.com>",
-      "delivery_status": "sent_unconfirmed"
+      "delivery_status": "bounced"
     },
     {
       "organization": "American Legion Department of New Jersey",
@@ -909,5 +909,11 @@
   "requeue_reason": "Resume verified outreach as priority 3",
   "last_send_via": "dogtagday@agentmail.to",
   "reply_to": "rshure001@yahoo.com",
-  "completed_at": "2026-09-19T01:14:51.269Z"
+  "completed_at": "2026-09-19T01:14:51.269Z",
+  "delivery_summary": {
+    "sent": 100,
+    "bounced": 4,
+    "delivery_unconfirmed": 96,
+    "checked_at": "2026-09-19T01:15:36.397Z"
+  }
 }
