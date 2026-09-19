@@ -14,15 +14,15 @@
 <main class="card">
 <p class="eyebrow">The Honor Jar</p>
 <h1>Honor a Veteran Today</h1>
-<p>Your gift will be completed securely on PayPal. Choose the button below to continue to PayPal.</p>
-<a id="paypalDonate" class="btn" href="https://www.paypal.me/ronnieshure">Continue Directly to PayPal</a>
+<p>Your gift will be completed securely on PayPal. Choose the button below to open PayPal in a new tab.</p>
+<a id="paypalDonate" class="btn" target="_blank" rel="noopener noreferrer" href="https://www.paypal.com/paypalme/ronnieshure">Continue Directly to PayPal</a>
 <p class="small">Secure payment is processed by PayPal. Dog Tag Day Foundation does not receive your card or bank login information.</p>
 </main>
 <script>
 (function(){
   var raw=new URLSearchParams(window.location.search).get('amount');
   var n=Number(raw);
-  if(Number.isFinite(n)&&n>=1){document.getElementById('paypalDonate').href='https://www.paypal.me/ronnieshure/'+n.toFixed(2)+'USD'}
+  if(Number.isFinite(n)&&n>=1){document.getElementById('paypalDonate').href='https://www.paypal.com/paypalme/ronnieshure/'+n.toFixed(2)+'USD'}
 })();
 </script>
 </body>
