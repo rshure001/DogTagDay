@@ -1,6 +1,6 @@
 {
   "campaign": "Dog Tag Day — April 18",
-  "status": "partially_sent",
+  "status": "sent",
   "subject": "Dog Tag Day — April 18 | A simple way to say: I see you",
   "body_template": "{{greeting}}\n\nI’m Ronnie Shure, Founder & CEO of Dog Tag Day Foundation. We are establishing April 18 as a day of visible recognition for veterans, service members, and their families.\n\nThe idea is simple: veterans and active-duty service members may wear their dog tags, and families may wear or carry the tags of loved ones who served. Participation is voluntary. No explanation is required and no story is owed. The purpose is visibility, recognition, and connection — a simple way of saying, ‘I see you.’\n\nI would welcome a conversation about how Dog Tag Day Foundation can help {{organization}} and how we might introduce April 18 to veterans and families.\n\nThank you for the work you do for our veteran community.\n\nRespectfully,\nRonnie Shure\nFounder & CEO\nDog Tag Day Foundation\nApril 18 | https://dogtagday.org\nrshure001@yahoo.com",
   "recipients": [
@@ -826,51 +826,88 @@
     {
       "organization": "American Legion Department of Oregon",
       "email": "edward.vandyke@va.gov",
-      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer",
+      "sent_at": "2026-09-19T01:14:51.269Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b73aaccf-81a0a49c-c331-44ff-9788-afc7e882f1b5-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "American Legion Department of Pennsylvania",
       "email": "rblack@pa-legion.com",
-      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer",
+      "sent_at": "2026-09-19T01:14:51.269Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b73ab643-b4ca6315-5248-46e2-975b-34e0c488485c-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "American Legion Department of Puerto Rico",
       "email": "oso9798@gmail.com",
-      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer",
+      "sent_at": "2026-09-19T01:14:51.269Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b73abf77-d3bfbb56-f58e-4723-af7b-2d5b76826af5-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "American Legion Department of Rhode Island",
       "email": "charles.petrarca@va.gov",
-      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer",
+      "sent_at": "2026-09-19T01:14:51.269Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b73aca92-06ddc12c-1497-44d0-a108-ec55ad9a0351-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "American Legion Department of South Carolina",
       "email": "patricia.wortherly-foye@va.gov",
-      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer",
+      "sent_at": "2026-09-19T01:14:51.269Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b73ad4c3-58468556-da32-4a14-85c5-91d92b7da66d-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "American Legion Department of South Dakota",
       "email": "mpillar1@hotmail.com",
-      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer",
+      "sent_at": "2026-09-19T01:14:51.269Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b73ade38-117f4e13-b374-4953-9bdd-0eba4a81f42d-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "American Legion Department of Tennessee",
       "email": "mark.harris@putnamcountytn.gov",
-      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer",
+      "sent_at": "2026-09-19T01:14:51.269Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b73ae7e1-547d16d2-1f99-4ee3-9c7d-2ca544763181-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "American Legion Department of Texas",
       "email": "michael.lacy@va.gov",
-      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer",
+      "sent_at": "2026-09-19T01:14:51.269Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b73af048-bd93a611-664a-4b96-ba02-013c184ec77d-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     },
     {
       "organization": "American Legion Department of Utah",
       "email": "adjutant@utlegion.org",
-      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer"
+      "source_url": "https://www.legion.org/member-services/veterans-services/veterans-benefits/find-a-veteran-service-officer",
+      "sent_at": "2026-09-19T01:14:51.269Z",
+      "send_via": "AgentMail",
+      "message_id": "<010001a0b73afae5-7b333a6f-af96-4d80-b306-c3e3e2595c39-000000@email.amazonses.com>",
+      "delivery_status": "sent_unconfirmed"
     }
   ],
   "requeued_at": "2026-09-19T01:10:00Z",
   "requeue_reason": "Resume verified outreach as priority 3",
   "last_send_via": "dogtagday@agentmail.to",
-  "reply_to": "rshure001@yahoo.com"
+  "reply_to": "rshure001@yahoo.com",
+  "completed_at": "2026-09-19T01:14:51.269Z"
 }
