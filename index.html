@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-dtd-build="2026-09-23-image-fix-v232">
+<html lang="en" data-dtd-build="2026-09-23-cleanup-v233">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -57,7 +57,7 @@ p{color:var(--muted);font-size:1.04rem;line-height:1.62}
 .map{padding:6px;background:#fff;border:4px solid var(--gold);border-radius:12px;overflow:hidden}
 footer{text-align:center;padding:26px 18px 34px;background:#06101f;border-top:3px solid var(--red);line-height:1.6}
 footer span{color:var(--gold)}.wraparound{padding:42px 18px;background:#0d1c2f;border-top:1px solid rgba(217,183,93,.25)}.wraparound .wrap{width:min(1080px,100%);margin:auto}.wraparound h2{text-align:center}.wraparound .eyebrow{text-align:center}.wraparound-photos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:24px 0}.wraparound-photos figure{margin:0;overflow:hidden;border:3px solid var(--gold);border-top:5px solid var(--red);border-radius:12px;background:#02070b}.wraparound-photos img{width:100%;height:100%;aspect-ratio:4/3;object-fit:cover}.wraparound-photos figcaption{text-align:center;padding:10px 8px;color:var(--gold);font-weight:900;letter-spacing:.08em}.wraparound-copy{max-width:900px;margin:0 auto;text-align:center}.wraparound-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:22px}.wraparound-steps span{display:grid;place-items:center;min-height:56px;padding:8px;border:1px solid var(--gold);border-radius:10px;background:#071426;text-align:center;font-weight:900;font-size:.82rem;letter-spacing:.04em}
-@media(max-width:700px){html,body{width:100%;max-width:100%;overflow-x:hidden}.wraparound{padding:34px 14px}.wraparound-photos{grid-template-columns:1fr}.wraparound-photos img{aspect-ratio:auto;height:auto;object-fit:contain}.wraparound-steps{grid-template-columns:1fr 1fr}.three-support{grid-template-columns:1fr!important}.three-support img{width:100%;height:auto!important;aspect-ratio:auto!important;object-fit:contain!important}.holidayAccent{padding:4px 6px 6px}.holidayAccent img{width:min(78vw,390px);max-height:78px}.holidayName{max-width:88vw;padding:2px 10px 3px;font-size:clamp(.82rem,3.6vw,1rem)}.site{width:100%;max-width:100%;margin:0;border-left:0;border-right:0}.nav,.section,.media,.storystrip,footer{width:100%;max-width:100%}.section{padding:36px 14px}.wrap{width:100%;max-width:100%;padding:0;margin:0 auto}.links{grid-template-columns:repeat(3,minmax(0,1fr))}.links a{min-width:0;font-size:.66rem;padding:8px 3px}.hero,.hero img,.frame,.frame img,.battle,.battle .frame,.map,.four{width:100%;max-width:100%}.hero img{aspect-ratio:auto;object-fit:contain}.battle .frame img{aspect-ratio:auto;object-fit:contain}.four{grid-template-columns:repeat(2,minmax(0,1fr))}.four figure{aspect-ratio:1/1}.four figcaption{font-size:.62rem}.transition,.twophotos{grid-template-columns:1fr 1fr}h1,h2,.heartline,.eyebrow,p{max-width:100%;overflow-wrap:anywhere;word-break:normal}h1{font-size:clamp(2rem,10vw,3rem)}h2{font-size:clamp(1.85rem,9vw,2.7rem)}.callout{width:100%;max-width:100%;padding:22px 10px}.callout strong{font-size:clamp(1.75rem,9vw,2.7rem);white-space:normal}.media{padding:12px 0}.frame{border-left-width:0;border-right-width:0;border-radius:0}.battle .wrap{width:100%;max-width:100%}.battle .frame{border-left:0;border-right:0}.twophotos img{min-width:0}.cards,.card{width:100%;max-width:100%}}
+@media(max-width:700px){html,body{width:100%;max-width:100%;overflow-x:hidden}.wraparound{padding:34px 14px}.wraparound-photos{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.wraparound-photos img{aspect-ratio:4/3;height:auto;object-fit:cover}.wraparound-photos figcaption{font-size:.62rem;padding:7px 3px}.wraparound-steps{grid-template-columns:1fr 1fr}.three-support{grid-template-columns:1fr!important}.three-support img{width:100%;height:auto!important;aspect-ratio:auto!important;object-fit:contain!important}.holidayAccent{padding:4px 6px 6px}.holidayAccent img{width:min(78vw,390px);max-height:78px}.holidayName{max-width:88vw;padding:2px 10px 3px;font-size:clamp(.82rem,3.6vw,1rem)}.site{width:100%;max-width:100%;margin:0;border-left:0;border-right:0}.nav,.section,.media,.storystrip,footer{width:100%;max-width:100%}.section{padding:36px 14px}.wrap{width:100%;max-width:100%;padding:0;margin:0 auto}.links{grid-template-columns:repeat(3,minmax(0,1fr))}.links a{min-width:0;font-size:.66rem;padding:8px 3px}.hero,.hero img,.frame,.frame img,.battle,.battle .frame,.map,.four{width:100%;max-width:100%}.hero img{aspect-ratio:auto;object-fit:contain}.battle .frame img{aspect-ratio:auto;object-fit:contain}.four{grid-template-columns:repeat(2,minmax(0,1fr))}.four figure{aspect-ratio:1/1}.four figcaption{font-size:.62rem}.transition,.twophotos{grid-template-columns:1fr 1fr}h1,h2,.heartline,.eyebrow,p{max-width:100%;overflow-wrap:anywhere;word-break:normal}h1{font-size:clamp(2rem,10vw,3rem)}h2{font-size:clamp(1.85rem,9vw,2.7rem)}.callout{width:100%;max-width:100%;padding:22px 10px}.callout strong{font-size:clamp(1.75rem,9vw,2.7rem);white-space:normal}.media{padding:12px 0}.frame{border-left-width:0;border-right-width:0;border-radius:0}.battle .wrap{width:100%;max-width:100%}.battle .frame{border-left:0;border-right:0}.twophotos img{min-width:0}.cards,.card{width:100%;max-width:100%}}
 </style>
 </head>
 <body>
@@ -68,10 +68,10 @@ footer span{color:var(--gold)}.wraparound{padding:42px 18px;background:#0d1c2f;b
 
 <section class="storystrip" aria-label="Dog Tag Day in action">
   <div class="four">
-    <figure><img src="assets/founder-approved-chain-20260920.jpg?v=20260923-a2" alt="Ronnie listening to a veteran"><figcaption>REAL CONVERSATIONS</figcaption></figure>
-    <figure><img src="assets/founder-approved-gray-20260920.jpg?v=20260923-b2" alt="Ronnie in a tie giving a veteran a supportive side hug"><figcaption>REAL PEOPLE</figcaption></figure>
-    <figure><img src="assets/founder-standing-approved-20260920.jpg?v=20260923-c2" alt="Ronnie talking with a veteran while a camera crew records"><figcaption>REAL SOLUTIONS</figcaption></figure>
-    <figure><img src="assets/ronnie-shure-founder-20260901.jpg?v=20260923-d2" alt="Ronnie standing for Dog Tag Day"><figcaption>STILL HERE</figcaption></figure>
+    <figure><img src="assets/ronnie-listening-veteran.jpg?v=20260923-r1" alt="Ronnie listening to a veteran"><figcaption>REAL CONVERSATIONS</figcaption></figure>
+    <figure><img src="assets/founder-tie-side-hug-no-tags-20260923.jpg?v=20260923-r2" alt="Ronnie in a tie giving a veteran a supportive side hug"><figcaption>REAL PEOPLE</figcaption></figure>
+    <figure><img src="assets/founder-film-crew-v55.jpg?v=20260923-r3" alt="Ronnie speaking with a veteran while a camera crew records"><figcaption>REAL SOLUTIONS</figcaption></figure>
+    <figure><img src="assets/founder-standing-approved-20260920.jpg?v=20260923-r4" alt="Ronnie standing for Dog Tag Day"><figcaption>STILL HERE</figcaption></figure>
   </div>
 </section>
 
@@ -83,9 +83,9 @@ footer span{color:var(--gold)}.wraparound{padding:42px 18px;background:#0d1c2f;b
     <div class="eyebrow">Wraparound Veteran Support</div>
     <h2 id="wraparound-title">We don’t replace existing veteran services. We help veterans reach them.</h2>
     <div class="wraparound-photos">
-      <figure><img src="assets/founder-approved-chain-20260920.jpg?v=20260923-listen2" alt="Ronnie listening to a veteran"><figcaption>LISTEN</figcaption></figure>
-      <figure><img src="assets/ronnie-street-conversation-final.jpg?v=20260923-connect2" alt="Ronnie in a tie giving a veteran a supportive side hug"><figcaption>CONNECT</figcaption></figure>
-      <figure><img src="assets/founder-standing-approved-20260920.jpg?v=20260923-follow2" alt="Ronnie following through with veteran support"><figcaption>FOLLOW THROUGH</figcaption></figure>
+      <figure><img src="assets/ronnie-listening-veteran.jpg?v=20260923-w1" alt="Ronnie listening to a veteran"><figcaption>LISTEN</figcaption></figure>
+      <figure><img src="assets/founder-tie-side-hug-no-tags-20260923.jpg?v=20260923-w2" alt="Ronnie in a tie giving a veteran a supportive side hug"><figcaption>CONNECT</figcaption></figure>
+      <figure><img src="assets/ronnie-community-support.jpg?v=20260923-w3" alt="Ronnie helping connect a veteran with support"><figcaption>FOLLOW THROUGH</figcaption></figure>
     </div>
     <p class="wraparound-copy">A veteran shouldn’t have to navigate a maze of agencies alone. Dog Tag Day Foundation listens to what the veteran needs, identifies established veteran, nonprofit, government, and community resources that may fit, helps explain the next step, and follows up. If the first door doesn’t open, we help identify another path.</p>
     <div class="wraparound-steps">
@@ -98,10 +98,7 @@ footer span{color:var(--gold)}.wraparound{padding:42px 18px;background:#0d1c2f;b
 
 <section class="section"><div class="wrap"><div class="eyebrow">Same Veteran • Different Battlefield</div><h2>The uniform comes off. The service doesn’t.</h2><div class="frame" style="margin-top:22px"><img src="assets/military-civilian-approved-20260923.png" alt="Military service roles transitioning into civilian life" style="aspect-ratio:auto;object-fit:contain;background:#02070b"></div><div class="heartline">Yesterday, America could see the uniform. Today, that same veteran may be standing beside you and <em>no one knows.</em></div></div></section>
 
-<section id="work" class="section alt"><div class="wrap"><div class="rule"></div><div class="twophotos three-support" style="grid-template-columns:repeat(2,minmax(0,1fr));gap:12px">
-<img src="assets/ronnie-street-conversation-final.jpg?v=20260923-work1b" alt="Ronnie in a tie supporting a veteran">
-<img src="assets/founder-approved-gray-20260920.jpg?v=20260923-work2b" alt="Ronnie talking with a veteran while a camera crew records">
-</div><div class="eyebrow">Year-Round Veteran Support • Program in Development</div><h2>We don’t just recognize veterans. We help them take the next step.</h2><p>A veteran may need help with benefits, food, housing, transportation, employment, home repairs, legal assistance, or simply finding the right organization to call. Dog Tag Day Foundation is building a year-round support program designed to make that process easier.</p><div class="cards">
+<section id="work" class="section alt"><div class="wrap"><div class="rule"></div><div class="eyebrow">Year-Round Veteran Support • Program in Development</div><h2>We don’t just recognize veterans. We help them take the next step.</h2><p>A veteran may need help with benefits, food, housing, transportation, employment, home repairs, legal assistance, or simply finding the right organization to call. Dog Tag Day Foundation is building a year-round support program designed to make that process easier.</p><div class="cards">
 <article class="card"><h3>1. We listen.</h3><p>We start with the veteran—not a form. What do they need? What have they already tried? What is getting in the way?</p></article>
 <article class="card"><h3>2. We find the right resource.</h3><p>We identify established veteran, nonprofit, government, and community services that fit the need.</p></article>
 <article class="card"><h3>3. We help make the connection.</h3><p>We help the veteran understand the next step and where to go.</p></article>
@@ -117,7 +114,6 @@ footer span{color:var(--gold)}.wraparound{padding:42px 18px;background:#0d1c2f;b
 <div class="patriotBottom"></div>
 <footer><strong>DOG TAG DAY FOUNDATION</strong><br><span>Put them on. Acknowledge one.</span><br>You don’t have to be invisible.</footer>
 </div>
-<script src="holiday-themes.js?v=20260923-restore" defer></script>
 <script>
 (function(){
   const el=document.getElementById('visitorCount');
