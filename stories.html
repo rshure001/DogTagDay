@@ -165,5 +165,23 @@
       <div>Official Date: April 18<br />© 2026 Dog Tag Day Foundation</div>
     </footer>
     <script src="story-wall-v2.js?v=20260830autopublish1"></script>
-  </body>
+  <script>
+(function(){
+  function openShareForm(){
+    var el=document.getElementById('share-story');
+    if(!el) return;
+    el.scrollIntoView({behavior:'auto',block:'start'});
+    setTimeout(function(){
+      var input=el.querySelector('input[name="name"]');
+      if(input) input.focus({preventScroll:true});
+    },100);
+  }
+  if(location.hash==='#share-story'||new URLSearchParams(location.search).get('open')==='share'){
+    if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',openShareForm);
+    else openShareForm();
+    window.addEventListener('load',openShareForm,{once:true});
+  }
+})();
+</script>
+</body>
 </html>
