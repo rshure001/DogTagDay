@@ -32,7 +32,7 @@ jobs:
               const brokenHome=await page.locator('img').evaluateAll(imgs=>imgs.filter(i=>!i.complete||i.naturalWidth===0).map(i=>i.getAttribute('src')));
               const noOverflowHome=await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+1);
               const body=await page.locator('body').innerText();
-              const homeOk=/^2026-\d{2}-\d{2}-final-v\d+$/.test(build||'')&&brokenHome.length===0&&noOverflowHome&&body.includes('Veterans should not become invisible.')&&body.includes('HONOR JAR');
+              const homeOk=/^2026-\d{2}-\d{2}-final-v\d+$/.test(build||'')&&brokenHome.length===0&&noOverflowHome&&body.includes('too many veterans become invisible once the uniform comes off.')&&body.includes('HONOR JAR');
               console.log(JSON.stringify({page:'home',build,brokenHome,noOverflowHome,homeOk}));
               await page.screenshot({path:'live-homepage-proof-current.png',fullPage:true});
               if(!homeOk) ok=false;
