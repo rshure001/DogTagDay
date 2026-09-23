@@ -7,7 +7,7 @@ permissions:
   contents: write
 jobs:
   localize:
-    if: ${{ github.event.head_commit.message == 'Run approved visual localizer v2' }}
+    if: ${{ github.event.head_commit.message == 'Run approved visual localizer v3' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -40,4 +40,5 @@ jobs:
           git config user.email "rshure001@yahoo.com"
           git add index.html assets/battlefield-approved-20260923.jpg assets/military-civilian-approved-20260923.png
           git commit -m "Publish approved battlefield and military civilian visuals permanently"
+          git pull --rebase origin main
           git push origin HEAD:main
