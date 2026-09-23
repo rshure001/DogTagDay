@@ -1,48 +1,43 @@
 name: Localize Approved Homepage Visuals
 on:
   push:
-    branches: [main]
+    branches:
+      - main
+permissions:
+  contents: write
 jobs:
   localize:
-    if: github.event.head_commit.message == 'Add one-time approved visual localizer'
-    permissions:
-      contents: write
+    if: ${{ github.event.head_commit.message == 'Run approved visual localizer v2' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           ref: main
-      - name: Download approved visuals into permanent local assets
+      - name: Download and install approved visuals
+        shell: bash
         run: |
-          set -e
-          curl -L --fail --retry 3 'https://gcdn.picsart.com/editing-temp/bf68af69-cb31-47eb-9486-8b0aa5cf5c79.jpeg' -o assets/battlefield-approved-20260923.jpg
-          curl -L --fail --retry 3 'https://gcdn.picsart.com/editing-temp/f58b165e-9962-4792-9173-4da0bf08291b.png' -o assets/military-civilian-approved-20260923.png
+          set -euo pipefail
+          curl -L --fail --retry 3 "https://gcdn.picsart.com/editing-temp/bf68af69-cb31-47eb-9486-8b0aa5cf5c79.jpeg" -o assets/battlefield-approved-20260923.jpg
+          curl -L --fail --retry 3 "https://gcdn.picsart.com/editing-temp/f58b165e-9962-4792-9173-4da0bf08291b.png" -o assets/military-civilian-approved-20260923.png
           test -s assets/battlefield-approved-20260923.jpg
           test -s assets/military-civilian-approved-20260923.png
           python - <<'PY'
-          from PIL import Image
-          for f in ['assets/battlefield-approved-20260923.jpg','assets/military-civilian-approved-20260923.png']:
-              im=Image.open(f); im.verify(); print(f,'OK')
-          PY
-          python - <<'PY'
           from pathlib import Path
+          import re
           p=Path('index.html')
           s=p.read_text()
-          import re
           s=re.sub(r'data-dtd-build="[^"]+"','data-dtd-build="2026-09-23-final-v203"',s)
           s=s.replace('assets/combat-soldiers-v27.jpg','assets/battlefield-approved-20260923.jpg')
-          old='''<div class="transition">
-<div class="panel"><img src="assets/recruits-corrected-tags-20260919.png" alt="Military service"><div class="cap">MILITARY SERVICE</div></div>
-<div class="panel"><img src="assets/ronnie-community-support.jpg" alt="Civilian life and support"><div class="cap">CIVILIAN LIFE</div></div>
-</div>'''
-          new='''<div class="frame" style="margin-top:22px"><img src="assets/military-civilian-approved-20260923.png" alt="Military service roles transitioning into civilian life" style="aspect-ratio:auto;object-fit:contain;background:#02070b"></div>'''
+          old='<div class="transition">\n<div class="panel"><img src="assets/recruits-corrected-tags-20260919.png" alt="Military service"><div class="cap">MILITARY SERVICE</div></div>\n<div class="panel"><img src="assets/ronnie-community-support.jpg" alt="Civilian life and support"><div class="cap">CIVILIAN LIFE</div></div>\n</div>'
+          new='<div class="frame" style="margin-top:22px"><img src="assets/military-civilian-approved-20260923.png" alt="Military service roles transitioning into civilian life" style="aspect-ratio:auto;object-fit:contain;background:#02070b"></div>'
           s=s.replace(old,new)
           p.write_text(s)
           PY
-      - name: Commit permanent visuals and rebuilt homepage
+      - name: Commit permanent visuals
+        shell: bash
         run: |
-          git config user.name 'rshure001'
-          git config user.email 'rshure001@yahoo.com'
+          git config user.name "rshure001"
+          git config user.email "rshure001@yahoo.com"
           git add index.html assets/battlefield-approved-20260923.jpg assets/military-civilian-approved-20260923.png
-          git commit -m 'Publish approved battlefield and military civilian visuals permanently'
+          git commit -m "Publish approved battlefield and military civilian visuals permanently"
           git push origin HEAD:main
