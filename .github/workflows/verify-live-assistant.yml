@@ -35,7 +35,7 @@ jobs:
                 const noOverflow=await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+1);
                 const recruitSrcs=await page.locator('img').evaluateAll(imgs=>imgs.map(i=>i.getAttribute('src')||''));
                 const recruitOk=recruitSrcs.some(s=>s.includes('assets/recruits-corrected-tags-20260919.png'));
-                const buildOk=/^2026-09-18-final-v\d+$/.test(build||'');
+                const buildOk=/^2026-09-23-final-v\d+$/.test(build||'');
                 console.log(JSON.stringify({page:'home',attempt:i+1,build,buildOk,broken,heroCount,noOverflow,recruitOk}));
                 if(buildOk && broken.length===0 && heroCount===1 && recruitOk && noOverflow){homepageOk=true;break;}
                 await page.waitForTimeout(3000);
