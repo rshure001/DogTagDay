@@ -34,6 +34,7 @@ jobs:
       - name: Send approved individualized emails
         shell: python
         run: |
+          import hashlib
           import datetime
           import email.utils
           import glob
@@ -52,6 +53,11 @@ jobs:
           queue_files = sorted(glob.glob("outreach/queue/*.json"))
           if not queue_files:
               raise SystemExit("No campaign files found.")
+
+          with open("mailer/suppression-hashes.json", encoding="utf-8") as handle:
+              suppression = json.load(handle)["entries"]
+          if not isinstance(suppression, dict):
+              raise ValueError("Invalid suppression registry")
 
           context = ssl.create_default_context()
           server = smtplib.SMTP_SSL("smtp.mail.yahoo.com", 465, context=context, timeout=45)
@@ -82,6 +88,10 @@ jobs:
                       address = str(recipient.get("email", "")).strip()
                       if not email_re.match(address):
                           raise ValueError(f"{path}: invalid recipient email")
+
+                      digest = hashlib.sha256(address.strip().lower().encode()).hexdigest()
+                      if digest in suppression or recipient.get("do_not_contact") or recipient.get("outreach_status") in ("hold", "suppressed", "do_not_contact"):
+                          continue
 
                       organization = str(recipient.get("organization", "")).strip()
                       contact_name = str(recipient.get("contact_name", "")).strip()

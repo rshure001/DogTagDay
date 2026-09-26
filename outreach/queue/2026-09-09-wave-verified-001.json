@@ -83,7 +83,9 @@
       "sent_at": "2026-09-19T01:08:58.402Z",
       "send_via": "AgentMail",
       "message_id": "<010001a0b73599c3-9b8b7205-1c73-4fa3-9f43-3c36054fcc21-000000@email.amazonses.com>",
-      "delivery_status": "sent_unconfirmed"
+      "delivery_status": "sent_unconfirmed",
+      "do_not_contact": true,
+      "outreach_status": "do_not_contact"
     },
     {
       "organization": "American Corporate Partners",
@@ -605,7 +607,9 @@
       "sent_at": "2026-09-19T01:12:45.250Z",
       "send_via": "AgentMail",
       "message_id": "<010001a0b7390eb6-0f0ef04a-b926-4a89-931a-cbed731ddfc3-000000@email.amazonses.com>",
-      "delivery_status": "bounced"
+      "delivery_status": "bounced",
+      "do_not_contact": false,
+      "outreach_status": "suppressed"
     },
     {
       "organization": "American Legion Department of Illinois",
@@ -767,7 +771,9 @@
       "sent_at": "2026-09-19T01:14:16.605Z",
       "send_via": "AgentMail",
       "message_id": "<010001a0b73a2bbf-361b8560-dafd-4a3d-a802-bb93ba958a05-000000@email.amazonses.com>",
-      "delivery_status": "sent_unconfirmed"
+      "delivery_status": "sent_unconfirmed",
+      "do_not_contact": false,
+      "outreach_status": "suppressed"
     },
     {
       "organization": "American Legion Department of New Mexico",

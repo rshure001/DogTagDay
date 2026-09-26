@@ -2,6 +2,8 @@ import nodemailer from 'nodemailer';
 import fs from 'node:fs/promises';
 import crypto from 'node:crypto';
 
+import { suppressionStatus } from './suppression.mjs';
+
 const LEDGER = new URL('./ledger.json', import.meta.url);
 
 async function readLedger() {
@@ -59,6 +61,8 @@ async function submit({ to, subject, text, replyTo, idempotencyKey }) {
 export async function sendOne({ to, subject, text, replyTo }) {
   const email = normalizeEmail(to);
   if (!email || !email.includes('@')) throw new Error('Invalid recipient');
+  const blocked = await suppressionStatus(email);
+  if (blocked) return { skipped: true, reason: blocked, email };
   const ledger = await readLedger();
   const idem = keyFor(email, subject, text);
   if (ledger.sent[idem]) return { skipped: true, reason: 'already-sent', ...ledger.sent[idem] };
