@@ -15,42 +15,46 @@
 <p class="note">Addresses were checked against official organization websites on September 1, 2026. This page does not connect to Gmail, Apollo, or Outlook.</p>
 </main>
 <script>
-const batchSubject="Dog Tag Day — April 18 — National Veterans Outreach";
+const batchSubject="Dog Tag Day — April 18, 2027 — National Veterans Outreach";
 const batchBody=`Dear Veterans Outreach Leadership,
 
-I am Ronnie Shure, Founder & President of Dog Tag Day Foundation.
+I am Ronnie Shure, Founder & CEO of Dog Tag Day Foundation.
 
-Dog Tag Day is a nonpartisan movement inviting veterans, active-duty service members, and military families to wear or display dog tags every April 18 and share the stories behind them. We ask Americans who see the tags to pause and acknowledge the person who served.
+Dog Tag Day is a nonpartisan movement inviting veterans, active-duty service members, and military families to wear or display dog tags on April 18, 2027 and share the stories behind them. We ask Americans who see the tags to pause and acknowledge the person who served.
+
+Our current outreach is building awareness and partnerships for the April 18, 2027 observance.
 
 Our purpose is simple: make military service visible and ensure veterans are seen, heard, and remembered.
 
-We would value your guidance and participation. How can Dog Tag Day Foundation help your organization, and how can we work together to bring April 18 to veterans and families nationwide?
+We would value your guidance and participation. How can Dog Tag Day Foundation help your organization, and how can we work together to bring April 18, 2027 to veterans and families nationwide?
 
 Respectfully,
 
 Ronnie Shure
-Founder & President
+Founder & CEO
 Dog Tag Day Foundation
 https://dogtagday.org/`;
 document.getElementById("firstWaveBatch").href="mailto:vapublicaffairs@va.gov?bcc="+encodeURIComponent("pio.ndvs@veterans.nv.gov,magazine@legion.org,rlaw@vfw.org")+"&subject="+encodeURIComponent(batchSubject)+"&body="+encodeURIComponent(batchBody);
-const commonEnd=`Dog Tag Day is a nonpartisan movement inviting veterans, active-duty service members, and military families to wear or display dog tags on April 18 and share the stories behind them. We ask Americans who see the tags to pause and acknowledge the person who served.
+const commonEnd=`Dog Tag Day is a nonpartisan movement inviting veterans, active-duty service members, and military families to wear or display dog tags on April 18, 2027 and share the stories behind them. We ask Americans who see the tags to pause and acknowledge the person who served.
+
+Our current outreach is building awareness and partnerships for the April 18, 2027 observance.
 
 Our purpose is simple: make military service visible and ensure veterans are seen, heard, and remembered.
 
-We would value your guidance and participation. How can Dog Tag Day Foundation help your organization, and how can we work together to bring April 18 to veterans and families nationwide?
+We would value your guidance and participation. How can Dog Tag Day Foundation help your organization, and how can we work together to bring April 18, 2027 to veterans and families nationwide?
 
 Respectfully,
 
 Ronnie Shure
-Founder & President
+Founder & CEO
 Dog Tag Day Foundation
 https://dogtagday.org/`;
 const targets=[
- {org:"U.S. Department of Veterans Affairs",to:"vapublicaffairs@va.gov",subject:"National Veterans Outreach — Dog Tag Day, April 18",opening:"Dear VA Office of Public and Intergovernmental Affairs,\n\nI am writing to introduce Dog Tag Day and ask for the VA’s guidance in bringing this national observance to veterans and their families.\n\n",source:"https://department.va.gov/"},
- {org:"Nevada Department of Veterans Services",to:"pio.ndvs@veterans.nv.gov",subject:"Nevada Partnership — Dog Tag Day, April 18",opening:"Dear Nevada Department of Veterans Services Public Information Office,\n\nAs a Nevada nonprofit foundation, we are asking NDVS to help us make military service visible throughout Nevada on April 18.\n\n",source:"https://veterans.nv.gov/"},
- {org:"The American Legion — Media Relations",to:"magazine@legion.org",subject:"National Collaboration — Dog Tag Day, April 18",opening:"Dear American Legion Media Relations Team,\n\nI am writing to invite The American Legion to help carry Dog Tag Day to veterans, posts, families, and communities across America.\n\n",source:"https://www.legion.org/about/media-toolkits/media-contacts"},
- {org:"VFW — Communications & Public Affairs",to:"rlaw@vfw.org",subject:"National Collaboration — Dog Tag Day, April 18",opening:"Dear Ms. Law,\n\nI am writing to invite the VFW to help carry Dog Tag Day to veterans, posts, families, and communities across America.\n\n",source:"https://www.vfw.org/media-and-events/latest-releases/media-contacts"},
- {org:"DAV — Communications",form:"https://www.dav.org/news-media/press-room/",subject:"Dog Tag Day, April 18",source:"https://www.dav.org/news-media/press-room/"}
+ {org:"U.S. Department of Veterans Affairs",to:"vapublicaffairs@va.gov",subject:"National Veterans Outreach — Dog Tag Day, April 18, 2027",opening:"Dear VA Office of Public and Intergovernmental Affairs,\n\nI am writing to introduce Dog Tag Day and ask for the VA’s guidance in bringing this national observance to veterans and their families.\n\n",source:"https://department.va.gov/"},
+ {org:"Nevada Department of Veterans Services",to:"pio.ndvs@veterans.nv.gov",subject:"Nevada Partnership — Dog Tag Day, April 18, 2027",opening:"Dear Nevada Department of Veterans Services Public Information Office,\n\nAs a Nevada nonprofit foundation, we are asking NDVS to help us make military service visible throughout Nevada on April 18, 2027.\n\n",source:"https://veterans.nv.gov/"},
+ {org:"The American Legion — Media Relations",to:"magazine@legion.org",subject:"National Collaboration — Dog Tag Day, April 18, 2027",opening:"Dear American Legion Media Relations Team,\n\nI am writing to invite The American Legion to help carry Dog Tag Day to veterans, posts, families, and communities across America.\n\n",source:"https://www.legion.org/about/media-toolkits/media-contacts"},
+ {org:"VFW — Communications & Public Affairs",to:"rlaw@vfw.org",subject:"National Collaboration — Dog Tag Day, April 18, 2027",opening:"Dear Ms. Law,\n\nI am writing to invite the VFW to help carry Dog Tag Day to veterans, posts, families, and communities across America.\n\n",source:"https://www.vfw.org/media-and-events/latest-releases/media-contacts"},
+ {org:"DAV — Communications",form:"https://www.dav.org/news-media/press-room/",subject:"Dog Tag Day, April 18, 2027",source:"https://www.dav.org/news-media/press-room/"}
 ];
 const cards=document.getElementById("cards");
 targets.forEach((t,i)=>{

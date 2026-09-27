@@ -11,3 +11,9 @@ The approved four-scene strip is `assets/four-scenes-longer-chains-20260926.webp
 Before publishing photo changes, inspect the actual images and the live page. Never replace the four-scene strip with a single founder portrait, and never describe a merely prepared change as published.
 
 On September 26, Ronnie requested a one-inch increase in the long dog-tag chains in panels 1, 2 and 3. Preserve this approved adjustment.
+
+## Outreach date clarity — September 27, 2026
+
+The upcoming Dog Tag Day observance is **April 18, 2027**. Every new or reusable outreach email subject and body must explicitly include `April 18, 2027`; do not use a yearless date as the invitation. Current outreach is building awareness and partners for that observance. Do not invent or imply an October event.
+
+Update only reusable templates and unsent/future copy. Preserve the original subjects, bodies, statuses, timestamps, and delivery evidence of sent/submitted records. Keep `mailer/ledger.json` and the completed `outreach/queue/2026-09-09-wave-verified-001.json` unchanged. In mixed files such as `mailer/messages.json`, update reusable top-level defaults and unsent records only; preserve submitted entries and all attempt metadata. A copy edit must not send, retry, reapprove, or requeue outreach.
