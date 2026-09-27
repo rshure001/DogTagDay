@@ -1,0 +1,8 @@
+{
+  "name": "dog-tag-day-host",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "vercel dev"
+  }
+}

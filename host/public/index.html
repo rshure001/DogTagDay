@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Dog Tag Day Control</title>
+<style>
+body{margin:0;background:#071426;color:#fff;font-family:Arial,sans-serif}main{max-width:720px;margin:auto;padding:22px 14px 50px}.gold{color:#d9b75d}.card{background:#0d1c2f;border:1px solid #31465f;border-radius:14px;padding:16px;margin:12px 0}.hero{border:2px solid #d9b75d;border-top:6px solid #b62035}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.network{padding:14px;border-radius:10px;background:#071426;border:1px solid #d9b75d;font-weight:800}.pending{color:#f2c96b}.ok{color:#7ee2aa}.button{display:block;text-align:center;text-decoration:none;background:#d9b75d;color:#071426;padding:14px;border-radius:10px;font-weight:900;margin-top:12px}small{color:#aebdcb}@media(max-width:520px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body><main>
+<div class="gold"><b>DOG TAG DAY • OWNED HOST</b></div>
+<h1>Dog Tag Day Control</h1>
+<p>Portable control plane. No Metricool, Buffer, TinyFish, or AppDeploy required in the publishing path.</p>
+<section class="card hero">
+<b>MASTER ROTATION</b>
+<h2>Every 3 hours • America/Los_Angeles</h2>
+<div id="slot">Checking current slot…</div>
+</section>
+<section class="card">
+<h2>Direct Platforms</h2>
+<div class="grid">
+<div class="network">Facebook <span class="pending">AUTH REQUIRED</span></div>
+<div class="network">Instagram <span class="pending">AUTH REQUIRED</span></div>
+<div class="network">TikTok <span class="pending">AUTH REQUIRED</span></div>
+<div class="network">YouTube <span class="pending">AUTH REQUIRED</span></div>
+</div>
+<small>Authorization will be stored on the host; publication will use official platform APIs only.</small>
+</section>
+<section class="card">
+<h2>Recovered Masters</h2>
+<p><b>Commercial #1</b> — READY</p>
+<p><b>Commercial #2</b> — READY</p>
+<p><b>Commercial #4</b> — HOLD</p>
+<p><b>Johnny Comes Marching Home</b> — HOLD</p>
+</section>
+<section class="card">
+<h2>Publication Truth</h2>
+<p>Only provider-confirmed posts will be labeled PUBLISHED. Other outcomes remain SUBMITTED, FAILED, RETRY, or SKIPPED.</p>
+</section>
+<script>
+fetch('/api/rotation').then(r=>r.json()).then(d=>{
+ document.getElementById('slot').textContent='Current slot: '+String(d.slotHour).padStart(2,'0')+':00 • '+d.commercial.replace('commercial-','Commercial #');
+}).catch(()=>{document.getElementById('slot').textContent='Rotation endpoint unavailable';});
+</script>
+</main></body></html>
