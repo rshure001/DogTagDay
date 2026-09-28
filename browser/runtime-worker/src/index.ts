@@ -3,19 +3,50 @@ import { chromium, Page } from 'playwright-core';
 const connector = process.env.DOGTAG_CONNECTOR_URL || 'https://ynleeweezwkdbisaiovq.supabase.co/functions/v1/dogtag-browser-runtime';
 const cdpUrl = process.env.DOGTAG_CDP_URL || 'http://127.0.0.1:9222';
 const pollMs = Number(process.env.DOGTAG_POLL_MS || 1200);
-const runtimeToken = process.env.DOGTAG_RUNTIME_TOKEN || '';
+let runtimeToken = process.env.DOGTAG_RUNTIME_TOKEN || '';
 
-if (!runtimeToken) throw new Error('DOGTAG_RUNTIME_TOKEN is required');
+const actionsTokenUrl = process.env.ACTIONS_ID_TOKEN_REQUEST_URL || '';
+const actionsBearer = process.env.ACTIONS_ID_TOKEN_REQUEST_TOKEN || '';
+
+async function refreshRuntimeToken() {
+  if (!actionsTokenUrl || !actionsBearer) {
+    if (!runtimeToken) throw new Error('DOGTAG_RUNTIME_TOKEN is required');
+    return runtimeToken;
+  }
+  const url = new URL(actionsTokenUrl);
+  url.searchParams.set('audience', 'dogtag-browser');
+  const response = await fetch(url, {
+    headers: { Authorization: `bearer ${actionsBearer}` },
+  });
+  if (!response.ok) throw new Error(`oidc_refresh_${response.status}`);
+  const body = await response.json() as { value?: string };
+  if (!body.value) throw new Error('oidc_refresh_missing_value');
+  runtimeToken = body.value;
+  return runtimeToken;
+}
+
+if (!runtimeToken && !actionsTokenUrl) throw new Error('DOGTAG_RUNTIME_TOKEN is required');
 
 function runtimeHeaders(extra: Record<string, string> = {}) {
   return { 'x-dogtag-runtime-token': runtimeToken, ...extra };
+}
+
+async function authorizedFetch(url: URL, init: RequestInit = {}) {
+  if (!runtimeToken) await refreshRuntimeToken();
+  let response = await fetch(url, init);
+  if (response.status !== 401) return response;
+  await refreshRuntimeToken();
+  const headers = new Headers(init.headers || {});
+  headers.set('x-dogtag-runtime-token', runtimeToken);
+  response = await fetch(url, { ...init, headers });
+  return response;
 }
 
 async function connectorGet(op: string, params: Record<string, string> = {}) {
   const url = new URL(connector);
   url.searchParams.set('op', op);
   for (const [key, value] of Object.entries(params)) url.searchParams.set(key, value);
-  const response = await fetch(url, { headers: runtimeHeaders() });
+  const response = await authorizedFetch(url, { headers: runtimeHeaders() });
   if (!response.ok) throw new Error(`connector_get_${response.status}`);
   return response.json();
 }
@@ -23,7 +54,7 @@ async function connectorGet(op: string, params: Record<string, string> = {}) {
 async function connectorPost(op: string, body: unknown) {
   const url = new URL(connector);
   url.searchParams.set('op', op);
-  const response = await fetch(url, {
+  const response = await authorizedFetch(url, {
     method: 'POST',
     headers: runtimeHeaders({ 'content-type': 'application/json' }),
     body: JSON.stringify(body),
@@ -81,6 +112,7 @@ async function execute(page: Page, action: string, payload: Record<string, strin
 }
 
 async function main() {
+  if (!runtimeToken) await refreshRuntimeToken();
   const browser = await chromium.connectOverCDP(cdpUrl);
   const contexts = browser.contexts();
   const context = contexts[0] || (await browser.newContext());
