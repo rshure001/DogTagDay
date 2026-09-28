@@ -3,9 +3,23 @@ import { chromium, Page } from 'playwright-core';
 const connector = process.env.DOGTAG_CONNECTOR_URL || 'https://dog-tag-day-browser-connector-rtpz8q.v2.appdeploy.ai';
 const cdpUrl = process.env.DOGTAG_CDP_URL || 'http://127.0.0.1:9222';
 const pollMs = Number(process.env.DOGTAG_POLL_MS || 1200);
+const runtimeToken = process.env.DOGTAG_RUNTIME_TOKEN || '';
+
+if (!runtimeToken) {
+  throw new Error('DOGTAG_RUNTIME_TOKEN is required');
+}
+
+function runtimeHeaders(extra: Record<string, string> = {}) {
+  return {
+    'x-dogtag-runtime-token': runtimeToken,
+    ...extra,
+  };
+}
 
 async function connectorGet(path: string) {
-  const response = await fetch(connector + path);
+  const response = await fetch(connector + path, {
+    headers: runtimeHeaders(),
+  });
   if (!response.ok) throw new Error(`connector_get_${response.status}`);
   return response.json();
 }
@@ -13,7 +27,7 @@ async function connectorGet(path: string) {
 async function connectorPost(path: string, body: unknown) {
   const response = await fetch(connector + path, {
     method: 'POST',
-    headers: { 'content-type': 'application/json' },
+    headers: runtimeHeaders({ 'content-type': 'application/json' }),
     body: JSON.stringify(body),
   });
   if (!response.ok) throw new Error(`connector_post_${response.status}`);
