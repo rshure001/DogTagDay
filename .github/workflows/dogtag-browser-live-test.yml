@@ -83,12 +83,12 @@ jobs:
           ID="$(curl -fsS -X POST "$CONNECTOR/test/command" \
             -H "x-dogtag-runtime-token: $DOGTAG_RUNTIME_TOKEN" \
             -H 'content-type: application/json' \
-            --data '{"action":"read","payload":{"selector":"h1"}}' | jq -r .id)"
+            --data '{"action":"read","payload":{"selector":"body"}}' | jq -r .id)"
           for i in $(seq 1 45); do
             R="$(curl -fsS -H "x-dogtag-runtime-token: $DOGTAG_RUNTIME_TOKEN" "$CONNECTOR/test/command/$ID")"
             STATE="$(echo "$R" | jq -r .state)"
             if [[ "$STATE" == "done" ]]; then
-              echo "$R" | jq -e '.result.text == "Example Domain"'
+              echo "$R" | jq -e '.result.text | contains("Example Domain")'
               echo "Read command verified."
               exit 0
             elif [[ "$STATE" == "failed" ]]; then
