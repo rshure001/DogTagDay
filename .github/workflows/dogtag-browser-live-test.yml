@@ -92,7 +92,7 @@ jobs:
             R="$(curl -fsS -H "x-dogtag-runtime-token: $DOGTAG_RUNTIME_TOKEN" "$CONNECTOR?op=test-result&id=$ID")"
             STATE="$(echo "$R" | jq -r .state)"
             if [[ "$STATE" == "done" ]]; then
-              echo "$R" | jq -e '.result.text | contains("Example Domain")'
+              echo "$R" | jq -e '.result.text | contains("This domain is for use in documentation examples")'
               echo "Read command verified."
               exit 0
             elif [[ "$STATE" == "failed" ]]; then
