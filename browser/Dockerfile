@@ -3,6 +3,7 @@ FROM node:22-bookworm
 RUN apt-get update \
   && apt-get install -y --no-install-recommends \
      chromium \
+     curl \
      ca-certificates \
      fonts-liberation \
      fonts-noto-color-emoji \
