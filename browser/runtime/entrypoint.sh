@@ -5,6 +5,11 @@ PROFILE="${DOGTAG_PROFILE_DIR:-/data/profile}"
 PORT="${DOGTAG_CDP_PORT:-9222}"
 CONNECTOR="${DOGTAG_CONNECTOR_URL:-https://dog-tag-day-browser-connector-rtpz8q.v2.appdeploy.ai}"
 
+if [[ -z "${DOGTAG_RUNTIME_TOKEN:-}" ]]; then
+  echo "Dog Tag Day Browser: DOGTAG_RUNTIME_TOKEN is required" >&2
+  exit 1
+fi
+
 mkdir -p "$PROFILE"
 
 cleanup() {
