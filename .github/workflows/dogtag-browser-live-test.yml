@@ -44,7 +44,7 @@ jobs:
             -e DOGTAG_CONNECTOR_URL="$CONNECTOR" \
             dogtagday-browser:runtime
           for i in $(seq 1 45); do
-            STATUS="$(curl -fsS -H "x-dogtag-runtime-token: $DOGTAG_RUNTIME_TOKEN" "$CONNECTOR/api/status")"
+            STATUS="$(curl -fsS -H "x-dogtag-runtime-token: $DOGTAG_RUNTIME_TOKEN" "$CONNECTOR?op=status")"
             if echo "$STATUS" | jq -e '.runtimeAttached == true and .runtimeStale == false and (.heartbeatAgeMs // 999999) < 30000' >/dev/null; then
               echo "Runtime heartbeat verified."
               exit 0
@@ -59,12 +59,12 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          ID="$(curl -fsS -X POST "$CONNECTOR/api/command" \
+          ID="$(curl -fsS -X POST "$CONNECTOR?op=test-command" \
             -H "x-dogtag-runtime-token: $DOGTAG_RUNTIME_TOKEN" \
             -H 'content-type: application/json' \
             --data '{"action":"open","payload":{"url":"https://example.com/"}}' | jq -r .id)"
           for i in $(seq 1 45); do
-            R="$(curl -fsS -H "x-dogtag-runtime-token: $DOGTAG_RUNTIME_TOKEN" "$CONNECTOR/api/runtime/command/$ID")"
+            R="$(curl -fsS -H "x-dogtag-runtime-token: $DOGTAG_RUNTIME_TOKEN" "$CONNECTOR?op=test-result&id=$ID")"
             STATE="$(echo "$R" | jq -r .state)"
             if [[ "$STATE" == "done" ]]; then
               echo "$R" | jq -e '.result.url | contains("example.com")'
@@ -83,12 +83,12 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          ID="$(curl -fsS -X POST "$CONNECTOR/api/command" \
+          ID="$(curl -fsS -X POST "$CONNECTOR?op=test-command" \
             -H "x-dogtag-runtime-token: $DOGTAG_RUNTIME_TOKEN" \
             -H 'content-type: application/json' \
             --data '{"action":"read","payload":{"selector":"body"}}' | jq -r .id)"
           for i in $(seq 1 45); do
-            R="$(curl -fsS -H "x-dogtag-runtime-token: $DOGTAG_RUNTIME_TOKEN" "$CONNECTOR/api/runtime/command/$ID")"
+            R="$(curl -fsS -H "x-dogtag-runtime-token: $DOGTAG_RUNTIME_TOKEN" "$CONNECTOR?op=test-result&id=$ID")"
             STATE="$(echo "$R" | jq -r .state)"
             if [[ "$STATE" == "done" ]]; then
               echo "$R" | jq -e '.result.text | contains("Example Domain")'
@@ -107,12 +107,12 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          ID="$(curl -fsS -X POST "$CONNECTOR/api/command" \
+          ID="$(curl -fsS -X POST "$CONNECTOR?op=test-command" \
             -H "x-dogtag-runtime-token: $DOGTAG_RUNTIME_TOKEN" \
             -H 'content-type: application/json' \
             --data '{"action":"click","payload":{"selector":"a"}}' | jq -r .id)"
           for i in $(seq 1 45); do
-            R="$(curl -fsS -H "x-dogtag-runtime-token: $DOGTAG_RUNTIME_TOKEN" "$CONNECTOR/api/runtime/command/$ID")"
+            R="$(curl -fsS -H "x-dogtag-runtime-token: $DOGTAG_RUNTIME_TOKEN" "$CONNECTOR?op=test-result&id=$ID")"
             STATE="$(echo "$R" | jq -r .state)"
             if [[ "$STATE" == "done" ]]; then
               echo "$R" | jq -e '.result.clicked == "a"'
@@ -130,7 +130,7 @@ jobs:
       - name: Final connector status
         if: always()
         run: |
-          curl -fsS -H "x-dogtag-runtime-token: $DOGTAG_RUNTIME_TOKEN" "$CONNECTOR/api/status" | jq .
+          curl -fsS -H "x-dogtag-runtime-token: $DOGTAG_RUNTIME_TOKEN" "$CONNECTOR?op=status" | jq .
           docker logs --tail 100 dogtag-browser || true
 
       - name: Stop runtime
