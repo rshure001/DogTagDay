@@ -6,6 +6,7 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/dogtag-browser-worker.yml'
+      - 'browser/runtime-worker/**'
 
 permissions:
   contents: read
