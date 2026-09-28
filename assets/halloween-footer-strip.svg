@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 220" role="img" aria-label="Halloween pumpkin, autumn leaves, moon and bats">
+  <rect width="1200" height="220" fill="#071426"/>
+  <circle cx="980" cy="72" r="46" fill="#f3df9b"/>
+  <g fill="#02070b">
+    <path d="M900 60c18-14 33-8 42 2-16-3-27 5-34 16-5-8-8-12-8-18z"/>
+    <path d="M1042 44c20-13 35-5 44 7-18-5-30 3-38 14-4-8-6-13-6-21z"/>
+    <path d="M1080 96c17-10 31-4 39 7-15-4-26 2-33 11-4-7-6-11-6-18z"/>
+  </g>
+  <g transform="translate(130 72)">
+    <ellipse cx="105" cy="72" rx="96" ry="70" fill="#e56b18"/>
+    <ellipse cx="73" cy="72" rx="48" ry="66" fill="#f07a20"/>
+    <ellipse cx="137" cy="72" rx="48" ry="66" fill="#cf5610"/>
+    <rect x="95" y="-4" width="18" height="34" rx="6" fill="#6f7f38" transform="rotate(-8 104 12)"/>
+    <path d="M52 60l28 15-27 10zM158 60l-28 15 27 10zM76 109q30 24 60 0-10 28-30 30-20-2-30-30z" fill="#2a160b"/>
+  </g>
+  <g fill="#c66a20" opacity=".95">
+    <path d="M35 155l24-15 9 16-24 15z"/>
+    <path d="M310 172l28-18 10 15-28 18z"/>
+    <path d="M405 150l24-16 10 14-24 16z"/>
+    <path d="M775 168l30-20 11 16-30 20z"/>
+  </g>
+  <g fill="#d8a13c" opacity=".95">
+    <path d="M82 188l25-17 10 14-25 17z"/>
+    <path d="M362 188l27-18 10 15-27 18z"/>
+    <path d="M720 150l25-16 9 14-25 16z"/>
+    <path d="M1110 168l26-17 10 15-26 17z"/>
+  </g>
+  <path d="M0 210c130-35 260 10 390-6 145-18 272-3 408 5 139 8 267-28 402-4v15H0z" fill="#0b2238"/>
+</svg>
