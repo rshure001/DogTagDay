@@ -1,25 +1,18 @@
 import { chromium, Page } from 'playwright-core';
 
-const connector = process.env.DOGTAG_CONNECTOR_URL || 'https://dog-tag-day-browser-connector-rtpz8q.v2.appdeploy.ai';
+const connector = process.env.DOGTAG_CONNECTOR_URL || 'https://ynleeweezwkdbisaiovq.supabase.co/functions/v1/dogtag-browser-runtime';
 const cdpUrl = process.env.DOGTAG_CDP_URL || 'http://127.0.0.1:9222';
 const pollMs = Number(process.env.DOGTAG_POLL_MS || 1200);
 const runtimeToken = process.env.DOGTAG_RUNTIME_TOKEN || '';
 
-if (!runtimeToken) {
-  throw new Error('DOGTAG_RUNTIME_TOKEN is required');
-}
+if (!runtimeToken) throw new Error('DOGTAG_RUNTIME_TOKEN is required');
 
 function runtimeHeaders(extra: Record<string, string> = {}) {
-  return {
-    'x-dogtag-runtime-token': runtimeToken,
-    ...extra,
-  };
+  return { 'x-dogtag-runtime-token': runtimeToken, ...extra };
 }
 
 async function connectorGet(path: string) {
-  const response = await fetch(connector + path, {
-    headers: runtimeHeaders(),
-  });
+  const response = await fetch(connector + path, { headers: runtimeHeaders() });
   if (!response.ok) throw new Error(`connector_get_${response.status}`);
   return response.json();
 }
@@ -90,15 +83,14 @@ async function main() {
   let heartbeatAt = 0;
   for (;;) {
     try {
-      const pages = context.pages();
-      const page = currentPage(pages);
+      const page = currentPage(context.pages());
       const now = Date.now();
       if (now - heartbeatAt > 5000) {
-        await connectorPost('/api/runtime/heartbeat', { currentUrl: page.url() });
+        await connectorPost('/heartbeat', { currentUrl: page.url() });
         heartbeatAt = now;
       }
 
-      const next = await connectorGet('/api/runtime/next');
+      const next = await connectorGet('/next');
       if (!next.command) {
         await new Promise(resolve => setTimeout(resolve, pollMs));
         continue;
@@ -112,14 +104,14 @@ async function main() {
 
       try {
         const result = await execute(page, command.action, command.payload || {});
-        await connectorPost('/api/runtime/result', {
+        await connectorPost('/result', {
           id: command.id,
           ok: true,
           currentUrl: page.url(),
           result,
         });
       } catch (error) {
-        await connectorPost('/api/runtime/result', {
+        await connectorPost('/result', {
           id: command.id,
           ok: false,
           currentUrl: page.url(),
