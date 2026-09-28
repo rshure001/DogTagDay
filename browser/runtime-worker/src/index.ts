@@ -11,14 +11,19 @@ function runtimeHeaders(extra: Record<string, string> = {}) {
   return { 'x-dogtag-runtime-token': runtimeToken, ...extra };
 }
 
-async function connectorGet(path: string) {
-  const response = await fetch(connector + path, { headers: runtimeHeaders() });
+async function connectorGet(op: string, params: Record<string, string> = {}) {
+  const url = new URL(connector);
+  url.searchParams.set('op', op);
+  for (const [key, value] of Object.entries(params)) url.searchParams.set(key, value);
+  const response = await fetch(url, { headers: runtimeHeaders() });
   if (!response.ok) throw new Error(`connector_get_${response.status}`);
   return response.json();
 }
 
-async function connectorPost(path: string, body: unknown) {
-  const response = await fetch(connector + path, {
+async function connectorPost(op: string, body: unknown) {
+  const url = new URL(connector);
+  url.searchParams.set('op', op);
+  const response = await fetch(url, {
     method: 'POST',
     headers: runtimeHeaders({ 'content-type': 'application/json' }),
     body: JSON.stringify(body),
@@ -42,7 +47,7 @@ async function execute(page: Page, action: string, payload: Record<string, strin
     case 'click':
       if (!payload.selector) throw new Error('missing_selector');
       await page.locator(payload.selector).first().click({ timeout: 15000 });
-      return { clicked: payload.selector };
+      return { clicked: payload.selector, url: page.url() };
     case 'type':
       if (!payload.selector) throw new Error('missing_selector');
       await page.locator(payload.selector).first().fill(payload.text || '');
@@ -50,7 +55,7 @@ async function execute(page: Page, action: string, payload: Record<string, strin
     case 'read': {
       const selector = payload.selector || 'body';
       const text = await page.locator(selector).first().innerText({ timeout: 15000 });
-      return { text: text.slice(0, 120000), selector };
+      return { text: text.slice(0, 120000), selector, url: page.url() };
     }
     case 'screenshot': {
       const data = await page.screenshot({ type: 'jpeg', quality: 35, fullPage: false });
@@ -87,11 +92,11 @@ async function main() {
       const page = currentPage(context.pages());
       const now = Date.now();
       if (now - heartbeatAt > 5000) {
-        await connectorPost('/heartbeat', { currentUrl: page.url() });
+        await connectorPost('heartbeat', { currentUrl: page.url() });
         heartbeatAt = now;
       }
 
-      const next = await connectorGet('/next');
+      const next = await connectorGet('next');
       if (!next.command) {
         await new Promise(resolve => setTimeout(resolve, pollMs));
         continue;
@@ -105,14 +110,14 @@ async function main() {
 
       try {
         const result = await execute(page, command.action, command.payload || {});
-        await connectorPost('/result', {
+        await connectorPost('result', {
           id: command.id,
           ok: true,
           currentUrl: page.url(),
           result,
         });
       } catch (error) {
-        await connectorPost('/result', {
+        await connectorPost('result', {
           id: command.id,
           ok: false,
           currentUrl: page.url(),
