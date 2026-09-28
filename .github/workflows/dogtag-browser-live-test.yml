@@ -1,0 +1,138 @@
+name: Dog Tag Day Live Browser Test
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/dogtag-browser-live-test.yml'
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  live-browser-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      CONNECTOR: https://dog-tag-day-browser-connector-rtpz8q.v2.appdeploy.ai
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build Dog Tag Day Browser runtime
+        run: docker build -f browser/Dockerfile -t dogtagday-browser:runtime .
+
+      - name: Obtain GitHub-signed runtime identity
+        shell: bash
+        run: |
+          set -euo pipefail
+          TOKEN="$(curl -fsS -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=dogtag-browser" | jq -r .value)"
+          test -n "$TOKEN"
+          echo "::add-mask::$TOKEN"
+          echo "DOGTAG_RUNTIME_TOKEN=$TOKEN" >> "$GITHUB_ENV"
+
+      - name: Start live Chromium runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          docker run -d --name dogtag-browser \
+            -e DOGTAG_RUNTIME_TOKEN="$DOGTAG_RUNTIME_TOKEN" \
+            -e DOGTAG_CONNECTOR_URL="$CONNECTOR" \
+            dogtagday-browser:runtime
+          for i in $(seq 1 45); do
+            STATUS="$(curl -fsS "$CONNECTOR/api/status")"
+            if echo "$STATUS" | jq -e '.runtimeAttached == true and .runtimeStale == false and (.heartbeatAgeMs // 999999) < 30000' >/dev/null; then
+              echo "Runtime heartbeat verified."
+              exit 0
+            fi
+            sleep 2
+          done
+          docker logs dogtag-browser || true
+          echo "Runtime failed to heartbeat." >&2
+          exit 1
+
+      - name: Give assistant control
+        run: |
+          curl -fsS -X POST "$CONNECTOR/api/handoff" \
+            -H 'content-type: application/json' \
+            --data '{"owner":"assistant"}' | jq .
+
+      - name: Open example.com through connector
+        shell: bash
+        run: |
+          set -euo pipefail
+          ID="$(curl -fsS -X POST "$CONNECTOR/api/command" \
+            -H 'content-type: application/json' \
+            --data '{"action":"open","payload":{"url":"https://example.com/"}}' | jq -r .id)"
+          for i in $(seq 1 45); do
+            R="$(curl -fsS -H "x-dogtag-runtime-token: $DOGTAG_RUNTIME_TOKEN" "$CONNECTOR/api/runtime/command/$ID")"
+            STATE="$(echo "$R" | jq -r .state)"
+            if [[ "$STATE" == "done" ]]; then
+              echo "$R" | jq -e '.result.url | contains("example.com")'
+              echo "Open command verified."
+              exit 0
+            elif [[ "$STATE" == "failed" ]]; then
+              echo "$R" | jq .
+              exit 1
+            fi
+            sleep 1
+          done
+          echo "Open command timed out." >&2
+          exit 1
+
+      - name: Read page through connector
+        shell: bash
+        run: |
+          set -euo pipefail
+          ID="$(curl -fsS -X POST "$CONNECTOR/api/command" \
+            -H 'content-type: application/json' \
+            --data '{"action":"read","payload":{"selector":"h1"}}' | jq -r .id)"
+          for i in $(seq 1 45); do
+            R="$(curl -fsS -H "x-dogtag-runtime-token: $DOGTAG_RUNTIME_TOKEN" "$CONNECTOR/api/runtime/command/$ID")"
+            STATE="$(echo "$R" | jq -r .state)"
+            if [[ "$STATE" == "done" ]]; then
+              echo "$R" | jq -e '.result.text == "Example Domain"'
+              echo "Read command verified."
+              exit 0
+            elif [[ "$STATE" == "failed" ]]; then
+              echo "$R" | jq .
+              exit 1
+            fi
+            sleep 1
+          done
+          echo "Read command timed out." >&2
+          exit 1
+
+      - name: Click page link through connector
+        shell: bash
+        run: |
+          set -euo pipefail
+          ID="$(curl -fsS -X POST "$CONNECTOR/api/command" \
+            -H 'content-type: application/json' \
+            --data '{"action":"click","payload":{"selector":"a"}}' | jq -r .id)"
+          for i in $(seq 1 45); do
+            R="$(curl -fsS -H "x-dogtag-runtime-token: $DOGTAG_RUNTIME_TOKEN" "$CONNECTOR/api/runtime/command/$ID")"
+            STATE="$(echo "$R" | jq -r .state)"
+            if [[ "$STATE" == "done" ]]; then
+              echo "$R" | jq -e '.result.clicked == "a"'
+              echo "Click command verified."
+              exit 0
+            elif [[ "$STATE" == "failed" ]]; then
+              echo "$R" | jq .
+              exit 1
+            fi
+            sleep 1
+          done
+          echo "Click command timed out." >&2
+          exit 1
+
+      - name: Final connector status
+        if: always()
+        run: |
+          curl -fsS "$CONNECTOR/api/status" | jq .
+          docker logs --tail 100 dogtag-browser || true
+
+      - name: Stop runtime
+        if: always()
+        run: docker rm -f dogtag-browser || true
