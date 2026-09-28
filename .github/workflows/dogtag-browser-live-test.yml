@@ -1,4 +1,5 @@
 name: Dog Tag Day Live Browser Test
+# trigger: supabase-route-fix
 
 on:
   workflow_dispatch:
