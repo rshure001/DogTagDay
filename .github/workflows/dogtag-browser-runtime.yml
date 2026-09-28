@@ -1,0 +1,27 @@
+name: Dog Tag Day Browser Runtime
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'browser/Dockerfile'
+      - 'browser/runtime/**'
+      - 'browser/runtime-worker/**'
+      - '.github/workflows/dogtag-browser-runtime.yml'
+
+jobs:
+  build-runtime:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build Dog Tag Day Browser runtime
+        run: docker build -f browser/Dockerfile -t dogtagday-browser:runtime .
+
+      - name: Verify image contains Chromium and worker
+        run: |
+          docker run --rm --entrypoint chromium dogtagday-browser:runtime --version
+          docker run --rm --entrypoint node dogtagday-browser:runtime --version
+          docker run --rm --entrypoint test dogtagday-browser:runtime -f /opt/dogtag-browser/runtime-worker/dist/index.js
