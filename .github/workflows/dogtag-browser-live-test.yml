@@ -5,6 +5,9 @@ on:
   push:
     paths:
       - '.github/workflows/dogtag-browser-live-test.yml'
+      - 'browser/runtime-worker/**'
+      - 'browser/runtime/**'
+      - 'browser/Dockerfile'
 
 permissions:
   contents: read
