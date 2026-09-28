@@ -29,7 +29,8 @@ async function connectorPost(path: string, body: unknown) {
 
 function currentPage(pages: Page[]) {
   if (!pages.length) throw new Error('no_page');
-  return pages[pages.length - 1];
+  const webPage = [...pages].reverse().find(page => /^https?:\/\//i.test(page.url()));
+  return webPage || pages[pages.length - 1];
 }
 
 async function execute(page: Page, action: string, payload: Record<string, string>) {
