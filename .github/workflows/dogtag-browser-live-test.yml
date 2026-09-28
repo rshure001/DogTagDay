@@ -45,7 +45,7 @@ jobs:
             dogtagday-browser:runtime
           for i in $(seq 1 45); do
             STATUS="$(curl -fsS -H "x-dogtag-runtime-token: $DOGTAG_RUNTIME_TOKEN" "$CONNECTOR?op=status")"
-            if echo "$STATUS" | jq -e '.runtimeAttached == true and .runtimeStale == false and (.heartbeatAgeMs // 999999) < 30000' >/dev/null; then
+            if echo "$STATUS" | jq -e '.runtimeAttached == true and .stale == false and (.heartbeatAgeMs // 999999) < 30000' >/dev/null; then
               echo "Runtime heartbeat verified."
               exit 0
             fi
