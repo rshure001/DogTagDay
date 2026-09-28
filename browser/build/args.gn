@@ -1,0 +1,6 @@
+is_debug=false
+is_official_build=false
+symbol_level=1
+dcheck_always_on=false
+use_remoteexec=false
+enable_nacl=false
