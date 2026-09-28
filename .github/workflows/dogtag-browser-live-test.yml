@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
-      CONNECTOR: https://dog-tag-day-browser-connector-rtpz8q.v2.appdeploy.ai
+      CONNECTOR: https://ynleeweezwkdbisaiovq.supabase.co/functions/v1/dogtag-browser-runtime
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -41,8 +41,8 @@ jobs:
             -e DOGTAG_CONNECTOR_URL="$CONNECTOR" \
             dogtagday-browser:runtime
           for i in $(seq 1 45); do
-            STATUS="$(curl -fsS "$CONNECTOR/api/status")"
-            if echo "$STATUS" | jq -e '.runtimeAttached == true and .runtimeStale == false and (.heartbeatAgeMs // 999999) < 30000' >/dev/null; then
+            STATUS="$(curl -fsS -H "x-dogtag-runtime-token: $DOGTAG_RUNTIME_TOKEN" "$CONNECTOR/status")"
+            if echo "$STATUS" | jq -e '.runtimeAttached == true and .stale == false and (.heartbeatAgeMs // 999999) < 30000' >/dev/null; then
               echo "Runtime heartbeat verified."
               exit 0
             fi
@@ -52,21 +52,16 @@ jobs:
           echo "Runtime failed to heartbeat." >&2
           exit 1
 
-      - name: Give assistant control
-        run: |
-          curl -fsS -X POST "$CONNECTOR/api/handoff" \
-            -H 'content-type: application/json' \
-            --data '{"owner":"assistant"}' | jq .
-
       - name: Open example.com through connector
         shell: bash
         run: |
           set -euo pipefail
-          ID="$(curl -fsS -X POST "$CONNECTOR/api/command" \
+          ID="$(curl -fsS -X POST "$CONNECTOR/test/command" \
+            -H "x-dogtag-runtime-token: $DOGTAG_RUNTIME_TOKEN" \
             -H 'content-type: application/json' \
             --data '{"action":"open","payload":{"url":"https://example.com/"}}' | jq -r .id)"
           for i in $(seq 1 45); do
-            R="$(curl -fsS -H "x-dogtag-runtime-token: $DOGTAG_RUNTIME_TOKEN" "$CONNECTOR/api/runtime/command/$ID")"
+            R="$(curl -fsS -H "x-dogtag-runtime-token: $DOGTAG_RUNTIME_TOKEN" "$CONNECTOR/test/command/$ID")"
             STATE="$(echo "$R" | jq -r .state)"
             if [[ "$STATE" == "done" ]]; then
               echo "$R" | jq -e '.result.url | contains("example.com")'
@@ -85,11 +80,12 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          ID="$(curl -fsS -X POST "$CONNECTOR/api/command" \
+          ID="$(curl -fsS -X POST "$CONNECTOR/test/command" \
+            -H "x-dogtag-runtime-token: $DOGTAG_RUNTIME_TOKEN" \
             -H 'content-type: application/json' \
             --data '{"action":"read","payload":{"selector":"h1"}}' | jq -r .id)"
           for i in $(seq 1 45); do
-            R="$(curl -fsS -H "x-dogtag-runtime-token: $DOGTAG_RUNTIME_TOKEN" "$CONNECTOR/api/runtime/command/$ID")"
+            R="$(curl -fsS -H "x-dogtag-runtime-token: $DOGTAG_RUNTIME_TOKEN" "$CONNECTOR/test/command/$ID")"
             STATE="$(echo "$R" | jq -r .state)"
             if [[ "$STATE" == "done" ]]; then
               echo "$R" | jq -e '.result.text == "Example Domain"'
@@ -108,11 +104,12 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          ID="$(curl -fsS -X POST "$CONNECTOR/api/command" \
+          ID="$(curl -fsS -X POST "$CONNECTOR/test/command" \
+            -H "x-dogtag-runtime-token: $DOGTAG_RUNTIME_TOKEN" \
             -H 'content-type: application/json' \
             --data '{"action":"click","payload":{"selector":"a"}}' | jq -r .id)"
           for i in $(seq 1 45); do
-            R="$(curl -fsS -H "x-dogtag-runtime-token: $DOGTAG_RUNTIME_TOKEN" "$CONNECTOR/api/runtime/command/$ID")"
+            R="$(curl -fsS -H "x-dogtag-runtime-token: $DOGTAG_RUNTIME_TOKEN" "$CONNECTOR/test/command/$ID")"
             STATE="$(echo "$R" | jq -r .state)"
             if [[ "$STATE" == "done" ]]; then
               echo "$R" | jq -e '.result.clicked == "a"'
@@ -130,7 +127,7 @@ jobs:
       - name: Final connector status
         if: always()
         run: |
-          curl -fsS "$CONNECTOR/api/status" | jq .
+          curl -fsS -H "x-dogtag-runtime-token: $DOGTAG_RUNTIME_TOKEN" "$CONNECTOR/status" | jq .
           docker logs --tail 100 dogtag-browser || true
 
       - name: Stop runtime
