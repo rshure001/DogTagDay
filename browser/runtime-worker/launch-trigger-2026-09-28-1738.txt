@@ -1,0 +1,3 @@
+Dog Tag Day browser worker launch trigger
+Requested: 2026-09-28 17:38 America/Los_Angeles
+Purpose: start the existing GitHub Actions Chromium worker and attach it to the Dog Tag Day browser connector.
