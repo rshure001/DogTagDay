@@ -1,0 +1,28 @@
+name: Dog Tag Browser Worker
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '*/15 * * * *'
+permissions:
+  id-token: write
+  contents: read
+concurrency:
+  group: dogtag-browser-worker
+  cancel-in-progress: true
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install playwright
+      - run: npx playwright install --with-deps chromium
+      - name: Run browser worker
+        env:
+          DOGTAG_RUNTIME_URL: https://ynleeweezwkdbisaiovq.supabase.co/functions/v1/dogtag-browser-runtime
+          ACTIONS_ID_TOKEN_REQUEST_URL: ${{ env.ACTIONS_ID_TOKEN_REQUEST_URL }}
+          ACTIONS_ID_TOKEN_REQUEST_TOKEN: ${{ env.ACTIONS_ID_TOKEN_REQUEST_TOKEN }}
+        run: node scripts/dogtag-browser-worker.mjs
