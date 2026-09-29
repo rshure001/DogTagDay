@@ -1,0 +1,13 @@
+name: Dog Tag Browser Runner Fresh
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  proof:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Proof of life
+        run: echo "DOGTAG_BROWSER_RUNNER_ALIVE"
