@@ -1,6 +1,6 @@
 import { chromium, Page } from 'playwright-core';
 
-const connector = process.env.DOGTAG_CONNECTOR_URL || 'https://ynleeweezwkdbisaiovq.supabase.co/functions/v1/dogtag-browser-runtime';
+const connector = process.env.DOGTAG_CONNECTOR_URL || 'https://dog-tag-day-browser-connector-rtpz8q.v2.appdeploy.ai';
 const cdpUrl = process.env.DOGTAG_CDP_URL || 'http://127.0.0.1:9222';
 const pollMs = Number(process.env.DOGTAG_POLL_MS || 1200);
 let runtimeToken = process.env.DOGTAG_RUNTIME_TOKEN || '';
@@ -42,18 +42,36 @@ async function authorizedFetch(url: URL, init: RequestInit = {}) {
   return response;
 }
 
-async function connectorGet(op: string, params: Record<string, string> = {}) {
-  const url = new URL(connector);
-  url.searchParams.set('op', op);
+function connectorUrl(op: string, params: Record<string, string> = {}) {
+  const isAppDeploy = connector.includes('appdeploy.ai');
+  let url: URL;
+  if (isAppDeploy) {
+    const paths: Record<string, string> = {
+      heartbeat: '/api/runtime/heartbeat',
+      next: '/api/runtime/next',
+      result: '/api/runtime/result',
+      status: '/api/status',
+    };
+    const path = paths[op];
+    if (!path) throw new Error(`unsupported_appdeploy_op_${op}`);
+    url = new URL(path, connector.endsWith('/') ? connector : connector + '/');
+  } else {
+    url = new URL(connector);
+    url.searchParams.set('op', op);
+  }
   for (const [key, value] of Object.entries(params)) url.searchParams.set(key, value);
+  return url;
+}
+
+async function connectorGet(op: string, params: Record<string, string> = {}) {
+  const url = connectorUrl(op, params);
   const response = await authorizedFetch(url, { headers: runtimeHeaders() });
   if (!response.ok) throw new Error(`connector_get_${response.status}`);
   return response.json();
 }
 
 async function connectorPost(op: string, body: unknown) {
-  const url = new URL(connector);
-  url.searchParams.set('op', op);
+  const url = connectorUrl(op);
   const response = await authorizedFetch(url, {
     method: 'POST',
     headers: runtimeHeaders({ 'content-type': 'application/json' }),
