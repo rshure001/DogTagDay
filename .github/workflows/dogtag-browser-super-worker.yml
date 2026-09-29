@@ -83,7 +83,7 @@ jobs:
       - name: Run Dog Tag Day super browser worker
         working-directory: browser/runtime-worker
         env:
-          DOGTAG_CONNECTOR_URL: https://ynleeweezwkdbisaiovq.supabase.co/functions/v1/dogtag-browser-runtime
+          DOGTAG_CONNECTOR_URL: https://dog-tag-day-browser-connector-rtpz8q.v2.appdeploy.ai
           DOGTAG_CDP_URL: http://127.0.0.1:9222
           DOGTAG_POLL_MS: '800'
         run: npm start
