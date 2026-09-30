@@ -19,7 +19,7 @@ async function refreshRuntimeToken() {
     headers: { Authorization: `bearer ${actionsBearer}` },
   });
   if (!response.ok) throw new Error(`oidc_refresh_${response.status}`);
-  const body = await response.json() as { value?: string };
+  const body = (await response.json()) as { value?: string };
   if (!body.value) throw new Error('oidc_refresh_missing_value');
   runtimeToken = body.value;
   return runtimeToken;
@@ -27,67 +27,33 @@ async function refreshRuntimeToken() {
 
 if (!runtimeToken && !actionsTokenUrl) throw new Error('DOGTAG_RUNTIME_TOKEN is required');
 
-function runtimeHeaders(extra: Record<string, string> = {}) {
-  return { 'x-dogtag-runtime-token': runtimeToken, ...extra };
-}
-
-async function authorizedFetch(url: URL, init: RequestInit = {}) {
+async function relayCall(
+  relayPage: Page,
+  method: 'heartbeat' | 'next' | 'result',
+  payload: Record<string, unknown>,
+) {
   if (!runtimeToken) await refreshRuntimeToken();
-  let response = await fetch(url, init);
-  if (response.status !== 401) return response;
-  await refreshRuntimeToken();
-  const headers = new Headers(init.headers || {});
-  headers.set('x-dogtag-runtime-token', runtimeToken);
-  response = await fetch(url, { ...init, headers });
-  return response;
-}
+  const invoke = async () =>
+    relayPage.evaluate(
+      async ({ methodName, data }) => {
+        const runtime = (window as unknown as {
+          dogtagRuntime?: Record<string, (payload: Record<string, unknown>) => Promise<unknown>>;
+        }).dogtagRuntime;
+        if (!runtime || !runtime[methodName]) throw new Error('runtime_relay_not_ready');
+        return runtime[methodName](data);
+      },
+      {
+        methodName: method,
+        data: { ...payload, token: runtimeToken },
+      },
+    );
 
-function connectorUrl(op: string, params: Record<string, string> = {}) {
-  const isAppDeploy = connector.includes('appdeploy.ai');
-  let url: URL;
-  if (isAppDeploy) {
-    const paths: Record<string, string> = {
-      heartbeat: '/api/runtime/heartbeat',
-      next: '/api/runtime/next',
-      result: '/api/runtime/result',
-      status: '/api/status',
-    };
-    const path = paths[op];
-    if (!path) throw new Error(`unsupported_appdeploy_op_${op}`);
-    url = new URL(path, connector.endsWith('/') ? connector : connector + '/');
-  } else {
-    url = new URL(connector);
-    url.searchParams.set('op', op);
+  try {
+    return await invoke();
+  } catch {
+    await refreshRuntimeToken();
+    return invoke();
   }
-  for (const [key, value] of Object.entries(params)) url.searchParams.set(key, value);
-  return url;
-}
-
-async function connectorGet(op: string, params: Record<string, string> = {}) {
-  const url = connectorUrl(op, params);
-  const response = await authorizedFetch(url, { headers: runtimeHeaders() });
-  if (!response.ok) throw new Error(`connector_get_${response.status}`);
-  return response.json();
-}
-
-async function connectorPost(op: string, body: unknown) {
-  const url = connectorUrl(op);
-  const response = await authorizedFetch(url, {
-    method: 'POST',
-    headers: runtimeHeaders({ 'content-type': 'application/json' }),
-    body: JSON.stringify(body),
-  });
-  if (!response.ok) {
-    const detail = await response.text().catch(() => '');
-    throw new Error(`connector_post_${response.status}${detail ? ':' + detail.slice(0, 300) : ''}`);
-  }
-  return response.json();
-}
-
-function currentPage(pages: Page[]) {
-  if (!pages.length) throw new Error('no_page');
-  const webPage = [...pages].reverse().find(page => /^https?:\/\//i.test(page.url()));
-  return webPage || pages[pages.length - 1];
 }
 
 async function execute(page: Page, action: string, payload: Record<string, string>) {
@@ -134,49 +100,63 @@ async function execute(page: Page, action: string, payload: Record<string, strin
 
 async function main() {
   if (!runtimeToken) await refreshRuntimeToken();
+
   const browser = await chromium.connectOverCDP(cdpUrl);
   const contexts = browser.contexts();
   const context = contexts[0] || (await browser.newContext());
-  if (!context.pages().length) await context.newPage();
 
-  await connectorPost('heartbeat', { currentUrl: currentPage(context.pages()).url() });
+  const existing = context.pages();
+  const relayPage = existing[0] || (await context.newPage());
+  await relayPage.goto(connector + '/?runtime=1', {
+    waitUntil: 'domcontentloaded',
+    timeout: 45000,
+  });
+  await relayPage.waitForFunction(
+    () => Boolean((window as unknown as { dogtagRuntime?: unknown }).dogtagRuntime),
+    undefined,
+    { timeout: 30000 },
+  );
+
+  const targetPage = await context.newPage();
+  await relayCall(relayPage, 'heartbeat', { currentUrl: targetPage.url() });
   console.log('DOGTAG_MANAGER_ATTACHED');
 
   let heartbeatAt = Date.now();
   for (;;) {
     try {
-      const page = currentPage(context.pages());
       const now = Date.now();
       if (now - heartbeatAt > 5000) {
-        await connectorPost('heartbeat', { currentUrl: page.url() });
+        await relayCall(relayPage, 'heartbeat', { currentUrl: targetPage.url() });
         heartbeatAt = now;
       }
 
-      const next = await connectorGet('next');
+      const next = (await relayCall(relayPage, 'next', {})) as {
+        command?: {
+          id: string;
+          action: string;
+          payload: Record<string, string>;
+        } | null;
+      };
+
       if (!next.command) {
         await new Promise(resolve => setTimeout(resolve, pollMs));
         continue;
       }
 
-      const command = next.command as {
-        id: string;
-        action: string;
-        payload: Record<string, string>;
-      };
-
+      const command = next.command;
       try {
-        const result = await execute(page, command.action, command.payload || {});
-        await connectorPost('result', {
+        const result = await execute(targetPage, command.action, command.payload || {});
+        await relayCall(relayPage, 'result', {
           id: command.id,
           ok: true,
-          currentUrl: page.url(),
+          currentUrl: targetPage.url(),
           result,
         });
       } catch (error) {
-        await connectorPost('result', {
+        await relayCall(relayPage, 'result', {
           id: command.id,
           ok: false,
-          currentUrl: page.url(),
+          currentUrl: targetPage.url(),
           result: { error: error instanceof Error ? error.message : String(error) },
         });
       }
