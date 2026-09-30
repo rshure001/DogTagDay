@@ -77,7 +77,10 @@ async function connectorPost(op: string, body: unknown) {
     headers: runtimeHeaders({ 'content-type': 'application/json' }),
     body: JSON.stringify(body),
   });
-  if (!response.ok) throw new Error(`connector_post_${response.status}`);
+  if (!response.ok) {
+    const detail = await response.text().catch(() => '');
+    throw new Error(`connector_post_${response.status}${detail ? ':' + detail.slice(0, 300) : ''}`);
+  }
   return response.json();
 }
 
@@ -136,7 +139,10 @@ async function main() {
   const context = contexts[0] || (await browser.newContext());
   if (!context.pages().length) await context.newPage();
 
-  let heartbeatAt = 0;
+  await connectorPost('heartbeat', { currentUrl: currentPage(context.pages()).url() });
+  console.log('DOGTAG_MANAGER_ATTACHED');
+
+  let heartbeatAt = Date.now();
   for (;;) {
     try {
       const page = currentPage(context.pages());
