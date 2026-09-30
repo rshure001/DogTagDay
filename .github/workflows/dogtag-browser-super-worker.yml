@@ -4,9 +4,8 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths:
-      - '.github/workflows/dogtag-browser-super-worker.yml'
-      - 'browser/runtime-worker/**'
+  schedule:
+    - cron: '0 */5 * * *'
 
 permissions:
   contents: read
