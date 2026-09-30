@@ -66,6 +66,13 @@ async function execute(page: Page, action: string, payload: Record<string, strin
       if (!payload.selector) throw new Error('missing_selector');
       await page.locator(payload.selector).first().click({ timeout: 15000 });
       return { clicked: payload.selector, url: page.url() };
+    case 'clickAt': {
+      const x = Number(payload.x);
+      const y = Number(payload.y);
+      if (!Number.isFinite(x) || !Number.isFinite(y)) throw new Error('missing_coordinates');
+      await page.mouse.click(x, y);
+      return { clickedAt: { x, y }, url: page.url() };
+    }
     case 'type':
       if (!payload.selector) throw new Error('missing_selector');
       await page.locator(payload.selector).first().fill(payload.text || '');
@@ -78,11 +85,15 @@ async function execute(page: Page, action: string, payload: Record<string, strin
     case 'screenshot': {
       const data = await page.screenshot({ type: 'jpeg', quality: 35, fullPage: false });
       const base64 = data.toString('base64');
+      const viewport = page.viewportSize();
       return {
         mimeType: 'image/jpeg',
         base64: base64.length <= 180000 ? base64 : undefined,
         byteLength: data.length,
         omittedBecauseTooLarge: base64.length > 180000,
+        viewportWidth: viewport?.width || 0,
+        viewportHeight: viewport?.height || 0,
+        url: page.url(),
       };
     }
     case 'back':
