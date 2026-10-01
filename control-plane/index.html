@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#071426">
+<title>Dog Tag Day Control Plane</title>
+<style>
+:root{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:#071426;color:#fff}
+*{box-sizing:border-box}body{margin:0;background:#071426;min-height:100vh}
+main{max-width:760px;margin:auto;padding:calc(18px + env(safe-area-inset-top)) 14px calc(70px + env(safe-area-inset-bottom))}
+.brand{color:#d9b75d;font-weight:900;letter-spacing:.09em;font-size:.76rem}
+h1{font-size:2rem;line-height:1.05;margin:.55rem 0 .35rem}
+h2{font-size:1.18rem;margin:.2rem 0 .55rem}.sub,.small{color:#afbdca;line-height:1.5}.small{font-size:.86rem}
+.card{background:#0d1c2f;border:1px solid #334a60;border-radius:16px;padding:17px;margin:14px 0}
+.hero{border-top:6px solid #b62035;border-left:2px solid #d9b75d;border-right:2px solid #d9b75d;border-bottom:2px solid #d9b75d}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.lane{background:#101f34;border:1px solid #2d425a;border-radius:13px;padding:14px}
+.row{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-top:1px solid #2a3e52}.row:first-of-type{border-top:0}
+.ok{color:#79e2aa;font-weight:900}.next{color:#f1c96b;font-weight:900}.hold{color:#f59e9e;font-weight:900}
+.btn{display:block;width:100%;padding:14px;margin:9px 0;border-radius:11px;text-align:center;text-decoration:none;font-weight:900;background:#d9b75d;color:#071426}
+.btn.secondary{background:#172b43;color:#fff;border:1px solid #496078}.btn.tiktok{background:#111;color:#fff;border:1px solid #4a5568}.btn.youtube{background:#b62035;color:#fff}.btn.meta{background:#1877f2;color:#fff}
+.badge{display:inline-block;padding:4px 8px;border-radius:999px;border:1px solid #496078;color:#c7d3df;font-size:.74rem;font-weight:800}
+@media(max-width:580px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main>
+<div class="brand">DOG TAG DAY • OWNED OPERATIONS</div>
+<h1>Dog Tag Day Control Plane</h1>
+<p class="sub">One control doorway for social publishing, email, site health, logs and recovery. Existing systems remain online until each replacement lane is tested.</p>
+
+<section class="card hero">
+<span class="badge">V1</span>
+<h2>Cutover policy</h2>
+<div class="row"><span>Public DogTagDay.org homepage</span><span class="ok">UNTOUCHED</span></div>
+<div class="row"><span>Existing backups / fallbacks</span><span class="ok">KEEP LIVE</span></div>
+<div class="row"><span>New direct API lanes</span><span class="next">BUILD + TEST</span></div>
+</section>
+
+<section class="grid">
+<article class="lane"><h2>TikTok</h2><div class="next">CONNECT NEXT</div><p class="small">Direct OAuth + direct video publishing through the Dog Tag Day backend.</p></article>
+<article class="lane"><h2>YouTube</h2><div class="next">AFTER TIKTOK</div><p class="small">Direct publishing lane, separate from analytics.</p></article>
+<article class="lane"><h2>Facebook + Instagram</h2><div class="next">AFTER YOUTUBE</div><p class="small">Official Meta API lane with isolated failure handling.</p></article>
+<article class="lane"><h2>Email Outreach</h2><div class="next">HARDENING</div><p class="small">Suppression list, skip-on-failure, counts and delivery evidence.</p></article>
+<article class="lane"><h2>Website</h2><div class="ok">LIVE</div><p class="small">Website remains independent from the control plane.</p></article>
+<article class="lane"><h2>Recovery</h2><div class="ok">KEEP FALLBACKS</div><p class="small">No old system removed until replacement passes live testing.</p></article>
+</section>
+
+<section class="card">
+<h2>Direct Platform Authorization</h2>
+<p class="small">These go straight to the Dog Tag Day backend. No Metricool or AppDeploy control page is required for the handoff itself.</p>
+<a class="btn tiktok" href="https://ynleeweezwkdbisaiovq.supabase.co/functions/v1/dogtag-control/connect/tiktok">CONNECT TIKTOK</a>
+<a class="btn youtube" href="https://ynleeweezwkdbisaiovq.supabase.co/functions/v1/dogtag-control/connect/youtube">CONNECT YOUTUBE</a>
+<a class="btn meta" href="https://ynleeweezwkdbisaiovq.supabase.co/functions/v1/dogtag-control/connect/meta">CONNECT FACEBOOK + INSTAGRAM</a>
+</section>
+
+<section class="card">
+<h2>Operations</h2>
+<a class="btn" href="https://ynleeweezwkdbisaiovq.supabase.co/functions/v1/dogtag-control/api/status" rel="noreferrer">LIVE BACKEND STATUS</a>
+<a class="btn secondary" href="/control/">EXISTING COMMAND CENTER</a>
+<a class="btn secondary" href="/browser/">OPERATIONS BROWSER</a>
+</section>
+
+<section class="card">
+<h2>Security</h2>
+<div class="row"><span>Passwords on this page</span><span class="ok">NONE</span></div>
+<div class="row"><span>OAuth tokens on this page</span><span class="ok">NONE</span></div>
+<div class="row"><span>Developer secrets</span><span class="ok">VAULT ONLY</span></div>
+<div class="row"><span>Provider isolation</span><span class="ok">YES</span></div>
+</section>
+
+<p class="small">Dog Tag Day Control Plane V1. This page does not store passwords, tokens, app secrets or recovery codes.</p>
+</main>
+</body>
+</html>

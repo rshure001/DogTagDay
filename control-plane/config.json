@@ -1,0 +1,28 @@
+{
+  "version": "1.0.0",
+  "cutoverPolicy": "keep-legacy-live-until-replacement-proven",
+  "modules": {
+    "tiktok": {
+      "state": "migration_pending",
+      "legacyFallback": "appdeploy"
+    },
+    "youtube": {
+      "state": "connector_pending"
+    },
+    "meta": {
+      "state": "connector_pending"
+    },
+    "email": {
+      "state": "hardening_pending"
+    },
+    "website": {
+      "state": "legacy_live"
+    },
+    "logs": {
+      "state": "foundation_ready"
+    },
+    "secrets": {
+      "state": "secure_store_required"
+    }
+  }
+}
