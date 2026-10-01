@@ -2,11 +2,27 @@ name: Publish Commercial One
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - publisher-direct
+    paths:
+      - '.github/workflows/publish-commercial-one.yml'
+      - '.publisher-trigger'
 
 jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
+      - name: Check required secrets
+        shell: bash
+        env:
+          META_ACCESS_TOKEN: ${{ secrets.META_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+        run: |
+          set -euo pipefail
+          test -n "${META_ACCESS_TOKEN}" || { echo "META_ACCESS_TOKEN is missing"; exit 1; }
+          test -n "${IG_USER_ID}" || { echo "IG_USER_ID is missing"; exit 1; }
+
       - name: Create Instagram Reel container
         id: create
         shell: bash
@@ -17,19 +33,15 @@ jobs:
           set -euo pipefail
           VIDEO_URL='https://static.metricool.com/planner/202609/6882844-file-7467803550847519649.mp4'
           CAPTION='Dog Tag Day — April 18, 2027. Real people. Real support. Real change. Put them on. Acknowledge one. DogTagDay.org #DogTagDay #Veterans'
-          RESPONSE=$(curl -sS -X POST "https://graph.facebook.com/v24.0/${IG_USER_ID}/media"             --data-urlencode "media_type=REELS"             --data-urlencode "video_url=${VIDEO_URL}"             --data-urlencode "caption=${CAPTION}"             --data-urlencode "share_to_feed=true"             --data-urlencode "access_token=${META_ACCESS_TOKEN}")
+          RESPONSE=$(curl -sS -X POST "https://graph.facebook.com/v24.0/${IG_USER_ID}/media" \
+            --data-urlencode "media_type=REELS" \
+            --data-urlencode "video_url=${VIDEO_URL}" \
+            --data-urlencode "caption=${CAPTION}" \
+            --data-urlencode "share_to_feed=true" \
+            --data-urlencode "access_token=${META_ACCESS_TOKEN}")
           echo "${RESPONSE}"
-          CONTAINER_ID=$(python - <<'PY'
-import json, os
-data=json.loads(os.environ['RESPONSE'])
-if 'id' not in data:
-    raise SystemExit(data)
-print(data['id'])
-PY
-          )
+          CONTAINER_ID=$(python -c 'import json,sys; d=json.loads(sys.argv[1]); print(d["id"]) if "id" in d else (_ for _ in ()).throw(SystemExit(d))' "${RESPONSE}")
           echo "container_id=${CONTAINER_ID}" >> "$GITHUB_OUTPUT"
-        env:
-          RESPONSE: ''
 
       - name: Wait for Instagram processing
         shell: bash
@@ -41,11 +53,12 @@ PY
           for i in $(seq 1 30); do
             RESPONSE=$(curl -sS "https://graph.facebook.com/v24.0/${CONTAINER_ID}?fields=status_code&access_token=${META_ACCESS_TOKEN}")
             echo "${RESPONSE}"
-            STATUS=$(python -c "import json,sys; print(json.loads(sys.argv[1]).get('status_code',''))" "${RESPONSE}")
+            STATUS=$(python -c 'import json,sys; print(json.loads(sys.argv[1]).get("status_code",""))' "${RESPONSE}")
             if [ "${STATUS}" = "FINISHED" ]; then exit 0; fi
             if [ "${STATUS}" = "ERROR" ]; then exit 1; fi
             sleep 10
           done
+          echo "Timed out waiting for Instagram processing"
           exit 1
 
       - name: Publish Reel
@@ -56,4 +69,8 @@ PY
           CONTAINER_ID: ${{ steps.create.outputs.container_id }}
         run: |
           set -euo pipefail
-          curl -sS -X POST "https://graph.facebook.com/v24.0/${IG_USER_ID}/media_publish"             --data-urlencode "creation_id=${CONTAINER_ID}"             --data-urlencode "access_token=${META_ACCESS_TOKEN}"
+          RESPONSE=$(curl -sS -X POST "https://graph.facebook.com/v24.0/${IG_USER_ID}/media_publish" \
+            --data-urlencode "creation_id=${CONTAINER_ID}" \
+            --data-urlencode "access_token=${META_ACCESS_TOKEN}")
+          echo "${RESPONSE}"
+          python -c 'import json,sys; d=json.loads(sys.argv[1]); assert "id" in d, d' "${RESPONSE}"
