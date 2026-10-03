@@ -11,7 +11,11 @@ async function authorizeControlRequest(request, env) {
   try {
     const parts = token.split(".");
     if (parts.length !== 3) throw new Error("bad_jwt");
-    const decode = (v) => JSON.parse(atob(v.replace(/-/g, "+").replace(/_/g, "/")));
+    const b64url = (v) => {
+      const normalized = v.replace(/-/g, "+").replace(/_/g, "/");
+      return normalized + "=".repeat((4 - normalized.length % 4) % 4);
+    };
+    const decode = (v) => JSON.parse(atob(b64url(v)));
     const headerPart = decode(parts[0]);
     const claims = decode(parts[1]);
     if (claims.iss !== "https://token.actions.githubusercontent.com") throw new Error("bad_issuer");
@@ -22,7 +26,7 @@ async function authorizeControlRequest(request, env) {
     if (!jwk) throw new Error("unknown_kid");
     const key = await crypto.subtle.importKey("jwk", jwk, { name: "RSASSA-PKCS1-v1_5", hash: "SHA-256" }, false, ["verify"]);
     const data = new TextEncoder().encode(parts[0] + "." + parts[1]);
-    const signature = Uint8Array.from(atob(parts[2].replace(/-/g, "+").replace(/_/g, "/")), c => c.charCodeAt(0));
+    const signature = Uint8Array.from(atob(b64url(parts[2])), c => c.charCodeAt(0));
     const valid = await crypto.subtle.verify("RSASSA-PKCS1-v1_5", key, signature, data);
     if (!valid) throw new Error("bad_signature");
     return null;
