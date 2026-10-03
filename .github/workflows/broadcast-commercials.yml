@@ -30,7 +30,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          RESPONSE="$(curl -fsS -X POST -H "Authorization: Bearer ${DOGTAG_RELAY_TOKEN}" -H "content-type: application/json" --data '{"commercials":["commercial-1","commercial-2","commercial-3"]}' https://dog-tag-day-super-house.workers.dev/api/relay)"
+          RESPONSE="$(curl -fsS -X POST -H "Authorization: Bearer ${DOGTAG_RELAY_TOKEN}" -H "content-type: application/json" --data '{"commercials":["commercial-1","commercial-2","commercial-3"]}' https://dog-tag-day-super-house.juvenile-lemming.workers.dev/api/relay)"
           echo "$RESPONSE"
           echo "$RESPONSE" | grep -q '"ok": true'
           echo "RELAY_ACCEPTED=true"
