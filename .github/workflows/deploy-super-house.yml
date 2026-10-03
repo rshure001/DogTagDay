@@ -7,6 +7,7 @@ on:
       - 'super-house/**'
       - 'super-house-worker.js'
       - '.github/workflows/deploy-super-house.yml'
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -15,9 +16,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+
       - name: Deploy Super House
         uses: cloudflare/wrangler-action@v4
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: deploy
+          secrets: |
+            TRYPOST_API_URL
+            TRYPOST_API_KEY
+            TRYPOST_SOCIAL_ACCOUNT_IDS
+        env:
+          TRYPOST_API_URL: ${{ secrets.TRYPOST_API_URL }}
+          TRYPOST_API_KEY: ${{ secrets.TRYPOST_API_KEY }}
+          TRYPOST_SOCIAL_ACCOUNT_IDS: ${{ secrets.TRYPOST_SOCIAL_ACCOUNT_IDS }}
