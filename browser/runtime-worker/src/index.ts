@@ -104,6 +104,19 @@ async function execute(page: Page, action: string, payload: Record<string, strin
       return { url: page.url() };
     case 'status':
       return { title: await page.title(), url: page.url() };
+    case 'reconnect':
+      await page.goto('about:blank', { waitUntil: 'domcontentloaded', timeout: 15000 }).catch(() => null);
+      await relayPage.goto(connector + '/?runtime=1', {
+        waitUntil: 'domcontentloaded',
+        timeout: 45000,
+      });
+      await relayPage.waitForFunction(
+        () => Boolean((window as unknown as { dogtagRuntime?: unknown }).dogtagRuntime),
+        undefined,
+        { timeout: 30000 },
+      );
+      await relayCall(relayPage, 'heartbeat', { currentUrl: page.url() });
+      return { reconnected: true, url: page.url() };
     default:
       throw new Error('unsupported_action');
   }
