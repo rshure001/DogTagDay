@@ -1,6 +1,6 @@
 import { chromium, Page } from 'playwright-core';
 
-const superHouse = process.env.DOGTAG_SUPER_HOUSE_URL || 'https://dog-tag-day-super-house.workers.dev';
+const superHouse = process.env.DOGTAG_SUPER_HOUSE_URL || 'https://dog-tag-day-super-house.juvenile-lemming.workers.dev';
 const connector = process.env.DOGTAG_CONNECTOR_URL || 'https://dog-tag-day-browser-connector-rtpz8q.v2.appdeploy.ai';
 const cdpUrl = process.env.DOGTAG_CDP_URL || 'http://127.0.0.1:9222';
 const pollMs = Number(process.env.DOGTAG_POLL_MS || 1200);
