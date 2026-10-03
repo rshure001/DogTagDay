@@ -1,4 +1,4 @@
-name: Dog Tag Day Commercial Broadcast — Super House Relay
+name: Dog Tag Day Commercial Broadcast — Direct Publisher
 
 on:
   workflow_dispatch:
@@ -7,31 +7,29 @@ on:
     paths:
       - '.github/workflows/broadcast-commercials.yml'
       - '.github/workflows/dog-tag-day-broadcast-trigger.txt'
-  schedule:
-    - cron: '0 */2 * * *'
 
 permissions:
   contents: read
-  id-token: write
 
 jobs:
-  trigger-super-house:
-    name: "Trigger Super House Relay"
+  publish-approved-commercials:
+    name: "Publish all three approved commercials"
     runs-on: ubuntu-latest
     steps:
-      - name: Get short-lived relay identity
+      - name: Publish Commercial 1
         shell: bash
         run: |
           set -euo pipefail
-          RESPONSE="$(curl -fsS --retry 3 --retry-delay 2 -H "Authorization: bearer \${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" "\${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=dogtag-browser")"
-          TOKEN="$(node -e "const x=JSON.parse(process.argv[1]); if(!x.value) process.exit(2); process.stdout.write(x.value)" "$RESPONSE")"
-          echo "DOGTAG_RELAY_TOKEN=$TOKEN" >> "$GITHUB_ENV"
+          curl -fsS --retry 3 --retry-delay 2 -X POST             -H "content-type: application/json"             https://dog-tag-day-kwai-bridge-awybdm.v2.appdeploy.ai/api/run-now
 
-      - name: Queue all three approved commercials
+      - name: Publish Commercial 2
         shell: bash
         run: |
           set -euo pipefail
-          RESPONSE="$(curl -fsS -X POST -H "Authorization: Bearer \${DOGTAG_RELAY_TOKEN}" -H "content-type: application/json" --data '{"commercials":["commercial-1","commercial-2","commercial-3"]}' https://dog-tag-day-super-house.juvenile-lemming.workers.dev/api/relay)"
-          echo "$RESPONSE"
-          echo "$RESPONSE" | grep -q '"ok": true'
-          echo "RELAY_ACCEPTED=true"
+          curl -fsS --retry 3 --retry-delay 2 -X POST             -H "content-type: application/json"             https://dog-tag-day-kwai-bridge-awybdm.v2.appdeploy.ai/api/run-now
+
+      - name: Publish Commercial 3
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsS --retry 3 --retry-delay 2 -X POST             -H "content-type: application/json"             https://dog-tag-day-kwai-bridge-awybdm.v2.appdeploy.ai/api/run-now
