@@ -1,9 +1,40 @@
 <!doctype html>
-<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dog Tag Day — Super Scheduler</title>
-<style>body{font-family:system-ui;margin:0;background:#101418;color:#fff}main{max-width:900px;margin:auto;padding:28px}.card{background:#1b2229;border-radius:14px;padding:20px;margin:14px 0}.ok{color:#7ee787}.warn{color:#ffd33d}button{padding:12px 18px;border:0;border-radius:10px;font-weight:700}</style></head>
-<body><main><h1>Dog Tag Day Super Scheduler</h1><p class="ok">● SUPER HOUSE ONLINE — CONTROL CENTER</p>
-<div class="card"><h2>Commercial Vault</h2><p>Commercial #1 — APPROVED</p><p>Commercial #2 — APPROVED</p><p>Commercial #3 — SOLDIERS STEP OUT — APPROVED</p></div>
-<div class="card"><h2>Broadcast Queue</h2><p id="state" class="warn">READY — awaiting authorized platform connection</p><button onclick="document.getElementById('state').textContent='QUEUED — verification required before publish'">QUEUE APPROVED COMMERCIALS</button></div>
-<div class="card"><h2>Publishing Engines</h2><p>Primary: Meta / Facebook + Instagram</p><p>Backup: free platform publisher</p><p>Emergency: replacement engine</p><p>Rule: FAILED ENGINE → REPLACE, DON'T PATCH</p></div>
-<div class="card"><h2>Verification</h2><p>Nothing is marked LIVE until a real platform post is verified.</p></div>
-</main></body></html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dog Tag Day — Super House</title>
+<style>
+body{font-family:system-ui;margin:0;background:#0b1117;color:#fff}main{max-width:1000px;margin:auto;padding:24px}.top{display:flex;justify-content:space-between;gap:12px;align-items:center}.badge{color:#7ee787;font-weight:800}.card{background:#151d25;border:1px solid #2b3946;border-radius:16px;padding:20px;margin:14px 0}button{padding:13px 18px;border:0;border-radius:10px;font-weight:800;cursor:pointer;margin:4px}.primary{background:#ffd33d;color:#111}.secondary{background:#263442;color:#fff}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}.platform{padding:15px;border-radius:12px;background:#0f151c;border:1px solid #2b3946}.ready{color:#7ee787}.needed{color:#ffd33d}.danger{color:#ff7b72}.small{color:#9aa8b5;font-size:13px}.big{font-size:28px;font-weight:900}
+</style></head>
+<body><main>
+<div class="top"><div><h1>Dog Tag Day Super House</h1><div class="badge">● COMMAND CENTER — LIVE CONTROL PANEL</div></div><button class="secondary" onclick="refresh()">REFRESH</button></div>
+
+<div class="card"><div class="small">MISSION CONTROL</div><div class="big">Commercials → Queue → Publish → Verify</div><p>No AppDeploy credit screen belongs here. This is the independent Super House control surface.</p></div>
+
+<div class="card"><h2>🎬 Commercial Vault</h2><div class="grid">
+<div class="platform"><b>Commercial #1</b><br><span class="ready">APPROVED</span></div>
+<div class="platform"><b>Commercial #2</b><br><span class="ready">APPROVED</span></div>
+<div class="platform"><b>Commercial #3</b><br><span class="ready">SOLDIERS STEP OUT — APPROVED</span></div>
+</div></div>
+
+<div class="card"><h2>📡 Platform Control</h2><div class="grid">
+<div class="platform"><b>Facebook</b><p id="facebook" class="needed">AUTHORIZATION REQUIRED</p><button class="primary" onclick="connect('meta')">CONNECT META</button></div>
+<div class="platform"><b>Instagram</b><p id="instagram" class="needed">AUTHORIZATION REQUIRED</p><button class="primary" onclick="connect('meta')">CONNECT META</button></div>
+<div class="platform"><b>TikTok</b><p id="tiktok" class="needed">AUTHORIZATION REQUIRED</p><button class="primary" onclick="connect('tiktok')">CONNECT TIKTOK</button></div>
+<div class="platform"><b>YouTube</b><p id="youtube" class="needed">AUTHORIZATION REQUIRED</p><button class="primary" onclick="connect('youtube')">CONNECT YOUTUBE</button></div>
+</div></div>
+
+<div class="card"><h2>🚀 Broadcast Control</h2>
+<button class="primary" onclick="queue()">QUEUE APPROVED COMMERCIALS</button>
+<button class="primary" onclick="run()">RUN NEXT COMMERCIAL NOW</button>
+<p id="message">Ready.</p></div>
+
+<div class="card"><h2>🛡️ Failover</h2><p>Primary → Backup → Emergency</p><p class="ready">FAILED ENGINE → REPLACE, DON'T PATCH</p><p class="small">A publication is never counted as LIVE until a real platform result is verified.</p></div>
+
+<div class="card"><h2>📊 Truth Panel</h2><pre id="status" class="small">Loading…</pre></div>
+</main>
+<script>
+const API='https://dog-tag-day-kwai-bridge-awybdm.v2.appdeploy.ai';
+async function refresh(){try{let r=await fetch(API+'/api/status');let d=await r.json();for(const p of ['facebook','instagram','tiktok','youtube']){let e=document.getElementById(p);e.textContent=d.platforms?.[p]?'AUTHORIZED':'AUTHORIZATION REQUIRED';e.className=d.platforms?.[p]?'ready':'needed'}document.getElementById('status').textContent=JSON.stringify(d,null,2)}catch(e){document.getElementById('status').textContent='Backend not reachable: '+e.message}}
+async function connect(t){document.getElementById('message').textContent='Opening secure authorization…';try{let r=await fetch(API+'/api/connect/'+t);let d=await r.json();if(d.authUrl)location.href=d.authUrl;else document.getElementById('message').textContent=d.message||'Provider credentials are not installed yet.'}catch(e){document.getElementById('message').textContent='Authorization service unavailable.'}}
+async function queue(){document.getElementById('message').textContent='Queueing…';try{let r=await fetch('https://dog-tag-day-super-house.workers.dev/api/queue',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({commercial:'commercial-1',platforms:['facebook','instagram','tiktok','youtube']})});document.getElementById('message').textContent=await r.text()}catch(e){document.getElementById('message').textContent='Super House queue endpoint is not deployed yet.'}}
+async function run(){document.getElementById('message').textContent='Sending next commercial to publishing engine…';try{let r=await fetch(API+'/api/run-now',{method:'POST'});document.getElementById('message').textContent=await r.text();refresh()}catch(e){document.getElementById('message').textContent='Publishing engine unavailable.'}}
+refresh();
+</script></body></html>
