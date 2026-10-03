@@ -324,12 +324,26 @@ async function processRelay(job, env) {
   });
 }
 
+function enrichPublishJob(job) {
+  const media = {
+    "commercial-1": "https://ynleeweezwkdbisaiovq.supabase.co/storage/v1/object/public/broadcast-masters/commercial-1-approved.mp4",
+    "commercial-2": "https://ynleeweezwkdbisaiovq.supabase.co/storage/v1/object/public/broadcast-masters/commercial-2-approved.mp4",
+    "commercial-3": "https://ynleeweezwkdbisaiovq.supabase.co/storage/v1/object/public/broadcast-masters/commercial-3-soldiers-step-out-approved.mp4"
+  }[job.commercial];
+  const captions = {
+    "commercial-1": "Dog Tag Day — April 18. Put them on. Acknowledge one. DogTagDay.org",
+    "commercial-2": "Dog Tag Day — April 18. Make veterans visible. Put them on. Acknowledge one. DogTagDay.org",
+    "commercial-3": "Dog Tag Day — April 18. Watch the mission step off the screen. Put them on. Acknowledge one. DogTagDay.org #DogTagDay #Veterans #April18."
+  };
+  return { ...job, mediaUrl: media, caption: captions[job.commercial] || "", publisher: "dog-tag-day-browser", publishDirect: true };
+}
+
 async function dispatchWithFailover(job, env) {
   const id = env.BROWSER_RELAY.idFromName("primary");
   const response = await env.BROWSER_RELAY.get(id).fetch(new Request("https://relay/enqueue", {
     method: "POST",
     headers: { "content-type": "application/json" },
-    body: JSON.stringify({ id: job.id, action: "publish", job })
+    body: JSON.stringify({ id: job.id, action: "publish", job: enrichPublishJob(job) })
   }));
   if (!response.ok) throw new Error("browser_relay_" + response.status);
 }
