@@ -1,4 +1,4 @@
-name: Dog Tag Day Commercial Broadcast — Free Runner
+name: Dog Tag Day Commercial Broadcast — 3-Leg Relay
 
 on:
   push:
@@ -10,12 +10,13 @@ on:
     - cron: '0 */2 * * *'
 
 jobs:
-  broadcast:
+  runner-1:
+    name: "Runner 1 — Facebook + Instagram"
     runs-on: ubuntu-latest
     permissions:
       contents: read
     steps:
-      - name: Broadcast approved commercials
+      - name: Publish first leg
         env:
           TRYPOST_API_URL: ${{ secrets.TRYPOST_API_URL }}
           TRYPOST_API_KEY: ${{ secrets.TRYPOST_API_KEY }}
@@ -25,80 +26,79 @@ jobs:
           test -n "$TRYPOST_API_URL"
           test -n "$TRYPOST_API_KEY"
           test -n "$TRYPOST_SOCIAL_ACCOUNT_IDS"
-
-          node <<'NODE'
+          node - <<'NODE'
           const base = process.env.TRYPOST_API_URL.replace(/\/$/, "");
           const key = process.env.TRYPOST_API_KEY;
           const ids = JSON.parse(process.env.TRYPOST_SOCIAL_ACCOUNT_IDS);
-
           const commercials = [
-            {
-              id: "commercial-1",
-              media: "https://ynleeweezwkdbisaiovq.supabase.co/storage/v1/object/public/broadcast-masters/commercial-1-approved.mp4",
-              caption: "Dog Tag Day — April 18. Put them on. Acknowledge one. DogTagDay.org"
-            },
-            {
-              id: "commercial-2",
-              media: "https://ynleeweezwkdbisaiovq.supabase.co/storage/v1/object/public/broadcast-masters/commercial-2-approved.mp4",
-              caption: "Dog Tag Day — April 18. Make veterans visible. Put them on. Acknowledge one. DogTagDay.org"
-            },
-            {
-              id: "commercial-3",
-              media: "https://ynleeweezwkdbisaiovq.supabase.co/storage/v1/object/public/broadcast-masters/commercial-3-soldiers-step-out-approved.mp4",
-              caption: "Dog Tag Day — April 18. Watch the mission step off the screen. Put them on. Acknowledge one. DogTagDay.org #DogTagDay #Veterans #April18."
-            }
+            ["commercial-1","https://ynleeweezwkdbisaiovq.supabase.co/storage/v1/object/public/broadcast-masters/commercial-1-approved.mp4","Dog Tag Day — April 18. Put them on. Acknowledge one. DogTagDay.org"],
+            ["commercial-2","https://ynleeweezwkdbisaiovq.supabase.co/storage/v1/object/public/broadcast-masters/commercial-2-approved.mp4","Dog Tag Day — April 18. Make veterans visible. Put them on. Acknowledge one. DogTagDay.org"],
+            ["commercial-3","https://ynleeweezwkdbisaiovq.supabase.co/storage/v1/object/public/broadcast-masters/commercial-3-soldiers-step-out-approved.mp4","Dog Tag Day — April 18. Watch the mission step off the screen. Put them on. Acknowledge one. DogTagDay.org #DogTagDay #Veterans #April18."]
           ];
+          async function call(path, body) {
+            const r = await fetch(base+path,{method:"POST",headers:{Authorization:"Bearer "+key,"Content-Type":"application/json"},body:JSON.stringify(body)});
+            const t=await r.text(); if(!r.ok) throw new Error(path+" -> "+r.status+" "+t); return t?JSON.parse(t):{};
+          }
+          for (const [id,media,caption] of commercials) for (const [platform,type] of [["facebook","facebook_reel"],["instagram","instagram_reel"]]) {
+            const post=await call("/posts",{content:caption,platforms:[{social_account_id:ids[platform],content_type:type}]});
+            await call("/posts/"+post.id+"/media/from-url",{url:media});
+            await call("/posts/"+post.id,{method:"PUT",status:"publishing"});
+            console.log("BATON 1 PASSED",id,platform,post.id);
+          }
+          NODE
 
-          const platforms = [
-            ["facebook", "facebook_reel"],
-            ["instagram", "instagram_reel"],
-            ["tiktok", "tiktok_video"],
-            ["youtube", "youtube_short"]
+  runner-2:
+    name: "Runner 2 — TikTok"
+    needs: runner-1
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Publish second leg
+        env:
+          TRYPOST_API_URL: ${{ secrets.TRYPOST_API_URL }}
+          TRYPOST_API_KEY: ${{ secrets.TRYPOST_API_KEY }}
+          TRYPOST_SOCIAL_ACCOUNT_IDS: ${{ secrets.TRYPOST_SOCIAL_ACCOUNT_IDS }}
+        run: |
+          set -euo pipefail
+          test -n "$TRYPOST_API_URL"
+          test -n "$TRYPOST_API_KEY"
+          test -n "$TRYPOST_SOCIAL_ACCOUNT_IDS"
+          node - <<'NODE'
+          const base=process.env.TRYPOST_API_URL.replace(/\/$/,""), key=process.env.TRYPOST_API_KEY, ids=JSON.parse(process.env.TRYPOST_SOCIAL_ACCOUNT_IDS);
+          const c=[
+            ["commercial-1","https://ynleeweezwkdbisaiovq.supabase.co/storage/v1/object/public/broadcast-masters/commercial-1-approved.mp4","Dog Tag Day — April 18. Put them on. Acknowledge one. DogTagDay.org"],
+            ["commercial-2","https://ynleeweezwkdbisaiovq.supabase.co/storage/v1/object/public/broadcast-masters/commercial-2-approved.mp4","Dog Tag Day — April 18. Make veterans visible. Put them on. Acknowledge one. DogTagDay.org"],
+            ["commercial-3","https://ynleeweezwkdbisaiovq.supabase.co/storage/v1/object/public/broadcast-masters/commercial-3-soldiers-step-out-approved.mp4","Dog Tag Day — April 18. Watch the mission step off the screen. Put them on. Acknowledge one. DogTagDay.org #DogTagDay #Veterans #April18."]
           ];
+          async function call(p,b){const r=await fetch(base+p,{method:"POST",headers:{Authorization:"Bearer "+key,"Content-Type":"application/json"},body:JSON.stringify(b)});const t=await r.text();if(!r.ok)throw Error(p+" -> "+r.status+" "+t);return t?JSON.parse(t):{}}
+          for(const [id,media,caption] of c){const post=await call("/posts",{content:caption,platforms:[{social_account_id:ids.tiktok,content_type:"tiktok_video"}]});await call("/posts/"+post.id+"/media/from-url",{url:media});await call("/posts/"+post.id,{method:"PUT",status:"publishing"});console.log("BATON 2 PASSED",id,post.id)}
+          NODE
 
-          async function call(path, options = {}) {
-            const res = await fetch(base + path, {
-              ...options,
-              headers: {
-                Authorization: "Bearer " + key,
-                "Content-Type": "application/json",
-                ...(options.headers || {})
-              }
-            });
-            const body = await res.text();
-            if (!res.ok) throw new Error(path + " -> " + res.status + " " + body);
-            return body ? JSON.parse(body) : {};
-          }
-
-          for (const commercial of commercials) {
-            for (const [platform, content_type] of platforms) {
-              const social_account_id = ids[platform];
-              if (!social_account_id) throw new Error("Missing configured account for " + platform);
-
-              const post = await call("/posts", {
-                method: "POST",
-                body: JSON.stringify({
-                  content: commercial.caption,
-                  platforms: [{ social_account_id, content_type }]
-                })
-              });
-
-              await call("/posts/" + post.id + "/media/from-url", {
-                method: "POST",
-                body: JSON.stringify({ url: commercial.media })
-              });
-
-              await call("/posts/" + post.id, {
-                method: "PUT",
-                body: JSON.stringify({ status: "publishing" })
-              });
-
-              console.log(JSON.stringify({
-                commercial: commercial.id,
-                platform,
-                post_id: post.id,
-                state: "SUBMITTED"
-              }));
-            }
-          }
+  runner-3:
+    name: "Runner 3 — YouTube"
+    needs: runner-2
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Publish final leg
+        env:
+          TRYPOST_API_URL: ${{ secrets.TRYPOST_API_URL }}
+          TRYPOST_API_KEY: ${{ secrets.TRYPOST_API_KEY }}
+          TRYPOST_SOCIAL_ACCOUNT_IDS: ${{ secrets.TRYPOST_SOCIAL_ACCOUNT_IDS }}
+        run: |
+          set -euo pipefail
+          test -n "$TRYPOST_API_URL"
+          test -n "$TRYPOST_API_KEY"
+          test -n "$TRYPOST_SOCIAL_ACCOUNT_IDS"
+          node - <<'NODE'
+          const base=process.env.TRYPOST_API_URL.replace(/\/$/,""), key=process.env.TRYPOST_API_KEY, ids=JSON.parse(process.env.TRYPOST_SOCIAL_ACCOUNT_IDS);
+          const c=[
+            ["commercial-1","https://ynleeweezwkdbisaiovq.supabase.co/storage/v1/object/public/broadcast-masters/commercial-1-approved.mp4","Dog Tag Day — April 18. Put them on. Acknowledge one. DogTagDay.org"],
+            ["commercial-2","https://ynleeweezwkdbisaiovq.supabase.co/storage/v1/object/public/broadcast-masters/commercial-2-approved.mp4","Dog Tag Day — April 18. Make veterans visible. Put them on. Acknowledge one. DogTagDay.org"],
+            ["commercial-3","https://ynleeweezwkdbisaiovq.supabase.co/storage/v1/object/public/broadcast-masters/commercial-3-soldiers-step-out-approved.mp4","Dog Tag Day — April 18. Watch the mission step off the screen. Put them on. Acknowledge one. DogTagDay.org #DogTagDay #Veterans #April18."]
+          ];
+          async function call(p,b){const r=await fetch(base+p,{method:"POST",headers:{Authorization:"Bearer "+key,"Content-Type":"application/json"},body:JSON.stringify(b)});const t=await r.text();if(!r.ok)throw Error(p+" -> "+r.status+" "+t);return t?JSON.parse(t):{}}
+          for(const [id,media,caption] of c){const post=await call("/posts",{content:caption,platforms:[{social_account_id:ids.youtube,content_type:"youtube_short"}]});await call("/posts/"+post.id+"/media/from-url",{url:media});await call("/posts/"+post.id,{method:"PUT",status:"publishing"});console.log("BATON 3 FINISH",id,post.id)}
           NODE
