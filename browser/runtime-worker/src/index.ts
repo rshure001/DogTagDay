@@ -56,7 +56,7 @@ async function relayCall(
   }
 }
 
-async function execute(page: Page, action: string, payload: Record<string, string>) {
+async function execute(page: Page, relayPage: Page, action: string, payload: Record<string, string>) {
   switch (action) {
     case 'open':
       if (!payload.url) throw new Error('missing_url');
@@ -169,7 +169,7 @@ async function main() {
 
       const command = next.command;
       try {
-        const result = await execute(targetPage, command.action, command.payload || {});
+        const result = await execute(targetPage, relayPage, command.action, command.payload || {});
         await relayCall(relayPage, 'result', {
           id: command.id,
           ok: true,
