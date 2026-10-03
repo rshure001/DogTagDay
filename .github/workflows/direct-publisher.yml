@@ -1,0 +1,30 @@
+# Dog Tag Day — direct publisher runner
+# This workflow validates the direct-publisher contract on every change.
+# Actual platform publication remains inside the Dog Tag Day browser session;
+# this workflow never marks a job published without a browser result.
+
+name: Direct Publisher Contract
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'super-house/direct-browser-publisher.js'
+      - 'super-house-worker.js'
+      - '.github/workflows/direct-publisher.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Validate direct publisher contract
+        run: |
+          node --check super-house/direct-browser-publisher.js
+          grep -q 'publisher: "dog-tag-day-browser"' super-house/direct-browser-publisher.js
+          grep -q 'action: "publish_direct"' super-house/direct-browser-publisher.js
+          echo "DIRECT_PUBLISHER_CONTRACT=VALID"
