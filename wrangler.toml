@@ -17,4 +17,12 @@ max_retries = 5
 dead_letter_queue = "dog-tag-day-broadcast-dlq"
 
 [vars]
-SUPER_HOUSE_VERSION = "1.0.0"
+SUPER_HOUSE_VERSION = "1.2.0-browser-relay"
+
+[[durable_objects.bindings]]
+name = "BROWSER_RELAY"
+class_name = "BrowserRelay"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["BrowserRelay"]
