@@ -1,9 +1,55 @@
-const VERSION = "1.0.0";
+const VERSION = "1.1.0-secure";
+const MAX_CONTROL_BODY_BYTES = 16 * 1024;
+const ALLOWED_COMMERCIALS = new Set(["commercial-1", "commercial-2", "commercial-3"]);
+const ALLOWED_PLATFORMS = new Set(["facebook", "instagram", "tiktok", "youtube"]);
+
+async function authorizeControlRequest(request, env) {
+  const configured = env.BROADCAST_CONTROL_SECRET;
+  if (!configured) return json({ ok: false, error: "control_plane_locked" }, 503);
+  const header = request.headers.get("authorization") || "";
+  if (!header.startsWith("Bearer ")) return json({ ok: false, error: "unauthorized" }, 401);
+  const supplied = header.slice(7).trim();
+  const encoder = new TextEncoder();
+  const [a, b] = await Promise.all([
+    crypto.subtle.digest("SHA-256", encoder.encode(supplied)),
+    crypto.subtle.digest("SHA-256", encoder.encode(configured))
+  ]);
+  if (!crypto.subtle.timingSafeEqual(a, b)) return json({ ok: false, error: "unauthorized" }, 401);
+  return null;
+}
+
+async function readControlJson(request) {
+  const declared = Number(request.headers.get("content-length") || "0");
+  if (declared > MAX_CONTROL_BODY_BYTES) throw new Error("request_too_large");
+  const bytes = await request.arrayBuffer();
+  if (bytes.byteLength > MAX_CONTROL_BODY_BYTES) throw new Error("request_too_large");
+  if (!bytes.byteLength) return {};
+  try { return JSON.parse(new TextDecoder().decode(bytes)); }
+  catch { throw new Error("invalid_json"); }
+}
+
+function validateCommercials(values) {
+  if (!Array.isArray(values) || values.length < 1 || values.length > 3) throw new Error("invalid_commercials");
+  const unique = [...new Set(values)];
+  if (unique.length !== values.length || unique.some(v => !ALLOWED_COMMERCIALS.has(v))) {
+    throw new Error("invalid_commercials");
+  }
+  return unique;
+}
+
+function validatePlatforms(values) {
+  if (!Array.isArray(values) || values.length < 1 || values.length > 4) throw new Error("invalid_platforms");
+  const unique = [...new Set(values)];
+  if (unique.length !== values.length || unique.some(v => !ALLOWED_PLATFORMS.has(v))) {
+    throw new Error("invalid_platforms");
+  }
+  return unique;
+}
 
 function json(data, status = 200) {
   return new Response(JSON.stringify(data, null, 2), {
     status,
-    headers: { "content-type": "application/json; charset=utf-8" }
+    headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store", "x-content-type-options": "nosniff" }
   });
 }
 
@@ -45,9 +91,15 @@ export default {
     }
 
     if (url.pathname === "/api/queue-all" && request.method === "POST") {
+      const denied = await authorizeControlRequest(request, env);
+      if (denied) return denied;
+      let body;
+      try { body = await readControlJson(request); } catch (error) { return json({ ok: false, error: String(error.message || error) }, 400); }
+      let selected;
+      try { selected = validateCommercials(body?.commercials || ["commercial-1", "commercial-2", "commercial-3"]); } catch (error) { return json({ ok: false, error: String(error.message || error) }, 400); }
       const platforms = ["facebook", "instagram", "tiktok", "youtube"];
       const jobs = [];
-      for (const commercial of ["commercial-1", "commercial-2", "commercial-3"]) {
+      for (const commercial of selected) {
         const job = {
           id: crypto.randomUUID(),
           commercial,
@@ -63,10 +115,12 @@ export default {
     }
 
     if (url.pathname === "/api/relay" && request.method === "POST") {
-      const body = await request.json().catch(() => null);
-      const commercials = body?.commercials?.length
-        ? body.commercials
-        : ["commercial-1", "commercial-2", "commercial-3"];
+      const denied = await authorizeControlRequest(request, env);
+      if (denied) return denied;
+      let body;
+      try { body = await readControlJson(request); } catch (error) { return json({ ok: false, error: String(error.message || error) }, 400); }
+      let commercials;
+      try { commercials = validateCommercials(body?.commercials?.length ? body.commercials : ["commercial-1", "commercial-2", "commercial-3"]); } catch (error) { return json({ ok: false, error: String(error.message || error) }, 400); }
 
       const relay = {
         id: crypto.randomUUID(),
@@ -92,15 +146,23 @@ export default {
     }
 
     if (url.pathname === "/api/queue" && request.method === "POST") {
-      const body = await request.json().catch(() => null);
-      if (!body?.commercial || !body?.platforms?.length) {
-        return json({ ok: false, error: "commercial_and_platforms_required" }, 400);
+      const denied = await authorizeControlRequest(request, env);
+      if (denied) return denied;
+      let body;
+      try { body = await readControlJson(request); } catch (error) { return json({ ok: false, error: String(error.message || error) }, 400); }
+      let commercial;
+      let platforms;
+      try {
+        commercial = validateCommercials([body?.commercial])[0];
+        platforms = validatePlatforms(body?.platforms);
+      } catch (error) {
+        return json({ ok: false, error: String(error.message || error) }, 400);
       }
 
       const job = {
         id: crypto.randomUUID(),
-        commercial: body.commercial,
-        platforms: body.platforms,
+        commercial,
+        platforms,
         createdAt: new Date().toISOString(),
         attempts: 0,
         state: "QUEUED"
@@ -245,6 +307,8 @@ async function dispatchWithFailover(job, env) {
 
 async function publishWithHttpRunner(job, base) {
   if (!base) throw new Error("runner_not_configured");
+  const target = new URL(base);
+  if (target.protocol !== "https:") throw new Error("publisher_https_required");
   const response = await fetch(base.replace(/\/$/, "") + "/publish", {
     method: "POST",
     headers: { "content-type": "application/json" },
