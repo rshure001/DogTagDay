@@ -1,0 +1,23 @@
+name: Deploy Dog Tag Day Super House
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'wrangler.toml'
+      - 'super-house/**'
+      - 'super-house-worker.js'
+      - '.github/workflows/deploy-super-house.yml'
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Deploy Super House
+        uses: cloudflare/wrangler-action@v4
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy
