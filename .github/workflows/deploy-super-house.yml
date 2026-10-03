@@ -23,6 +23,3 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: deploy
-          TRYPOST_API_URL: ${{ secrets.TRYPOST_API_URL }}
-          TRYPOST_API_KEY: ${{ secrets.TRYPOST_API_KEY }}
-          TRYPOST_SOCIAL_ACCOUNT_IDS: ${{ secrets.TRYPOST_SOCIAL_ACCOUNT_IDS }}
