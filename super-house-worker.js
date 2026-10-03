@@ -14,7 +14,12 @@ async function authorizeControlRequest(request, env) {
     crypto.subtle.digest("SHA-256", encoder.encode(supplied)),
     crypto.subtle.digest("SHA-256", encoder.encode(configured))
   ]);
-  if (!crypto.subtle.timingSafeEqual(a, b)) return json({ ok: false, error: "unauthorized" }, 401);
+  const aa = new Uint8Array(a);
+  const bb = new Uint8Array(b);
+  let diff = aa.length ^ bb.length;
+  const length = Math.max(aa.length, bb.length);
+  for (let i = 0; i < length; i++) diff |= (aa[i] || 0) ^ (bb[i] || 0);
+  if (diff !== 0) return json({ ok: false, error: "unauthorized" }, 401);
   return null;
 }
 
