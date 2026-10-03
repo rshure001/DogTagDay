@@ -84,8 +84,8 @@ export default {
       await env.BROADCAST_QUEUE.send({
         type: "relay",
         relay,
-        commercial: commercials[0],
-        platforms: relay.stages[0].platforms
+        commercialIndex: 0,
+        stageIndex: 0
       });
 
       return json({ ok: true, relay });
@@ -123,7 +123,11 @@ export default {
       // failed engines are replaced, not patched.
       // Actual platform adapters are isolated behind this dispatch boundary.
       try {
-        await dispatchWithFailover(job, env);
+        if (job.type === "relay") {
+          await processRelay(job, env);
+        } else {
+          await dispatchWithFailover(job, env);
+        }
         message.ack();
       } catch (error) {
         console.error("broadcast_failed", {
@@ -135,6 +139,88 @@ export default {
     }
   }
 };
+
+async function processRelay(job, env) {
+  const relay = job.relay;
+  const commercialIndex = Number.isInteger(job.commercialIndex) ? job.commercialIndex : 0;
+  const stageIndex = Number.isInteger(job.stageIndex) ? job.stageIndex : 0;
+  const stage = relay?.stages?.[stageIndex];
+  const commercial = relay?.commercials?.[commercialIndex];
+
+  if (!relay || !stage || !commercial) {
+    throw new Error("relay_state_invalid");
+  }
+
+  const stageJob = {
+    id: relay.id + "-commercial-" + (commercialIndex + 1) + "-stage-" + (stageIndex + 1),
+    commercial,
+    platforms: stage.platforms,
+    relayId: relay.id,
+    relayStage: stage.stage,
+    createdAt: relay.createdAt,
+    attempts: 0,
+    state: "QUEUED"
+  };
+
+  console.log("relay_stage_start", {
+    relayId: relay.id,
+    commercial,
+    commercialIndex,
+    stageIndex,
+    runner: stage.runner,
+    platforms: stage.platforms
+  });
+
+  await dispatchWithFailover(stageJob, env);
+
+  const nextStageIndex = stageIndex + 1;
+  const nextCommercialIndex = commercialIndex + 1;
+
+  if (nextStageIndex < relay.stages.length) {
+    await env.BROADCAST_QUEUE.send({
+      type: "relay",
+      relay: {
+        ...relay,
+        stage: nextStageIndex + 1,
+        state: "IN_PROGRESS"
+      },
+      commercialIndex,
+      stageIndex: nextStageIndex
+    });
+    console.log("relay_baton_pass", {
+      relayId: relay.id,
+      fromStage: stageIndex + 1,
+      toStage: nextStageIndex + 1,
+      commercial
+    });
+    return;
+  }
+
+  if (nextCommercialIndex < relay.commercials.length) {
+    await env.BROADCAST_QUEUE.send({
+      type: "relay",
+      relay: {
+        ...relay,
+        stage: 1,
+        state: "IN_PROGRESS"
+      },
+      commercialIndex: nextCommercialIndex,
+      stageIndex: 0
+    });
+    console.log("relay_next_commercial", {
+      relayId: relay.id,
+      completedCommercial: commercial,
+      nextCommercial: relay.commercials[nextCommercialIndex]
+    });
+    return;
+  }
+
+  console.log("relay_finished", {
+    relayId: relay.id,
+    commercials: relay.commercials,
+    stagesPerCommercial: relay.stages.length
+  });
+}
 
 async function dispatchWithFailover(job, env) {
   const runners = [
