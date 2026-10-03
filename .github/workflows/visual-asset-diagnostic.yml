@@ -58,3 +58,41 @@ jobs:
         with:
           name: visual-asset-diagnostic
           path: visual-asset-diagnostic.jpg
+
+  broadcast:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Broadcast approved commercials
+        env:
+          TRYPOST_API_URL: ${{ secrets.TRYPOST_API_URL }}
+          TRYPOST_API_KEY: ${{ secrets.TRYPOST_API_KEY }}
+          TRYPOST_SOCIAL_ACCOUNT_IDS: ${{ secrets.TRYPOST_SOCIAL_ACCOUNT_IDS }}
+        run: |
+          set -euo pipefail
+          test -n "$TRYPOST_API_URL"
+          test -n "$TRYPOST_API_KEY"
+          test -n "$TRYPOST_SOCIAL_ACCOUNT_IDS"
+          node <<'NODE'
+          const base = process.env.TRYPOST_API_URL.replace(/\/$/, "");
+          const key = process.env.TRYPOST_API_KEY;
+          const ids = JSON.parse(process.env.TRYPOST_SOCIAL_ACCOUNT_IDS);
+          const commercials = [
+            ["commercial-1","https://ynleeweezwkdbisaiovq.supabase.co/storage/v1/object/public/broadcast-masters/commercial-1-approved.mp4","Dog Tag Day — April 18. Put them on. Acknowledge one. DogTagDay.org"],
+            ["commercial-2","https://ynleeweezwkdbisaiovq.supabase.co/storage/v1/object/public/broadcast-masters/commercial-2-approved.mp4","Dog Tag Day — April 18. Make veterans visible. Put them on. Acknowledge one. DogTagDay.org"],
+            ["commercial-3","https://ynleeweezwkdbisaiovq.supabase.co/storage/v1/object/public/broadcast-masters/commercial-3-soldiers-step-out-approved.mp4","Dog Tag Day — April 18. Watch the mission step off the screen. Put them on. Acknowledge one. DogTagDay.org #DogTagDay #Veterans #April18."]
+          ];
+          const platforms=[["facebook","facebook_reel"],["instagram","instagram_reel"],["tiktok","tiktok_video"],["youtube","youtube_short"]];
+          async function call(path,body,method="POST"){
+            const r=await fetch(base+path,{method,headers:{"Authorization":"Bearer "+key,"Content-Type":"application/json"},body:JSON.stringify(body)});
+            const t=await r.text(); if(!r.ok) throw new Error(path+" "+r.status+" "+t); return t?JSON.parse(t):{};
+          }
+          for(const [id,media,content] of commercials){
+            for(const [platform,content_type] of platforms){
+              if(!ids[platform]) throw new Error("missing_account_"+platform);
+              const post=await call("/posts",{content,platforms:[{social_account_id:ids[platform],content_type}]});
+              await call("/posts/"+post.id+"/media/from-url",{url:media});
+              await call("/posts/"+post.id,{status:"publishing"},"PUT");
+              console.log("SUBMITTED",id,platform,post.id);
+            }
+          }
+          NODE
