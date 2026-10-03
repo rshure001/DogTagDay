@@ -1,0 +1,104 @@
+name: Dog Tag Day Commercial Broadcast
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/broadcast-commercials.yml'
+  workflow_dispatch:
+  schedule:
+    - cron: '0 */2 * * *'
+
+jobs:
+  broadcast:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Broadcast approved commercials
+        env:
+          TRYPOST_API_URL: ${{ secrets.TRYPOST_API_URL }}
+          TRYPOST_API_KEY: ${{ secrets.TRYPOST_API_KEY }}
+          TRYPOST_SOCIAL_ACCOUNT_IDS: ${{ secrets.TRYPOST_SOCIAL_ACCOUNT_IDS }}
+        run: |
+          set -euo pipefail
+          test -n "$TRYPOST_API_URL"
+          test -n "$TRYPOST_API_KEY"
+          test -n "$TRYPOST_SOCIAL_ACCOUNT_IDS"
+
+          node <<'NODE'
+          const base = process.env.TRYPOST_API_URL.replace(/\/$/, "");
+          const key = process.env.TRYPOST_API_KEY;
+          const ids = JSON.parse(process.env.TRYPOST_SOCIAL_ACCOUNT_IDS);
+
+          const commercials = [
+            {
+              id: "commercial-1",
+              media: "https://ynleeweezwkdbisaiovq.supabase.co/storage/v1/object/public/broadcast-masters/commercial-1-approved.mp4",
+              caption: "Dog Tag Day — April 18. Put them on. Acknowledge one. DogTagDay.org"
+            },
+            {
+              id: "commercial-2",
+              media: "https://ynleeweezwkdbisaiovq.supabase.co/storage/v1/object/public/broadcast-masters/commercial-2-approved.mp4",
+              caption: "Dog Tag Day — April 18. Make veterans visible. Put them on. Acknowledge one. DogTagDay.org"
+            },
+            {
+              id: "commercial-3",
+              media: "https://ynleeweezwkdbisaiovq.supabase.co/storage/v1/object/public/broadcast-masters/commercial-3-soldiers-step-out-approved.mp4",
+              caption: "Dog Tag Day — April 18. Watch the mission step off the screen. Put them on. Acknowledge one. DogTagDay.org #DogTagDay #Veterans #April18."
+            }
+          ];
+
+          const platforms = [
+            ["facebook", "facebook_reel"],
+            ["instagram", "instagram_reel"],
+            ["tiktok", "tiktok_video"],
+            ["youtube", "youtube_short"]
+          ];
+
+          async function call(path, options = {}) {
+            const res = await fetch(base + path, {
+              ...options,
+              headers: {
+                Authorization: "Bearer " + key,
+                "Content-Type": "application/json",
+                ...(options.headers || {})
+              }
+            });
+            const body = await res.text();
+            if (!res.ok) throw new Error(path + " -> " + res.status + " " + body);
+            return body ? JSON.parse(body) : {};
+          }
+
+          for (const commercial of commercials) {
+            for (const [platform, content_type] of platforms) {
+              const social_account_id = ids[platform];
+              if (!social_account_id) throw new Error("Missing configured account for " + platform);
+
+              const post = await call("/posts", {
+                method: "POST",
+                body: JSON.stringify({
+                  content: commercial.caption,
+                  platforms: [{ social_account_id, content_type }]
+                })
+              });
+
+              await call("/posts/" + post.id + "/media/from-url", {
+                method: "POST",
+                body: JSON.stringify({ url: commercial.media })
+              });
+
+              await call("/posts/" + post.id, {
+                method: "PUT",
+                body: JSON.stringify({ status: "publishing" })
+              });
+
+              console.log(JSON.stringify({
+                commercial: commercial.id,
+                platform,
+                post_id: post.id,
+                state: "SUBMITTED"
+              }));
+            }
+          }
+          NODE
