@@ -62,6 +62,35 @@ export default {
       return json({ ok: true, jobs });
     }
 
+    if (url.pathname === "/api/relay" && request.method === "POST") {
+      const body = await request.json().catch(() => null);
+      const commercials = body?.commercials?.length
+        ? body.commercials
+        : ["commercial-1", "commercial-2", "commercial-3"];
+
+      const relay = {
+        id: crypto.randomUUID(),
+        stage: 1,
+        stages: [
+          { stage: 1, runner: "Runner 1", platforms: ["facebook", "instagram"] },
+          { stage: 2, runner: "Runner 2", platforms: ["tiktok"] },
+          { stage: 3, runner: "Runner 3", platforms: ["youtube"] }
+        ],
+        commercials,
+        createdAt: new Date().toISOString(),
+        state: "QUEUED"
+      };
+
+      await env.BROADCAST_QUEUE.send({
+        type: "relay",
+        relay,
+        commercial: commercials[0],
+        platforms: relay.stages[0].platforms
+      });
+
+      return json({ ok: true, relay });
+    }
+
     if (url.pathname === "/api/queue" && request.method === "POST") {
       const body = await request.json().catch(() => null);
       if (!body?.commercial || !body?.platforms?.length) {
