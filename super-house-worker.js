@@ -33,6 +33,35 @@ export default {
       });
     }
 
+    if (url.pathname === "/api/commercials" && request.method === "GET") {
+      return json({
+        ok: true,
+        commercials: [
+          { id: "commercial-1", title: "Commercial #1", status: "APPROVED" },
+          { id: "commercial-2", title: "Commercial #2", status: "APPROVED" },
+          { id: "commercial-3", title: "Soldiers Step Out", status: "APPROVED" }
+        ]
+      });
+    }
+
+    if (url.pathname === "/api/queue-all" && request.method === "POST") {
+      const platforms = ["facebook", "instagram", "tiktok", "youtube"];
+      const jobs = [];
+      for (const commercial of ["commercial-1", "commercial-2", "commercial-3"]) {
+        const job = {
+          id: crypto.randomUUID(),
+          commercial,
+          platforms,
+          createdAt: new Date().toISOString(),
+          attempts: 0,
+          state: "QUEUED"
+        };
+        await env.BROADCAST_QUEUE.send(job);
+        jobs.push(job);
+      }
+      return json({ ok: true, jobs });
+    }
+
     if (url.pathname === "/api/queue" && request.method === "POST") {
       const body = await request.json().catch(() => null);
       if (!body?.commercial || !body?.platforms?.length) {
@@ -130,9 +159,13 @@ async function publishWithTryPost(job, env) {
 
   if (!media) throw new Error("commercial_not_found");
 
-  const caption = job.commercial === "commercial-3"
-    ? "Dog Tag Day — April 18. Watch the mission step off the screen. Put them on. Acknowledge one. DogTagDay.org #DogTagDay #Veterans #April18."
-    : "Dog Tag Day — April 18. Put them on. Acknowledge one. dogtagday.org";
+  const captions = {
+    "commercial-1": "Dog Tag Day — April 18. Put them on. Acknowledge one. DogTagDay.org",
+    "commercial-2": "Dog Tag Day — April 18. Make veterans visible. Put them on. Acknowledge one. DogTagDay.org",
+    "commercial-3": "Dog Tag Day — April 18. Watch the mission step off the screen. Put them on. Acknowledge one. DogTagDay.org #DogTagDay #Veterans #April18."
+  };
+  const caption = captions[job.commercial];
+  if (!caption) throw new Error("caption_not_found");
 
   const base = env.TRYPOST_API_URL.replace(/\/$/, "");
   const headers = {
