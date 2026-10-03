@@ -17,7 +17,7 @@ max_retries = 5
 dead_letter_queue = "dog-tag-day-broadcast-dlq"
 
 [vars]
-SUPER_HOUSE_VERSION = "1.2.1-browser-relay"
+SUPER_HOUSE_VERSION = "1.2.2-browser-relay"
 
 [[durable_objects.bindings]]
 name = "BROWSER_RELAY"
