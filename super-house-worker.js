@@ -4,25 +4,32 @@ const ALLOWED_COMMERCIALS = new Set(["commercial-1", "commercial-2", "commercial
 const ALLOWED_PLATFORMS = new Set(["facebook", "instagram", "tiktok", "youtube"]);
 
 async function authorizeControlRequest(request, env) {
-  const configured = env.BROADCAST_CONTROL_SECRET;
-  if (!configured) return json({ ok: false, error: "control_plane_locked" }, 503);
   const header = request.headers.get("authorization") || "";
   if (!header.startsWith("Bearer ")) return json({ ok: false, error: "unauthorized" }, 401);
-  const supplied = header.slice(7).trim();
-  const encoder = new TextEncoder();
-  const [a, b] = await Promise.all([
-    crypto.subtle.digest("SHA-256", encoder.encode(supplied)),
-    crypto.subtle.digest("SHA-256", encoder.encode(configured))
-  ]);
-  const aa = new Uint8Array(a);
-  const bb = new Uint8Array(b);
-  let diff = aa.length ^ bb.length;
-  const length = Math.max(aa.length, bb.length);
-  for (let i = 0; i < length; i++) diff |= (aa[i] || 0) ^ (bb[i] || 0);
-  if (diff !== 0) return json({ ok: false, error: "unauthorized" }, 401);
-  return null;
+  const token = header.slice(7).trim();
+  if (!token) return json({ ok: false, error: "unauthorized" }, 401);
+  try {
+    const parts = token.split(".");
+    if (parts.length !== 3) throw new Error("bad_jwt");
+    const decode = (v) => JSON.parse(atob(v.replace(/-/g, "+").replace(/_/g, "/")));
+    const headerPart = decode(parts[0]);
+    const claims = decode(parts[1]);
+    if (claims.iss !== "https://token.actions.githubusercontent.com") throw new Error("bad_issuer");
+    if (claims.aud !== "dogtag-browser") throw new Error("bad_audience");
+    if (!claims.exp || claims.exp < Math.floor(Date.now() / 1000)) throw new Error("expired");
+    const jwks = await fetch("https://token.actions.githubusercontent.com/.well-known/jwks", { cf: { cacheTtl: 300 } }).then(r => r.json());
+    const jwk = jwks.keys.find(k => k.kid === headerPart.kid);
+    if (!jwk) throw new Error("unknown_kid");
+    const key = await crypto.subtle.importKey("jwk", jwk, { name: "RSASSA-PKCS1-v1_5", hash: "SHA-256" }, false, ["verify"]);
+    const data = new TextEncoder().encode(parts[0] + "." + parts[1]);
+    const signature = Uint8Array.from(atob(parts[2].replace(/-/g, "+").replace(/_/g, "/")), c => c.charCodeAt(0));
+    const valid = await crypto.subtle.verify("RSASSA-PKCS1-v1_5", key, signature, data);
+    if (!valid) throw new Error("bad_signature");
+    return null;
+  } catch {
+    return json({ ok: false, error: "unauthorized" }, 401);
+  }
 }
-
 async function readControlJson(request) {
   const declared = Number(request.headers.get("content-length") || "0");
   if (declared > MAX_CONTROL_BODY_BYTES) throw new Error("request_too_large");
@@ -95,6 +102,25 @@ export default {
       });
     }
 
+    if (url.pathname === "/api/browser/next" && request.method === "POST") {
+      const denied = await authorizeControlRequest(request, env);
+      if (denied) return denied;
+      const id = env.BROWSER_RELAY.idFromName("primary");
+      return env.BROWSER_RELAY.get(id).fetch(new Request("https://relay/next", { method: "POST" }));
+    }
+
+    if (url.pathname === "/api/browser/result" && request.method === "POST") {
+      const denied = await authorizeControlRequest(request, env);
+      if (denied) return denied;
+      const body = await readControlJson(request).catch(() => ({}));
+      const id = env.BROWSER_RELAY.idFromName("primary");
+      return env.BROWSER_RELAY.get(id).fetch(new Request("https://relay/result", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(body)
+      }));
+    }
+
     if (url.pathname === "/api/queue-all" && request.method === "POST") {
       const denied = await authorizeControlRequest(request, env);
       if (denied) return denied;
@@ -140,12 +166,17 @@ export default {
         state: "QUEUED"
       };
 
-      await env.BROADCAST_QUEUE.send({
-        type: "relay",
-        relay,
-        commercialIndex: 0,
-        stageIndex: 0
-      });
+      const relayId = env.BROWSER_RELAY.idFromName("primary");
+      await env.BROWSER_RELAY.get(relayId).fetch(new Request("https://relay/enqueue", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          id: relay.id,
+          action: "broadcast",
+          commercials,
+          relay
+        })
+      }));
 
       return json({ ok: true, relay });
     }
@@ -290,26 +321,14 @@ async function processRelay(job, env) {
 }
 
 async function dispatchWithFailover(job, env) {
-  const runners = [
-    async () => publishWithTryPost(job, env),
-    async () => publishWithHttpRunner(job, env.PUBLISHER_B_URL),
-    async () => publishWithHttpRunner(job, env.PUBLISHER_C_URL),
-    async () => publishWithHttpRunner(job, env.PUBLISHER_D_URL),
-    async () => publishWithHttpRunner(job, env.PUBLISHER_E_URL)
-  ];
-
-  let lastError;
-  for (let i = 0; i < runners.length; i++) {
-    try {
-      await runners[i]();
-      return;
-    } catch (error) {
-      lastError = new Error("runner_" + (i + 1) + "_failed: " + String(error));
-    }
-  }
-  throw lastError || new Error("all_publishers_failed");
+  const id = env.BROWSER_RELAY.idFromName("primary");
+  const response = await env.BROWSER_RELAY.get(id).fetch(new Request("https://relay/enqueue", {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ id: job.id, action: "publish", job })
+  }));
+  if (!response.ok) throw new Error("browser_relay_" + response.status);
 }
-
 async function publishWithHttpRunner(job, base) {
   if (!base) throw new Error("runner_not_configured");
   const target = new URL(base);
@@ -385,5 +404,36 @@ async function publishWithTryPost(job, env) {
       body: JSON.stringify({ status: "publishing" })
     });
     if (!published.ok) throw new Error("trypost_publish_" + platform + "_" + published.status);
+  }
+}
+
+
+export class BrowserRelay {
+  constructor(state) { this.state = state; }
+
+  async fetch(request) {
+    const url = new URL(request.url);
+    if (request.method !== "POST") return json({ ok: false, error: "method_not_allowed" }, 405);
+    if (url.pathname === "/enqueue") {
+      const job = await request.json();
+      const queue = (await this.state.storage.get("queue")) || [];
+      queue.push(job);
+      await this.state.storage.put("queue", queue.slice(-100));
+      return json({ ok: true, queued: job.id });
+    }
+    if (url.pathname === "/next") {
+      const queue = (await this.state.storage.get("queue")) || [];
+      const command = queue.shift() || null;
+      await this.state.storage.put("queue", queue);
+      return json({ ok: true, command });
+    }
+    if (url.pathname === "/result") {
+      const result = await request.json();
+      const results = (await this.state.storage.get("results")) || [];
+      results.push({ ...result, receivedAt: new Date().toISOString() });
+      await this.state.storage.put("results", results.slice(-100));
+      return json({ ok: true });
+    }
+    return json({ ok: false, error: "route_not_found" }, 404);
   }
 }
