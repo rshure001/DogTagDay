@@ -69,7 +69,9 @@ async function dispatchWithFailover(job, env) {
   const engines = [
     env.PUBLISHER_A_URL,
     env.PUBLISHER_B_URL,
-    env.PUBLISHER_EMERGENCY_URL
+    env.PUBLISHER_C_URL,
+    env.PUBLISHER_D_URL,
+    env.PUBLISHER_E_URL
   ].filter(Boolean);
 
   if (!engines.length) {
@@ -77,7 +79,10 @@ async function dispatchWithFailover(job, env) {
   }
 
   let lastError;
-  for (const base of engines) {
+  const attempts = [];
+  for (let i = 0; i < engines.length; i++) {
+    const base = engines[i];
+    attempts.push({ runner: i + 1, url: base });
     try {
       const response = await fetch(base.replace(/\/$/, "") + "/publish", {
         method: "POST",
