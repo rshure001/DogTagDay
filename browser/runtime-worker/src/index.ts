@@ -1,5 +1,6 @@
 import { chromium, Page } from 'playwright-core';
 
+const superHouse = process.env.DOGTAG_SUPER_HOUSE_URL || 'https://dog-tag-day-super-house.workers.dev';
 const connector = process.env.DOGTAG_CONNECTOR_URL || 'https://dog-tag-day-browser-connector-rtpz8q.v2.appdeploy.ai';
 const cdpUrl = process.env.DOGTAG_CDP_URL || 'http://127.0.0.1:9222';
 const pollMs = Number(process.env.DOGTAG_POLL_MS || 1200);
@@ -26,6 +27,21 @@ async function refreshRuntimeToken() {
 }
 
 if (!runtimeToken && !actionsTokenUrl) throw new Error('DOGTAG_RUNTIME_TOKEN is required');
+
+async function superHouseCall(path: string, body: Record<string, unknown> = {}) {
+  if (!runtimeToken) await refreshRuntimeToken();
+  const response = await fetch(superHouse + path, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${runtimeToken}`,
+      'content-type': 'application/json',
+    },
+    body: JSON.stringify(body),
+  });
+  const text = await response.text();
+  if (!response.ok) throw new Error(`super_house_${response.status}_${text.slice(0, 500)}`);
+  return text ? JSON.parse(text) : {};
+}
 
 async function relayCall(
   relayPage: Page,
@@ -142,6 +158,7 @@ async function main() {
   );
 
   const targetPage = await context.newPage();
+  console.log('DOGTAG_SUPER_HOUSE_RELAY_READY', superHouse);
   await relayCall(relayPage, 'heartbeat', { currentUrl: targetPage.url() });
   console.log('DOGTAG_MANAGER_ATTACHED');
 
@@ -154,35 +171,36 @@ async function main() {
         heartbeatAt = now;
       }
 
-      const next = (await relayCall(relayPage, 'next', {})) as {
-        command?: {
-          id: string;
-          action: string;
-          payload: Record<string, string>;
-        } | null;
-      };
-
-      if (!next.command) {
-        await new Promise(resolve => setTimeout(resolve, pollMs));
-        continue;
-      }
-
-      const command = next.command;
-      try {
-        const result = await execute(targetPage, relayPage, command.action, command.payload || {});
-        await relayCall(relayPage, 'result', {
-          id: command.id,
-          ok: true,
-          currentUrl: targetPage.url(),
-          result,
-        });
-      } catch (error) {
-        await relayCall(relayPage, 'result', {
-          id: command.id,
-          ok: false,
-          currentUrl: targetPage.url(),
-          result: { error: error instanceof Error ? error.message : String(error) },
-        });
+      const broker = await superHouseCall('/api/browser/next');
+      if (broker.command) {
+        const command = broker.command as { id: string; action: string; [key: string]: unknown };
+        try {
+          let result: unknown;
+          if (command.action === 'publish' || command.action === 'broadcast') {
+            result = {
+              accepted: true,
+              command: command.action,
+              relayId: (command.relay as { id?: string } | undefined)?.id || command.id,
+              note: 'Browser broadcast command received by live runner.'
+            };
+            console.log('DOGTAG_BROADCAST_COMMAND_RECEIVED', JSON.stringify(command));
+          } else {
+            result = await execute(targetPage, relayPage, command.action, (command.payload || {}) as Record<string, string>);
+          }
+          await superHouseCall('/api/browser/result', {
+            id: command.id,
+            ok: true,
+            currentUrl: targetPage.url(),
+            result,
+          });
+        } catch (error) {
+          await superHouseCall('/api/browser/result', {
+            id: command.id,
+            ok: false,
+            currentUrl: targetPage.url(),
+            result: { error: error instanceof Error ? error.message : String(error) },
+          });
+        }
       }
     } catch (error) {
       console.error('[dog-tag-day-browser-worker]', error);
