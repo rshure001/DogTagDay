@@ -1,10 +1,17 @@
 {
-  "version": "1.1.0",
+  "version": "1.2.0",
   "ownershipModel": "dogtagday-source-of-truth",
+  "architectureMode": "unified-shell-around-legacy",
   "cutoverPolicy": "keep-legacy-live-until-replacement-proven",
   "sourceOfTruth": {
     "repository": "rshure001/DogTagDay",
     "branch": "main"
+  },
+  "integrationModel": {
+    "strategy": "wrap-then-absorb",
+    "principle": "Build the Dog Tag Day control plane around working legacy components, expose one control interface, then replace internals lane-by-lane without creating a permanent second system.",
+    "cutover": "one_lane_at_a_time",
+    "rollback": "retain_legacy_fallback_until_health_and_publish_test_pass"
   },
   "modules": {
     "browserControl": {
