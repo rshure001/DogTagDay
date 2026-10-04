@@ -28,4 +28,4 @@ jobs:
           PUBLISHER: https://ynleeweezwkdbisaiovq.supabase.co/functions/v1/dogtag-publish-now
         run: |
           set -euo pipefail
-          curl -fsS --retry 3 --retry-delay 2             -X POST "$PUBLISHER"             -H "Authorization: Bearer $DOGTAG_RUNTIME_TOKEN"             -H "Content-Type: application/json"             --data '{"commercials":["commercial-1","commercial-2","commercial-3"]}'
+          curl -sS --retry 3 --retry-delay 2             -X POST "$PUBLISHER"             -H "Authorization: Bearer $DOGTAG_RUNTIME_TOKEN"             -H "Content-Type: application/json"             --data '{"commercials":["commercial-1","commercial-2","commercial-3"]}'
