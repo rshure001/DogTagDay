@@ -11,3 +11,4 @@ jobs:
     steps:
       - name: Proof of life
         run: echo "DOGTAG_BROWSER_RUNNER_ALIVE"
+      # Browser-runtime handoff kick retained in source control.
