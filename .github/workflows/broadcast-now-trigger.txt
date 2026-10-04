@@ -1,2 +1,3 @@
 RUN BROADCAST NOW — execute all three approved commercials — 2026-10-04T16:19:28.486Z
 RUN BROADCAST NOW — replacement worker verification — 2026-10-04T16:26:57.898Z
+RUN BROADCAST NOW — 2026-10-04T16:30:00Z — commercial-1 commercial-2 commercial-3
