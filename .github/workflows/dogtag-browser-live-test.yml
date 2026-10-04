@@ -1,5 +1,5 @@
 name: Dog Tag Day Live Browser Test
-# trigger: supabase-route-fix
+# trigger: direct-publisher-worker-replacement
 
 on:
   workflow_dispatch:
