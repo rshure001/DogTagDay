@@ -1,7 +1,26 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
+  "ownershipModel": "dogtagday-source-of-truth",
   "cutoverPolicy": "keep-legacy-live-until-replacement-proven",
+  "sourceOfTruth": {
+    "repository": "rshure001/DogTagDay",
+    "branch": "main"
+  },
   "modules": {
+    "browserControl": {
+      "state": "source_owned",
+      "role": "outer-control-layer",
+      "legacyFallback": "appdeploy-browser-connector"
+    },
+    "publishingEngine": {
+      "state": "source_owned",
+      "role": "platform-publishing-core",
+      "legacyFallback": "appdeploy-direct-publishing-engine"
+    },
+    "broadcastControl": {
+      "state": "source_owned",
+      "role": "queue-and-rotation"
+    },
     "tiktok": {
       "state": "migration_pending",
       "legacyFallback": "appdeploy"
