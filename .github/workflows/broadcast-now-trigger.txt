@@ -1,1 +1,1 @@
-RUN BROADCAST NOW — credential diagnostic before publication — authorized platforms: Facebook, Instagram, YouTube
+RUN BROADCAST NOW — safe credential state check
