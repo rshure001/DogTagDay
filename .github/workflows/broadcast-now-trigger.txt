@@ -1,1 +1,1 @@
-RUN BROADCAST NOW — safe credential state check
+RUN BROADCAST NOW — safe credential state check v2
