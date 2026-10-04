@@ -138,6 +138,39 @@ async function execute(page: Page, relayPage: Page, action: string, payload: Rec
   }
 }
 
+async function publishDirect(command: { id: string; commercial?: string; platforms?: string[] }) {
+  const commercial = String(command.commercial || "");
+  if (!/^commercial-[123]$/.test(commercial)) throw new Error("commercial_not_approved");
+
+  const publisher = process.env.DOGTAG_PUBLISHER_URL ||
+    "https://ynleeweezwkdbisaiovq.supabase.co/functions/v1/dogtag-publish-now";
+
+  const response = await fetch(publisher, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${runtimeToken}`,
+      "content-type": "application/json",
+    },
+    body: JSON.stringify({ commercials: [commercial] }),
+  });
+
+  const body = await response.text();
+  let parsed: unknown = {};
+  try { parsed = body ? JSON.parse(body) : {}; } catch { parsed = { raw: body.slice(0, 2000) }; }
+
+  if (!response.ok) {
+    throw new Error(`publisher_${response.status}_${body.slice(0, 1000)}`);
+  }
+
+  return {
+    action: "publish_direct",
+    commercial,
+    requestedPlatforms: command.platforms || ["facebook", "instagram", "tiktok", "youtube"],
+    publisher,
+    result: parsed,
+  };
+}
+
 async function main() {
   if (!runtimeToken) await refreshRuntimeToken();
 
@@ -147,8 +180,8 @@ async function main() {
 
   const existing = context.pages();
   const relayPage = existing[0] || (await context.newPage());
-  await relayPage.goto(connector + '/?runtime=1', {
-    waitUntil: 'domcontentloaded',
+  await relayPage.goto(connector + "/?runtime=1", {
+    waitUntil: "domcontentloaded",
     timeout: 45000,
   });
   await relayPage.waitForFunction(
@@ -158,58 +191,75 @@ async function main() {
   );
 
   const targetPage = await context.newPage();
-  console.log('DOGTAG_SUPER_HOUSE_RELAY_READY', superHouse);
-  await relayCall(relayPage, 'heartbeat', { currentUrl: targetPage.url() });
-  console.log('DOGTAG_MANAGER_ATTACHED');
+  console.log("DOGTAG_MANAGER_ATTACHED");
+  await relayCall(relayPage, "heartbeat", { currentUrl: targetPage.url() });
 
   let heartbeatAt = Date.now();
   for (;;) {
     try {
       const now = Date.now();
       if (now - heartbeatAt > 5000) {
-        await relayCall(relayPage, 'heartbeat', { currentUrl: targetPage.url() });
+        await relayCall(relayPage, "heartbeat", { currentUrl: targetPage.url() });
         heartbeatAt = now;
       }
 
-      const broker = await superHouseCall('/api/browser/next');
+      const broker = await superHouseCall("/api/browser/next");
       if (broker.command) {
-        const command = broker.command as { id: string; action: string; [key: string]: unknown };
+        const command = broker.command as {
+          id: string;
+          action: string;
+          commercial?: string;
+          platforms?: string[];
+          payload?: Record<string, string>;
+          [key: string]: unknown;
+        };
+
         try {
           let result: unknown;
-          if (command.action === 'publish' || command.action === 'broadcast') {
+
+          if (command.action === "publish_direct") {
+            result = await publishDirect(command);
+          } else if (command.action === "publish" || command.action === "broadcast") {
             result = {
-              accepted: true,
+              accepted: false,
               command: command.action,
-              relayId: (command.relay as { id?: string } | undefined)?.id || command.id,
-              note: 'Browser broadcast command received by live runner.'
+              error: "legacy_broadcast_command_replaced_use_publish_direct",
             };
-            console.log('DOGTAG_BROADCAST_COMMAND_RECEIVED', JSON.stringify(command));
+            throw new Error("legacy_broadcast_command_replaced_use_publish_direct");
           } else {
-            result = await execute(targetPage, relayPage, command.action, (command.payload || {}) as Record<string, string>);
+            result = await execute(
+              targetPage,
+              relayPage,
+              command.action,
+              (command.payload || {}) as Record<string, string>,
+            );
           }
-          await superHouseCall('/api/browser/result', {
+
+          await superHouseCall("/api/browser/result", {
             id: command.id,
             ok: true,
             currentUrl: targetPage.url(),
             result,
           });
         } catch (error) {
-          await superHouseCall('/api/browser/result', {
+          await superHouseCall("/api/browser/result", {
             id: command.id,
             ok: false,
             currentUrl: targetPage.url(),
-            result: { error: error instanceof Error ? error.message : String(error) },
+            result: {
+              error: error instanceof Error ? error.message : String(error),
+            },
           });
         }
       }
     } catch (error) {
-      console.error('[dog-tag-day-browser-worker]', error);
+      console.error("[dog-tag-day-browser-worker]", error);
       await new Promise(resolve => setTimeout(resolve, 3000));
     }
   }
 }
 
 main().catch(error => {
-  console.error('[dog-tag-day-browser-worker:fatal]', error);
+  console.error("[dog-tag-day-browser-worker:fatal]", error);
   process.exit(1);
 });
