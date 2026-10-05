@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dog Tag Day TV | April 18</title>
+<style>
+body{margin:0;background:#071426;color:#fff;font-family:Arial,sans-serif}header{padding:22px;text-align:center;border-bottom:3px solid #d9b75d}h1{margin:0;color:#d9b75d}.sub{margin:8px 0 0;color:#ccd5df}.wrap{max-width:1100px;margin:auto;padding:20px}.player{background:#000;border:2px solid #d9b75d;border-radius:10px;overflow:hidden}video{width:100%;display:block;max-height:72vh;background:#000}.now{text-align:center;padding:14px}.badge{display:inline-block;padding:6px 10px;border-radius:20px;background:#b62035;font-weight:700}.schedule{margin-top:20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}.card{border:1px solid #33445a;padding:15px;border-radius:8px;background:#0d1c2f}.card b{color:#d9b75d}a{color:#d9b75d}.note{color:#aeb9c6;font-size:.9rem;text-align:center;margin-top:20px}
+</style></head><body>
+<header><h1>DOG TAG DAY TV</h1><div class="sub">For identity, brotherhood, and honor • April 18</div></header>
+<main class="wrap">
+<section class="player"><video id="tv" controls playsinline preload="metadata"></video><div class="now"><span class="badge">NOW PLAYING</span><div id="title">Loading Dog Tag Day TV…</div></div></section>
+<section class="schedule">
+<div class="card"><b>Commercial #1</b><br>Real people. Real support. Real change.</div>
+<div class="card"><b>Commercial #2</b><br>Help a veteran be seen, heard, and remembered.</div>
+</section>
+<p class="note">Dog Tag Day TV is the owned video home of <a href="/">DogTagDay.org</a>. The player rotates approved commercials automatically.</p>
+</main>
+<script>
+const shows=[
+{title:'Dog Tag Day Commercial #1',src:'https://static.metricool.com/planner/202609/6882844-file-7467803550847519649.mp4'},
+{title:'Dog Tag Day Commercial #2',src:'https://static.metricool.com/planner/202609/6882844-file-17244267812868165918.mp4'}
+];
+let i=0,v=document.getElementById('tv'),t=document.getElementById('title');
+function play(n){i=n%shows.length;v.src=shows[i].src;t.textContent=shows[i].title;v.play().catch(()=>{});}
+v.addEventListener('ended',()=>play(i+1)); play(0);
+</script></body></html>
