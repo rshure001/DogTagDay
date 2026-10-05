@@ -44,35 +44,25 @@ async function superHouseCall(path: string, body: Record<string, unknown> = {}) 
 }
 
 async function relayCall(
-  relayPage: Page,
   method: 'heartbeat' | 'next' | 'result',
   payload: Record<string, unknown>,
 ) {
   if (!runtimeToken) await refreshRuntimeToken();
-  const invoke = async () =>
-    relayPage.evaluate(
-      async ({ methodName, data }) => {
-        const runtime = (window as unknown as {
-          dogtagRuntime?: Record<string, (payload: Record<string, unknown>) => Promise<unknown>>;
-        }).dogtagRuntime;
-        if (!runtime || !runtime[methodName]) throw new Error('runtime_relay_not_ready');
-        return runtime[methodName](data);
-      },
-      {
-        methodName: method,
-        data: { ...payload, token: runtimeToken },
-      },
-    );
-
-  try {
-    return await invoke();
-  } catch {
-    await refreshRuntimeToken();
-    return invoke();
+  const response = await fetch(`${connector}/api/runtime/relay/${method}`, {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json',
+    },
+    body: JSON.stringify({ ...payload, token: runtimeToken }),
+  });
+  const body = await response.text();
+  if (!response.ok) {
+    throw new Error(`runtime_relay_${response.status}_${body.slice(0, 500)}`);
   }
+  return body ? JSON.parse(body) : {};
 }
 
-async function execute(page: Page, relayPage: Page, action: string, payload: Record<string, string>) {
+async function execute(page: Page, action: string, payload: Record<string, string>) {
   switch (action) {
     case 'open':
       if (!payload.url) throw new Error('missing_url');
@@ -122,16 +112,7 @@ async function execute(page: Page, relayPage: Page, action: string, payload: Rec
       return { title: await page.title(), url: page.url() };
     case 'reconnect':
       await page.goto('about:blank', { waitUntil: 'domcontentloaded', timeout: 15000 }).catch(() => null);
-      await relayPage.goto(connector + '/?runtime=1', {
-        waitUntil: 'domcontentloaded',
-        timeout: 45000,
-      });
-      await relayPage.waitForFunction(
-        () => Boolean((window as unknown as { dogtagRuntime?: unknown }).dogtagRuntime),
-        undefined,
-        { timeout: 30000 },
-      );
-      await relayCall(relayPage, 'heartbeat', { currentUrl: page.url() });
+      await relayCall('heartbeat', { currentUrl: page.url() });
       return { reconnected: true, url: page.url() };
     default:
       throw new Error('unsupported_action');
@@ -178,28 +159,16 @@ async function main() {
   const contexts = browser.contexts();
   const context = contexts[0] || (await browser.newContext());
 
-  const existing = context.pages();
-  const relayPage = existing[0] || (await context.newPage());
-  await relayPage.goto(connector + "/?runtime=1", {
-    waitUntil: "domcontentloaded",
-    timeout: 45000,
-  });
-  await relayPage.waitForFunction(
-    () => Boolean((window as unknown as { dogtagRuntime?: unknown }).dogtagRuntime),
-    undefined,
-    { timeout: 30000 },
-  );
-
   const targetPage = await context.newPage();
   console.log("DOGTAG_MANAGER_ATTACHED");
-  await relayCall(relayPage, "heartbeat", { currentUrl: targetPage.url() });
+  await relayCall("heartbeat", { currentUrl: targetPage.url() });
 
   let heartbeatAt = Date.now();
   for (;;) {
     try {
       const now = Date.now();
       if (now - heartbeatAt > 5000) {
-        await relayCall(relayPage, "heartbeat", { currentUrl: targetPage.url() });
+        await relayCall("heartbeat", { currentUrl: targetPage.url() });
         heartbeatAt = now;
       }
 
@@ -229,7 +198,6 @@ async function main() {
           } else {
             result = await execute(
               targetPage,
-              relayPage,
               command.action,
               (command.payload || {}) as Record<string, string>,
             );
