@@ -1,0 +1,12 @@
+{
+  "recorded_at": "2026-10-07T22:28:04.599Z",
+  "http_code": 503,
+  "result": {
+    "ok": false,
+    "error": "stored_credential_missing",
+    "credentialPresence": {
+      "youtube": false,
+      "meta": false
+    }
+  }
+}
