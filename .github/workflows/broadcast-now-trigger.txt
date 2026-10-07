@@ -4,3 +4,4 @@ RUN BROADCAST NOW — 2026-10-04T16:30:00Z — commercial-1 commercial-2 commerc
 RUN BROADCAST NOW — final owned-publisher execution — 2026-10-04T16:51:25.520Z — commercial-1 commercial-2 commercial-3
 RUN BROADCAST NOW — owned execution bridge live — 2026-10-04T17:00:00Z — commercial-1 commercial-2 commercial-3
 RUN BROADCAST NOW — verified-result recording enabled — 2026-10-04T17:08:00Z — commercial-1 commercial-2 commercial-3
+RUN BROADCAST NOW — new execution attempt 2026-10-07T20:37:28.228Z — commercial-1 commercial-2 commercial-3
