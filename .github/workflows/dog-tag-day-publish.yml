@@ -14,7 +14,7 @@ jobs:
         run: |
           set -e
           echo "Calling live Dog Tag Day publishing engine..."
-          RESPONSE=$(curl --fail --show-error --silent --request POST             --header "Content-Type: application/json"             --data '{}'             "https://dog-tag-day-kwai-bridge-awybdm.v2.appdeploy.ai/api/run-now")
+          RESPONSE=$(curl --fail --show-error --silent --location --request GET             "https://dog-tag-day-broadcast-control-trpgv6.v2.appdeploy.ai/api/direct/run-now")
           echo "$RESPONSE"
       - name: Verify engine status
         run: |
