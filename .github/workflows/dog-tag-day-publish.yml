@@ -6,17 +6,30 @@ on:
     paths:
       - ".dispatch/publish-now"
 
+permissions:
+  contents: read
+  id-token: write
+
 jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - name: Execute live Dog Tag Day publisher
+      - name: Get Dog Tag Day runtime identity
+        shell: bash
         run: |
-          set -e
-          echo "Calling live Dog Tag Day publishing engine..."
-          RESPONSE=$(curl --fail --show-error --silent --location --request GET             "https://api-v2.appdeploy.ai/app/dog-tag-day-broadcast-control-trpgv6/api/direct/run-now")
+          set -euo pipefail
+          RESPONSE="$(curl -fsS --retry 3 --retry-delay 2 -H "Authorization: bearer \${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" "\${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=dogtag-browser")"
+          TOKEN="$(node -e "const x=JSON.parse(process.argv[1]); if(!x.value) process.exit(2); process.stdout.write(x.value)" "$RESPONSE")"
+          echo "DOGTAG_RUNTIME_TOKEN=$TOKEN" >> "$GITHUB_ENV"
+      - name: Publish Commercial #1 through direct publisher
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "Calling Dog Tag Day direct publisher for Commercial #1..."
+          RESPONSE="$(curl -fsS --retry 2 --retry-delay 2 \
+            -X POST \
+            -H "Authorization: Bearer \${DOGTAG_RUNTIME_TOKEN}" \
+            -H "Content-Type: application/json" \
+            --data '{"commercials":["commercial-1"]}' \
+            "https://ynleeweezwkdbisaiovq.supabase.co/functions/v1/dogtag-publish-now")"
           echo "$RESPONSE"
-      - name: Verify engine status
-        run: |
-          curl --fail --show-error --silent             "https://api-v2.appdeploy.ai/app/dog-tag-day-kwai-bridge-awybdm/api/status"
-          echo
