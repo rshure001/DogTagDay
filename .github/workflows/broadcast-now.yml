@@ -1,4 +1,4 @@
-name: Dog Tag Day — Broadcast Now (Owned Control Plane)
+name: Dog Tag Day — Broadcast Now (Owned Direct Publisher)
 
 on:
   push:
@@ -22,13 +22,13 @@ jobs:
           TOKEN="$(node -e 'const x=JSON.parse(process.argv[1]); if(!x.value) process.exit(2); process.stdout.write(x.value)' "$RESPONSE")"
           echo "DOGTAG_RUNTIME_TOKEN=$TOKEN" >> "$GITHUB_ENV"
 
-      - name: Execute Dog Tag Day owned broadcast control plane
+      - name: Publish all three approved commercials through owned direct publisher
         shell: bash
         env:
-          EXECUTOR: https://ynleeweezwkdbisaiovq.supabase.co/functions/v1/dogtag-broadcast-execute
+          PUBLISHER: https://ynleeweezwkdbisaiovq.supabase.co/functions/v1/dogtag-publish-now
         run: |
           set -euo pipefail
-          HTTP_CODE="$(curl -sS --retry 3 --retry-delay 2 -o /tmp/dtd-result.json -w '%{http_code}'             -X POST "$EXECUTOR"             -H "Authorization: Bearer $DOGTAG_RUNTIME_TOKEN"             -H "Content-Type: application/json"             --data '{}')"
+          HTTP_CODE="$(curl -sS --retry 3 --retry-delay 2 -o /tmp/dtd-result.json -w '%{http_code}'             -X POST "$PUBLISHER"             -H "Authorization: Bearer $DOGTAG_RUNTIME_TOKEN"             -H "Content-Type: application/json"             --data '{"commercials":["commercial-1","commercial-2","commercial-3"]}')"
           cat /tmp/dtd-result.json
           node -e 'const fs=require("fs"); const x=JSON.parse(fs.readFileSync("/tmp/dtd-result.json","utf8")); fs.writeFileSync("/tmp/dtd-result-safe.json",JSON.stringify({recorded_at:new Date().toISOString(),http_code:Number(process.argv[1]),result:x},null,2));' "$HTTP_CODE"
 
@@ -39,6 +39,8 @@ jobs:
         run: |
           set -euo pipefail
           CONTENT="$(base64 -w0 /tmp/dtd-result-safe.json)"
-          SHA="$(curl -fsS -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json"             https://api.github.com/repos/rshure001/DogTagDay/contents/broadcast-result.json | node -e 'let s="";process.stdin.on("data",d=>s+=d);process.stdin.on("end",()=>{try{process.stdout.write(JSON.parse(s).sha||"")}catch{}})')"
-          BODY="$(node -e 'const fs=require("fs"); const x={message:"Record owned broadcast execution result",content:process.argv[1],branch:"main"}; if(process.argv[2])x.sha=process.argv[2]; process.stdout.write(JSON.stringify(x));' "$CONTENT" "$SHA")"
-          curl -fsS -X PUT             -H "Authorization: Bearer $GH_TOKEN"             -H "Accept: application/vnd.github+json"             -H "Content-Type: application/json"             https://api.github.com/repos/rshure001/DogTagDay/contents/broadcast-result.json             --data "$BODY"
+          URL="https://api.github.com/repos/rshure001/DogTagDay/contents/broadcast-result.json"
+          EXISTING="$(curl -sS -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" "$URL")"
+          SHA="$(node -e 'let x=JSON.parse(process.argv[1]); process.stdout.write(x.sha||"")' "$EXISTING")"
+          BODY="$(node -e 'const x={message:"Record owned direct broadcast execution result",content:process.argv[1],branch:"main"}; if(process.argv[2])x.sha=process.argv[2]; process.stdout.write(JSON.stringify(x));' "$CONTENT" "$SHA")"
+          curl -fsS -X PUT -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" -H "Content-Type: application/json" "$URL" --data "$BODY"
