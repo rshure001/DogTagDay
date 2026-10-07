@@ -2,6 +2,9 @@ name: Dog Tag Day — Publish Next Commercial
 
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - ".dispatch/publish-now"
 
 jobs:
   publish:
@@ -11,9 +14,8 @@ jobs:
         run: |
           set -e
           echo "Calling live Dog Tag Day publishing engine..."
-          curl --fail --show-error --silent --request POST             --header "Content-Type: application/json"             --data '{}'             "https://dog-tag-day-kwai-bridge-awybdm.v2.appdeploy.ai/api/run-now"
-          echo
-          echo "Publisher request completed."
+          RESPONSE=$(curl --fail --show-error --silent --request POST             --header "Content-Type: application/json"             --data '{}'             "https://dog-tag-day-kwai-bridge-awybdm.v2.appdeploy.ai/api/run-now")
+          echo "$RESPONSE"
       - name: Verify engine status
         run: |
           curl --fail --show-error --silent             "https://dog-tag-day-kwai-bridge-awybdm.v2.appdeploy.ai/api/status"
