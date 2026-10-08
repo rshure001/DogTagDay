@@ -23,6 +23,9 @@ jobs:
             -o publish-response.json
           cat publish-response.json
 
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Wait and capture publish IDs
         run: |
           set -euo pipefail
@@ -45,8 +48,6 @@ jobs:
           print(json.dumps(report,indent=2))
           PY
 
-      - name: Save ID report
-        uses: actions/checkout@v4
       - name: Commit ID report
         run: |
           git config user.name "Dog Tag Day Telescope"
