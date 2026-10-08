@@ -1,0 +1,29 @@
+name: Dog Tag Day Direct POST Bridge
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/dog-tag-day-direct-post"
+
+permissions:
+  contents: read
+
+jobs:
+  direct-post:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: POST directly to live publisher
+        env:
+          PUBLISHER_URL: https://dog-tag-day-kwai-bridge-awybdm.v2.appdeploy.ai/api/run-now
+        run: |
+          set -euo pipefail
+          echo "POST $PUBLISHER_URL"
+          response="$(curl --fail-with-body --silent --show-error --max-time 600             -X POST "$PUBLISHER_URL"             -H "Content-Type: application/json")"
+          echo "$response"
+          if ! echo "$response" | grep -Eq '"state":"(submitted|confirmed)"'; then
+            echo "FAIL: no platform returned submitted/confirmed."
+            exit 1
+          fi
+          echo "SUCCESS: publisher returned a real platform submission."
