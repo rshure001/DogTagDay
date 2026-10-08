@@ -1,0 +1,22 @@
+name: Dog Tag Day — Start Commercial Publisher
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  actions: write
+
+jobs:
+  dispatch-commercial:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Start existing commercial workflow
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -e
+          echo "Dispatching existing publish-commercial-one.yml..."
+          gh workflow run publish-commercial-one.yml --repo rshure001/DogTagDay --ref main
+          echo "Commercial workflow dispatched."
