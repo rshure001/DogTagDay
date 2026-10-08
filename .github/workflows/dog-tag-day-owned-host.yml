@@ -1,0 +1,35 @@
+name: Dog Tag Day — Owned Host Publisher
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".dispatch/publish-owned"
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get GitHub OIDC token
+        id: oidc
+        shell: bash
+        run: |
+          set -euo pipefail
+          RESPONSE="$(curl -sS -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=dogtag-browser")"
+          TOKEN="$(python -c 'import json,sys; print(json.load(sys.stdin)["value"])' <<< "$RESPONSE")"
+          echo "::add-mask::$TOKEN"
+          echo "token=$TOKEN" >> "$GITHUB_OUTPUT"
+
+      - name: Run Dog Tag Day owned-host publisher
+        shell: bash
+        env:
+          OIDC_TOKEN: ${{ steps.oidc.outputs.token }}
+        run: |
+          set -euo pipefail
+          RESPONSE="$(curl -sS --retry 3 --retry-delay 2             -X POST             -H "Authorization: Bearer $OIDC_TOKEN"             -H "Content-Type: application/json"             --data '{"commercials":["commercial-1","commercial-2","commercial-3"]}'             "https://ynleeweezwkdbisaiovq.supabase.co/functions/v1/dogtag-publish-now")"
+          echo "$RESPONSE"
+          python -c 'import json,sys; x=json.load(sys.stdin); sys.exit(2 if x.get("ok") is False else 0)' <<< "$RESPONSE"
