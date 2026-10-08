@@ -1,0 +1,29 @@
+name: Dog Tag Day Internal Dispatch
+
+on:
+  push:
+    paths:
+      - ".github/dispatch/DOG_TAG_DAY_PUBLISH"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Execute Dog Tag Day publish dispatch
+        env:
+          PUBLISHER_URL: https://dog-tag-day-kwai-bridge-awybdm.v2.appdeploy.ai/api/run-now
+        run: |
+          set -euo pipefail
+          echo "DOG TAG DAY INTERNAL DISPATCH"
+          response="$(curl --fail-with-body --silent --show-error --max-time 600             -X POST "$PUBLISHER_URL"             -H "Content-Type: application/json")"
+          echo "$response"
+          if ! echo "$response" | grep -Eq '"state":"(submitted|confirmed)"'; then
+            echo "DISPATCH FAILED: no real platform submission returned."
+            exit 1
+          fi
+          echo "DISPATCH SUCCESS: real platform submission returned."
