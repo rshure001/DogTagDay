@@ -1,0 +1,29 @@
+name: Dog Tag Day One Button Air
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/dispatch/GO_LIVE_NOW"
+
+jobs:
+  broadcast:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Execute existing Dog Tag Day publisher
+        run: |
+          set -e
+          curl -fsS -X POST "https://dog-tag-day-kwai-bridge-awybdm.v2.appdeploy.ai/api/run-now" \
+            -H "Accept: application/json" \
+            -o result.json
+          cat result.json
+          grep -Eq '"state":"(submitted|confirmed)"' result.json || {
+            echo "Publisher did not return a confirmed/submitted platform result."
+            exit 1
+          }
+      - name: Capture live result
+        run: |
+          sleep 5
+          curl -fsS "https://dog-tag-day-kwai-bridge-awybdm.v2.appdeploy.ai/api/status" \
+            -H "Accept: application/json" > status.json
+          cat status.json
