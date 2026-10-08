@@ -1,0 +1,17 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dog Tag Day Super Interface</title>
+<style>body{font-family:Arial,sans-serif;background:#111;color:#fff;margin:0;padding:20px}h1{margin:0 0 8px}button{padding:14px 20px;font-size:18px;font-weight:700;border:0;border-radius:8px;cursor:pointer}.go{background:#d4af37;color:#111}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:20px 0}.card{background:#202020;padding:16px;border-radius:10px}.ok{color:#58e06f}.bad{color:#ff6666}.id{font-family:monospace;word-break:break-all;font-size:13px}.small{color:#aaa}.log{white-space:pre-wrap;background:#000;padding:12px;border-radius:8px;max-height:420px;overflow:auto}</style></head>
+<body><h1>Dog Tag Day — SUPER INTERFACE</h1><div class="small">Direct view of the existing publisher</div>
+<p><button class="go" onclick="run()">PUBLISH ALL NOW</button></p>
+<div class="grid" id="platforms"></div><div class="card"><b>Scheduler</b><div id="sched">Loading…</div></div>
+<h2>Latest Publish Result</h2><div class="card log" id="latest">Loading…</div>
+<script>
+const API='https://dog-tag-day-kwai-bridge-awybdm.v2.appdeploy.ai';
+function esc(x){return String(x??'').replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))}
+async function status(){let r=await fetch(API+'/api/status',{cache:'no-store'});let s=await r.json();
+let p=s.platforms||{};document.getElementById('platforms').innerHTML=['facebook','instagram','tiktok','youtube'].map(x=>'<div class="card"><b>'+x.toUpperCase()+'</b><div class="'+(p[x]?'ok':'bad')+'">'+(p[x]?'CONNECTED':'NOT CONNECTED')+'</div></div>').join('');
+let q=s.scheduler||{};document.getElementById('sched').innerHTML='Cadence: '+esc(q.cadenceHours)+' hours<br>Mode: '+esc(q.mode)+'<br>Last run: '+esc(q.lastRun)+'<br>Last commercial: '+esc(q.lastCommercial)+'<br>Next commercial: '+esc(q.nextCommercial);
+document.getElementById('latest').textContent=JSON.stringify((s.history||[])[0]||{message:'No publish history returned'},null,2)}
+async function run(){document.getElementById('latest').textContent='PUBLISHING NOW…';try{let r=await fetch(API+'/api/run-now',{method:'POST'});let x=await r.json();document.getElementById('latest').textContent=JSON.stringify(x,null,2);setTimeout(status,2000)}catch(e){document.getElementById('latest').textContent='ERROR: '+e}}
+status();setInterval(status,15000);
+</script></body></html>
