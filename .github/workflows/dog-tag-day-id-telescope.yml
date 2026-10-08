@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - ".github/dispatch/ID_TELESCOPE_NOW"
+      - ".github/dispatch/ID_TELESCOPE_NOW*"
 
 permissions:
   contents: write
