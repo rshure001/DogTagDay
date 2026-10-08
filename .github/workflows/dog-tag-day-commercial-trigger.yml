@@ -2,6 +2,9 @@ name: Dog Tag Day Commercial Trigger
 
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - ".github/dog-tag-day-publish-now"
   schedule:
     - cron: "0 */3 * * *"
 
@@ -19,9 +22,7 @@ jobs:
         run: |
           set -euo pipefail
           echo "Triggering Dog Tag Day commercial publisher..."
-          response="$(curl --fail-with-body --silent --show-error --max-time 600 \
-            -X POST "$PUBLISHER_URL" \
-            -H "Content-Type: application/json")"
+          response="$(curl --fail-with-body --silent --show-error --max-time 600             -X POST "$PUBLISHER_URL"             -H "Content-Type: application/json")"
           echo "$response"
           echo "$response" | grep -Eq '"state":"(submitted|confirmed)"' || {
             echo "Publisher returned no confirmed/submitted platform result."
