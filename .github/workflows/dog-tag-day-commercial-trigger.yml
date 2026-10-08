@@ -1,0 +1,30 @@
+name: Dog Tag Day Commercial Trigger
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 */3 * * *"
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Trigger live Dog Tag Day publisher
+        env:
+          PUBLISHER_URL: https://dog-tag-day-kwai-bridge-awybdm.v2.appdeploy.ai/api/run-now
+        run: |
+          set -euo pipefail
+          echo "Triggering Dog Tag Day commercial publisher..."
+          response="$(curl --fail-with-body --silent --show-error --max-time 600 \
+            -X POST "$PUBLISHER_URL" \
+            -H "Content-Type: application/json")"
+          echo "$response"
+          echo "$response" | grep -Eq '"state":"(submitted|confirmed)"' || {
+            echo "Publisher returned no confirmed/submitted platform result."
+            exit 1
+          }
+          echo "Dog Tag Day publish trigger completed with at least one platform result."
