@@ -1,0 +1,57 @@
+name: Dog Tag Day ID Telescope
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/dispatch/ID_TELESCOPE_NOW"
+
+permissions:
+  contents: write
+
+jobs:
+  telescope:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger publisher
+        id: publish
+        run: |
+          set -euo pipefail
+          curl -fsS -X POST \
+            "https://dog-tag-day-kwai-bridge-awybdm.v2.appdeploy.ai/api/run-now" \
+            -H "Accept: application/json" \
+            -o publish-response.json
+          cat publish-response.json
+
+      - name: Wait and capture publish IDs
+        run: |
+          set -euo pipefail
+          sleep 8
+          curl -fsS \
+            "https://dog-tag-day-kwai-bridge-awybdm.v2.appdeploy.ai/api/status" \
+            -H "Accept: application/json" \
+            -o status.json
+          python - <<'PY'
+          import json
+          s=json.load(open("status.json"))
+          report={
+            "captured_at": __import__("datetime").datetime.now(__import__("datetime").timezone.utc).isoformat(),
+            "scheduler": s.get("scheduler"),
+            "platforms": s.get("platforms"),
+            "latest": (s.get("history") or [None])[0],
+            "source": "Dog Tag Day ID Telescope"
+          }
+          json.dump(report,open("dog-tag-day-publish-report.json","w"),indent=2)
+          print(json.dumps(report,indent=2))
+          PY
+
+      - name: Save ID report
+        uses: actions/checkout@v4
+      - name: Commit ID report
+        run: |
+          git config user.name "Dog Tag Day Telescope"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          cp dog-tag-day-publish-report.json runtime-dog-tag-day-publish-report.json
+          git add runtime-dog-tag-day-publish-report.json
+          git commit -m "Record latest Dog Tag Day publish IDs" || exit 0
+          git push
