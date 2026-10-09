@@ -1,6 +1,7 @@
 name: Dog Tag Day — Broadcast Now (Owned Direct Publisher)
 
 on:
+  workflow_dispatch:
   push:
     branches: [main]
     paths:
@@ -28,8 +29,9 @@ jobs:
           PUBLISHER: https://ynleeweezwkdbisaiovq.supabase.co/functions/v1/dogtag-publish-now
         run: |
           set -euo pipefail
-          HTTP_CODE="$(curl -sS --retry 3 --retry-delay 2 -o /tmp/dtd-result.json -w '%{http_code}'             -X POST "$PUBLISHER"             -H "Authorization: Bearer $DOGTAG_RUNTIME_TOKEN"             -H "Content-Type: application/json"             --data '{"commercials":["commercial-1","commercial-2","commercial-3"]}')"
+          HTTP_CODE="$(curl -sS --retry 3 --retry-delay 2 -o /tmp/dtd-result.json -w '%{http_code}' -X POST "$PUBLISHER" -H "Authorization: Bearer $DOGTAG_RUNTIME_TOKEN" -H "Content-Type: application/json" --data '{"commercials":["commercial-1","commercial-2","commercial-3"]}')"
           cat /tmp/dtd-result.json
+          node -e 'const fs=require("fs"); const x=JSON.parse(fs.readFileSync("/tmp/dtd-result.json","utf8")); const code=Number(process.argv[1]); if(code<200||code>=300||x.error||x.ok===false||x.state==="failed"||x.status==="failed"||x.code==="stored_credential_missing"||x.code==="stored_credential_malformed") { console.error("PUBLISH_REJECTED: publisher did not confirm all posts"); process.exit(1); } if(!x.results && !x.posts && !x.published && x.state!=="confirmed") { console.error("PUBLISH_UNCONFIRMED: response lacks explicit post receipts"); process.exit(1); }' "$HTTP_CODE"
           node -e 'const fs=require("fs"); const x=JSON.parse(fs.readFileSync("/tmp/dtd-result.json","utf8")); fs.writeFileSync("/tmp/dtd-result-safe.json",JSON.stringify({recorded_at:new Date().toISOString(),http_code:Number(process.argv[1]),result:x},null,2));' "$HTTP_CODE"
 
       - name: Record execution result
@@ -43,4 +45,4 @@ jobs:
           EXISTING="$(curl -sS -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" "$URL")"
           SHA="$(node -e 'let x=JSON.parse(process.argv[1]); process.stdout.write(x.sha||"")' "$EXISTING")"
           BODY="$(node -e 'const x={message:"Record owned direct broadcast execution result",content:process.argv[1],branch:"main"}; if(process.argv[2])x.sha=process.argv[2]; process.stdout.write(JSON.stringify(x));' "$CONTENT" "$SHA")"
-          curl -fsS -X PUT -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" -H "Content-Type: application/json" "$URL" --data "$BODY"
+          curl -fsS -X PUT -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" -H "Content-Type: application/json" "https://api.github.com/repos/rshure001/DogTagDay/contents/broadcast-result.json" --data "$BODY"
