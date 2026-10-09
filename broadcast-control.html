@@ -3,13 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Dog Tag Day — One-Tap Commercial</title>
+<title>Dog Tag Day — Commercial Control</title>
 <style>
 body{margin:0;background:#fff;color:#071426;font-family:Arial,sans-serif;padding:24px}
 main{max-width:680px;margin:auto}
 h1{font-family:Georgia,serif;font-size:42px;line-height:1.05}
 .card{border:2px solid #d9b75d;border-radius:14px;padding:18px;margin:16px 0}
-button{display:block;width:100%;padding:18px;border:0;border-radius:12px;background:#d9b75d;color:#071426;font-weight:900;font-size:20px}
+button{display:block;width:100%;padding:18px;border:0;border-radius:12px;background:#d9b75d;color:#071426;font-weight:900;font-size:20px;margin:10px 0}
+a{display:block;text-align:center;padding:14px;font-weight:900}
 #status{margin-top:14px;font-weight:900}
 small{line-height:1.5}
 </style>
@@ -19,23 +20,14 @@ small{line-height:1.5}
 <h1>DOG TAG DAY<br>COMMERCIAL CONTROL</h1>
 <div class="card">
 <p><strong>ONE-TAP FREE ROUTE</strong></p>
-<small>This page sends the approved next commercial directly to the existing Dog Tag Day publishing engine. No AppDeploy deployment is used here.</small>
-</div>
-<div class="card">
-<form id="runForm" action="https://dog-tag-day-kwai-bridge-awybdm.v2.appdeploy.ai/api/run-now" method="post" target="run_result">
-<button type="submit">RUN NEXT COMMERCIAL NOW</button>
-</form>
+<small>Use the buttons below to trigger the existing Dog Tag Day publishing engine or open its live status.</small>
+<form action="https://dog-tag-day-kwai-bridge-awybdm.v2.appdeploy.ai/api/run-now" method="post" target="run_result"><button type="submit">▶ RUN NEXT COMMERCIAL NOW</button></form>
+<a href="https://dog-tag-day-kwai-bridge-awybdm.v2.appdeploy.ai/api/status" target="_blank" rel="noopener">📡 OPEN LIVE ENGINE STATUS</a>
 <div id="status">Ready.</div>
-</div>
-<div class="card">
-<a href="https://dog-tag-day-kwai-bridge-awybdm.v2.appdeploy.ai/api/status" target="_blank" rel="noopener">Open live engine status</a>
 </div>
 <iframe name="run_result" id="run_result" style="display:none"></iframe>
 <script>
-document.getElementById('runForm').addEventListener('submit',function(){
-  document.getElementById('status').textContent='COMMERCIAL RUN SENT — checking engine result…';
-  setTimeout(function(){document.getElementById('status').textContent='COMMERCIAL RUN SENT. Open Live Engine Status to verify the recorded platform results.'},1800);
-});
+document.querySelector('form').addEventListener('submit',function(){document.getElementById('status').textContent='COMMERCIAL RUN SENT — verify Live Engine Status for platform results.'});
 </script>
 </main>
 </body>
