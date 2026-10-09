@@ -12,11 +12,11 @@ jobs:
   dispatch-commercial:
     runs-on: ubuntu-latest
     steps:
-      - name: Start existing commercial workflow
+      - name: Start existing owned direct publisher
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          set -e
-          echo "Dispatching existing publish-commercial-one.yml..."
-          gh workflow run publish-commercial-one.yml --repo rshure001/DogTagDay --ref main
-          echo "Commercial workflow dispatched."
+          set -euo pipefail
+          echo "Dispatching broadcast-now.yml..."
+          gh workflow run broadcast-now.yml --repo rshure001/DogTagDay --ref main
+          echo "Owned direct publisher workflow dispatched."
