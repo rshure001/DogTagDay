@@ -3,7 +3,7 @@ name: Dog Tag Day Publisher Health Check
 on:
   workflow_dispatch:
   schedule:
-    # Check the existing publisher every three hours without triggering a second publish cycle.
+    # Check status every three hours; do not trigger another publish cycle.
     - cron: "17 */3 * * *"
 
 permissions:
@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 2
     steps:
-      - name: Check publisher and authorization status
+      - name: Check publisher authorization and recent publishing results
         shell: bash
         run: |
           set -euo pipefail
@@ -26,18 +26,24 @@ jobs:
           with open("status.json", encoding="utf-8") as f:
               data = json.load(f)
           print(json.dumps(data, indent=2))
-          # Never trigger publishing from this monitor: the existing engine already has a
-          # three-hour publishing cron, and a second trigger could create duplicate posts.
-          text = json.dumps(data).lower()
-          blockers = []
-          for platform in ("facebook", "instagram", "tiktok", "youtube"):
-              section = data.get(platform)
-              if isinstance(section, dict):
-                  authorized = section.get("authorized", section.get("connected", section.get("ready")))
-                  if authorized is False:
-                      blockers.append(platform)
+          # Actual engine response uses data["platforms"] with boolean readiness values.
+          platforms = data.get("platforms", {})
+          blockers = [name for name in ("facebook", "instagram", "tiktok", "youtube")
+                      if platforms.get(name) is not True]
           if blockers:
               print("AUTHORIZATION BLOCKERS: " + ", ".join(blockers))
+          history = data.get("history", [])
+          if history:
+              latest = history[0]
+              print("Latest cycle record:", json.dumps(latest, sort_keys=True))
+              results = latest.get("results", {})
+              failed = [name for name, result in results.items()
+                        if isinstance(result, dict) and result.get("ok") is False]
+              if failed:
+                  print("LATEST CYCLE FAILURES: " + ", ".join(failed))
+          else:
+              print("No publishing history returned by status endpoint.")
+          if blockers:
               sys.exit(1)
-          print("Status endpoint responded. Review platform status fields above; this check does not claim that any commercial was posted.")
+          print("Credentials appear present according to engine readiness flags; this does not by itself prove posts are live.")
           PY
