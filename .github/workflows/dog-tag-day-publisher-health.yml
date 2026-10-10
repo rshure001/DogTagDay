@@ -1,0 +1,43 @@
+name: Dog Tag Day Publisher Health Check
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Check the existing publisher every three hours without triggering a second publish cycle.
+    - cron: "17 */3 * * *"
+
+permissions:
+  contents: read
+
+jobs:
+  publisher-status:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Check publisher and authorization status
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE="https://dog-tag-day-kwai-bridge-awybdm.v2.appdeploy.ai"
+          echo "Checking Dog Tag Day publisher status..."
+          curl --fail --silent --show-error --max-time 20 "$BASE/api/status" -o status.json
+          python - <<'PY'
+          import json, sys
+          with open("status.json", encoding="utf-8") as f:
+              data = json.load(f)
+          print(json.dumps(data, indent=2))
+          # Never trigger publishing from this monitor: the existing engine already has a
+          # three-hour publishing cron, and a second trigger could create duplicate posts.
+          text = json.dumps(data).lower()
+          blockers = []
+          for platform in ("facebook", "instagram", "tiktok", "youtube"):
+              section = data.get(platform)
+              if isinstance(section, dict):
+                  authorized = section.get("authorized", section.get("connected", section.get("ready")))
+                  if authorized is False:
+                      blockers.append(platform)
+          if blockers:
+              print("AUTHORIZATION BLOCKERS: " + ", ".join(blockers))
+              sys.exit(1)
+          print("Status endpoint responded. Review platform status fields above; this check does not claim that any commercial was posted.")
+          PY
