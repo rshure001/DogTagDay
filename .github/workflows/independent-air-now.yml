@@ -1,0 +1,44 @@
+name: Dog Tag Day — Independent Air
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  air:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Publish both commercials to Dog Tag Day Network
+        shell: bash
+        run: |
+          set -euo pipefail
+          for item in \
+            'Dog Tag Day — Real People. Real Support. Real Change.|https://static.metricool.com/planner/202609/6882844-file-7467803550847519649.mp4' \
+            'Help a Veteran Be Seen, Heard, and Remembered|https://static.metricool.com/planner/202609/6882844-file-17244267812868165918.mp4'
+          do
+            title="${item%%|*}"
+            url="${item#*|}"
+            curl -fsS -X POST 'https://dog-tag-day-network-do6uvt.v2.appdeploy.ai/api/posts' \
+              -H 'Content-Type: application/json' \
+              --data "$(printf '{"title":"%s","creator":"Dog Tag Day Foundation","description":"Dog Tag Day — April 18. Put them on. Acknowledge one. DogTagDay.org","videoUrl":"%s","rightsAccepted":true}' "$title" "$url")"
+          done
+      - name: Publish both commercials to Dog Tag Day TV
+        shell: bash
+        run: |
+          set -euo pipefail
+          for item in \
+            'Dog Tag Day — Real People. Real Support. Real Change.|https://static.metricool.com/planner/202609/6882844-file-7467803550847519649.mp4' \
+            'Help a Veteran Be Seen, Heard, and Remembered|https://static.metricool.com/planner/202609/6882844-file-17244267812868165918.mp4'
+          do
+            title="${item%%|*}"
+            url="${item#*|}"
+            curl -fsS -X POST 'https://dog-tag-day-tv-krmx28.v2.appdeploy.ai/api/videos' \
+              -H 'Content-Type: application/json' \
+              --data "$(printf '{"title":"%s","creator":"Dog Tag Day Foundation","description":"Identity • Brotherhood • Honor. Help a veteran be seen, heard, and remembered.","category":"Dog Tag Day","videoUrl":"%s","rightsAccepted":true}' "$title" "$url")"
+          done
+      - name: Verify the public feeds
+        run: |
+          set -euo pipefail
+          curl -fsS 'https://dog-tag-day-network-do6uvt.v2.appdeploy.ai/api/feed'
+          curl -fsS 'https://dog-tag-day-tv-krmx28.v2.appdeploy.ai/api/videos'
