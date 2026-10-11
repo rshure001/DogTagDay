@@ -5,10 +5,18 @@ on:
   workflow_dispatch:
 permissions:
   contents: write
+  id-token: write
 jobs:
   air:
     runs-on: ubuntu-latest
     steps:
+      - name: Get short-lived Dog Tag Day runtime identity
+        shell: bash
+        run: |
+          set -euo pipefail
+          RESPONSE="$(curl -fsS -H "Authorization: bearer ${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=dogtag-browser")"
+          TOKEN="$(node -e 'const x=JSON.parse(process.argv[1]); if(!x.value) process.exit(2); process.stdout.write(x.value)' "$RESPONSE")"
+          echo "DOGTAG_RUNTIME_TOKEN=$TOKEN" >> "$GITHUB_ENV"
       - name: Publish both commercials to Dog Tag Day Network
         shell: bash
         run: |
@@ -19,9 +27,7 @@ jobs:
           do
             title="${item%%|*}"
             url="${item#*|}"
-            curl -fsS -X POST 'https://dog-tag-day-network-do6uvt.v2.appdeploy.ai/api/posts' \
-              -H 'Content-Type: application/json' \
-              --data "$(printf '{"title":"%s","creator":"Dog Tag Day Foundation","description":"Dog Tag Day — April 18. Put them on. Acknowledge one. DogTagDay.org","videoUrl":"%s","rightsAccepted":true}' "$title" "$url")"
+            curl -fsS -X POST 'https://dog-tag-day-network-do6uvt.v2.appdeploy.ai/api/posts' -H "Authorization: Bearer $DOGTAG_RUNTIME_TOKEN" -H 'Content-Type: application/json' --data "$(printf '{"title":"%s","creator":"Dog Tag Day Foundation","description":"Dog Tag Day — April 18. Put them on. Acknowledge one. DogTagDay.org","videoUrl":"%s","rightsAccepted":true}' "$title" "$url")"
           done
       - name: Publish both commercials to Dog Tag Day TV
         shell: bash
@@ -33,12 +39,10 @@ jobs:
           do
             title="${item%%|*}"
             url="${item#*|}"
-            curl -fsS -X POST 'https://dog-tag-day-tv-krmx28.v2.appdeploy.ai/api/videos' \
-              -H 'Content-Type: application/json' \
-              --data "$(printf '{"title":"%s","creator":"Dog Tag Day Foundation","description":"Identity • Brotherhood • Honor. Help a veteran be seen, heard, and remembered.","category":"Dog Tag Day","videoUrl":"%s","rightsAccepted":true}' "$title" "$url")"
+            curl -fsS -X POST 'https://dog-tag-day-tv-krmx28.v2.appdeploy.ai/api/videos' -H "Authorization: Bearer $DOGTAG_RUNTIME_TOKEN" -H 'Content-Type: application/json' --data "$(printf '{"title":"%s","creator":"Dog Tag Day Foundation","description":"Identity • Brotherhood • Honor. Help a veteran be seen, heard, and remembered.","category":"Dog Tag Day","videoUrl":"%s","rightsAccepted":true}' "$title" "$url")"
           done
       - name: Verify the public feeds
         run: |
           set -euo pipefail
-          curl -fsS 'https://dog-tag-day-network-do6uvt.v2.appdeploy.ai/api/feed'
-          curl -fsS 'https://dog-tag-day-tv-krmx28.v2.appdeploy.ai/api/videos'
+          curl -fsS -H "Authorization: Bearer $DOGTAG_RUNTIME_TOKEN" 'https://dog-tag-day-network-do6uvt.v2.appdeploy.ai/api/feed'
+          curl -fsS -H "Authorization: Bearer $DOGTAG_RUNTIME_TOKEN" 'https://dog-tag-day-tv-krmx28.v2.appdeploy.ai/api/videos'
