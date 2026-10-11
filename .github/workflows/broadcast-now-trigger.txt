@@ -1,2 +1,2 @@
-RUN BROADCAST NOW — DIRECT OWNED PUBLISHER — 2026-10-09T23:59:00.000Z — commercial-1 commercial-2 commercial-3 — facebook instagram youtube
-Manual broadcast retry requested 2026-10-09T12:00Z
+FORCE AIR RUN 2026-10-11T08:30:00-07:00
+Publish the approved Dog Tag Day commercials now through the owned direct publisher.
