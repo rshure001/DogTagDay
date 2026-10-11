@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dog Tag Day Network</title>
+<meta name="description" content="The independent Dog Tag Day Network. Watch the three approved Dog Tag Day commercials.">
+<style>
+:root{color-scheme:dark;--gold:#e2bd62;--bg:#101214;--panel:#1a1d20;--muted:#b9c0c6}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:#f7f7f7;font:16px/1.5 system-ui,-apple-system,Segoe UI,sans-serif}
+header{padding:28px 18px;text-align:center;border-bottom:1px solid #393a3b;background:#080909}
+h1{margin:0;color:var(--gold);letter-spacing:.04em;font-size:clamp(1.8rem,5vw,3rem)}header p{margin:8px 0 0;color:var(--muted)}
+main{max-width:1000px;margin:auto;padding:22px 16px 40px}.live{display:inline-block;border:1px solid #a93d3d;color:#ffb6b6;padding:3px 10px;border-radius:20px;font-size:.8rem;letter-spacing:.08em;margin-bottom:12px}
+.player{background:#000;border:1px solid #393a3b;border-radius:12px;overflow:hidden}video{display:block;width:100%;max-height:65vh;background:#000;aspect-ratio:16/9}
+h2{color:var(--gold);margin:26px 0 10px}.choices{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+button{width:100%;text-align:left;padding:15px;border:1px solid #444;border-radius:10px;background:var(--panel);color:white;font:inherit;cursor:pointer}
+button:hover,button:focus{border-color:var(--gold);outline:2px solid transparent}button[aria-pressed=true]{border-color:var(--gold);box-shadow:inset 0 0 0 1px var(--gold)}
+.small{color:var(--muted);font-size:.92rem}.foot{margin-top:24px;padding-top:18px;border-top:1px solid #393a3b;color:var(--muted)}a{color:var(--gold)}
+</style>
+</head>
+<body>
+<header><h1>DOG TAG DAY NETWORK</h1><p>Independent • Public • For identity, brotherhood, and honor.</p></header>
+<main>
+<span class="live">NETWORK PLAYER</span>
+<div class="player"><video id="player" controls playsinline preload="metadata" poster="" aria-label="Dog Tag Day commercial"></video></div>
+<h2 id="now">Now playing: Commercial 1</h2>
+<p class="small">Choose any approved commercial below. The player advances to the next commercial when the current video ends. Playback depends on your device and connection.</p>
+<div class="choices" role="group" aria-label="Approved commercials">
+<button type="button" data-index="0" aria-pressed="true"><strong>Commercial 1</strong><br><span class="small">Watch approved video</span></button>
+<button type="button" data-index="1" aria-pressed="false"><strong>Commercial 2</strong><br><span class="small">Watch approved video</span></button>
+<button type="button" data-index="2" aria-pressed="false"><strong>Commercial 3 — Soldiers Step Out</strong><br><span class="small">Watch approved video</span></button>
+</div>
+<div class="foot"><p><strong>Dog Tag Day — April 18</strong></p><p>Put them on. Acknowledge one. Don’t let our veterans fade into the background.</p><p><a href="https://DogTagDay.org/">Visit DogTagDay.org</a></p></div>
+</main>
+<script>
+(function(){
+const videos=[
+'https://ynleeweezwkdbisaiovq.supabase.co/storage/v1/object/public/broadcast-masters/commercial-1-approved.mp4',
+'https://ynleeweezwkdbisaiovq.supabase.co/storage/v1/object/public/broadcast-masters/commercial-2-approved.mp4',
+'https://ynleeweezwkdbisaiovq.supabase.co/storage/v1/object/public/broadcast-masters/commercial-3-soldiers-step-out-approved.mp4'
+];
+const labels=['Commercial 1','Commercial 2','Commercial 3 — Soldiers Step Out'];
+const player=document.getElementById('player'), now=document.getElementById('now'), buttons=[...document.querySelectorAll('button[data-index]')];
+let current=0;
+function select(i,autoplay){current=(i+videos.length)%videos.length;player.src=videos[current];player.load();now.textContent='Now playing: '+labels[current];buttons.forEach((b,j)=>b.setAttribute('aria-pressed',String(j===current)));if(autoplay)player.play().catch(()=>{});}
+buttons.forEach(b=>b.addEventListener('click',()=>select(Number(b.dataset.index),true)));
+player.addEventListener('ended',()=>select(current+1,true));
+select(0,false);
+})();
+</script>
+</body>
+</html>
