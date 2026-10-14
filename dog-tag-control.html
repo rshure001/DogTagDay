@@ -13,8 +13,6 @@ main{max-width:1000px;margin:auto;padding:18px 12px 36px}.top{border-top:6px sol
 .actions{display:grid;grid-template-columns:1fr;gap:10px;margin:16px 0}
 a{display:block;text-align:center;padding:14px 12px;border-radius:10px;font-weight:900;text-decoration:none}
 .primary{background:var(--gold);color:var(--navy)}.secondary{border:1px solid var(--gold);color:white}
-.frame{border:2px solid var(--gold);border-radius:12px;overflow:hidden;background:white}
-iframe{display:block;width:100%;height:72vh;min-height:560px;border:0;background:white}
 .note{font-size:13px}.footer{padding:12px 2px;color:var(--muted);font-size:13px}
 @media(min-width:600px){.actions{grid-template-columns:1fr 1fr}}
 </style>
@@ -26,10 +24,7 @@ iframe{display:block;width:100%;height:72vh;min-height:560px;border:0;background
 <a class="primary" href="https://ynleeweezwkdbisaiovq.supabase.co/functions/v1/dogtag-control/" target="_blank" rel="noopener">OPEN CONTROL DIRECTLY</a>
 <a class="secondary" href="https://ynleeweezwkdbisaiovq.supabase.co/functions/v1/dogtag-control/api/status" target="_blank" rel="noopener">CHECK SYSTEM STATUS</a>
 </div>
-<section class="frame" aria-label="Dog Tag Day control dashboard">
-<iframe title="Dog Tag Day TV Control Dashboard" src="https://ynleeweezwkdbisaiovq.supabase.co/functions/v1/dogtag-control/" loading="eager" referrerpolicy="no-referrer"></iframe>
-</section>
-<p class="note">If the embedded panel displays raw HTML instead of the dashboard, use “OPEN CONTROL DIRECTLY.” This page is a separate access route and does not change account credentials or publish anything.</p>
+<section style="border:1px solid var(--gold);border-radius:12px;padding:16px;background:var(--panel)"><h2 style="margin-top:0">Dashboard access</h2><p>The embedded view was removed because this browser was showing the page source instead of the dashboard. Open the control in its own browser tab using the gold button above.</p><p class="note">The status link returns machine-readable system status, not the visual dashboard.</p></section>
 <div class="footer">DogTagDay.org • April 18 • For identity, brotherhood, and honor.</div>
 </main>
 </body>
