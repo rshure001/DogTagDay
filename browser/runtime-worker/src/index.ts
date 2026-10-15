@@ -1,7 +1,6 @@
 import { chromium, Page } from 'playwright-core';
 
 const superHouse = process.env.DOGTAG_SUPER_HOUSE_URL || 'https://dog-tag-day-super-house.juvenile-lemming.workers.dev';
-const connector = process.env.DOGTAG_CONNECTOR_URL || 'https://dog-tag-day-browser-connector-rtpz8q.v2.appdeploy.ai';
 const cdpUrl = process.env.DOGTAG_CDP_URL || 'http://127.0.0.1:9222';
 const pollMs = Number(process.env.DOGTAG_POLL_MS || 1200);
 let runtimeToken = process.env.DOGTAG_RUNTIME_TOKEN || '';
@@ -41,25 +40,6 @@ async function superHouseCall(path: string, body: Record<string, unknown> = {}) 
   const text = await response.text();
   if (!response.ok) throw new Error(`super_house_${response.status}_${text.slice(0, 500)}`);
   return text ? JSON.parse(text) : {};
-}
-
-async function relayCall(
-  method: 'heartbeat' | 'next' | 'result',
-  payload: Record<string, unknown>,
-) {
-  if (!runtimeToken) await refreshRuntimeToken();
-  const response = await fetch(`${connector}/api/runtime/relay/${method}`, {
-    method: 'POST',
-    headers: {
-      'content-type': 'application/json',
-    },
-    body: JSON.stringify({ ...payload, token: runtimeToken }),
-  });
-  const body = await response.text();
-  if (!response.ok) {
-    throw new Error(`runtime_relay_${response.status}_${body.slice(0, 500)}`);
-  }
-  return body ? JSON.parse(body) : {};
 }
 
 async function execute(page: Page, action: string, payload: Record<string, string>) {
@@ -112,7 +92,7 @@ async function execute(page: Page, action: string, payload: Record<string, strin
       return { title: await page.title(), url: page.url() };
     case 'reconnect':
       await page.goto('about:blank', { waitUntil: 'domcontentloaded', timeout: 15000 }).catch(() => null);
-      await relayCall('heartbeat', { currentUrl: page.url() });
+      return { reconnected: true, url: page.url() };
       return { reconnected: true, url: page.url() };
     default:
       throw new Error('unsupported_action');
@@ -161,17 +141,8 @@ async function main() {
 
   const targetPage = await context.newPage();
   console.log("DOGTAG_MANAGER_ATTACHED");
-  await relayCall("heartbeat", { currentUrl: targetPage.url() });
-
-  let heartbeatAt = Date.now();
   for (;;) {
     try {
-      const now = Date.now();
-      if (now - heartbeatAt > 5000) {
-        await relayCall("heartbeat", { currentUrl: targetPage.url() });
-        heartbeatAt = now;
-      }
-
       const broker = await superHouseCall("/api/browser/next");
       if (broker.command) {
         const command = broker.command as {
