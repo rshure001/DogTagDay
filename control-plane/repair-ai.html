@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dog Tag Day Repair AI — Bridge Diagnostics</title>
+<style>
+:root{color-scheme:dark;--bg:#050817;--panel:#111a2b;--line:#344158;--gold:#ffd15c;--text:#f4f6fb;--muted:#aab5c7;--ok:#70e1a1;--bad:#ff8e8e}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 system-ui,-apple-system,sans-serif}main{max-width:900px;margin:auto;padding:22px}h1{font-size:clamp(28px,5vw,42px);line-height:1.08;margin:.35em 0}h2{font-size:20px;margin:0 0 12px}.eyebrow{color:var(--gold);font-weight:900;letter-spacing:.16em}.muted,.hint{color:var(--muted)}.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px;margin:14px 0}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}.check{background:#0b1220;border:1px solid var(--line);border-radius:12px;padding:14px;min-width:0}.status{font-weight:800;margin:6px 0}.ok{color:var(--ok)}.bad{color:var(--bad)}.pending{color:var(--gold)}button{background:var(--gold);color:#121212;border:0;border-radius:10px;padding:13px 16px;font-weight:900;font-size:16px;cursor:pointer;margin:5px 5px 5px 0}button.secondary{background:#26344b;color:var(--text)}pre{white-space:pre-wrap;overflow-wrap:anywhere;color:#dbe5f5;font-size:13px;max-height:320px;overflow:auto}.small{font-size:13px}.pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:3px 9px;font-size:12px;color:var(--muted)}a{color:#9cc9ff}button:focus-visible,a:focus-visible{outline:3px solid white;outline-offset:3px}
+</style>
+</head>
+<body><main>
+<div class="eyebrow">DOG TAG DAY FOUNDATION</div>
+<h1>Repair AI — Bridge Diagnostics</h1>
+<p class="muted">Free diagnostic console for the existing publishing bridge. Read-only checks first. It never stores tokens, changes credentials, posts content, or modifies the live website.</p>
+<div class="card">
+<h2>Bridge health</h2>
+<div class="grid">
+<div class="check"><b>AppDeploy status API</b><div id="api-status" class="status pending">Not checked</div><div id="api-detail" class="small muted">Checks whether the status endpoint responds.</div></div>
+<div class="check"><b>Browser access (CORS)</b><div id="cors-status" class="status pending">Not checked</div><div id="cors-detail" class="small muted">Distinguishes an API failure from a browser cross-origin block where possible.</div></div>
+<div class="check"><b>Platform authorization</b><div id="auth-status" class="status pending">Not checked</div><div id="auth-detail" class="small muted">Reports only what the status API explicitly returns.</div></div>
+</div>
+<p><button id="run-checks">RUN SAFE DIAGNOSTICS</button><button class="secondary" id="clear">CLEAR RESULTS</button></p>
+</div>
+<div class="card">
+<h2>Provider handoff tests</h2>
+<p class="muted small">These buttons request an authorization URL but do not follow it automatically. Use only after the status check. Never paste access tokens or app secrets into this page.</p>
+<div class="grid">
+<div class="check"><b>Facebook + Instagram (Meta)</b><div id="meta-result" class="status pending">Not tested</div><button class="secondary" data-provider="meta">TEST META HANDOFF</button><pre id="meta-output">No request made.</pre></div>
+<div class="check"><b>TikTok</b><div id="tiktok-result" class="status pending">Not tested</div><button class="secondary" data-provider="tiktok">TEST TIKTOK HANDOFF</button><pre id="tiktok-output">No request made.</pre></div>
+<div class="check"><b>YouTube</b><div id="youtube-result" class="status pending">Not tested</div><button class="secondary" data-provider="youtube">TEST YOUTUBE HANDOFF</button><pre id="youtube-output">No request made.</pre></div>
+</div>
+</div>
+<div class="card">
+<h2>Repair guidance</h2>
+<div id="guidance" class="muted">Run safe diagnostics to generate a report.</div>
+<p class="small">The tool will not claim an authorization is fixed unless the bridge returns a verifiable success signal. A browser CORS error alone does not prove the server is down.</p>
+</div>
+<div class="card">
+<h2>Diagnostic log</h2><pre id="log">Ready. No requests have been made.</pre>
+<p class="small muted">No secrets are collected or displayed. Reports are kept in this page only and are not uploaded.</p>
+</div>
+<p class="small muted">Repair AI prototype • isolated control-plane page • does not alter dogtagday.org or publish commercials.</p>
+</main>
+<script>
+const API='https://dog-tag-day-kwai-bridge-awybdm.v2.appdeploy.ai';
+const $=id=>document.getElementById(id);
+const logLines=[];
+function log(label,data){logLines.unshift(new Date().toISOString()+' | '+label+'\n'+(typeof data==='string'?data:JSON.stringify(data,null,2)));$('log').textContent=logLines.slice(0,12).join('\n\n');}
+function set(id,text,kind='pending'){const e=$(id);e.textContent=text;e.className='status '+kind;}
+function safeSummary(d){if(!d||typeof d!=='object')return {responseType:typeof d};const out={};for(const k of ['ok','status','state','message','error','code','platforms','authorization','auth','version','service'])if(k in d)out[k]=d[k];return out;}
+async function requestJson(url,options={}){const r=await fetch(url,{...options,cache:'no-store',redirect:'manual'});const type=r.headers.get('content-type')||'';const body=await r.text();let parsed=null;try{parsed=JSON.parse(body)}catch{}return {httpStatus:r.status,ok:r.ok,contentType:type,redirected:r.redirected,location:r.headers.get('location'),bodyText:body.slice(0,2500),json:parsed};}
+async function runChecks(){
+$('run-checks').disabled=true;set('api-status','Checking…');set('cors-status','Checking…');set('auth-status','Checking…');
+try{
+const r=await requestJson(API+'/api/status');log('GET /api/status',r);
+if(r.json&&r.ok){set('api-status','API responds (HTTP '+r.httpStatus+')','ok');set('cors-status','Browser can read response','ok');const d=r.json;const platforms=d.platforms||{};const names=['facebook','instagram','tiktok','youtube'];const ready=names.filter(p=>platforms[p]===true||platforms[p]==='authorized'||platforms[p]==='connected');set('auth-status',ready.length+'/4 explicitly authorized',ready.length===4?'ok':'bad');$('auth-detail').textContent=names.map(p=>p+': '+(platforms[p]===true?'authorized':String(platforms[p]??'not confirmed'))).join(' • ');$('guidance').textContent=ready.length===4?'Status API reports all four platforms authorized. Confirm with a real test post before calling publishing fixed.':'The API responds, but one or more platforms are not explicitly authorized. Test each provider handoff and inspect its configured callback URL and required app permissions.';}
+else if(r.json){set('api-status','HTTP '+r.httpStatus+' — API error','bad');set('cors-status','Response readable','ok');set('auth-status','Cannot verify','bad');$('api-detail').textContent=JSON.stringify(safeSummary(r.json));$('guidance').textContent='The server returned an error response. Use the HTTP status and error code to identify the failing route before changing credentials.';}
+else{set('api-status','Unexpected response','bad');set('cors-status','Response readable, not JSON','pending');set('auth-status','Cannot verify','bad');$('guidance').textContent='The endpoint returned a non-JSON response. Check whether this is a hosting error page, redirect, or incorrect API route.';}
+$('api-detail').textContent='HTTP '+r.httpStatus+' • '+r.contentType;
+}catch(e){set('api-status','Request failed','bad');set('cors-status','Network/CORS/SSL error','bad');set('auth-status','Cannot verify','bad');$('api-detail').textContent=String(e.message||e);$('cors-detail').textContent='Browser fetch failed. This can mean CORS policy, TLS, network failure, or an unavailable endpoint; it does not identify which without server logs.';$('guidance').textContent='The browser could not read the status endpoint. Next, check the same endpoint in a new tab and inspect the bridge server logs. Do not regenerate secrets until logs identify the cause.';log('GET /api/status failed',String(e));}
+finally{$('run-checks').disabled=false;}
+}
+async function testProvider(provider){
+set(provider+'-result','Testing…');const output=$(provider+'-output');output.textContent='Requesting authorization handoff…';
+try{const r=await requestJson(API+'/api/connect/'+provider);const d=r.json;log('GET /api/connect/'+provider,r);
+if(r.httpStatus>=300&&r.httpStatus<400){set(provider+'-result','Redirect response (HTTP '+r.httpStatus+')','pending');output.textContent='Redirect was not followed. Location header: '+(r.location||'not exposed by browser');}
+else if(d&&typeof d.authUrl==='string'&&/^https:\/\//i.test(d.authUrl)){set(provider+'-result','Authorization URL returned','ok');output.textContent='A secure HTTPS authorization URL was returned. Open it only after confirming it belongs to the expected provider.\nURL: '+d.authUrl;}
+else if(d){set(provider+'-result','No authorization URL','bad');output.textContent=JSON.stringify(safeSummary(d),null,2);}
+else{set(provider+'-result','Unexpected response','bad');output.textContent='HTTP '+r.httpStatus+' • '+r.contentType+'\n'+r.bodyText;}
+}catch(e){set(provider+'-result','Handoff request failed','bad');output.textContent=String(e.message||e)+'\nLikely possibilities include browser CORS restrictions, unavailable route, or server/network error. Check logs to distinguish.';log('Provider handoff failed: '+provider,String(e));}
+}
+$('run-checks').addEventListener('click',runChecks);
+$('clear').addEventListener('click',()=>{logLines.length=0;$('log').textContent='Cleared. No results retained.';for(const id of ['api-status','cors-status','auth-status','meta-result','tiktok-result','youtube-result'])set(id,'Not checked');for(const id of ['meta-output','tiktok-output','youtube-output'])$(id).textContent='No request made.';$('guidance').textContent='Run safe diagnostics to generate a report.';});
+document.querySelectorAll('[data-provider]').forEach(b=>b.addEventListener('click',()=>testProvider(b.dataset.provider)));
+</script></body></html>
