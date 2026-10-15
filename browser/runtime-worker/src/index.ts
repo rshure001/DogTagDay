@@ -93,7 +93,6 @@ async function execute(page: Page, action: string, payload: Record<string, strin
     case 'reconnect':
       await page.goto('about:blank', { waitUntil: 'domcontentloaded', timeout: 15000 }).catch(() => null);
       return { reconnected: true, url: page.url() };
-      return { reconnected: true, url: page.url() };
     default:
       throw new Error('unsupported_action');
   }
