@@ -2,17 +2,32 @@ name: Dog Tag Day Free Broadcast Trigger
 
 on:
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "0 */3 * * *"
   workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
 
 jobs:
   trigger-broadcast:
     runs-on: ubuntu-latest
     steps:
-      - name: Trigger live Dog Tag Day publisher
+      - name: Get short-lived Dog Tag Day runtime identity
+        shell: bash
         run: |
-          set -e
-          curl --fail-with-body --show-error --silent \
-            -X POST \
-            -H "Content-Type: application/json" \
-            https://dog-tag-day-kwai-bridge-awybdm.v2.appdeploy.ai/api/run-now
+          set -euo pipefail
+          RESPONSE="$(curl -fsS -H "Authorization: bearer ${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=dogtag-browser")"
+          TOKEN="$(node -e 'const x=JSON.parse(process.argv[1]); if(!x.value) process.exit(2); process.stdout.write(x.value)' "$RESPONSE")"
+          echo "::add-mask::$TOKEN"
+          echo "DOGTAG_RUNTIME_TOKEN=$TOKEN" >> "$GITHUB_ENV"
+
+      - name: Trigger direct publisher and require confirmed receipts
+        shell: bash
+        env:
+          PUBLISHER: https://ynleeweezwkdbisaiovq.supabase.co/functions/v1/dogtag-publish-now
+        run: |
+          set -euo pipefail
+          HTTP_CODE="$(curl -sS --retry 3 --retry-delay 2 -o /tmp/dtd-result.json -w '%{http_code}' -X POST "$PUBLISHER" -H "Authorization: Bearer $DOGTAG_RUNTIME_TOKEN" -H "Content-Type: application/json" --data '{"commercials":["commercial-1","commercial-2","commercial-3"]}')"
+          cat /tmp/dtd-result.json
+          node -e 'const fs=require("fs"); const x=JSON.parse(fs.readFileSync("/tmp/dtd-result.json","utf8")); const code=Number(process.argv[1]); if(code<200||code>=300||x.error||x.ok===false||x.state==="failed"||x.status==="failed"||x.code==="stored_credential_missing"||x.code==="stored_credential_malformed") { console.error("PUBLISH_REJECTED: publisher did not confirm all posts"); process.exit(1); } if(!x.results && !x.posts && !x.published && x.state!=="confirmed") { console.error("PUBLISH_UNCONFIRMED: response lacks explicit post receipts"); process.exit(1); }' "$HTTP_CODE"
