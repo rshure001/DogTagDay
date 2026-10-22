@@ -1,0 +1,14 @@
+{
+  "platforms": [
+    {"id":"facebook","name":"Facebook","enabled":true},
+    {"id":"instagram","name":"Instagram","enabled":true},
+    {"id":"tiktok","name":"TikTok","enabled":true},
+    {"id":"youtube","name":"YouTube","enabled":true}
+  ],
+  "policy": {
+    "requireConfirmation": true,
+    "preventDuplicatePublication": true,
+    "retryRecoverableFailures": true,
+    "maxAutomaticRetries": 3
+  }
+}
