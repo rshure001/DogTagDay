@@ -6,7 +6,7 @@ function decode(value: string): string {
   return value.replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#x27;|&#39;/g, "'").replace(/&lt;/g, '<').replace(/&gt;/g, '>');
 }
 function textOnly(value: string): string {
-  return decode(value.replace(/<[^>]*>/g, ' ').replace(/\\s+/g, ' ')).trim();
+  return decode(value.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ')).trim();
 }
 function unwrap(raw: string): string {
   try {
@@ -19,13 +19,13 @@ function parseResults(html: string, limit: number): SearchResult[] {
   const blocks = html.split(/<div[^>]+class="[^"]*result results_links[^"]*"[^>]*>/i).slice(1);
   const found: SearchResult[] = [];
   for (const block of blocks) {
-    const a = block.match(/<a[^>]+class="[^"]*result__a[^"]*"[^>]+href="([^"]+)"[^>]*>([\\s\\S]*?)<\\/a>/i);
+    const a = block.match(/<a[^>]+class="[^"]*result__a[^"]*"[^>]+href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/i);
     if (!a) continue;
     const url = unwrap(decode(a[1]));
-    if (!/^https?:\\/\\//i.test(url)) continue;
+    if (!/^https?:\/\//i.test(url)) continue;
     let host = '';
-    try { host = new URL(url).hostname.replace(/^www\\./, ''); } catch { continue; }
-    const snippetMatch = block.match(/class="[^"]*result__snippet[^"]*"[^>]*>([\\s\\S]*?)<\\/[^>]+>/i);
+    try { host = new URL(url).hostname.replace(/^www\./, ''); } catch { continue; }
+    const snippetMatch = block.match(/class="[^"]*result__snippet[^"]*"[^>]*>([\s\S]*?)<\/[^>]+>/i);
     found.push({ title: textOnly(a[2]), url, snippet: snippetMatch ? textOnly(snippetMatch[1]) : '', source: host });
     if (found.length >= limit) break;
   }
