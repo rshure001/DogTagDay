@@ -10,8 +10,67 @@ type AiResponse = { answer?: string; sources?: Array<{ title: string; url: strin
 type Mode = 'web' | 'images' | 'news' | 'veterans' | 'ai';
 const suggestions = ['Rolex watches', 'veteran grants', 'small business funding', 'science news'];
 
-function BabyOctopus() { return <div className="baby-octopus" aria-label="Baby octopus mascot"><svg viewBox="0 0 140 118" aria-hidden="true"><defs><radialGradient id="babyOrange" cx="35%" cy="20%"><stop stopColor="#ffc18b"/><stop offset="1" stopColor="#d96d42"/></radialGradient></defs><g className="octo-legs" fill="none" stroke="#df8051" strokeWidth="13" strokeLinecap="round"><path className="leg leg1" d="M53 72Q29 83 18 98Q9 102 13 91"/><path className="leg leg2" d="M66 78Q52 100 39 108Q29 111 31 101"/><path className="leg leg3" d="M78 78Q82 100 99 107Q110 109 107 98"/><path className="leg leg4" d="M91 70Q115 81 126 93Q136 96 132 84"/><path className="leg leg5" d="M49 65Q26 64 18 73Q9 75 13 64"/><path className="leg leg6" d="M94 62Q116 59 126 67Q136 68 132 57"/></g><path d="M39 61Q29 35 47 16Q67 -1 91 13Q112 27 105 54Q99 79 75 81Q51 82 39 61Z" fill="url(#babyOrange)" stroke="#bd603e" strokeWidth="1.5"/><ellipse cx="59" cy="23" rx="17" ry="7" fill="#fff0dc" opacity=".38"/><g className="octo-eyes"><ellipse cx="59" cy="48" rx="9" ry="12" fill="#fffdf8"/><ellipse cx="85" cy="48" rx="9" ry="12" fill="#fffdf8"/><g className="octo-pupils"><ellipse cx="62" cy="50" rx="4" ry="6" fill="#263443"/><ellipse cx="88" cy="50" rx="4" ry="6" fill="#263443"/><circle cx="63" cy="47" r="1.5" fill="white"/><circle cx="89" cy="47" r="1.5" fill="white"/></g><path className="octo-blink" d="M50 48Q59 59 68 48M76 48Q85 59 94 48" fill="none" stroke="#a94e36" strokeWidth="3.5" strokeLinecap="round"/></g><path d="M68 65Q74 71 81 65" fill="none" stroke="#9e4935" strokeWidth="2.3" strokeLinecap="round"/><circle cx="47" cy="62" r="3" fill="#ffd0a5"/><circle cx="98" cy="62" r="3" fill="#ffd0a5"/></svg></div>; }
-
+function BabyOctopus() {
+  return (
+                  <div className="baby-octopus" aria-label="EverythingHub AI baby octopus mascot">
+                    <svg viewBox="0 0 180 150" role="img" aria-label="A realistic orange baby octopus with eight moving arms">
+                      <defs>
+                        <radialGradient id="babyMantle" cx="34%" cy="18%" r="82%">
+                          <stop offset="0" stopColor="#ffd6b5"/><stop offset=".28" stopColor="#f7a36f"/><stop offset=".68" stopColor="#d96b42"/><stop offset="1" stopColor="#8e382d"/>
+                        </radialGradient>
+                        <linearGradient id="babyArm" x1="0" y1="0" x2=".2" y2="1">
+                          <stop offset="0" stopColor="#ffbd8c"/><stop offset=".48" stopColor="#e98758"/><stop offset="1" stopColor="#a74736"/>
+                        </linearGradient>
+                        <radialGradient id="babyEye" cx="38%" cy="28%" r="72%">
+                          <stop offset="0" stopColor="#5b9ab5"/><stop offset=".38" stopColor="#173d59"/><stop offset=".78" stopColor="#071827"/><stop offset="1" stopColor="#020912"/>
+                        </radialGradient>
+                        <filter id="babySoftShadow" x="-30%" y="-30%" width="160%" height="170%"><feGaussianBlur stdDeviation="2.2"/></filter>
+                      </defs>
+                      <g className="baby-arms" fill="none" stroke="url(#babyArm)" strokeWidth="12" strokeLinecap="round">
+                        <path className="baby-arm a1" d="M57 99 Q37 94 24 104 Q11 115 18 128 Q24 138 36 132"/>
+                        <path className="baby-arm a2" d="M67 108 Q49 117 47 133 Q47 143 58 145"/>
+                        <path className="baby-arm a3" d="M78 112 Q68 128 75 143"/>
+                        <path className="baby-arm a4" d="M91 113 Q91 130 100 144"/>
+                        <path className="baby-arm a5" d="M105 109 Q125 118 127 135 Q127 145 116 146"/>
+                        <path className="baby-arm a6" d="M119 99 Q144 93 157 108 Q167 120 157 132 Q150 139 141 131"/>
+                        <path className="baby-arm a7" d="M48 86 Q25 78 17 62 Q11 49 20 43"/>
+                        <path className="baby-arm a8" d="M132 85 Q153 76 160 59 Q165 47 155 40"/>
+                      </g>
+                      <g fill="#ffd1ad" stroke="#b95a43" strokeWidth="1.2" opacity=".95">
+                        <circle cx="20" cy="115" r="3.1"/><circle cx="25" cy="128" r="2.8"/><circle cx="48" cy="132" r="2.7"/>
+                        <circle cx="57" cy="140" r="2.6"/><circle cx="74" cy="137" r="2.7"/><circle cx="99" cy="137" r="2.7"/>
+                        <circle cx="126" cy="135" r="2.8"/><circle cx="154" cy="119" r="3"/><circle cx="159" cy="107" r="2.8"/>
+                        <circle cx="18" cy="59" r="2.8"/><circle cx="22" cy="47" r="2.6"/><circle cx="158" cy="56" r="2.8"/>
+                      </g>
+                      <ellipse cx="90" cy="110" rx="48" ry="8" fill="#160e12" opacity=".25" filter="url(#babySoftShadow)"/>
+                      <path d="M43 78 C34 48 48 15 87 12 C126 9 148 39 138 78 C132 101 115 111 90 112 C64 112 49 101 43 78Z" fill="url(#babyMantle)" stroke="#a64c36" strokeWidth="1.8"/>
+                      <path d="M54 47 Q65 20 91 20 Q119 20 130 49" fill="none" stroke="#fff3e5" strokeOpacity=".62" strokeWidth="4.5" strokeLinecap="round"/>
+                      <g fill="#ffd9bd" opacity=".58">
+                        <circle cx="57" cy="37" r="2"/><circle cx="70" cy="26" r="1.7"/><circle cx="112" cy="28" r="2"/><circle cx="126" cy="43" r="1.8"/>
+                        <circle cx="47" cy="67" r="1.7"/><circle cx="132" cy="68" r="1.8"/><circle cx="60" cy="91" r="1.6"/><circle cx="119" cy="91" r="1.7"/>
+                      </g>
+                      <g className="baby-eyes">
+                        <ellipse cx="69" cy="70" rx="17" ry="20" fill="#fff8ef"/>
+                        <ellipse cx="110" cy="70" rx="17" ry="20" fill="#fff8ef"/>
+                      </g>
+                      <g className="baby-blink">
+                        <ellipse cx="69" cy="70" rx="17" ry="20" fill="#d87550"/>
+                        <ellipse cx="110" cy="70" rx="17" ry="20" fill="#d87550"/>
+                      </g>
+                      <g className="baby-pupils">
+                        <ellipse cx="72" cy="72" rx="9" ry="12" fill="url(#babyEye)"/>
+                        <ellipse cx="107" cy="72" rx="9" ry="12" fill="url(#babyEye)"/>
+                        <circle cx="75" cy="65" r="4.2" fill="#fff"/><circle cx="110" cy="65" r="4.2" fill="#fff"/>
+                        <circle cx="68" cy="77" r="1.7" fill="#9fd8ed"/><circle cx="103" cy="77" r="1.7" fill="#9fd8ed"/>
+                      </g>
+                      <path className="baby-smile" d="M81 94 Q90 101 99 94" fill="none" stroke="#743529" strokeWidth="2.8" strokeLinecap="round"/>
+                      <ellipse cx="52" cy="88" rx="7" ry="4" fill="#f39a88" opacity=".62"/><ellipse cx="127" cy="88" rx="7" ry="4" fill="#f39a88" opacity=".62"/>
+                    </svg>
+                    <span className="baby-caption">Your AI guide</span>
+                  </div>
+                  <form className="search-form hero-search-overlay" onSubmit={event => runSearch(event)}>
+  );
+}
 
 export default function App() {
   const [query, setQuery] = useState('');
