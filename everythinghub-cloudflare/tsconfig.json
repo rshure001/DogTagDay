@@ -18,12 +18,11 @@
     "strict": true,
     "types": [
       "vite/client",
-      "@vercel/node"
     ]
   },
   "include": [
     "src",
-    "api",
+    "functions",
     "vite.config.ts"
   ]
 }
