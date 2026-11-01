@@ -156,7 +156,7 @@ export default function App() {
       <header className="topbar">
         <a className="brand" href="#" onClick={event => { event.preventDefault(); resetSearch(); }}>
           <span className="brand-mark"><Globe2 size={19} strokeWidth={1.9} /></span>
-          <span className="brand-word">everything<span>hub</span></span>
+          <span className="brand-lockup"><span className="brand-word">EVERYTHING HUB</span><span className="brand-tagline">Everything within reach.</span></span>
         </a>
         <div className="topbar-right">
           <span className="availability"><i /> LIVE SEARCH</span>
