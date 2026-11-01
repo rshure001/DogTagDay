@@ -10,6 +10,9 @@ type AiResponse = { answer?: string; sources?: Array<{ title: string; url: strin
 type Mode = 'web' | 'images' | 'news' | 'veterans' | 'ai';
 const suggestions = ['Rolex watches', 'veteran grants', 'small business funding', 'science news'];
 
+function BabyOctopus() { return <div className="baby-octopus" aria-label="Baby octopus mascot"><svg viewBox="0 0 140 118" aria-hidden="true"><defs><radialGradient id="babyOrange" cx="35%" cy="20%"><stop stopColor="#ffc18b"/><stop offset="1" stopColor="#d96d42"/></radialGradient></defs><g className="octo-legs" fill="none" stroke="#df8051" strokeWidth="13" strokeLinecap="round"><path className="leg leg1" d="M53 72Q29 83 18 98Q9 102 13 91"/><path className="leg leg2" d="M66 78Q52 100 39 108Q29 111 31 101"/><path className="leg leg3" d="M78 78Q82 100 99 107Q110 109 107 98"/><path className="leg leg4" d="M91 70Q115 81 126 93Q136 96 132 84"/><path className="leg leg5" d="M49 65Q26 64 18 73Q9 75 13 64"/><path className="leg leg6" d="M94 62Q116 59 126 67Q136 68 132 57"/></g><path d="M39 61Q29 35 47 16Q67 -1 91 13Q112 27 105 54Q99 79 75 81Q51 82 39 61Z" fill="url(#babyOrange)" stroke="#bd603e" strokeWidth="1.5"/><ellipse cx="59" cy="23" rx="17" ry="7" fill="#fff0dc" opacity=".38"/><g className="octo-eyes"><ellipse cx="59" cy="48" rx="9" ry="12" fill="#fffdf8"/><ellipse cx="85" cy="48" rx="9" ry="12" fill="#fffdf8"/><g className="octo-pupils"><ellipse cx="62" cy="50" rx="4" ry="6" fill="#263443"/><ellipse cx="88" cy="50" rx="4" ry="6" fill="#263443"/><circle cx="63" cy="47" r="1.5" fill="white"/><circle cx="89" cy="47" r="1.5" fill="white"/></g><path className="octo-blink" d="M50 48Q59 59 68 48M76 48Q85 59 94 48" fill="none" stroke="#a94e36" strokeWidth="3.5" strokeLinecap="round"/></g><path d="M68 65Q74 71 81 65" fill="none" stroke="#9e4935" strokeWidth="2.3" strokeLinecap="round"/><circle cx="47" cy="62" r="3" fill="#ffd0a5"/><circle cx="98" cy="62" r="3" fill="#ffd0a5"/></svg></div>; }
+
+
 export default function App() {
   const [query, setQuery] = useState('');
   const [submittedQuery, setSubmittedQuery] = useState('');
@@ -114,6 +117,7 @@ export default function App() {
         )}
 
         <form className="search-form" onSubmit={event => runSearch(event)}>
+          {!searched && <BabyOctopus />}
           <Search className="search-icon" size={20} strokeWidth={1.8} />
           <input aria-label="Search the web" autoComplete="off" value={query}
             onChange={event => setQuery(event.target.value)} placeholder="What are you looking for?" />
