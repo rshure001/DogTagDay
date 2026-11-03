@@ -9,6 +9,7 @@ const SEEDS=[
 'https://www.un.org/','https://www.who.int/','https://www.unesco.org/','https://www.worldbank.org/','https://www.imf.org/',
 'https://www.archive.org/','https://commons.wikimedia.org/','https://www.openstreetmap.org/','https://developer.mozilla.org/',
 'https://www.python.org/','https://nodejs.org/','https://www.metmuseum.org/','https://www.nist.gov/','https://www.nature.com/',
+'https://everythinghub-free-pages.vercel.app/',
 'https://arxiv.org/','https://www.ed.gov/','https://www.dol.gov/','https://www.irs.gov/'
 ];
 const hosts=new Set(SEEDS.map(s=>new URL(s).hostname));
