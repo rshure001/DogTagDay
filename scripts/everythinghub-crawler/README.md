@@ -1,10 +1,17 @@
 # Everything Hub free crawler
 
-A separate, low-rate GitHub Actions crawler prototype. It starts from a small allowlist of public information sites, stays on those seed hosts, checks robots.txt, fetches HTML only, deduplicates canonical URLs, and stores records in everythinghub-index/pages.json with a generated sitemap.xml.
+A separate, low-rate GitHub Actions crawler prototype for building a broader multi-topic index.
 
-- Schedule: every six hours; manual runs are available in GitHub Actions.
-- Limit: 50 pages per run, with a pause between successful requests.
-- No paid crawling service, API key, or AppDeploy deployment is required.
-- This prototype does not crawl the whole web and does not yet feed the live Everything Hub search API. Integration is required before these records appear in public search results.
+- Starts from a curated set of public sources spanning reference, science, government, health, culture, maps, education, and software.
+- Stays on the explicitly allowlisted source hosts and checks robots.txt before fetching.
+- Stores discovered URLs in a persistent frontier so later runs continue discovering pages instead of restarting from the homepages.
+- Deduplicates canonical URLs and writes records to `everythinghub-index/pages.json`.
+- Regenerates `everythinghub-index/sitemap.xml` after each run.
+- Runs every six hours, with a maximum of 50 successful pages per run and a delay between requests.
+- Uses GitHub Actions and public websites; no paid crawler subscription, API key, or AppDeploy deployment is required.
 
-Respect each site's terms and robots policy.
+## Important limits
+
+This is an initial, bounded crawler—not Google's index and not a whole-web crawler. It only discovers pages on the configured source hosts, and respects each site's robots.txt. The generated records are not yet connected to Everything Hub's live search API. That integration is a separate step, after we verify the first crawl run and inspect the generated data.
+
+To add subject coverage, add suitable public source hosts to `SEEDS` in `crawl.mjs`. Respect site terms and robots policies.
