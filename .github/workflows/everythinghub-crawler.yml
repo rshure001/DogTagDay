@@ -1,0 +1,29 @@
+name: Everything Hub free crawler
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 */6 * * *"
+permissions:
+  contents: write
+concurrency:
+  group: everythinghub-free-crawler
+  cancel-in-progress: false
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run bounded crawler
+        run: node scripts/everythinghub-crawler/crawl.mjs
+        env:
+          MAX_PAGES: "50"
+      - name: Save index and sitemap
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add everythinghub-index/pages.json everythinghub-index/sitemap.xml
+          if ! git diff --cached --quiet; then
+            git commit -m "Update Everything Hub crawl index"
+            git push
+          fi
