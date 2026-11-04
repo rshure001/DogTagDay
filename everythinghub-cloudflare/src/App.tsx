@@ -889,7 +889,6 @@ export default function App() {
               </div>
 
             </div>
-            <p className="hero-tagline hero-tagline-simple hero-tagline-expanded"><span>EVERYTHING HUB.</span><span>EVERYTHING WITHIN YOUR REACH.</span></p>
           </section>
         )}
 
