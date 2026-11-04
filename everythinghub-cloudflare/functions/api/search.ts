@@ -19,6 +19,46 @@ function parseDuck(html: string, limit: number): Item[] {
   }
   return out;
 }
+
+function decodeXml(value: string): string {
+  return value
+    .replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, "$1")
+    .replace(/&#(x[0-9a-f]+|\d+);/gi, (_match, code) => {
+      const number = code[0].toLowerCase() === "x" ? parseInt(code.slice(1), 16) : parseInt(code, 10);
+      return Number.isFinite(number) ? String.fromCodePoint(number) : "";
+    })
+    .replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"').replace(/&apos;/g, "'");
+}
+function parseBingRss(xml: string, limit: number): Item[] {
+  const items: Item[] = [];
+  for (const block of xml.match(/<item(?:\s[^>]*)?>[\s\S]*?<\/item>/gi) || []) {
+    const field = (name: string) => {
+      const match = block.match(new RegExp("<" + name + "(?:\\s[^>]*)?>([\\s\\S]*?)<\\/" + name + ">", "i"));
+      return match ? decodeXml(match[1]).replace(/<[^>]*>/g, " ").replace(/\\s+/g, " ").trim() : "";
+    };
+    const title = field("title");
+    const link = field("link");
+    const snippet = field("description");
+    try {
+      const target = new URL(link);
+      if (!title || !["http:", "https:"].includes(target.protocol)) continue;
+      items.push({ title, url: target.href, snippet, source: target.hostname.replace(/^www\\./i, "") });
+      if (items.length >= limit) break;
+    } catch { /* ignore malformed feed entries */ }
+  }
+  return items;
+}
+async function bingRss(q: string, limit: number): Promise<Item[]> {
+  const endpoint = "https://www.bing.com/search?" + new URLSearchParams({ format: "rss", q });
+  const response = await fetch(endpoint, {
+    headers: { "User-Agent": "Mozilla/5.0 (compatible; EverythingHub/1.0; public search)", Accept: "application/rss+xml, application/xml, text/xml" },
+    signal: AbortSignal.timeout(8000)
+  });
+  if (!response.ok) throw new Error("Bing RSS unavailable");
+  return parseBingRss(await response.text(), limit);
+}
+
 async function wiki(q: string, limit: number): Promise<Item[]> {
   const url = "https://en.wikipedia.org/w/api.php?" + new URLSearchParams({ action: "query", list: "search", format: "json", utf8: "1", srlimit: String(limit), srsearch: q });
   const response = await fetch(url, { headers: { "User-Agent": "EverythingHub/1.0 (public search)" } });
@@ -50,6 +90,10 @@ export const onRequest = async ({ request }: any) => {
       if (results.length) return Response.json({ results, count: results.length, providers: ["DuckDuckGo"] }, { headers });
     }
   } catch { /* use the public reference fallback */ }
+  try {
+    const results = await bingRss(scoped, limit);
+    if (results.length) return Response.json({ results, count: results.length, providers: ["Bing RSS"], note: "Public web results from Bing's RSS endpoint; not a proprietary EverythingHub index." }, { headers });
+  } catch { /* try the clearly labeled reference fallback */ }
   try {
     const results = await wiki(q, limit);
     return Response.json({ results, count: results.length, providers: results.length ? ["Wikipedia"] : [], note: "Reference fallback results; not a full-web index." }, { headers });
