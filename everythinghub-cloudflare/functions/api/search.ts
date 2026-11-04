@@ -35,7 +35,7 @@ function parseBingRss(xml: string, limit: number): Item[] {
   for (const block of xml.match(/<item(?:\s[^>]*)?>[\s\S]*?<\/item>/gi) || []) {
     const field = (name: string) => {
       const match = block.match(new RegExp("<" + name + "(?:\\s[^>]*)?>([\\s\\S]*?)<\\/" + name + ">", "i"));
-      return match ? decodeXml(match[1]).replace(/<[^>]*>/g, " ").replace(/\\s+/g, " ").trim() : "";
+      return match ? decodeXml(match[1]).replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim() : "";
     };
     const title = field("title");
     const link = field("link");
