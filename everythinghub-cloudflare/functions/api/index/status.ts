@@ -1,0 +1,4 @@
+export const onRequest = async ({ request }: any) => {
+  if (request.method !== "GET") return Response.json({ error: "Use GET." }, { status: 405 });
+  return Response.json({ crawler: "not-configured", running: false, schedule: "not scheduled", workers: 0, maxPagesPerWorkerPerRun: 0, maxPagesPerRun: 0, seedSites: 0, pagesIndexed: 0, pagesSkipped: 0, queuedPages: 0, lastCrawledAt: null, lastError: "A web crawler and search index have not been deployed. Search currently uses public search providers.", scope: "Live public-source search; no proprietary web index." }, { headers: { "Cache-Control": "no-store" } });
+};
