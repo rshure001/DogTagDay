@@ -77,7 +77,7 @@ export const onRequest = async ({ request }: any) => {
   const url = new URL(request.url);
   const q = (url.searchParams.get("q") || "").trim().slice(0, 240);
   const vertical = url.searchParams.get("vertical") || "web";
-  const limit = Math.min(10, Math.max(1, Number(url.searchParams.get("limit")) || 10));
+  const limit = Math.min(25, Math.max(1, Number(url.searchParams.get("limit")) || 25));
   if (q.length < 2) return Response.json({ error: "Enter at least two characters." }, { status: 400, headers });
   const scoped = vertical === "veterans" ? q + " (site:va.gov OR site:militaryonesource.mil OR site:legion.org OR site:dav.org)" : vertical === "news" ? q + " news" : q;
   try {
