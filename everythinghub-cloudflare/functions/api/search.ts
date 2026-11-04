@@ -4,7 +4,7 @@ function parseDuck(html: string, limit: number): Item[] {
   const out: Item[] = [];
   const blocks = html.split(/<div[^>]+class=["'][^"']*result results_links[^"']*["'][^>]*>/i).slice(1);
   for (const block of blocks) {
-    const match = block.match(/<a[^>]+class=["'][^"']*result__a[^"']*["'][^>]+href=["']([^"']+)["'][^>]*>([\s\\S]*?)<\/a>/i);
+    const match = block.match(/<a[^>]+class=["'][^"']*result__a[^"']*["'][^>]+href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/i);
     if (!match) continue;
     let url = match[1].replace(/&amp;/g, "&");
     try {
@@ -12,7 +12,7 @@ function parseDuck(html: string, limit: number): Item[] {
       url = parsed.searchParams.get("uddg") || parsed.href;
       const target = new URL(url);
       if (!["http:", "https:"].includes(target.protocol)) continue;
-      const snippetMatch = block.match(/class=["'][^"']*result__snippet[^"']*["'][^>]*>([\s\\S]*?)<\/[^>]+>/i);
+      const snippetMatch = block.match(/class=["'][^"']*result__snippet[^"']*["'][^>]*>([\s\S]*?)<\/[^>]+>/i);
       out.push({ title: clean(match[2]), url: target.href, snippet: snippetMatch ? clean(snippetMatch[1]) : "", source: target.hostname.replace(/^www\./, "") });
       if (out.length >= limit) break;
     } catch { /* ignore malformed result */ }
