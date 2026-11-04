@@ -461,7 +461,7 @@ export default function App() {
         setMessage(found.length ? found.length + ' videos and moving-image records found in Internet Archive' : 'No matching video records found. Try a broader phrase.');
         void api.post('/api/insights/search', { query: cleanQuery, resultCount: found.length }).catch(() => undefined);
       } else {
-        const data = await searchWithFreeFallback(cleanQuery, selectedMode, 10);
+        const data = await searchWithFreeFallback(cleanQuery, selectedMode, 25);
         const found = data.results || [];
         setResults(found);
         setProviders(data.providers || []);
