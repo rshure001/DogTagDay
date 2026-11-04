@@ -467,7 +467,7 @@ export default function App() {
         setProviders(data.providers || []);
         setProviderIssues(data.unavailableProviders || []);
         const providerSummary = (data.providers || []).length + ' free public sources responded';
-        setMessage(found.length ? found.length + (selectedMode === 'news' ? ' news-focused results found · ' : ' results found · ') + providerSummary : 'No readable results came back. Try a different phrase.');
+        setMessage(found.length ? found.length + (selectedMode === 'news' ? ' news-focused results found · ' : ' results found · ') + providerSummary + (data.note ? ' · ' + data.note : '') : 'No readable results came back. Try a different phrase.');
         void api.post('/api/insights/search', { query: cleanQuery, resultCount: found.length }).catch(() => undefined);
       }
     } catch (error) {
