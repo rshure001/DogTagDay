@@ -37,7 +37,7 @@ jobs:
       - name: Deploy free temporary preview (no account or payment required)
         run: |
           set -o pipefail
-          npx --yes netlify-cli deploy --allow-anonymous --dir=dist --functions=netlify/functions 2>&1 | tee deploy.log
+          npx --yes netlify-cli deploy --allow-anonymous --dir=dist 2>&1 | tee deploy.log
           URL=$(grep -Eo 'https://[a-zA-Z0-9-]+\\.netlify\\.app' deploy.log | tail -1)
           if [ -z "$URL" ]; then
             echo "Netlify did not return a preview URL."
