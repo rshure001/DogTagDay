@@ -2040,3 +2040,19 @@ button[aria-label*="share" i],a[aria-label*="share" i],.share-button,.share-cont
  .site-shell:has(.everythinghub-approved-home-art) .top-news{width:calc(100% - 24px)!important;margin:14px 12px 24px!important}
 }
 @media(prefers-reduced-motion:reduce){.hub-art-tentacles,.hub-art-pupils,.hub-baby-pupils,.hub-baby-blink,.hub-baby-arms{animation:none!important}}
+
+/* Artwork-first mobile hero: align the single live input with the printed search field. */
+.site-shell:has(.everythinghub-approved-home-art) .homepage-live-search{
+  left:26.8%!important;
+  top:61.5%!important;
+  width:46.5%!important;
+  height:10.8%!important;
+}
+@media(max-width:600px){
+  .site-shell:has(.everythinghub-approved-home-art) .homepage-live-search{
+    left:26.8%!important;
+    top:61.5%!important;
+    width:46.5%!important;
+    height:10.8%!important;
+  }
+}
