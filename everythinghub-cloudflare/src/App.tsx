@@ -681,6 +681,18 @@ export default function App() {
             </div>
             <div className="everythinghub-approved-home-art">
 <img className="hub-approved-neon-art" src="https://everythinghub-search-engine-4x25f8.v2.appdeploy.ai/resources/everythinghub-approved-octopus.png" alt="EverythingHub approved homepage artwork with eight labeled discovery sections, central search bar, and baby octopus" />
+              <div className="home-baby-octopus" aria-label="Blinking baby octopus guide">
+                <svg viewBox="0 0 180 150" role="img" aria-label="Baby octopus looks at you, then toward the search bar, and blinks">
+                  <g className="baby-arms" fill="none" stroke="#a978df" strokeWidth="12" strokeLinecap="round">
+                    <path className="baby-arm a1" d="M57 99 Q30 94 20 116 Q15 132 34 134"/><path className="baby-arm a2" d="M67 108 Q48 120 54 142"/><path className="baby-arm a3" d="M78 112 Q68 130 76 143"/><path className="baby-arm a4" d="M91 113 Q91 130 100 144"/><path className="baby-arm a5" d="M105 109 Q126 119 122 141"/><path className="baby-arm a6" d="M119 99 Q148 92 159 115 Q163 131 145 134"/><path className="baby-arm a7" d="M48 86 Q20 75 19 53"/><path className="baby-arm a8" d="M132 85 Q158 75 160 53"/>
+                  </g>
+                  <path d="M43 78 C34 48 48 15 87 12 C126 9 148 39 138 78 C132 101 115 111 90 112 C64 112 49 101 43 78Z" fill="#a978df" stroke="#59358d" strokeWidth="2"/>
+                  <g className="baby-eyes"><ellipse cx="69" cy="70" rx="17" ry="20" fill="#fff8ef"/><ellipse cx="110" cy="70" rx="17" ry="20" fill="#fff8ef"/></g>
+                  <g className="baby-pupils"><ellipse cx="72" cy="72" rx="9" ry="12" fill="#173d59"/><ellipse cx="107" cy="72" rx="9" ry="12" fill="#173d59"/><circle cx="75" cy="65" r="4.2" fill="#fff"/><circle cx="110" cy="65" r="4.2" fill="#fff"/></g>
+                  <g className="baby-blink"><ellipse cx="69" cy="70" rx="17" ry="20" fill="#8750c7"/><ellipse cx="110" cy="70" rx="17" ry="20" fill="#8750c7"/></g>
+                  <path className="baby-smile" d="M81 94 Q90 101 99 94" fill="none" stroke="#59358d" strokeWidth="3" strokeLinecap="round"/>
+                </svg>
+              </div>
               <form className="everythinghub-live-search homepage-live-search" role="search" onSubmit={event => runSearch(event)}>
                 <Search className="everythinghub-search-icon" size={22} aria-hidden="true" />
                 <input aria-label="Search EverythingHub" autoComplete="off" value={query} onChange={event => setQuery(event.target.value)} placeholder="Search anything on the web" />
