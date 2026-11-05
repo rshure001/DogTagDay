@@ -1,4 +1,4 @@
-name: Build and deploy EverythingHub
+name: Build and preview EverythingHub (free)
 
 on:
   push:
@@ -12,38 +12,42 @@ permissions:
   contents: read
 
 concurrency:
-  group: everythinghub-build
+  group: everythinghub-free-preview
   cancel-in-progress: true
 
 jobs:
-  build:
+  build-and-preview:
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: everythinghub-cloudflare
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: everythinghub-cloudflare-migration
       - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
           cache-dependency-path: everythinghub-cloudflare/package.json
-      - run: npm install
-      - run: npm run build
-      - name: Upload verified static build
+      - name: Install dependencies
+        run: npm install
+      - name: Build website
+        run: npm run build
+      - name: Deploy free temporary preview (no account or payment required)
+        run: |
+          set -o pipefail
+          npx --yes netlify-cli deploy --allow-anonymous --dir=dist --functions=netlify/functions 2>&1 | tee deploy.log
+          URL=$(grep -Eo 'https://[a-zA-Z0-9-]+\\.netlify\\.app' deploy.log | tail -1)
+          if [ -z "$URL" ]; then
+            echo "Netlify did not return a preview URL."
+            exit 1
+          fi
+          echo "## EverythingHub temporary preview" >> "$GITHUB_STEP_SUMMARY"
+          echo "$URL" >> "$GITHUB_STEP_SUMMARY"
+      - name: Keep built files for inspection
         uses: actions/upload-artifact@v4
         with:
           name: everythinghub-build
           path: everythinghub-cloudflare/dist
-          if-no-files-found: error
           retention-days: 7
-      - name: Deploy to Cloudflare Pages
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: |
-          if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then
-            echo "Build verified. Deployment skipped: Cloudflare credentials are not configured."
-            exit 0
-          fi
-          npx wrangler pages deploy dist --project-name everythinghub-preview
