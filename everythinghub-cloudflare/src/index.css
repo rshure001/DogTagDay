@@ -2056,3 +2056,12 @@ button[aria-label*="share" i],a[aria-label*="share" i],.share-button,.share-cont
     height:10.8%!important;
   }
 }
+/* Visible baby mascot beside the approved homepage artwork. */
+.hero .everythinghub-approved-home-art{position:relative!important;display:block!important;width:min(100%,1100px)!important;margin:0 auto!important}
+.hero .everythinghub-approved-home-art>.home-baby-octopus{display:block!important;position:absolute!important;left:6%!important;bottom:5%!important;width:13%!important;height:auto!important;z-index:16!important;pointer-events:none!important;filter:drop-shadow(0 4px 7px #0008)!important;animation:hub-baby-soft-float 4.5s ease-in-out infinite!important}
+.hero .everythinghub-approved-home-art>.home-baby-octopus svg{display:block!important;width:100%!important;height:auto!important}
+.hero .everythinghub-approved-home-art>.home-baby-octopus .baby-pupils{transform-box:fill-box!important;transform-origin:center!important;animation:hub-baby-look-sequence 7.8s ease-in-out infinite!important}
+.hero .everythinghub-approved-home-art>.home-baby-octopus .baby-blink{transform-box:fill-box!important;transform-origin:center!important;animation:hub-baby-blink 5.8s ease-in-out infinite!important}
+.hero .everythinghub-approved-home-art>.home-baby-octopus .baby-arms .baby-arm{transform-box:fill-box!important;transform-origin:50% 12%!important;animation:hub-baby-tentacle 3.8s ease-in-out infinite!important}
+@media(max-width:600px){.hero .everythinghub-approved-home-art>.home-baby-octopus{left:5%!important;bottom:4%!important;width:15%!important}}
+@media(prefers-reduced-motion:reduce){.hero .everythinghub-approved-home-art>.home-baby-octopus,.hero .everythinghub-approved-home-art>.home-baby-octopus .baby-pupils,.hero .everythinghub-approved-home-art>.home-baby-octopus .baby-blink,.hero .everythinghub-approved-home-art>.home-baby-octopus .baby-arms .baby-arm{animation:none!important}}
