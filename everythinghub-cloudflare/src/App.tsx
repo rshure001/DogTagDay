@@ -452,13 +452,21 @@ export default function App() {
         setProviderIssues((data as ImageResponse & { unavailableProviders?: string[] }).unavailableProviders || []);
         void api.post('/api/insights/search', { query: cleanQuery, resultCount: found.length }).catch(() => undefined);
       } else if (selectedMode === 'media') {
-        const response = await api.get('/api/videos?q=' + encodeURIComponent(cleanQuery));
-        const data = response.data as SearchResponse;
+        let data: SearchResponse;
+        try {
+          const response = await api.get('/api/videos?q=' + encodeURIComponent(cleanQuery));
+          data = response.data as SearchResponse;
+        } catch {
+          const response = await fetch(PUBLIC_SEARCH_API + '/api/videos?q=' + encodeURIComponent(cleanQuery), { headers: { Accept: 'application/json' } });
+          const payload = await response.json() as SearchResponse;
+          if (!response.ok) throw new Error('Free public video search is temporarily unavailable.');
+          data = payload;
+        }
         const found = data.results || [];
         setResults(found);
         setProviders(data.providers || []);
         setProviderIssues(data.unavailableProviders || []);
-        setMessage(found.length ? found.length + ' videos and moving-image records found in Internet Archive' : 'No matching video records found. Try a broader phrase.');
+        setMessage(found.length ? found.length + ' relevant public video results found' : 'No sufficiently relevant videos found. Try a more specific or broader phrase.');
         void api.post('/api/insights/search', { query: cleanQuery, resultCount: found.length }).catch(() => undefined);
       } else {
         const data = await searchWithFreeFallback(cleanQuery, selectedMode, 25);
