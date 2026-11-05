@@ -1,4 +1,4 @@
-name: Build and verify EverythingHub
+name: Build and deploy EverythingHub
 
 on:
   push:
@@ -37,3 +37,14 @@ jobs:
           path: everythinghub-cloudflare/dist
           if-no-files-found: error
           retention-days: 7
+      - name: Deploy to Cloudflare Pages
+        if: ${{ secrets.CLOUDFLARE_API_TOKEN != '' && secrets.CLOUDFLARE_ACCOUNT_ID != '' }}
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist --project-name everythinghub-preview
+          workingDirectory: everythinghub-cloudflare
+      - name: Report missing Cloudflare credentials
+        if: ${{ secrets.CLOUDFLARE_API_TOKEN == '' || secrets.CLOUDFLARE_ACCOUNT_ID == '' }}
+        run: echo "Build verified. Cloudflare deployment skipped because CLOUDFLARE_API_TOKEN and/or CLOUDFLARE_ACCOUNT_ID repository secrets are not configured."
