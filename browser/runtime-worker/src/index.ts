@@ -1,6 +1,5 @@
 import { chromium, Page } from 'playwright-core';
 
-const superHouse = process.env.DOGTAG_SUPER_HOUSE_URL || 'https://dog-tag-day-super-house.juvenile-lemming.workers.dev';
 const connector = process.env.DOGTAG_CONNECTOR_URL || 'https://dog-tag-day-browser-connector-rtpz8q.v2.appdeploy.ai';
 const cdpUrl = process.env.DOGTAG_CDP_URL || 'http://127.0.0.1:9222';
 const pollMs = Number(process.env.DOGTAG_POLL_MS || 1200);
@@ -28,36 +27,22 @@ async function refreshRuntimeToken() {
 
 if (!runtimeToken && !actionsTokenUrl) throw new Error('DOGTAG_RUNTIME_TOKEN is required');
 
-async function superHouseCall(path: string, body: Record<string, unknown> = {}) {
-  if (!runtimeToken) await refreshRuntimeToken();
-  const response = await fetch(superHouse + path, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${runtimeToken}`,
-      'content-type': 'application/json',
-    },
-    body: JSON.stringify(body),
-  });
-  const text = await response.text();
-  if (!response.ok) throw new Error(`super_house_${response.status}_${text.slice(0, 500)}`);
-  return text ? JSON.parse(text) : {};
-}
-
 async function relayCall(
   method: 'heartbeat' | 'next' | 'result',
-  payload: Record<string, unknown>,
+  payload: Record<string, unknown> = {},
 ) {
   if (!runtimeToken) await refreshRuntimeToken();
-  const response = await fetch(`${connector}/api/runtime/relay/${method}`, {
-    method: 'POST',
+  const response = await fetch(`${connector}/api/runtime/${method}`, {
+    method: method === 'next' ? 'GET' : 'POST',
     headers: {
-      'content-type': 'application/json',
+      'x-dogtag-runtime-token': runtimeToken,
+      ...(method === 'next' ? {} : { 'content-type': 'application/json' }),
     },
-    body: JSON.stringify({ ...payload, token: runtimeToken }),
+    ...(method === 'next' ? {} : { body: JSON.stringify(payload) }),
   });
   const body = await response.text();
   if (!response.ok) {
-    throw new Error(`runtime_relay_${response.status}_${body.slice(0, 500)}`);
+    throw new Error(`runtime_${method}_${response.status}_${body.slice(0, 500)}`);
   }
   return body ? JSON.parse(body) : {};
 }
@@ -172,7 +157,7 @@ async function main() {
         heartbeatAt = now;
       }
 
-      const broker = await superHouseCall("/api/browser/next");
+      const broker = await relayCall("next");
       if (broker.command) {
         const command = broker.command as {
           id: string;
@@ -203,7 +188,7 @@ async function main() {
             );
           }
 
-          await superHouseCall("/api/browser/result", {
+          await relayCall("result", {
             id: command.id,
             ok: true,
             currentUrl: targetPage.url(),
