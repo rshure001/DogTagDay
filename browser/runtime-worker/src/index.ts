@@ -1,6 +1,6 @@
 import { chromium, Page } from 'playwright-core';
 
-const superHouse = process.env.DOGTAG_SUPER_HOUSE_URL || 'https://dog-tag-day-super-house.juvenile-lemming.workers.dev';
+const superHouse = process.env.DOGTAG_SUPER_HOUSE_URL || 'https://ynleeweezwkdbisaiovq.supabase.co/functions/v1/dogtag-browser-runtime';
 const cdpUrl = process.env.DOGTAG_CDP_URL || 'http://127.0.0.1:9222';
 const pollMs = Number(process.env.DOGTAG_POLL_MS || 1200);
 let runtimeToken = process.env.DOGTAG_RUNTIME_TOKEN || '';
@@ -32,16 +32,20 @@ if (!runtimeToken && !actionsTokenUrl) throw new Error('DOGTAG_RUNTIME_TOKEN is 
 
 async function superHouseCall(path: string, payload: Record<string, unknown> = {}) {
   if (!runtimeToken || Date.now() - runtimeTokenRefreshedAt > 3 * 60 * 1000) await refreshRuntimeToken();
-  const response = await fetch(`${superHouse}${path}`, {
-    method: 'POST',
+  const isNext = path === "/api/browser/next";
+  const isResult = path === "/api/browser/result";
+  if (!isNext && !isResult) throw new Error("unsupported_supabase_runtime_route");
+  const target = superHouse + (isNext ? "?op=next" : "?op=result");
+  const response = await fetch(target, {
+    method: isNext ? "GET" : "POST",
     headers: {
-      authorization: `Bearer ${runtimeToken}`,
-      'content-type': 'application/json',
+      "x-dogtag-runtime-token": runtimeToken,
+      ...(isResult ? { "content-type": "application/json" } : {}),
     },
-    body: JSON.stringify(payload),
+    ...(isResult ? { body: JSON.stringify(payload) } : {}),
   });
   const body = await response.text();
-  if (!response.ok) throw new Error(`super_house_${response.status}_${body.slice(0, 500)}`);
+  if (!response.ok) throw new Error(`supabase_runtime_${response.status}_${body.slice(0, 500)}`);
   return body ? JSON.parse(body) : {};
 }
 
