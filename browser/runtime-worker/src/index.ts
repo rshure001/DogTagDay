@@ -195,7 +195,7 @@ async function main() {
             result,
           });
         } catch (error) {
-          await superHouseCall("/api/browser/result", {
+          await relayCall("result", {
             id: command.id,
             ok: false,
             currentUrl: targetPage.url(),
