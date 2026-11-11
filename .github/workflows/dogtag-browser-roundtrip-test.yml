@@ -24,7 +24,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          RESPONSE="$(curl -fsS --retry 3 --retry-delay 2 -H "Authorization: bearer \${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" "\${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=dogtag-browser")"
+          RESPONSE="$(curl -fsS --retry 3 --retry-delay 2 -H "Authorization: bearer ${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=dogtag-browser")"
           TOKEN="$(node -e "const x=JSON.parse(process.argv[1]); if(!x.value) process.exit(2); process.stdout.write(x.value)" "$RESPONSE")"
           echo "::add-mask::$TOKEN"
           echo "DOGTAG_RUNTIME_TOKEN=$TOKEN" >> "$GITHUB_ENV"
@@ -42,9 +42,9 @@ jobs:
             if [ "$CODE" = "200" ]; then break; fi
             sleep 2
           done
-          if [ "\${CODE:-}" != "200" ]; then
+          if [ "${CODE:-}" != "200" ]; then
             cat "$RUNNER_TEMP/enqueue.json" || true
-            echo "Could not enqueue status command; HTTP \${CODE:-none}" >&2
+            echo "Could not enqueue status command; HTTP ${CODE:-none}" >&2
             exit 1
           fi
           ID="$(node -e "const x=JSON.parse(require('fs').readFileSync(process.argv[1],'utf8')); if(!x.ok||!x.id) process.exit(2); process.stdout.write(x.id)" "$RUNNER_TEMP/enqueue.json")"
@@ -53,7 +53,7 @@ jobs:
       - name: Wait for the browser worker result
         shell: bash
         env:
-          COMMAND_ID: \${{ steps.enqueue.outputs.id }}
+          COMMAND_ID: ${{ steps.enqueue.outputs.id }}
         run: |
           set -euo pipefail
           for i in $(seq 1 90); do
