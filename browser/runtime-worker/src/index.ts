@@ -4,6 +4,7 @@ const superHouse = process.env.DOGTAG_SUPER_HOUSE_URL || 'https://dog-tag-day-su
 const cdpUrl = process.env.DOGTAG_CDP_URL || 'http://127.0.0.1:9222';
 const pollMs = Number(process.env.DOGTAG_POLL_MS || 1200);
 let runtimeToken = process.env.DOGTAG_RUNTIME_TOKEN || '';
+let runtimeTokenRefreshedAt = runtimeToken ? Date.now() : 0;
 
 const actionsTokenUrl = process.env.ACTIONS_ID_TOKEN_REQUEST_URL || '';
 const actionsBearer = process.env.ACTIONS_ID_TOKEN_REQUEST_TOKEN || '';
@@ -11,6 +12,7 @@ const actionsBearer = process.env.ACTIONS_ID_TOKEN_REQUEST_TOKEN || '';
 async function refreshRuntimeToken() {
   if (!actionsTokenUrl || !actionsBearer) {
     if (!runtimeToken) throw new Error('DOGTAG_RUNTIME_TOKEN is required');
+    runtimeTokenRefreshedAt = Date.now();
     return runtimeToken;
   }
   const url = new URL(actionsTokenUrl);
@@ -22,13 +24,14 @@ async function refreshRuntimeToken() {
   const body = (await response.json()) as { value?: string };
   if (!body.value) throw new Error('oidc_refresh_missing_value');
   runtimeToken = body.value;
+  runtimeTokenRefreshedAt = Date.now();
   return runtimeToken;
 }
 
 if (!runtimeToken && !actionsTokenUrl) throw new Error('DOGTAG_RUNTIME_TOKEN is required');
 
 async function superHouseCall(path: string, payload: Record<string, unknown> = {}) {
-  if (!runtimeToken) await refreshRuntimeToken();
+  if (!runtimeToken || Date.now() - runtimeTokenRefreshedAt > 3 * 60 * 1000) await refreshRuntimeToken();
   const response = await fetch(`${superHouse}${path}`, {
     method: 'POST',
     headers: {
@@ -199,6 +202,8 @@ async function main() {
             },
           });
         }
+      } else {
+        await new Promise(resolve => setTimeout(resolve, pollMs));
       }
     } catch (error) {
       console.error("[dog-tag-day-browser-worker]", error);
