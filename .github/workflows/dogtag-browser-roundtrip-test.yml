@@ -59,7 +59,7 @@ jobs:
           for i in $(seq 1 90); do
             CODE="$(curl -sS -o "$RUNNER_TEMP/result.json" -w "%{http_code}" \
               "$SUPER_HOUSE_URL?op=test-result&id=$COMMAND_ID" \
-              -H "Authorization: Bearer $DOGTAG_RUNTIME_TOKEN" || true)"
+              -H "x-dogtag-runtime-token: $DOGTAG_RUNTIME_TOKEN" || true)"
             if [ "$CODE" = "200" ]; then
               STATE="$(node -e "const x=JSON.parse(require('fs').readFileSync(process.argv[1],'utf8')); process.stdout.write(x.state==='done'?'done':x.state==='failed'?'failed':'pending')" "$RUNNER_TEMP/result.json")"
               if [ "$STATE" = "done" ]; then
