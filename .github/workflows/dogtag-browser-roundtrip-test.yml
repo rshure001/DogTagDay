@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     env:
-      SUPER_HOUSE_URL: https://dog-tag-day-super-house.juvenile-lemming.workers.dev
+      SUPER_HOUSE_URL: https://ynleeweezwkdbisaiovq.supabase.co/functions/v1/dogtag-browser-runtime
     steps:
       - name: Obtain GitHub-signed runtime identity
         shell: bash
@@ -35,8 +35,8 @@ jobs:
         run: |
           set -euo pipefail
           for i in $(seq 1 60); do
-            CODE="$(curl -sS -o "$RUNNER_TEMP/enqueue.json" -w "%{http_code}" -X POST "$SUPER_HOUSE_URL/api/browser/test-command" \
-              -H "Authorization: Bearer $DOGTAG_RUNTIME_TOKEN" \
+            CODE="$(curl -sS -o "$RUNNER_TEMP/enqueue.json" -w "%{http_code}" -X POST "$SUPER_HOUSE_URL?op=test-command" \
+              -H "x-dogtag-runtime-token: $DOGTAG_RUNTIME_TOKEN" \
               -H "content-type: application/json" \
               --data '{"action":"status"}' || true)"
             if [ "$CODE" = "200" ]; then break; fi
@@ -58,12 +58,12 @@ jobs:
           set -euo pipefail
           for i in $(seq 1 90); do
             CODE="$(curl -sS -o "$RUNNER_TEMP/result.json" -w "%{http_code}" \
-              "$SUPER_HOUSE_URL/api/browser/test-result?id=$COMMAND_ID" \
+              "$SUPER_HOUSE_URL?op=test-result&id=$COMMAND_ID" \
               -H "Authorization: Bearer $DOGTAG_RUNTIME_TOKEN" || true)"
             if [ "$CODE" = "200" ]; then
-              STATE="$(node -e "const x=JSON.parse(require('fs').readFileSync(process.argv[1],'utf8')); process.stdout.write(!x.found?'pending':x.result.ok?'done':'failed')" "$RUNNER_TEMP/result.json")"
+              STATE="$(node -e "const x=JSON.parse(require('fs').readFileSync(process.argv[1],'utf8')); process.stdout.write(x.state==='done'?'done':x.state==='failed'?'failed':'pending')" "$RUNNER_TEMP/result.json")"
               if [ "$STATE" = "done" ]; then
-                node -e "const x=JSON.parse(require('fs').readFileSync(process.argv[1],'utf8')); const r=x.result.result; if(!r||typeof r.url!=='string'||typeof r.title!=='string') process.exit(2); console.log(JSON.stringify({ok:true,url:r.url,title:r.title,receivedAt:x.result.receivedAt}))" "$RUNNER_TEMP/result.json"
+                node -e "const x=JSON.parse(require('fs').readFileSync(process.argv[1],'utf8')); const r=x.result; if(!r||typeof r.url!=='string'||typeof r.title!=='string') process.exit(2); console.log(JSON.stringify({ok:true,url:r.url,title:r.title,commandId:x.id}))" "$RUNNER_TEMP/result.json"
                 echo "Browser command round trip verified."
                 exit 0
               elif [ "$STATE" = "failed" ]; then
