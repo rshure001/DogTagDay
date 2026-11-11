@@ -20,6 +20,8 @@ async function authorizeControlRequest(request, env) {
     const claims = decode(parts[1]);
     if (claims.iss !== "https://token.actions.githubusercontent.com") throw new Error("bad_issuer");
     if (claims.aud !== "dogtag-browser") throw new Error("bad_audience");
+    if (claims.repository !== "rshure001/DogTagDay") throw new Error("bad_repository");
+    if (claims.ref !== "refs/heads/main") throw new Error("bad_ref");
     if (!claims.exp || claims.exp < Math.floor(Date.now() / 1000)) throw new Error("expired");
     const jwks = await fetch("https://token.actions.githubusercontent.com/.well-known/jwks", { cf: { cacheTtl: 300 } }).then(r => r.json());
     const jwk = jwks.keys.find(k => k.kid === headerPart.kid);
@@ -104,6 +106,38 @@ export default {
           { id: "commercial-3", title: "Soldiers Step Out", status: "APPROVED" }
         ]
       });
+    }
+
+    if (url.pathname === "/api/browser/test-command" && request.method === "POST") {
+      const denied = await authorizeControlRequest(request, env);
+      if (denied) return denied;
+      let body;
+      try { body = await readControlJson(request); }
+      catch (error) { return json({ ok: false, error: String(error.message || error) }, 400); }
+      if (String(body?.action || "status") !== "status") {
+        return json({ ok: false, error: "test_action_not_allowed" }, 400);
+      }
+      const id = crypto.randomUUID();
+      const relayId = env.BROWSER_RELAY.idFromName("primary");
+      const response = await env.BROWSER_RELAY.get(relayId).fetch(new Request("https://relay/enqueue", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ id, action: "status", payload: {} })
+      }));
+      if (!response.ok) return json({ ok: false, error: "browser_relay_" + response.status }, 502);
+      return json({ ok: true, id });
+    }
+
+    if (url.pathname === "/api/browser/test-result" && request.method === "GET") {
+      const denied = await authorizeControlRequest(request, env);
+      if (denied) return denied;
+      const id = url.searchParams.get("id") || "";
+      if (!id) return json({ ok: false, error: "missing_id" }, 400);
+      const relayId = env.BROWSER_RELAY.idFromName("primary");
+      return env.BROWSER_RELAY.get(relayId).fetch(new Request(
+        "https://relay/result?id=" + encodeURIComponent(id),
+        { method: "GET" }
+      ));
     }
 
     if (url.pathname === "/api/browser/next" && request.method === "POST") {
@@ -431,6 +465,14 @@ export class BrowserRelay {
 
   async fetch(request) {
     const url = new URL(request.url);
+    if (url.pathname === "/result" && request.method === "GET") {
+      const id = url.searchParams.get("id") || "";
+      if (!id) return json({ ok: false, error: "missing_id" }, 400);
+      const results = (await this.state.storage.get("results")) || [];
+      const result = [...results].reverse().find(item => item.id === id);
+      if (!result) return json({ ok: true, found: false }, 404);
+      return json({ ok: true, found: true, result });
+    }
     if (request.method !== "POST") return json({ ok: false, error: "method_not_allowed" }, 405);
     if (url.pathname === "/enqueue") {
       const job = await request.json();

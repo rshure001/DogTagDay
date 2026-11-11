@@ -8,13 +8,19 @@ on:
         required: true
         type: boolean
         default: false
+  push:
+    branches: [main]
+    paths:
+      - "super-house-worker.js"
+      - "wrangler.toml"
+      - ".github/workflows/deploy-super-house.yml"
 
 permissions:
   contents: read
 
 jobs:
   deploy:
-    if: ${{ inputs.deploy_production == true }}
+    if: ${{ github.event_name == 'push' || inputs.deploy_production == true }}
     runs-on: ubuntu-latest
     permissions:
       contents: read
